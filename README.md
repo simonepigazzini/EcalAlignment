@@ -1,0 +1,4 @@
+EcalAlignment
+=============
+
+EcalAlignment framework
