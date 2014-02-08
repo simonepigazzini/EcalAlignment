@@ -65,17 +65,24 @@ int main(int argc, char** argv)
  
  if (argc < 4) {
   std::cout << " Error: Code usage: " << std::endl;
-  std::cout << "     CombineRotoTraslations  InputPositionsFile  AdditionalPositionsFile  OutputPositionsFile " << std::endl;
+  std::cout << "     CombineRotoTraslations  InputPositionsFile  AdditionalPositionsFile  OutputPositionsFile [sign]    :: sign 1 is standard, -1 for opposite" << std::endl;
   return false;
  }
 
  std::string filePositionsInput     (argv[1]) ;
  std::string filePositionsAddition  (argv[2]) ;
  std::string filePositionsOutput    (argv[3]) ;
+ float sign = 1;
+ if (argc >= 5) {
+   sign = atof(argv[4]);
+ }
+
 
  std::cout << " InputPositionsFile      = " << argv[1] << std::endl;
  std::cout << " AdditionalPositionsFile = " << argv[2] << std::endl;
  std::cout << " OutputPositionsFile     = " << argv[3] << std::endl;
+ std::cout << " Sign                    = " << sign    << std::endl;
+
 
  std::ifstream* fileIn;
  fileIn = new std::ifstream(filePositionsInput.c_str());
@@ -124,7 +131,7 @@ int main(int argc, char** argv)
 
   std::cout << " " << inputDPHIe << " " << inputDTHETAe << " " << inputDPSIe ;
   std::cout << " " << inputDX << " " << inputDY << " " << inputDZ << " ===> " ;
-  
+
   getline(*fileInAddition,buffer);
   std::stringstream lineAddition( buffer );
 
@@ -134,10 +141,20 @@ int main(int argc, char** argv)
   lineAddition >> inputDX_addition;    inputDX_addition /= 100.;
   lineAddition >> inputDY_addition;    inputDY_addition /= 100.; 
   lineAddition >> inputDZ_addition;    inputDZ_addition /= 100.; 
-  
+
   std::cout << " " << inputDPHIe_addition << " " << inputDTHETAe_addition << " " << inputDPSIe_addition ;
   std::cout << " " << inputDX_addition << " " << inputDY_addition << " " << inputDZ_addition << std::endl;
 
+  if (sign == -1) {
+   std::cout << " Sign = -1 " <<std::endl;
+   std::cout << " ---> inversion " << std::endl;
+   inputDX_addition = - inputDX_addition;
+   inputDY_addition = - inputDY_addition;
+   inputDZ_addition = - inputDZ_addition;
+   inputDPHIe_addition   = - inputDPHIe_addition;
+   inputDTHETAe_addition = - inputDTHETAe_addition;
+   inputDPSIe_addition   = - inputDPSIe_addition;
+  }
   CLHEP::Hep3Vector translation(inputDX,inputDY,inputDZ);
   CLHEP::HepEulerAngles euler(inputDPHIe, inputDTHETAe, inputDPSIe);
   CLHEP::HepRotation rotation(euler);
