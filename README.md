@@ -8,7 +8,7 @@ EcalAlignment framework
 where:
 
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_5_3_3/src/EcalValidation/EcalAlignment
-
+    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_0_6_patch1/src/EcalAlignment
 
 to setup:
 
