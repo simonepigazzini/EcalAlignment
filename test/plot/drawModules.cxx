@@ -13,9 +13,10 @@ void createHisto(TLatex* tinfo, TH1F* hmc, TTree* tmc, char* variable, char* tit
  hmc -> GetXaxis()->SetTitle(title);
  hmc -> GetYaxis()->SetTitle("Number of events");
 
- hmc->SetLineColor(kTeal);
+ hmc->SetMarkerColor(kBlue);
+ hmc->SetLineColor(kBlue);
  hmc->SetLineWidth(2);
- hmc->SetFillColor(kTeal);
+ hmc->SetFillColor(kBlue);
  hmc->SetFillStyle(3002);
 
  TString  sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
@@ -32,21 +33,22 @@ void createHisto2D(TH2F* hmc, TTree* tmc, char* variableY, char* variableX, char
 
  //  tcut = Form("(%s) * weight_PU",cut);
  tcut = Form("(%s)",cut);
- toDraw = Form("%s >> %s",variable,hmc->GetName());
+ toDraw = Form("%s:%s >> %s",variableY, variableX, hmc->GetName());
  tmc   -> Draw(toDraw.Data(),tcut.Data(),"goff");
 
  hmc -> GetXaxis()->SetTitle(variableX);
  hmc -> GetYaxis()->SetTitle(variableY);
 
- hmc->SetLineColor(kTeal);
+ hmc->SetMarkerColor(kRed);
+ hmc->SetLineColor(kRed);
  hmc->SetLineWidth(2);
- hmc->SetFillColor(kTeal);
+ hmc->SetFillColor(kRed);
  hmc->SetFillStyle(3002);
 
 }
 
 
-void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA){
+void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA, TString commonCut = "1"){
  TDRStyle();
 
  //  gStyle->SetLabelOffset(0.050, "Y");
@@ -68,8 +70,8 @@ void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA
  TLatex*  tinfoDEta = new TLatex(0.2,0.8,"");
  ///---- text info (end) ----
 
- createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","1");
- createHisto(tinfoDEta, DEtaMC, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","1");
+ createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",commonCut.Data());
+ createHisto(tinfoDEta, DEtaMC, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta",commonCut.Data());
 
  ///---- legend (begin) ----
  TLegend* legend = new TLegend(0.62,0.72,0.88,0.93);
@@ -101,15 +103,15 @@ void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA
 
  legend->Draw();
  cDPhi->SetGrid(); gPad->Update();
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.gif").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.pdf").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.png").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.C").c_str()); gSystem->Sleep(1);
- cDPhi->SetLogy(); gPad->Update();
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.gif").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.pdf").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.png").c_str());
- cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.C").c_str()); gSystem->Sleep(1);
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.gif").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.pdf").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.png").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.C").c_str()); gSystem->Sleep(1);
+//  cDPhi->SetLogy(); gPad->Update();
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.gif").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.pdf").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.png").c_str());
+//  cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.C").c_str()); gSystem->Sleep(1);
 
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
@@ -117,29 +119,34 @@ void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA
 
  legend->Draw();
  cDEta->SetGrid(); gPad->Update();   
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.gif").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.pdf").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.png").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.C").c_str()); gSystem->Sleep(1);
- cDEta->SetLogy(); gPad->Update();
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.gif").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.pdf").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.png").c_str());
- cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.C").c_str()); gSystem->Sleep(1);
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.gif").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.pdf").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.png").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.C").c_str()); gSystem->Sleep(1);
+//  cDEta->SetLogy(); gPad->Update();
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.gif").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.pdf").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.png").c_str());
+//  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.C").c_str()); gSystem->Sleep(1);
 
 
  ///---- 2D plot ----
- createHisto2D(TH2F* hmc, TTree* tmc, char* variableY, char* variableX, char* title, char* cut) {
- TH2F* DPhiMCvsEta   = new TH2F("DPhiMCvsEta",  "MC"  ,200,-0.04,0.04,20,-3,3);
- TH2F* DEtaMCvsEta   = new TH2F("DEtaMCvsEta"  ,"MC"  ,200,-0.02,0.02,,20,-3,3);
- createHisto2D(DPhiMCvsEta, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}","1");
- createHisto2D(DEtaMCvsEta, trMC, "deltaEtaSuperClusterAtVtx", "etaSC", "#Delta#eta vs #eta_{SC}","1");
+ TH2F* DPhiMCvsEta   = new TH2F("DPhiMCvsEta",  "MC"  , 20,-3,3,  200,-0.04,0.04);
+ TH2F* DEtaMCvsEta   = new TH2F("DEtaMCvsEta"  ,"MC"  , 20,-3,3,  200,-0.04,0.04);
+ createHisto2D(DPhiMCvsEta, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",commonCut.Data());
+ createHisto2D(DEtaMCvsEta, trMC, "deltaEtaSuperClusterAtVtx", "etaSC", "#Delta#eta vs #eta_{SC}",commonCut.Data());
+
+ TProfile* DPhiMCvsEta_tx = (TProfile*) DPhiMCvsEta->ProfileX();
+ TProfile* DEtaMCvsEta_tx = (TProfile*) DEtaMCvsEta->ProfileX();
 
  TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
  DPhiMCvsEta->Draw("colz");
+ DPhiMCvsEta_tx->Draw("same");
 
  TCanvas* cDEtavsEta = new TCanvas("cDetavsEta","cDetavsEta",700,700);
  DEtaMCvsEta->Draw("colz");
+ DEtaMCvsEta_tx->Draw("same");
+
 
 
 //  

@@ -152,7 +152,7 @@ EcalAlignment::~EcalAlignment()
    // (e.g. close files, deallocate resources etc.)
  if (eleId_names_.size() != 0) {
   delete [] eleId_;
- } 
+ }
 }
 
 
@@ -417,13 +417,13 @@ void
   float EtaMax      = 3.0;
   
 //    if ( met_ < 10. ) continue;
-  if ( ETSC_ < 20. ) continue;
+//   if ( ETSC_ < 20. ) continue;  //----> filtered afterwards!
 //    if ( fabs(dphiMETEle_) < 0.75) continue;   
    
   if ( fabs(eta_)> EtaCutEB && fabs(eta_)< EtaCutEE ) continue;
   if ( fabs(eta_)> EtaMax ) continue;
 
-  if ( electrons_classification_ != 0 ) continue;
+//   if ( electrons_classification_ != 0 ) continue;  //----> filtered afterwards!
    
    
 
