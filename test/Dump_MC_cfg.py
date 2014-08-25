@@ -34,7 +34,7 @@ process.configurationMetadata = cms.untracked.PSet(
     name = cms.untracked.string('PyReleaseValidation')
 )
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(-1)
 )
 process.options = cms.untracked.PSet(
 
@@ -49,28 +49,28 @@ process.source = cms.Source("PoolSource",
 # Output definition
 
 
-process.RECOoutput = cms.OutputModule("PoolOutputModule",
-    splitLevel = cms.untracked.int32(0),
-    outputCommands = process.RECOEventContent.outputCommands,
+#process.RECOoutput = cms.OutputModule("PoolOutputModule",
+    #splitLevel = cms.untracked.int32(0),
+    #outputCommands = process.RECOEventContent.outputCommands,
     #fileName = cms.untracked.string('outSkim_V3.root'),
-    fileName = cms.string (options.outputFile),
-    dataset = cms.untracked.PSet(
-        filterName = cms.untracked.string(''),
-        dataTier = cms.untracked.string('RECO')
-    )
-)
+    ##fileName = cms.string (options.outputFile),
+    #dataset = cms.untracked.PSet(
+        #filterName = cms.untracked.string(''),
+        #dataTier = cms.untracked.string('RECO')
+    #)
+#)
 
-process.out = cms.OutputModule("PoolOutputModule",
-  outputCommands = cms.untracked.vstring(
-#'keep *',
-       'drop *'
-#'keep *_gsfElectrons_*_*'
-#'keep *_*_*_EcalAlignmentBIS'
-#'drop *_gsfElectron_*_*',
-#'drop *_gsfElectronCores_*_*'
-        ),
-  fileName = cms.untracked.string("outCMSSW.root")
-)
+#process.out = cms.OutputModule("PoolOutputModule",
+  #outputCommands = cms.untracked.vstring(
+##'keep *',
+       #'drop *'
+##'keep *_gsfElectrons_*_*'
+##'keep *_*_*_EcalAlignmentBIS'
+##'drop *_gsfElectron_*_*',
+##'drop *_gsfElectronCores_*_*'
+        #),
+  #fileName = cms.untracked.string("outCMSSW.root")
+#)
 
   
 # Additional output definition
@@ -207,7 +207,8 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
 
 process.TFileService = cms.Service(
     "TFileService",
-    fileName = cms.string("EcalAlignment.root")
+    #fileName = cms.string("EcalAlignment.root")
+    fileName = cms.string(options.outputFile)
     )
 
 
@@ -259,7 +260,7 @@ process.noscraping = cms.EDFilter(
 # select events with at least one gsf electron
 process.highetele = cms.EDFilter(
     "GsfElectronSelector",
-    src = cms.InputTag("gsfElectrons"),
+    src = cms.InputTag("gedGsfElectrons"),  # -> new!
     cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
     )
 
