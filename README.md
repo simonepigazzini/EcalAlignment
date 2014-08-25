@@ -17,6 +17,9 @@ to setup:
     cd EcalValidation
     git clone git@github.com:amassiro/EcalAlignment.git
 
+    scramv1 b -j 8 -Werror=unused-variable
+
+        NB: the "unused variable" errors must be disabled, because are coming from CLHEP libraries loaded by geometry, I  have no access to
 
 
 where alignment constants are backuped:

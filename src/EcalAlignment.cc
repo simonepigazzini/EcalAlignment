@@ -362,14 +362,14 @@ void
      
    // spike removal variables
   int sev = -1;
-  int flag = -1;
+//   int flag = -1;
    
   sev = -1; //---- ??
   seedSeverityLevel_ = sev;
-  double seed_energy_temp = -1;
-  int iSC;
-  int iSM;
-  int numRecHit = 0;
+//   double seed_energy_temp = -1;
+//   int iSC;
+//   int iSM;
+//   int numRecHit = 0;
   const std::vector<std::pair<DetId,float> > & hits= electron.superCluster()->hitsAndFractions();
 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
@@ -388,7 +388,7 @@ void
     iDetEB_  = EcalBarrelGeometry::alignmentTransformIndexLocal(barrelId);
    }
   }
-  if (electron.isEE()){
+  else if (electron.isEE()){
    std::pair<DetId, float> id = EcalClusterTools::getMaximum(hits, theEndcapEcalRecHits);   
    EcalRecHitCollection::const_iterator it = theEndcapEcalRecHits->find(id.first);
    eleSwissCross_ = EcalTools::swissCross(id.first,*theEndcapEcalRecHits,0.);

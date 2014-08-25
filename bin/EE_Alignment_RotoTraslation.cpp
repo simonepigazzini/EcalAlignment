@@ -123,8 +123,8 @@ double Chi2Func(const double *xx ){
 
   Double_t vErrDEta;
   Double_t vErrDPhi;
-  Double_t vErrEta;
-  Double_t vErrPhi;
+//   Double_t vErrEta;
+//   Double_t vErrPhi;
   
   double Chi2 = 0;
   
@@ -146,8 +146,8 @@ double Chi2Func(const double *xx ){
   
     vErrDPhi = 1.3 * fabs((sqrt(3.6 / sqrt(vEnergy[iEntry]) * 3.6 / sqrt(vEnergy[iEntry]) + 12. / vEnergy[iEntry] * 12. / vEnergy[iEntry] + 0.54*0.54)) / 1000. / (Z * tan(2*atan(exp(-vEta[iEntry]))))); ///===> /1000 perchè è in "mm" -> "m"
     
-    vErrEta = 0.0;
-    vErrPhi = 0.0;
+//     vErrEta = 0.0;
+//     vErrPhi = 0.0;
 
 
     ///==== (x,y,z) 
@@ -216,9 +216,9 @@ int main(int argc, char** argv)
  rotationTheta = subPSetInput.getParameter<bool> ("rotationTheta") ;
  rotationPsi   = subPSetInput.getParameter<bool> ("rotationPsi") ;
      
- double setRotationPhi     = subPSetInput.getUntrackedParameter<double> ("setRotationPhi",0) ;
- double setRotationTheta   = subPSetInput.getUntrackedParameter<double> ("setRotationTheta",0) ;
- double setRotationPsi     = subPSetInput.getUntrackedParameter<double> ("setRotationPsi",0) ;
+//  double setRotationPhi     = subPSetInput.getUntrackedParameter<double> ("setRotationPhi",0) ;
+//  double setRotationTheta   = subPSetInput.getUntrackedParameter<double> ("setRotationTheta",0) ;
+//  double setRotationPsi     = subPSetInput.getUntrackedParameter<double> ("setRotationPsi",0) ;
 
  
  even = subPSetInput.getUntrackedParameter<bool> ("even",true) ;

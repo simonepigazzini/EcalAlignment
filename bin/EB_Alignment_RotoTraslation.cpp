@@ -139,8 +139,8 @@ double Chi2Func(const double *xx ){
   
  Double_t vErrDEta;
  Double_t vErrDPhi;
- Double_t vErrEta;
- Double_t vErrPhi;
+//  Double_t vErrEta;
+//  Double_t vErrPhi;
   
 //   std::cout << "myList->GetN() = " << myList->GetN() << std::endl;
   
@@ -164,8 +164,8 @@ double Chi2Func(const double *xx ){
     
     vErrDPhi = 1.3 * (sqrt(3.6 / sqrt(vEnergy[iEntry]) * 3.6 / sqrt(vEnergy[iEntry]) + 12. / vEnergy[iEntry] * 12. / vEnergy[iEntry] + 0.54*0.54)) / 1000. / R ; ///===> /1000 perchè è in "mm" -> "m"
     
-    vErrEta = 0.0;
-    vErrPhi = 0.0;
+//     vErrEta = 0.0;
+//     vErrPhi = 0.0;
 
     ///==== (x,y,z) 
     HepGeom::Point3D<double> xyz( R / sin(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * cos (vPhi[iEntry]),
@@ -233,9 +233,9 @@ int main(int argc, char** argv)
  rotationTheta = subPSetInput.getParameter<bool> ("rotationTheta") ;
  rotationPsi   = subPSetInput.getParameter<bool> ("rotationPsi") ;
      
- double setRotationPhi     = subPSetInput.getUntrackedParameter<double> ("setRotationPhi",0) ;
- double setRotationTheta   = subPSetInput.getUntrackedParameter<double> ("setRotationTheta",0) ;
- double setRotationPsi     = subPSetInput.getUntrackedParameter<double> ("setRotationPsi",0) ;
+//  double setRotationPhi     = subPSetInput.getUntrackedParameter<double> ("setRotationPhi",0) ;
+//  double setRotationTheta   = subPSetInput.getUntrackedParameter<double> ("setRotationTheta",0) ;
+//  double setRotationPsi     = subPSetInput.getUntrackedParameter<double> ("setRotationPsi",0) ;
 
  
  even = subPSetInput.getUntrackedParameter<bool> ("even",true) ;
