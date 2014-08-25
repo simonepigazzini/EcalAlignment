@@ -1,1608 +1,1174 @@
+#include "TDRStyle.cc"
+
+void createHisto(TLatex* tinfo, TH1F* hmc, TTree* tmc, char* variable, char* title, char* cut) {
+
+ TString toDraw;
+ TString tcut;
+
+//  tcut = Form("(%s) * weight_PU",cut);
+ tcut = Form("(%s)",cut);
+ toDraw = Form("%s >> %s",variable,hmc->GetName());
+ tmc   -> Draw(toDraw.Data(),tcut.Data(),"goff");
+
+ hmc -> GetXaxis()->SetTitle(title);
+ hmc -> GetYaxis()->SetTitle("Number of events");
+
+ hmc->SetLineColor(kTeal);
+ hmc->SetLineWidth(2);
+ hmc->SetFillColor(kTeal);
+ hmc->SetFillStyle(3002);
+
+ double integralMC  ;
+
+ TString  sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
+ tinfo -> SetText(0.2,0.85,sinfo);
+ tinfo -> SetTextSize(0.040);
+ tinfo -> SetNDC(true); 
+}
+
+
+
+
+
 void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA){
+ TDRStyle();
+
+ //  gStyle->SetLabelOffset(0.050, "Y");
+ gStyle->SetTitleYOffset(1.1);
+ //  gStyle->SetPadLeftMargin(0.15);
+ gStyle->cd();
+
+ TFile *fileMC   = TFile::Open(nameInFileRoot.Data());
+
+ TTree* trMC   = (TTree*) fileMC  -> Get("ntupleEcalAlignment/myTree");
+
+
+ ///---- all ----
+ TH1F* DPhiMC   = new TH1F("DPhiMC",  " MC"  ,200,-0.04,0.04);
+ TH1F* DEtaMC   = new TH1F("DEtaMC"  ," MC"  ,200,-0.02,0.02);
+
+ ///---- text info (begin) ----
+ TLatex*  tinfoDPhi = new TLatex(0.2,0.8,"");
+ TLatex*  tinfoDEta = new TLatex(0.2,0.8,"");
+ ///---- text info (end) ----
+
+ createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","1");
+ createHisto(tinfoDEta, DEtaMC, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","1");
+
+ ///---- legend (begin) ----
+ TLegend* legend = new TLegend(0.62,0.72,0.88,0.93);
+ //  TLegend* legend = new TLegend(0.60,0.72,0.80,0.88);
+ legend->AddEntry(DEtaMC,"MC","f");
+ legend->SetFillColor(kWhite);
+ ///---- legend (end) ----
  
- //  int Mean = 0;
- int Mean = 1;
  
- TFile* fileIn = new TFile(nameInFileRoot);
+ ///---- text (begin) ----
+ TLatex *tEB = new TLatex(0.2,0.7,"#splitline{EB}{#splitline{CMS 2011}{L= 4.98 fb^{-1}}}");
+ TLatex *tEE = new TLatex(0.2,0.7,"#splitline{EE}{#splitline{CMS 2011}{L= 4.98 fb^{-1}}}");
+ tEB->SetNDC(true);
+ tEE->SetNDC(true);
+ ///---- text (end) ----
  
- TLine lineVert (35.5,-1,35.5,1);
- lineVert.SetLineColor(kGreen);
- lineVert.SetLineWidth(4);
- lineVert.SetLineStyle(3);
- 
- gStyle->SetTitleX(0.2f);
- gStyle->SetTitleW(0.5f);
- 
- TString nameHisto;
- TH1F* h;
- TH1F* hMC;
- THStack* hs;
- TCanvas* cJoint = new TCanvas("cJoint","cJoint",1000,1000);
- cJoint->SetLeftMargin(0.10);
- cJoint->SetRightMargin(0.25);
- cJoint->SetTopMargin(0.05);
- cJoint->SetBottomMargin(0.20);
- 
- 
- 
+ TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
+ DPhiMC->Draw("PE");
+ tinfoDPhi->Draw();
+
+
  TString toDoShell;
  toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
  system(toDoShell.Data());
  toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
  system(toDoShell.Data());
- toDoShell = Form("mkdir %s/plot ;",nameOutputDir.Data());
+ toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
  system(toDoShell.Data());
- 
- TString toDoROOT;
- 
- double norm;
- 
- 
- double MC_Dphi_Eplus_EBplus;
- double errMC_Dphi_Eplus_EBplus;
- double MC_Dphi_Eminus_EBplus;
- double errMC_Dphi_Eminus_EBplus;
- double MC_Dphi_EBplus;
- double errMC_Dphi_EBplus; 
- double MC_Deta_EBplus;
- double errMC_Deta_EBplus;
- 
- double MC_Dphi_Eplus_EBminus;
- double errMC_Dphi_Eplus_EBminus;
- double MC_Dphi_Eminus_EBminus;
- double errMC_Dphi_Eminus_EBminus;
- double MC_Dphi_EBminus;
- double errMC_Dphi_EBminus; 
- double MC_Deta_EBminus;
- double errMC_Deta_EBminus;
- 
- double MC_Dphi_Eplus_EEplus;
- double errMC_Dphi_Eplus_EEplus;
- double MC_Dphi_Eminus_EEplus;
- double errMC_Dphi_Eminus_EEplus;
- double MC_Dphi_EEplus;
- double errMC_Dphi_EEplus; 
- double MC_Deta_EEplus;
- double errMC_Deta_EEplus;
- 
- double MC_Dphi_Eplus_EEminus;
- double errMC_Dphi_Eplus_EEminus;
- double MC_Dphi_Eminus_EEminus;
- double errMC_Dphi_Eminus_EEminus;
- double MC_Dphi_EEminus;
- double errMC_Dphi_EEminus; 
- double MC_Deta_EEminus;
- double errMC_Deta_EEminus;
- 
- 
- 
- double DATA_Dphi_Eplus_EBplus;
- double errDATA_Dphi_Eplus_EBplus;
- double DATA_Dphi_Eminus_EBplus;
- double errDATA_Dphi_Eminus_EBplus;
- double DATA_Dphi_EBplus;
- double errDATA_Dphi_EBplus; 
- double DATA_Deta_EBplus;
- double errDATA_Deta_EBplus;
- 
- double DATA_Dphi_Eplus_EBminus;
- double errDATA_Dphi_Eplus_EBminus;
- double DATA_Dphi_Eminus_EBminus;
- double errDATA_Dphi_Eminus_EBminus;
- double DATA_Dphi_EBminus;
- double errDATA_Dphi_EBminus; 
- double DATA_Deta_EBminus;
- double errDATA_Deta_EBminus;
- 
- double DATA_Dphi_Eplus_EEplus;
- double errDATA_Dphi_Eplus_EEplus;
- double DATA_Dphi_Eminus_EEplus;
- double errDATA_Dphi_Eminus_EEplus;
- double DATA_Dphi_EEplus;
- double errDATA_Dphi_EEplus; 
- double DATA_Deta_EEplus;
- double errDATA_Deta_EEplus;
- 
- double DATA_Dphi_Eplus_EEminus;
- double errDATA_Dphi_Eplus_EEminus;
- double DATA_Dphi_Eminus_EEminus;
- double errDATA_Dphi_Eminus_EEminus;
- double DATA_Dphi_EEminus;
- double errDATA_Dphi_EEminus; 
- double DATA_Deta_EEminus;
- double errDATA_Deta_EEminus;
- 
- 
- std::vector<double> DATA_Dphi;
- std::vector<double> DATA_Dphi_ePlus;
- std::vector<double> DATA_Dphi_eMinus;
- std::vector<double> DATA_Deta;
- std::vector<double> DATA_err_Dphi;
- std::vector<double> DATA_err_Dphi_ePlus;
- std::vector<double> DATA_err_Dphi_eMinus;
- std::vector<double> DATA_err_Deta;
- 
- std::vector<double> MC_Dphi;
- std::vector<double> MC_Dphi_ePlus;
- std::vector<double> MC_Dphi_eMinus;
- std::vector<double> MC_Deta;
- std::vector<double> MC_err_Dphi;
- std::vector<double> MC_err_Dphi_ePlus;
- std::vector<double> MC_err_Dphi_eMinus;
- std::vector<double> MC_err_Deta;
- 
- TString nameHistoInRootFile;
- ///==== EB ====
- for (int iSM = 0; iSM <36; iSM++) {
-  ///~~~~ Dphi ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM);
-  std::cout << " Dphi  nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<18) {
-    nameHistoInRootFile = Form ("Data/W_121_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_122_1_Tot_temp");  
-   }
-  } 
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM);
-  }
-  std::cout << " Dphi nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg0 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg0->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EB_%d.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi.push_back(h->GetMean());
-  DATA_err_Dphi.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi.push_back(hMC->GetMean());
-  MC_err_Dphi.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  ///~~~~ Dphi e+ ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM+40);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<18) {
-    nameHistoInRootFile = Form ("Data/W_125_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_126_1_Tot_temp");  
-   }
-  } 
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM+40);
-  }
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EB_%d_ePlus.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi_ePlus.push_back(h->GetMean());
-  DATA_err_Dphi_ePlus.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi_ePlus.push_back(hMC->GetMean());
-  MC_err_Dphi_ePlus.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  ///~~~~ Dphi e- ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM+80);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<18) {
-    nameHistoInRootFile = Form ("Data/W_129_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_130_1_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM+80);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg2 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg2->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EB_%d_eMinus.png",nameOutputDir.Data(),iSM);
-  std::cout << " Dphi e- toDoROOT = " << toDoROOT.Data() << std::endl;
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi_eMinus.push_back(h->GetMean());
-  DATA_err_Dphi_eMinus.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi_eMinus.push_back(hMC->GetMean());
-  MC_err_Dphi_eMinus.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  ///~~~~ Deta ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_0_Tot_temp",nameDATA.Data(),iSM);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<18) {
-    nameHistoInRootFile = Form ("Data/W_121_0_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_122_0_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_0_Tot_temp",iSM);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg3 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg3->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Deta_EB_%d.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Deta.push_back(h->GetMean());
-  DATA_err_Deta.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Deta.push_back(hMC->GetMean());
-  MC_err_Deta.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
- }
- 
- 
- 
- 
- 
- ///==== EE ====
- for (int iSM = 0; iSM <4; iSM++) {
-  ///~~~~ Dphi ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM+36);
-  std::cout << " Dphi nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<2) {
-    nameHistoInRootFile = Form ("Data/W_123_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_120_1_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM+36);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg0 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg0->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EE_%d.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi.push_back(h->GetMean());
-  DATA_err_Dphi.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi.push_back(hMC->GetMean());
-  MC_err_Dphi.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  
-  ///~~~~ Dphi e+ ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM+40+36);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<2) {
-    nameHistoInRootFile = Form ("Data/W_127_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_124_1_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM+40+36);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EE_%d_ePlus.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi_ePlus.push_back(h->GetMean());
-  DATA_err_Dphi_ePlus.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi_ePlus.push_back(hMC->GetMean());
-  MC_err_Dphi_ePlus.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  ///~~~~ Dphi e- ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_1_Tot_temp",nameDATA.Data(),iSM+80+36);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<2) {
-    nameHistoInRootFile = Form ("Data/W_131_1_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_128_1_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_1_Tot_temp",iSM+80+36);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg2 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg2->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Dphi_EE_%d_eMinus.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Dphi_eMinus.push_back(h->GetMean());
-  DATA_err_Dphi_eMinus.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Dphi_eMinus.push_back(hMC->GetMean());
-  MC_err_Dphi_eMinus.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
-  ///~~~~ Deta ~~~~
-  nameHistoInRootFile = Form("Data/%s_%d_0_Tot_temp",nameDATA.Data(),iSM+36);
-  std::cout << " Dphi e+ nameHistoInRootFile = " << nameHistoInRootFile.Data() << std::endl;
-  h = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  if (Mean == 1){
-   if (iSM<2) {
-    nameHistoInRootFile = Form ("Data/W_123_0_Tot_temp");  
-   }
-   else {
-    nameHistoInRootFile = Form ("Data/W_120_0_Tot_temp");  
-   }
-  }
-  else {
-   nameHistoInRootFile = Form("Data/W_%d_0_Tot_temp",iSM+36);
-  }
-  hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
-  cJoint->cd();
-  h->Draw();
-  norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
-  cJoint->SetGrid();
-  TLegend* leg3 = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
-  leg3->SetFillColor(kWhite);
-  cJoint->SetGrid();   
-  toDoROOT = Form("%s/plot/Deta_EE_%d.png",nameOutputDir.Data(),iSM);
-  cJoint->SaveAs(toDoROOT);
-  DATA_Deta.push_back(h->GetMean());
-  DATA_err_Deta.push_back(h->GetRMS() /sqrt( h->GetEntries() ));
-  MC_Deta.push_back(hMC->GetMean());
-  MC_err_Deta.push_back(hMC->GetRMS() /sqrt( hMC->GetEntries() ));
-  
- }
- 
- 
- 
- 
- 
- 
- ///===============================
- ///==== Summary plots: EE, EB ====
- 
- ///==== EB+ ====
- ///==== e+ ====
- nameHistoInRootFile = Form("Data/%s_125_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_125_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEPlusEBplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEPlusEBplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEPlusEBplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT); 
- DATA_Dphi_Eplus_EBplus    = h->GetMean();
- errDATA_Dphi_Eplus_EBplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eplus_EBplus      = hMC->GetMean();
- errMC_Dphi_Eplus_EBplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e- ====
- nameHistoInRootFile = Form("Data/%s_129_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_129_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEMinusEBplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEMinusEBplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEMinusEBplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eminus_EBplus    = h->GetMean();
- errDATA_Dphi_Eminus_EBplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eminus_EBplus      = hMC->GetMean();
- errMC_Dphi_Eminus_EBplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e^{-} + e^{+} ====
- nameHistoInRootFile = Form("Data/%s_121_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_121_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEBplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEBplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEBplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_EBplus    = h->GetMean();
- errDATA_Dphi_EBplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_EBplus      = hMC->GetMean();
- errMC_Dphi_EBplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- nameHistoInRootFile = Form("Data/%s_121_0_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_121_0_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEBplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEBplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DetaEBplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Deta_EBplus    = h->GetMean();
- errDATA_Deta_EBplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Deta_EBplus      = hMC->GetMean();
- errMC_Deta_EBplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- 
- 
- 
- ///==== EB- ====
- ///==== e+ ====
- nameHistoInRootFile = Form("Data/%s_126_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_126_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEPlusEBminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEPlusEBminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEPlusEBminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eplus_EBminus    = h->GetMean();
- errDATA_Dphi_Eplus_EBminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eplus_EBminus      = hMC->GetMean();
- errMC_Dphi_Eplus_EBminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e- ====
- nameHistoInRootFile = Form("Data/%s_130_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_130_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEMinusEBminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEMinusEBminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEMinusEBminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eminus_EBminus    = h->GetMean();
- errDATA_Dphi_Eminus_EBminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eminus_EBminus      = hMC->GetMean();
- errMC_Dphi_Eminus_EBminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e^{-} + e^{+} ====
- nameHistoInRootFile = Form("Data/%s_122_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_122_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEBminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEBminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEBminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_EBminus    = h->GetMean();
- errDATA_Dphi_EBminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_EBminus      = hMC->GetMean();
- errMC_Dphi_EBminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- nameHistoInRootFile = Form("Data/%s_122_0_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_122_0_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEBminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEBminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DetaEBminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Deta_EBminus    = h->GetMean();
- errDATA_Deta_EBminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Deta_EBminus      = hMC->GetMean();
- errMC_Deta_EBminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- 
- 
- 
- 
- 
- ///==== EE+ ====
- ///==== e+ ====
- nameHistoInRootFile = Form("Data/%s_124_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_124_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEPlusEEplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEPlusEEplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEPlusEEplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eplus_EEplus    = h->GetMean();
- errDATA_Dphi_Eplus_EEplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eplus_EEplus      = hMC->GetMean();
- errMC_Dphi_Eplus_EEplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e- ====
- nameHistoInRootFile = Form("Data/%s_128_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_128_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEMinusEEplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEMinusEEplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEMinusEEplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eminus_EEplus    = h->GetMean();
- errDATA_Dphi_Eminus_EEplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eminus_EEplus      = hMC->GetMean();
- errMC_Dphi_Eminus_EEplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e^{-} + e^{+} ====
- nameHistoInRootFile = Form("Data/%s_120_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_120_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEEplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEEplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEEplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_EEplus    = h->GetMean();
- errDATA_Dphi_EEplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_EEplus      = hMC->GetMean();
- errMC_Dphi_EEplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- 
- nameHistoInRootFile = Form("Data/%s_120_0_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_120_0_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEEplus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEEplus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DetaEEplus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Deta_EEplus    = h->GetMean();
- errDATA_Deta_EEplus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Deta_EEplus      = hMC->GetMean();
- errMC_Deta_EEplus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- 
- 
- 
- 
- ///==== EE- ====
- ///==== e+ ====
- nameHistoInRootFile = Form("Data/%s_127_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_127_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEPlusEEminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEPlusEEminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEPlusEEminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eplus_EEminus    = h->GetMean();
- errDATA_Dphi_Eplus_EEminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eplus_EEminus      = hMC->GetMean();
- errMC_Dphi_Eplus_EEminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e- ====
- nameHistoInRootFile = Form("Data/%s_131_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_131_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEMinusEEminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEMinusEEminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEMinusEEminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_Eminus_EEminus    = h->GetMean();
- errDATA_Dphi_Eminus_EEminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_Eminus_EEminus      = hMC->GetMean();
- errMC_Dphi_Eminus_EEminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- ///==== e^{-} + e^{+} ====
- nameHistoInRootFile = Form("Data/%s_123_1_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_123_1_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEEminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEEminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEEminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Dphi_EEminus    = h->GetMean();
- errDATA_Dphi_EEminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Dphi_EEminus      = hMC->GetMean();
- errMC_Dphi_EEminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- nameHistoInRootFile = Form("Data/%s_123_0_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- nameHistoInRootFile = Form ("Data/W_123_0_Tot_temp");  
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- cJoint->cd();
- h->Draw();
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- cJoint->SetGrid();
- TLegend* legEEminus = cJoint->BuildLegend(0.8,0.55,0.98,0.75);
- legEEminus->SetFillColor(kWhite);
- cJoint->SetGrid();   
- toDoROOT = Form("%s/plot/DetaEEminus.png",nameOutputDir.Data());
- cJoint->SaveAs(toDoROOT);
- DATA_Deta_EEminus    = h->GetMean();
- errDATA_Deta_EEminus = h->GetRMS() /sqrt( h->GetEntries() );
- MC_Deta_EEminus      = hMC->GetMean();
- errMC_Deta_EEminus   = hMC->GetRMS() /sqrt( hMC->GetEntries() );
- 
- 
- 
- 
- 
- 
- 
- 
- ///==== write to html ==== 
- 
- TString nameFileHTML = Form("%s/ModulesMiddle.html",nameOutputDir.Data());
- std::ofstream myfile;
- myfile.precision (3) ;
- myfile.unsetf(std::ios::scientific); 
- myfile.open (nameFileHTML.Data());
- 
- 
- myfile << " <table summary=\"\" border=\"3\" cellpadding=\"14\" > " << std::endl;
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << " <b>&Delta;&phi; e+</b> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> EB+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEPlusEBplus.png\" target=\"_blank\"><img src=\"plot/DphiEPlusEBplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eplus_EBplus  << " &pm; " <<   errMC_Dphi_Eplus_EBplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eplus_EBplus  << " &pm; " << errDATA_Dphi_Eplus_EBplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EB- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEPlusEBminus.png\" target=\"_blank\"><img src=\"plot/DphiEPlusEBminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eplus_EBminus  << " &pm; " <<   errMC_Dphi_Eplus_EBminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eplus_EBminus  << " &pm; " << errDATA_Dphi_Eplus_EBminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> EE+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEPlusEEplus.png\" target=\"_blank\"><img src=\"plot/DphiEPlusEEplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eplus_EEplus  << " &pm; " <<   errMC_Dphi_Eplus_EEplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eplus_EEplus  << " &pm; " << errDATA_Dphi_Eplus_EEplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EE- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEPlusEEminus.png\" target=\"_blank\"><img src=\"plot/DphiEPlusEEminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eplus_EEminus  << " &pm; " <<   errMC_Dphi_Eplus_EEminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eplus_EEminus  << " &pm; " << errDATA_Dphi_Eplus_EEminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " " << std::endl;  
- myfile << " <td ROWSPAN=\"2\"> " << std::endl;
- myfile << "  <center> EB+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEBplus.png\" target=\"_blank\"><img src=\"plot/DphiEBplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_EBplus  << " &pm; " <<   errMC_Dphi_EBplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_EBplus  << " &pm; " << errDATA_Dphi_EBplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EB- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEBminus.png\" target=\"_blank\"><img src=\"plot/DphiEBminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_EBminus  << " &pm; " <<   errMC_Dphi_EBminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_EBminus  << " &pm; " << errDATA_Dphi_EBminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <td ROWSPAN=\"2\"> " << std::endl;
- myfile << "  <center> EE+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEEplus.png\" target=\"_blank\"><img src=\"plot/DphiEEplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_EEplus  << " &pm; " <<   errMC_Dphi_EEplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_EEplus  << " &pm; " << errDATA_Dphi_EEplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EE- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEEminus.png\" target=\"_blank\"><img src=\"plot/DphiEEminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_EEminus  << " &pm; " <<   errMC_Dphi_EEminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_EEminus  << " &pm; " << errDATA_Dphi_EEminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << " <b>&Delta;&phi; e-</b> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> EB+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEMinusEBplus.png\" target=\"_blank\"><img src=\"plot/DphiEMinusEBplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eminus_EBplus  << " &pm; " <<   errMC_Dphi_Eminus_EBplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eminus_EBplus  << " &pm; " << errDATA_Dphi_Eminus_EBplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EB- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEMinusEBminus.png\" target=\"_blank\"><img src=\"plot/DphiEMinusEBminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eminus_EBminus  << " &pm; " <<   errMC_Dphi_Eminus_EBminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eminus_EBminus  << " &pm; " << errDATA_Dphi_Eminus_EBminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " " << std::endl;  
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> EE+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEMinusEEplus.png\" target=\"_blank\"><img src=\"plot/DphiEMinusEEplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eminus_EEplus  << " &pm; " <<   errMC_Dphi_Eminus_EEplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eminus_EEplus  << " &pm; " << errDATA_Dphi_Eminus_EEplus   << " </center></font> </br></br>" << std::endl;  
- myfile << "  <center> EE- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DphiEMinusEEminus.png\" target=\"_blank\"><img src=\"plot/DphiEMinusEEminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Dphi_Eminus_EEminus  << " &pm; " <<   errMC_Dphi_Eminus_EEminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Dphi_Eminus_EEminus  << " &pm; " << errDATA_Dphi_Eminus_EEminus   << " </center></font> </br></br>" << std::endl;  
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << " <b>&Delta;&eta;</b> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << "  <td COLSPAN=\"2\"> " << std::endl;
- myfile << "  <center> EB+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DetaEBplus.png\" target=\"_blank\"><img src=\"plot/DetaEBplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Deta_EBplus  << " &pm; " <<   errMC_Deta_EBplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Deta_EBplus  << " &pm; " << errDATA_Deta_EBplus   << " </center></font> </br></br>" << std::endl; 
- myfile << "  <center> EB- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DetaEBminus.png\" target=\"_blank\"><img src=\"plot/DetaEBminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Deta_EBminus  << " &pm; " <<   errMC_Deta_EBminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Deta_EBminus  << " &pm; " << errDATA_Deta_EBminus   << " </center></font> </br></br>" << std::endl; 
- myfile << " </td> " << std::endl;
- myfile << " <td COLSPAN=\"2\"> " << std::endl;
- myfile << "  <center> EE+ </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DetaEEplus.png\" target=\"_blank\"><img src=\"plot/DetaEEplus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Deta_EEplus  << " &pm; " <<   errMC_Deta_EEplus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Deta_EEplus  << " &pm; " << errDATA_Deta_EEplus   << " </center></font> </br></br>" << std::endl; 
- myfile << "  <center> EE- </center></br>  " << std::endl;
- myfile << " <center><a href=\"plot/DetaEEminus.png\" target=\"_blank\"><img src=\"plot/DetaEEminus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
- myfile << "  <font color=\"blue\"><center>  " <<   MC_Deta_EEminus  << " &pm; " <<   errMC_Deta_EEminus   << " </center></font> </br>" << std::endl;
- myfile << "  <font color=\"red\"><center>  "  << DATA_Deta_EEminus  << " &pm; " << errDATA_Deta_EEminus   << " </center></font> </br></br>" << std::endl; 
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- myfile << "  " << std::endl;
- myfile << " </table> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <br><br><br><br> " << std::endl;
- myfile << " " << std::endl;
- 
- 
- 
- 
- 
- myfile << " <table summary=\"\" border=\"3\" cellpadding=\"14\" > " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"3\" > <center> Module </center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"black\">  &Delta;&phi; e+ </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"black\">  &Delta;&phi; e- </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"black\">  &Delta;&eta;    </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"black\">  &Delta;&phi;    </font></center> </td> " << std::endl;
- myfile << " </tr> " << std::endl;
- myfile << " " << std::endl; 
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  DATA  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  DATA  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  DATA  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  DATA  </font></center> </td> " << std::endl;
- myfile << " </tr> " << std::endl;
- myfile << " <tr> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  MC  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  MC  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  MC  </font></center> </td> " << std::endl;
- myfile << " <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  MC  </font></center> </td> " << std::endl;
- myfile << " </tr> " << std::endl;
- 
- 
- 
- 
- ///=======================
- ///==== Summary plots ====
- 
- 
- 
- TGraphErrors* grDATA_Dphi = new TGraphErrors();
- grDATA_Dphi->SetTitle("#Delta#phi DATA");
- grDATA_Dphi->SetMarkerColor(kRed);
- grDATA_Dphi->SetLineColor(kRed);
- grDATA_Dphi->SetFillColor(kRed);
- grDATA_Dphi->SetMarkerStyle(20);
- grDATA_Dphi->SetMarkerSize(1);
- grDATA_Dphi->SetLineWidth(1);
- grDATA_Dphi->GetXaxis()->SetTitle("iDet");
- grDATA_Dphi->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grDATA_Dphi_ePlus = new TGraphErrors();
- grDATA_Dphi_ePlus->SetTitle("#Delta#phi e+ DATA");
- grDATA_Dphi_ePlus->SetMarkerColor(kRed);
- grDATA_Dphi_ePlus->SetLineColor(kRed);
- grDATA_Dphi_ePlus->SetFillColor(kRed);
- grDATA_Dphi_ePlus->SetMarkerStyle(20);
- grDATA_Dphi_ePlus->SetMarkerSize(1);
- grDATA_Dphi_ePlus->SetLineWidth(1);
- grDATA_Dphi_ePlus->GetXaxis()->SetTitle("iDet");
- grDATA_Dphi_ePlus->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grDATA_Dphi_eMinus = new TGraphErrors();
- grDATA_Dphi_eMinus->SetTitle("#Delta#phi e- DATA");
- grDATA_Dphi_eMinus->SetMarkerColor(kRed);
- grDATA_Dphi_eMinus->SetLineColor(kRed);
- grDATA_Dphi_eMinus->SetFillColor(kRed);
- grDATA_Dphi_eMinus->SetMarkerStyle(20);
- grDATA_Dphi_eMinus->SetMarkerSize(1);
- grDATA_Dphi_eMinus->SetLineWidth(1);
- grDATA_Dphi_eMinus->GetXaxis()->SetTitle("iDet");
- grDATA_Dphi_eMinus->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grDATA_Deta = new TGraphErrors();
- grDATA_Deta->SetTitle("#Delta#eta DATA");
- grDATA_Deta->SetMarkerColor(kRed);
- grDATA_Deta->SetLineColor(kRed);
- grDATA_Deta->SetFillColor(kRed);
- grDATA_Deta->SetMarkerStyle(20);
- grDATA_Deta->SetMarkerSize(1);
- grDATA_Deta->SetLineWidth(1);
- grDATA_Deta->GetXaxis()->SetTitle("iDet");
- grDATA_Deta->GetYaxis()->SetTitle("#Delta#eta");
- 
- TGraphErrors* grMC_Dphi = new TGraphErrors();
- grMC_Dphi->SetTitle("#Delta#phi MC");
- grMC_Dphi->SetMarkerColor(kBlue);
- grMC_Dphi->SetLineColor(kBlue);
- grMC_Dphi->SetFillColor(kBlue);
- grMC_Dphi->SetMarkerStyle(21);
- grMC_Dphi->SetMarkerSize(1);
- grMC_Dphi->SetLineWidth(1);
- grMC_Dphi->GetXaxis()->SetTitle("iDet");
- grMC_Dphi->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grMC_Dphi_ePlus = new TGraphErrors();
- grMC_Dphi_ePlus->SetTitle("#Delta#phi e+ MC");
- grMC_Dphi_ePlus->SetMarkerColor(kBlue);
- grMC_Dphi_ePlus->SetLineColor(kBlue);
- grMC_Dphi_ePlus->SetFillColor(kBlue);
- grMC_Dphi_ePlus->SetMarkerStyle(21);
- grMC_Dphi_ePlus->SetMarkerSize(1);
- grMC_Dphi_ePlus->SetLineWidth(1);
- grMC_Dphi_ePlus->GetXaxis()->SetTitle("iDet");
- grMC_Dphi_ePlus->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grMC_Dphi_eMinus = new TGraphErrors();
- grMC_Dphi_eMinus->SetTitle("#Delta#phi e- MC");
- grMC_Dphi_eMinus->SetMarkerColor(kBlue);
- grMC_Dphi_eMinus->SetLineColor(kBlue);
- grMC_Dphi_eMinus->SetFillColor(kBlue);
- grMC_Dphi_eMinus->SetMarkerStyle(21);
- grMC_Dphi_eMinus->SetMarkerSize(1);
- grMC_Dphi_eMinus->SetLineWidth(1);
- grMC_Dphi_eMinus->GetXaxis()->SetTitle("iDet");
- grMC_Dphi_eMinus->GetYaxis()->SetTitle("#Delta#phi");
- 
- TGraphErrors* grMC_Deta = new TGraphErrors();
- grMC_Deta->SetTitle("#Delta#eta MC");
- grMC_Deta->SetMarkerColor(kBlue);
- grMC_Deta->SetLineColor(kBlue);
- grMC_Deta->SetFillColor(kBlue);
- grMC_Deta->SetMarkerStyle(21);
- grMC_Deta->SetMarkerSize(1);
- grMC_Deta->SetLineWidth(1);
- grMC_Deta->GetXaxis()->SetTitle("iDet");
- grMC_Deta->GetYaxis()->SetTitle("#Delta#eta"); 
- 
- std::cout << " DATA_Dphi_ePlus.size() = " << DATA_Dphi_ePlus.size() << std::endl;
- for (int iSM = 0; iSM <40; iSM++) { 
-  grDATA_Dphi->SetPoint(iSM,iSM,DATA_Dphi.at(iSM));
-  grDATA_Dphi->SetPointError(iSM,0,DATA_err_Dphi.at(iSM));
-  grDATA_Dphi_ePlus->SetPoint(iSM,iSM,DATA_Dphi_ePlus.at(iSM));
-  grDATA_Dphi_ePlus->SetPointError(iSM,0,DATA_err_Dphi_ePlus.at(iSM));
-  grDATA_Dphi_eMinus->SetPoint(iSM,iSM,DATA_Dphi_eMinus.at(iSM));
-  grDATA_Dphi_eMinus->SetPointError(iSM,0,DATA_err_Dphi_eMinus.at(iSM));
-  grDATA_Deta->SetPoint(iSM,iSM,DATA_Deta.at(iSM));
-  grDATA_Deta->SetPointError(iSM,0,DATA_err_Deta.at(iSM));
-  
-  grMC_Dphi->SetPoint(iSM,iSM,MC_Dphi.at(iSM));
-  grMC_Dphi->SetPointError(iSM,0,MC_err_Dphi.at(iSM));
-  grMC_Dphi_ePlus->SetPoint(iSM,iSM,MC_Dphi_ePlus.at(iSM));
-  grMC_Dphi_ePlus->SetPointError(iSM,0,MC_err_Dphi_ePlus.at(iSM));
-  grMC_Dphi_eMinus->SetPoint(iSM,iSM,MC_Dphi_eMinus.at(iSM));
-  grMC_Dphi_eMinus->SetPointError(iSM,0,MC_err_Dphi_eMinus.at(iSM));
-  grMC_Deta->SetPoint(iSM,iSM,MC_Deta.at(iSM));
-  grMC_Deta->SetPointError(iSM,0,MC_err_Deta.at(iSM));  
- } 
- 
- 
- 
- TCanvas* cJointMG = new TCanvas("cJointMG","cJointMG",1000,500);
- cJointMG->SetLeftMargin(0.10);
- cJointMG->SetRightMargin(0.25);
- cJointMG->SetTopMargin(0.05);
- cJointMG->SetBottomMargin(0.20);
- 
- cJointMG->cd();
- TMultiGraph* mgr_Dphi = new TMultiGraph();
- mgr_Dphi->Add(grDATA_Dphi);
- mgr_Dphi->Add(grMC_Dphi);
- mgr_Dphi->Draw("AP");
- mgr_Dphi->GetXaxis()->SetTitle("iDet");
- mgr_Dphi->GetYaxis()->SetTitle("#Delta#phi");
- cJointMG->SetGrid();
- TLegend* legQ = cJointMG->BuildLegend(0.8,0.55,0.98,0.75);
- legQ->SetFillColor(kWhite);
- lineVert.Draw();
- cJointMG->SetGrid();   
- toDoROOT = Form("%s/plot/Dphi.png",nameOutputDir.Data());
- cJointMG->SaveAs(toDoROOT);
- cJointMG->SaveAs(toDoROOT);
- 
- cJointMG->Clear();
- cJointMG->cd();
- TMultiGraph* mgr_Dphi_ePlus = new TMultiGraph();
- mgr_Dphi_ePlus->Add(grDATA_Dphi_ePlus);
- mgr_Dphi_ePlus->Add(grMC_Dphi_ePlus);
- mgr_Dphi_ePlus->Draw("AP");
- mgr_Dphi_ePlus->GetXaxis()->SetTitle("iDet");
- mgr_Dphi_ePlus->GetYaxis()->SetTitle("#Delta#phi");
- cJointMG->SetGrid();
- TLegend* legA = cJointMG->BuildLegend(0.8,0.55,0.98,0.75);
- legA->SetFillColor(kWhite);
- lineVert.Draw();
- cJointMG->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEPlus.png",nameOutputDir.Data());
- cJointMG->SaveAs(toDoROOT);
- cJointMG->SaveAs(toDoROOT);
- 
- 
- cJointMG->Clear();
- cJointMG->cd();
- TMultiGraph* mgr_Dphi_eMinus = new TMultiGraph();
- mgr_Dphi_eMinus->Add(grDATA_Dphi_eMinus);
- mgr_Dphi_eMinus->Add(grMC_Dphi_eMinus);
- mgr_Dphi_eMinus->Draw("AP");
- mgr_Dphi_eMinus->GetXaxis()->SetTitle("iDet");
- mgr_Dphi_eMinus->GetYaxis()->SetTitle("#Delta#phi");
- cJointMG->SetGrid();
- TLegend* legB = cJointMG->BuildLegend(0.8,0.55,0.98,0.75);
- legB->SetFillColor(kWhite);
- lineVert.Draw();
- cJointMG->SetGrid();   
- toDoROOT = Form("%s/plot/DphiEMinus.png",nameOutputDir.Data());
- cJointMG->SaveAs(toDoROOT);
- 
- cJointMG->Clear();
- cJointMG->cd();
- TMultiGraph* mgr_Deta = new TMultiGraph();
- mgr_Deta->Add(grDATA_Deta);
- mgr_Deta->Add(grMC_Deta);
- mgr_Deta->Draw("AP");
- mgr_Deta->GetXaxis()->SetTitle("iDet");
- mgr_Deta->GetYaxis()->SetTitle("#Delta#eta");
- cJointMG->SetGrid();
- TLegend* legC = cJointMG->BuildLegend(0.8,0.55,0.98,0.75);
- legC->SetFillColor(kWhite);
- lineVert.Draw();
- cJointMG->SetGrid();   
- toDoROOT = Form("%s/plot/Deta.png",nameOutputDir.Data());
- cJointMG->SaveAs(toDoROOT);
- 
- 
- 
- 
- ///============================
- ///==== to create big HTML ====
- 
- 
- toDoShell = Form("cp scripts/html/templateModulesBegin.html %s/ModulesBegin.html",nameOutputDir.Data());
- system(toDoShell.Data());
- 
- toDoShell = Form("cp scripts/html/templateModulesEnd.html %s/ModulesEnd.html",nameOutputDir.Data());
- system(toDoShell.Data());
- 
- //  TString nameFileHTML = Form("%s/ModulesMiddle.html",nameOutputDir.Data());
- //  std::ofstream myfile;
- //  myfile.precision (3) ;
- //  myfile.unsetf(std::ios::scientific); 
- //  myfile.open (nameFileHTML.Data());
- for (int iSM = 0; iSM <36; iSM++) { 
-  myfile << "<tr>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"2\" > <center><a href=\"Module_EB_" << iSM << ".html\" target=\"_blank\"> Module EB " << iSM << " </a></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi_ePlus.at(iSM)  << " &pm; " << DATA_err_Dphi_ePlus.at(iSM)   << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi_eMinus.at(iSM) << " &pm; " << DATA_err_Dphi_eMinus.at(iSM)  << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Deta.at(iSM)        << " &pm; " << DATA_err_Deta.at(iSM)         << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi.at(iSM)        << " &pm; " << DATA_err_Dphi.at(iSM)         << " </font></center> </td>" << std::endl;
-  myfile << "</tr>" << std::endl;
-  myfile << "<tr>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi_ePlus.at(iSM)  << " &pm; " << MC_err_Dphi_ePlus.at(iSM)   << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi_eMinus.at(iSM) << " &pm; " << MC_err_Dphi_eMinus.at(iSM)  << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Deta.at(iSM)        << " &pm; " << MC_err_Deta.at(iSM)         << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi.at(iSM)        << " &pm; " << MC_err_Dphi.at(iSM)         << " </font></center> </td>" << std::endl;
-  myfile << "</tr>" << std::endl;
- }
- myfile << "<hr>" << std::endl;
- myfile << "<hr>" << std::endl;
- for (int iSM = 0; iSM <4; iSM++) { 
-  myfile << "<tr>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"2\" > <center><a href=\"Module_EE_" << iSM << ".html\" target=\"_blank\"> Module EE " << iSM << " </a></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi_ePlus.at(iSM+36)  << " &pm; " << DATA_err_Dphi_ePlus.at(iSM+36)   << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi_eMinus.at(iSM+36) << " &pm; " << DATA_err_Dphi_eMinus.at(iSM+36)  << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Deta.at(iSM+36)        << " &pm; " << DATA_err_Deta.at(iSM+36)         << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"red\">  " << DATA_Dphi.at(iSM+36)        << " &pm; " << DATA_err_Dphi.at(iSM+36)         << " </font></center> </td>" << std::endl;
-  myfile << "</tr>" << std::endl;
-  myfile << "<tr>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi_ePlus.at(iSM+36)  << " &pm; " << MC_err_Dphi_ePlus.at(iSM+36)   << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi_eMinus.at(iSM+36) << " &pm; " << MC_err_Dphi_eMinus.at(iSM+36)  << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Deta.at(iSM+36)        << " &pm; " << MC_err_Deta.at(iSM+36)         << " </font></center> </td>" << std::endl;
-  myfile << "   <td COLSPAN=\"1\" ROWSPAN=\"1\"> <font color=\"blue\">  " << MC_Dphi.at(iSM+36)        << " &pm; " << MC_err_Dphi.at(iSM+36)         << " </font></center> </td>" << std::endl;
-  myfile << "</tr>" << std::endl;
- } 
- 
- 
- 
- myfile << "  " << std::endl;
- myfile << " </table> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " <br><br><br><br> " << std::endl;
- myfile << " " << std::endl;
- 
- 
- myfile << " <br><br><br><br> " << std::endl;
- myfile << "<br>" << std::endl;
- myfile << "<hr>" << std::endl;
- myfile << "<hr>" << std::endl;
- myfile << "<br>" << std::endl;
- 
- myfile << " <table summary=\"\" border=\"3\" cellpadding=\"14\" > " << std::endl;
- myfile << " <tr> " << std::endl; 
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &eta; </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/Eta.png\" target=\"_blank\"><img src=\"plot/Eta.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &eta; e+ </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/EtaEPlus.png\" target=\"_blank\"><img src=\"plot/Eta.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &eta; e-</center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/EtaEMinus.png\" target=\"_blank\"><img src=\"plot/Eta.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- 
- myfile << " <tr> " << std::endl; 
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &phi; </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/Phi.png\" target=\"_blank\"><img src=\"plot/Phi.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &phi; e+ </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/PhiEPlus.png\" target=\"_blank\"><img src=\"plot/Phi.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> &phi; e-</center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/PhiEMinus.png\" target=\"_blank\"><img src=\"plot/Phi.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- 
- 
- 
- 
- myfile << " <table summary=\"\" border=\"3\" cellpadding=\"14\" > " << std::endl;
- myfile << " <tr> " << std::endl; 
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex X </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/xVtx.png\" target=\"_blank\"><img src=\"plot/xVtx.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex Y </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/yVtx.png\" target=\"_blank\"><img src=\"plot/yVtx.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex Z </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/zVtx.png\" target=\"_blank\"><img src=\"plot/zVtx.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- 
- myfile << " <table summary=\"\" border=\"3\" cellpadding=\"14\" > " << std::endl;
- myfile << " <tr> " << std::endl; 
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex X </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/xVtx_logy.png\" target=\"_blank\"><img src=\"plot/xVtx_logy.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex Y </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/yVtx_logy.png\" target=\"_blank\"><img src=\"plot/yVtx_logy.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " <td COLSPAN=\"1\"> " << std::endl;
- myfile << "  <center> vertex Z </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/zVtx_logy.png\" target=\"_blank\"><img src=\"plot/zVtx_logy.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " </td> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " </tr> " << std::endl;
- 
- myfile << "  </br></br></br>  " << std::endl;
- myfile << "  <center> Number of Vetexes </center></br>  " << std::endl;
- myfile << "  <center><a href=\"plot/Nvtx.png\" target=\"_blank\"><img src=\"plot/Nvtx.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << "  <center><a href=\"plot/Nvtx_logy.png\" target=\"_blank\"><img src=\"plot/Nvtx_logy.png\" height=\"200\" width=\"200\"></a></center> " << std::endl;
- myfile << " " << std::endl;  
- myfile << " " << std::endl;  
- 
- 
- 
- 
- 
- 
- ///===== additional distributions ====
- 
- //---- all ----
- TCanvas* cEta = new TCanvas("cEta","cEta",1000,500);
- cEta->SetLeftMargin(0.10);
- cEta->SetRightMargin(0.25);
- cEta->SetTopMargin(0.05);
- cEta->SetBottomMargin(0.20);
- cEta->cd();
- nameHistoInRootFile = Form("Data/%s_134_4_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cEta->SetGrid();   
- toDoROOT = Form("%s/plot/Eta.png",nameOutputDir.Data());
- cEta->SaveAs(toDoROOT); 
- 
- 
- //---- e+ ----
- TCanvas* cEtaEPlusEPlus = new TCanvas("cEtaEPlus","cEtaEPlus",1000,500);
- cEtaEPlus->SetLeftMargin(0.10);
- cEtaEPlus->SetRightMargin(0.25);
- cEtaEPlus->SetTopMargin(0.05);
- cEtaEPlus->SetBottomMargin(0.20);
- cEtaEPlus->cd();
- nameHistoInRootFile = Form("Data/%s_132_4_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cEtaEPlus->SetGrid();   
- toDoROOT = Form("%s/plot/EtaEMinus.png",nameOutputDir.Data());
- cEtaEPlus->SaveAs(toDoROOT); 
- 
- 
- //---- e- ----
- TCanvas* cEtaEMinusEMinus = new TCanvas("cEtaEMinus","cEtaEMinus",1000,500);
- cEtaEMinus->SetLeftMargin(0.10);
- cEtaEMinus->SetRightMargin(0.25);
- cEtaEMinus->SetTopMargin(0.05);
- cEtaEMinus->SetBottomMargin(0.20);
- cEtaEMinus->cd();
- nameHistoInRootFile = Form("Data/%s_133_4_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cEtaEMinus->SetGrid();   
- toDoROOT = Form("%s/plot/EtaEPlus.png",nameOutputDir.Data());
- cEtaEMinus->SaveAs(toDoROOT); 
- 
- 
- 
- 
- 
- //---- all ----
- TCanvas* cPhi = new TCanvas("cPhi","cPhi",1000,500);
- cPhi->SetLeftMargin(0.10);
- cPhi->SetRightMargin(0.25);
- cPhi->SetTopMargin(0.05);
- cPhi->SetBottomMargin(0.20);
- cPhi->cd();
- nameHistoInRootFile = Form("Data/%s_134_8_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cPhi->SetGrid();   
- toDoROOT = Form("%s/plot/Phi.png",nameOutputDir.Data());
- cPhi->SaveAs(toDoROOT); 
- 
- 
- //---- e+ ----
- TCanvas* cPhiEPlusEPlus = new TCanvas("cPhiEPlus","cPhiEPlus",1000,500);
- cPhiEPlus->SetLeftMargin(0.10);
- cPhiEPlus->SetRightMargin(0.25);
- cPhiEPlus->SetTopMargin(0.05);
- cPhiEPlus->SetBottomMargin(0.20);
- cPhiEPlus->cd();
- nameHistoInRootFile = Form("Data/%s_132_8_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cPhiEPlus->SetGrid();   
- toDoROOT = Form("%s/plot/PhiEMinus.png",nameOutputDir.Data());
- cPhiEPlus->SaveAs(toDoROOT); 
- 
- 
- //---- e- ----
- TCanvas* cPhiEMinusEMinus = new TCanvas("cPhiEMinus","cPhiEMinus",1000,500);
- cPhiEMinus->SetLeftMargin(0.10);
- cPhiEMinus->SetRightMargin(0.25);
- cPhiEMinus->SetTopMargin(0.05);
- cPhiEMinus->SetBottomMargin(0.20);
- cPhiEMinus->cd();
- nameHistoInRootFile = Form("Data/%s_133_8_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- cPhiEMinus->SetGrid();   
- toDoROOT = Form("%s/plot/PhiEPlus.png",nameOutputDir.Data());
- cPhiEMinus->SaveAs(toDoROOT); 
- 
- 
- 
- 
- 
- 
- 
- 
- TCanvas* cNvtx = new TCanvas("cNvtx","cNvtx",1000,500);
- cNvtx->SetLeftMargin(0.10);
- cNvtx->SetRightMargin(0.25);
- cNvtx->SetTopMargin(0.05);
- cNvtx->SetBottomMargin(0.20);
- cNvtx->cd();
- nameHistoInRootFile = Form("Data/%s_134_12_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- nameHistoInRootFile = Form("Data/W_134_12_Tot_temp");
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- hMC->Draw("HISTsame");
- cNvtx->SetGrid();   
- toDoROOT = Form("%s/plot/Nvtx.png",nameOutputDir.Data());
- cNvtx->SaveAs(toDoROOT); 
- cNvtx->SetLogy();   
- toDoROOT = Form("%s/plot/Nvtx_logy.png",nameOutputDir.Data());
- cNvtx->SaveAs(toDoROOT); 
- 
- 
- TCanvas* cxVtx = new TCanvas("cxVtx","cxVtx",1000,500);
- cxVtx->SetLeftMargin(0.10);
- cxVtx->SetRightMargin(0.25);
- cxVtx->SetTopMargin(0.05);
- cxVtx->SetBottomMargin(0.20);
- cxVtx->cd();
- nameHistoInRootFile = Form("Data/%s_134_9_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- nameHistoInRootFile = Form("Data/W_134_9_Tot_temp");
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- hMC->Draw("HISTsame");
- cxVtx->SetGrid();   
- toDoROOT = Form("%s/plot/xVtx.png",nameOutputDir.Data());
- cxVtx->SaveAs(toDoROOT); 
- cxVtx->SetLogy();   
- toDoROOT = Form("%s/plot/xVtx_logy.png",nameOutputDir.Data());
- cxVtx->SaveAs(toDoROOT); 
- 
- 
- TCanvas* cyVtx = new TCanvas("cyVtx","cyVtx",1000,500);
- cyVtx->SetLeftMargin(0.10);
- cyVtx->SetRightMargin(0.25);
- cyVtx->SetTopMargin(0.05);
- cyVtx->SetBottomMargin(0.20);
- cyVtx->cd();
- nameHistoInRootFile = Form("Data/%s_134_10_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- nameHistoInRootFile = Form("Data/W_134_10_Tot_temp");
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- hMC->Draw("HISTsame");
- cyVtx->SetGrid();   
- toDoROOT = Form("%s/plot/yVtx.png",nameOutputDir.Data());
- cyVtx->SaveAs(toDoROOT); 
- cyVtx->SetLogy();   
- toDoROOT = Form("%s/plot/yVtx_logy.png",nameOutputDir.Data());
- cyVtx->SaveAs(toDoROOT); 
- 
- 
- 
- TCanvas* czVtx = new TCanvas("czVtx","czVtx",1000,500);
- czVtx->SetLeftMargin(0.10);
- czVtx->SetRightMargin(0.25);
- czVtx->SetTopMargin(0.05);
- czVtx->SetBottomMargin(0.20);
- czVtx->cd();
- nameHistoInRootFile = Form("Data/%s_134_11_Tot_temp",nameDATA.Data());
- h = (TH1F*) fileIn->Get(nameHistoInRootFile);
- h->Draw();
- nameHistoInRootFile = Form("Data/W_134_11_Tot_temp");
- hMC = (TH1F*) fileIn->Get(nameHistoInRootFile);
- norm = h->Integral(); hMC->DrawNormalized("HISTsame",norm);
- hMC->Draw("HISTsame");
- czVtx->SetGrid();   
- toDoROOT = Form("%s/plot/zVtx.png",nameOutputDir.Data());
- czVtx->SaveAs(toDoROOT); 
- czVtx->SetLogy();   
- toDoROOT = Form("%s/plot/zVtx_logy.png",nameOutputDir.Data());
- czVtx->SaveAs(toDoROOT); 
- 
- 
- 
- 
- 
- myfile.close(); 
- 
- TString totalnameFileHTML = Form("%s/Modules.html",nameOutputDir.Data());
- std::string toCreateHLTML;
- toCreateHLTML.clear();
- toCreateHLTML.insert(toCreateHLTML.size(),"cat scripts/html/templateModulesBegin.html ");
- toCreateHLTML.insert(toCreateHLTML.size(),nameFileHTML.Data());
- toCreateHLTML.insert(toCreateHLTML.size()," scripts/html/templateModulesEnd.html > ");
- toCreateHLTML.insert(toCreateHLTML.size(),totalnameFileHTML.Data());
- toCreateHLTML.insert(toCreateHLTML.size()," ; \n ");
- 
- std::cout << std::endl << std::endl << std::endl;
- std::cout << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << std::endl;
- std::cout << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << std::endl;
- std::cout << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << std::endl;
- std::cout << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << std::endl;
- std::cout << " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " << std::endl;
- std::cout << std::endl << std::endl << std::endl;
- 
- //  std::cout << toCreateHLTML << std::endl;
- system(toCreateHLTML.c_str());
- 
- std::cout << std::endl << std::endl << std::endl;
- 
- 
- 
- 
- 
- ///===================================
- ///==== to create many small HTML ====
- 
- 
- for (int iSM = 0; iSM <36; iSM++) { 
-  nameFileHTML = Form("%s/Module_EB_%d_temp.html",nameOutputDir.Data(),iSM);
-  std::ofstream myfileCicle;
-  myfileCicle.precision (3) ;
-  myfileCicle.unsetf(std::ios::scientific); 
-  myfileCicle.open (nameFileHTML.Data());
-  
-  myfileCicle << "<tr> " << std::endl;
-  myfileCicle << "<td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<b>EB module " << iSM << "</b>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi_ePlus.at(iSM)  << " &pm; " << DATA_err_Dphi_ePlus.at(iSM)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi_ePlus.at(iSM)    << " &pm; " << MC_err_Dphi_ePlus.at(iSM)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi_eMinus.at(iSM)  << " &pm; " << DATA_err_Dphi_eMinus.at(iSM)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi_eMinus.at(iSM)    << " &pm; " << MC_err_Dphi_eMinus.at(iSM)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Deta.at(iSM)  << " &pm; " << DATA_err_Deta.at(iSM)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Deta.at(iSM)    << " &pm; " << MC_err_Deta.at(iSM)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi.at(iSM)  << " &pm; " << DATA_err_Dphi.at(iSM)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi.at(iSM)    << " &pm; " << MC_err_Dphi.at(iSM)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << "</tr> " << std::endl;
-  
-  
-  myfileCicle << "<tr> " << std::endl;
-  myfileCicle << "<td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<b>EB module " << iSM << "</b>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EB_" << iSM << "_ePlus.png\" target=\"_blank\"><img src=\"plot/Dphi_EB_" << iSM << "_ePlus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EB_" << iSM << "_eMinus.png\" target=\"_blank\"><img src=\"plot/Dphi_EB_" << iSM << "_eMinus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Deta_EB_" << iSM << ".png\" target=\"_blank\"><img src=\"plot/Deta_EB_" << iSM << ".png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EB_" << iSM << ".png\" target=\"_blank\"><img src=\"plot/Dphi_EB_" << iSM << ".png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << "</tr> " << std::endl;
-  
-  myfileCicle << "</table> " << std::endl;  
-  
-  myfileCicle << "</center> " << std::endl;  
-  myfileCicle << "</body> " << std::endl;  
-  myfileCicle << "</html> " << std::endl;  
-  
-  myfileCicle.close(); 
-  
-  TString totalnameFileHTML = Form("%s/Module_EB_%d.html",nameOutputDir.Data(),iSM);
-  
-  std::string toCreateHLTML;
-  toCreateHLTML.clear();
-  toCreateHLTML.insert(toCreateHLTML.size(),"cat scripts/html/templateOneModuleBegin.html ");
-  toCreateHLTML.insert(toCreateHLTML.size(),nameFileHTML.Data());
-  toCreateHLTML.insert(toCreateHLTML.size()," > ");
-  toCreateHLTML.insert(toCreateHLTML.size(),totalnameFileHTML.Data());
-  toCreateHLTML.insert(toCreateHLTML.size()," ; \n ");
-  //   std::cout << toCreateHLTML << std::endl;
-  system(toCreateHLTML.c_str());
-  
- }
- 
- 
- for (int iSM = 0; iSM <4; iSM++) { 
-  nameFileHTML = Form("%s/Module_EE_%d_temp.html",nameOutputDir.Data(),iSM);
-  std::ofstream myfileCicle;
-  myfileCicle.precision (3) ;
-  myfileCicle.unsetf(std::ios::scientific); 
-  myfileCicle.open (nameFileHTML.Data());
-  
-  myfileCicle << "<tr> " << std::endl;
-  myfileCicle << "<td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<b>EE module " << iSM << "</b>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi_ePlus.at(iSM+36)  << " &pm; " << DATA_err_Dphi_ePlus.at(iSM+36)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi_ePlus.at(iSM+36)    << " &pm; " << MC_err_Dphi_ePlus.at(iSM+36)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi_eMinus.at(iSM+36)  << " &pm; " << DATA_err_Dphi_eMinus.at(iSM+36)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi_eMinus.at(iSM+36)    << " &pm; " << MC_err_Dphi_eMinus.at(iSM+36)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Deta.at(iSM+36)  << " &pm; " << DATA_err_Deta.at(iSM+36)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Deta.at(iSM+36)    << " &pm; " << MC_err_Deta.at(iSM+36)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << "<center><font color=\"red\">  " << DATA_Dphi.at(iSM+36)  << " &pm; " << DATA_err_Dphi.at(iSM+36)  << " </font></center>" << std::endl;
-  myfileCicle << "<center><font color=\"blue\"> " << MC_Dphi.at(iSM+36)    << " &pm; " << MC_err_Dphi.at(iSM+36)    << " </font></center>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << "</tr> " << std::endl;
-  
-  
-  myfileCicle << "<tr> " << std::endl;
-  myfileCicle << "<td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << "<b>EE module " << iSM << "</b>" << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EE_" << iSM << "_ePlus.png\" target=\"_blank\"><img src=\"plot/Dphi_EE_" << iSM << "_ePlus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"1\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EE_" << iSM << "_eMinus.png\" target=\"_blank\"><img src=\"plot/Dphi_EE_" << iSM << "_eMinus.png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Deta_EE_" << iSM << ".png\" target=\"_blank\"><img src=\"plot/Deta_EE_" << iSM << ".png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  myfileCicle << " <td COLSPAN=\"2\">" << std::endl;
-  myfileCicle << " <center><a href=\"plot/Dphi_EE_" << iSM << ".png\" target=\"_blank\"><img src=\"plot/Dphi_EE_" << iSM << ".png\" height=\"100\" width=\"100\"></a></center> " << std::endl;
-  myfileCicle << "</td>" << std::endl;
-  
-  
-  myfileCicle << "</tr> " << std::endl;
-  
-  myfileCicle << "</table> " << std::endl;  
-  
-  myfileCicle << "</center> " << std::endl;  
-  myfileCicle << "</body> " << std::endl;  
-  myfileCicle << "</html> " << std::endl;  
-  
-  myfileCicle.close(); 
-  
-  TString totalnameFileHTML = Form("%s/Module_EE_%d.html",nameOutputDir.Data(),iSM);
-  std::string toCreateHLTML;
-  toCreateHLTML.clear();
-  toCreateHLTML.insert(toCreateHLTML.size(),"cat scripts/html/templateOneModuleBegin.html ");
-  toCreateHLTML.insert(toCreateHLTML.size(),nameFileHTML.Data());
-  toCreateHLTML.insert(toCreateHLTML.size()," > ");
-  toCreateHLTML.insert(toCreateHLTML.size(),totalnameFileHTML.Data());
-  toCreateHLTML.insert(toCreateHLTML.size()," ; \n ");
-  //   std::cout << toCreateHLTML << std::endl;
-  system(toCreateHLTML.c_str());
-  
- }
- 
- 
- 
- ///==== remove unused ====
- TString toRemove = Form("rm %s/*temp.html",nameOutputDir.Data());
- system(toRemove.Data());
- 
- ///==== exit ====
- gApplication->Terminate(0);
- 
+
+ legend->Draw();
+ cDPhi->SetGrid(); gPad->Update();
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.gif").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.pdf").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.png").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi.C").c_str()); gSystem->Sleep(1);
+ cDPhi->SetLogy(); gPad->Update();
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.gif").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.pdf").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.png").c_str());
+ cDPhi->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDPhi_logy.C").c_str()); gSystem->Sleep(1);
+
+ TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
+ DEtaMC->Draw("PE");
+ tinfoDEta->Draw();
+
+ legend->Draw();
+ cDEta->SetGrid(); gPad->Update();   
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.gif").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.pdf").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.png").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta.C").c_str()); gSystem->Sleep(1);
+ cDEta->SetLogy(); gPad->Update();
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.gif").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.pdf").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.png").c_str());
+ cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.C").c_str()); gSystem->Sleep(1);
+
+
+
+
+//  
+//  ///---- EB ----
+//  TH1F* DPhiDATAEB = new TH1F("DPhiDATAEB"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEB   = new TH1F("DPhiNoAlignmentEB",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEB   = new TH1F("DPhiMCEB",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEB = new TH1F("DEtaDATAEB"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEB   = new TH1F("DEtaNoAlignmentEB"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEB   = new TH1F("DEtaMCEB"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEB, DPhiNoAlignmentEB, DPhiMCEB, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)<1.5");
+//  createHisto(tinfoDEta,DEtaDATAEB, DEtaNoAlignmentEB, DEtaMCEB, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)<1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEB = new TCanvas("cDphiEB2011","cDphiEB2011",700,700);
+//  DPhiDATAEB->Draw("PE");
+//  DPhiNoAlignmentEB->Draw("PsameE");
+//  DPhiMCEB->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEB->SetGrid(); gPad->Update();   
+//  cDPhiEB->Print("images/cDPhiEB.gif");
+//  cDPhiEB->Print("images/cDPhiEB.pdf");
+//  cDPhiEB->Print("images/cDPhiEB.png");
+//  cDPhiEB->Print("images/cDPhiEB.C"); gSystem->Sleep(1);
+//  cDPhiEB->SetLogy(); gPad->Update();
+//  cDPhiEB->Print("images/cDPhiEB_logy.gif");
+//  cDPhiEB->Print("images/cDPhiEB_logy.pdf");
+//  cDPhiEB->Print("images/cDPhiEB_logy.png");
+//  cDPhiEB->Print("images/cDPhiEB_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEB = new TCanvas("cDeta2011EB","cDeta2011EB",700,700);
+//  DEtaDATAEB->Draw("PE");
+//  DEtaNoAlignmentEB->Draw("PsameE");
+//  DEtaMCEB->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEB->SetGrid(); gPad->Update();   
+//  cDEtaEB->Print("images/cDEtaEB.gif");
+//  cDEtaEB->Print("images/cDEtaEB.pdf");
+//  cDEtaEB->Print("images/cDEtaEB.png");
+//  cDEtaEB->Print("images/cDEtaEB.C"); gSystem->Sleep(1);
+//  cDEtaEB->SetLogy(); gPad->Update();
+//  cDEtaEB->Print("images/cDEtaEB_logy.gif");
+//  cDEtaEB->Print("images/cDEtaEB_logy.pdf");
+//  cDEtaEB->Print("images/cDEtaEB_logy.png");
+//  cDEtaEB->Print("images/cDEtaEB_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EB+ ----
+//  TH1F* DPhiDATAEBplus = new TH1F("DPhiDATAEBplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBplus   = new TH1F("DPhiNoAlignmentEBplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBplus   = new TH1F("DPhiMCEBplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBplus = new TH1F("DEtaDATAEBplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBplus   = new TH1F("DEtaNoAlignmentEBplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBplus   = new TH1F("DEtaMCEBplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBplus, DPhiNoAlignmentEBplus, DPhiMCEBplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta<1.5");
+//  createHisto(tinfoDEta,DEtaDATAEBplus, DEtaNoAlignmentEBplus, DEtaMCEBplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta<1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBplus = new TCanvas("cDphiEBplus2011","cDphiEBplus2011",700,700);
+//  DPhiDATAEBplus->Draw("PE");
+//  DPhiNoAlignmentEBplus->Draw("PsameE");
+//  DPhiMCEBplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBplus->SetGrid(); gPad->Update();   
+//  cDPhiEBplus->Print("images/cDPhiEBplus.gif");
+//  cDPhiEBplus->Print("images/cDPhiEBplus.pdf");
+//  cDPhiEBplus->Print("images/cDPhiEBplus.png");
+//  cDPhiEBplus->Print("images/cDPhiEBplus.C"); gSystem->Sleep(1);
+//  cDPhiEBplus->SetLogy(); gPad->Update();
+//  cDPhiEBplus->Print("images/cDPhiEBplus_logy.gif");
+//  cDPhiEBplus->Print("images/cDPhiEBplus_logy.pdf");
+//  cDPhiEBplus->Print("images/cDPhiEBplus_logy.png");
+//  cDPhiEBplus->Print("images/cDPhiEBplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBplus = new TCanvas("cDeta2011EBplus","cDeta2011EBplus",700,700);
+//  DEtaDATAEBplus->Draw("PE");
+//  DEtaNoAlignmentEBplus->Draw("PsameE");
+//  DEtaMCEBplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBplus->SetGrid(); gPad->Update();   
+//  cDEtaEBplus->Print("images/cDEtaEBplus.gif");
+//  cDEtaEBplus->Print("images/cDEtaEBplus.pdf");
+//  cDEtaEBplus->Print("images/cDEtaEBplus.png");
+//  cDEtaEBplus->Print("images/cDEtaEBplus.C"); gSystem->Sleep(1);
+//  cDEtaEBplus->SetLogy(); gPad->Update();
+//  cDEtaEBplus->Print("images/cDEtaEBplus_logy.gif");
+//  cDEtaEBplus->Print("images/cDEtaEBplus_logy.pdf");
+//  cDEtaEBplus->Print("images/cDEtaEBplus_logy.png");
+//  cDEtaEBplus->Print("images/cDEtaEBplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EB- ---- 
+//  TH1F* DPhiDATAEBminus = new TH1F("DPhiDATAEBminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBminus   = new TH1F("DPhiNoAlignmentEBminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBminus   = new TH1F("DPhiMCEBminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBminus = new TH1F("DEtaDATAEBminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBminus   = new TH1F("DEtaNoAlignmentEBminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBminus   = new TH1F("DEtaMCEBminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBminus, DPhiNoAlignmentEBminus, DPhiMCEBminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta>-1.5");
+//  createHisto(tinfoDEta,DEtaDATAEBminus, DEtaNoAlignmentEBminus, DEtaMCEBminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta>-1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBminus = new TCanvas("cDphiEBminus2011","cDphiEBminus2011",700,700);
+//  DPhiDATAEBminus->Draw("PE");
+//  DPhiNoAlignmentEBminus->Draw("PsameE");
+//  DPhiMCEBminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBminus->SetGrid(); gPad->Update();   
+//  cDPhiEBminus->Print("images/cDPhiEBminus.gif");
+//  cDPhiEBminus->Print("images/cDPhiEBminus.pdf");
+//  cDPhiEBminus->Print("images/cDPhiEBminus.png");
+//  cDPhiEBminus->Print("images/cDPhiEBminus.C"); gSystem->Sleep(1);
+//  cDPhiEBminus->SetLogy(); gPad->Update();
+//  cDPhiEBminus->Print("images/cDPhiEBminus_logy.gif");
+//  cDPhiEBminus->Print("images/cDPhiEBminus_logy.pdf");
+//  cDPhiEBminus->Print("images/cDPhiEBminus_logy.png");
+//  cDPhiEBminus->Print("images/cDPhiEBminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBminus = new TCanvas("cDeta2011EBminus","cDeta2011EBminus",700,700);
+//  DEtaDATAEBminus->Draw("PE");
+//  DEtaNoAlignmentEBminus->Draw("PsameE");
+//  DEtaMCEBminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBminus->SetGrid(); gPad->Update();   
+//  cDEtaEBminus->Print("images/cDEtaEBminus.gif");
+//  cDEtaEBminus->Print("images/cDEtaEBminus.pdf");
+//  cDEtaEBminus->Print("images/cDEtaEBminus.png");
+//  cDEtaEBminus->Print("images/cDEtaEBminus.C"); gSystem->Sleep(1);
+//  cDEtaEBminus->SetLogy(); gPad->Update();
+//  cDEtaEBminus->Print("images/cDEtaEBminus_logy.gif");
+//  cDEtaEBminus->Print("images/cDEtaEBminus_logy.pdf");
+//  cDEtaEBminus->Print("images/cDEtaEBminus_logy.png");
+//  cDEtaEBminus->Print("images/cDEtaEBminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  ///---- EE ----
+//  TH1F* DPhiDATAEE = new TH1F("DPhiDATAEE"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEE   = new TH1F("DPhiNoAlignmentEE",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEE   = new TH1F("DPhiMCEE",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEE = new TH1F("DEtaDATAEE"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEE   = new TH1F("DEtaNoAlignmentEE"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEE   = new TH1F("DEtaMCEE"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEE, DPhiNoAlignmentEE, DPhiMCEE, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)>1.5");
+//  createHisto(tinfoDEta,DEtaDATAEE, DEtaNoAlignmentEE, DEtaMCEE, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)>1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEE = new TCanvas("cDphiEE2011","cDphiEE2011",700,700);
+//  DPhiDATAEE->Draw("PE");
+//  DPhiNoAlignmentEE->Draw("PsameE");
+//  DPhiMCEE->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEE->SetGrid(); gPad->Update();   
+//  cDPhiEE->Print("images/cDPhiEE.gif");
+//  cDPhiEE->Print("images/cDPhiEE.pdf");
+//  cDPhiEE->Print("images/cDPhiEE.png");
+//  cDPhiEE->Print("images/cDPhiEE.C"); gSystem->Sleep(1);
+//  cDPhiEE->SetLogy(); gPad->Update();
+//  cDPhiEE->Print("images/cDPhiEE_logy.gif");
+//  cDPhiEE->Print("images/cDPhiEE_logy.pdf");
+//  cDPhiEE->Print("images/cDPhiEE_logy.png");
+//  cDPhiEE->Print("images/cDPhiEE_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEE = new TCanvas("cDeta2011EE","cDeta2011EE",700,700);
+//  DEtaDATAEE->Draw("PE");
+//  DEtaNoAlignmentEE->Draw("PsameE");
+//  DEtaMCEE->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEE->SetGrid(); gPad->Update();   
+//  cDEtaEE->Print("images/cDEtaEE.gif");
+//  cDEtaEE->Print("images/cDEtaEE.pdf");
+//  cDEtaEE->Print("images/cDEtaEE.png");
+//  cDEtaEE->Print("images/cDEtaEE.C"); gSystem->Sleep(1);
+//  cDEtaEE->SetLogy(); gPad->Update();
+//  cDEtaEE->Print("images/cDEtaEE_logy.gif");
+//  cDEtaEE->Print("images/cDEtaEE_logy.pdf");
+//  cDEtaEE->Print("images/cDEtaEE_logy.png");
+//  cDEtaEE->Print("images/cDEtaEE_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EE+ ----
+//  TH1F* DPhiDATAEEplus = new TH1F("DPhiDATAEEplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEplus   = new TH1F("DPhiNoAlignmentEEplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEplus   = new TH1F("DPhiMCEEplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEplus = new TH1F("DEtaDATAEEplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEplus   = new TH1F("DEtaNoAlignmentEEplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEplus   = new TH1F("DEtaMCEEplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEplus, DPhiNoAlignmentEEplus, DPhiMCEEplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta>1.5");
+//  createHisto(tinfoDEta,DEtaDATAEEplus, DEtaNoAlignmentEEplus, DEtaMCEEplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta>1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEplus = new TCanvas("cDphiEEplus2011","cDphiEEplus2011",700,700);
+//  DPhiDATAEEplus->Draw("PE");
+//  DPhiNoAlignmentEEplus->Draw("PsameE");
+//  DPhiMCEEplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEplus->SetGrid(); gPad->Update();   
+//  cDPhiEEplus->Print("images/cDPhiEEplus.gif");
+//  cDPhiEEplus->Print("images/cDPhiEEplus.pdf");
+//  cDPhiEEplus->Print("images/cDPhiEEplus.png");
+//  cDPhiEEplus->Print("images/cDPhiEEplus.C"); gSystem->Sleep(1);
+//  cDPhiEEplus->SetLogy(); gPad->Update();
+//  cDPhiEEplus->Print("images/cDPhiEEplus_logy.gif");
+//  cDPhiEEplus->Print("images/cDPhiEEplus_logy.pdf");
+//  cDPhiEEplus->Print("images/cDPhiEEplus_logy.png");
+//  cDPhiEEplus->Print("images/cDPhiEEplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEplus = new TCanvas("cDeta2011EEplus","cDeta2011EEplus",700,700);
+//  DEtaDATAEEplus->Draw("PE");
+//  DEtaNoAlignmentEEplus->Draw("PsameE");
+//  DEtaMCEEplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEplus->SetGrid(); gPad->Update();   
+//  cDEtaEEplus->Print("images/cDEtaEEplus.gif");
+//  cDEtaEEplus->Print("images/cDEtaEEplus.pdf");
+//  cDEtaEEplus->Print("images/cDEtaEEplus.png");
+//  cDEtaEEplus->Print("images/cDEtaEEplus.C"); gSystem->Sleep(1);
+//  cDEtaEEplus->SetLogy(); gPad->Update();
+//  cDEtaEEplus->Print("images/cDEtaEEplus_logy.gif");
+//  cDEtaEEplus->Print("images/cDEtaEEplus_logy.pdf");
+//  cDEtaEEplus->Print("images/cDEtaEEplus_logy.png");
+//  cDEtaEEplus->Print("images/cDEtaEEplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  ///---- EE- ---- 
+//  TH1F* DPhiDATAEEminus = new TH1F("DPhiDATAEEminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEminus   = new TH1F("DPhiNoAlignmentEEminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEminus   = new TH1F("DPhiMCEEminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEminus = new TH1F("DEtaDATAEEminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEminus   = new TH1F("DEtaNoAlignmentEEminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEminus   = new TH1F("DEtaMCEEminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEminus, DPhiNoAlignmentEEminus, DPhiMCEEminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta<-1.5");
+//  createHisto(tinfoDEta,DEtaDATAEEminus, DEtaNoAlignmentEEminus, DEtaMCEEminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta<-1.5");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEminus = new TCanvas("cDphiEEminus2011","cDphiEEminus2011",700,700);
+//  DPhiDATAEEminus->Draw("PE");
+//  DPhiNoAlignmentEEminus->Draw("PsameE");
+//  DPhiMCEEminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEminus->SetGrid(); gPad->Update();   
+//  cDPhiEEminus->Print("images/cDPhiEEminus.gif");
+//  cDPhiEEminus->Print("images/cDPhiEEminus.pdf");
+//  cDPhiEEminus->Print("images/cDPhiEEminus.png");
+//  cDPhiEEminus->Print("images/cDPhiEEminus.C"); gSystem->Sleep(1);
+//  cDPhiEEminus->SetLogy(); gPad->Update();
+//  cDPhiEEminus->Print("images/cDPhiEEminus_logy.gif");
+//  cDPhiEEminus->Print("images/cDPhiEEminus_logy.pdf");
+//  cDPhiEEminus->Print("images/cDPhiEEminus_logy.png");
+//  cDPhiEEminus->Print("images/cDPhiEEminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEminus = new TCanvas("cDeta2011EEminus","cDeta2011EEminus",700,700);
+//  DEtaDATAEEminus->Draw("PE");
+//  DEtaNoAlignmentEEminus->Draw("PsameE");
+//  DEtaMCEEminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEminus->SetGrid(); gPad->Update();   
+//  cDEtaEEminus->Print("images/cDEtaEEminus.gif");
+//  cDEtaEEminus->Print("images/cDEtaEEminus.pdf");
+//  cDEtaEEminus->Print("images/cDEtaEEminus.png");
+//  cDEtaEEminus->Print("images/cDEtaEEminus.C"); gSystem->Sleep(1);
+//  cDEtaEEminus->SetLogy(); gPad->Update();
+//  cDEtaEEminus->Print("images/cDEtaEEminus_logy.gif");
+//  cDEtaEEminus->Print("images/cDEtaEEminus_logy.pdf");
+//  cDEtaEEminus->Print("images/cDEtaEEminus_logy.png");
+//  cDEtaEEminus->Print("images/cDEtaEEminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  ///---- electron ----
+//  
+//  
+//  ///---- EB _eminus ----
+//  TH1F* DPhiDATAEB_eminus_eminus = new TH1F("DPhiDATAEB_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEB_eminus_eminus   = new TH1F("DPhiNoAlignmentEB_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEB_eminus   = new TH1F("DPhiMCEB_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEB_eminus = new TH1F("DEtaDATAEB_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEB_eminus   = new TH1F("DEtaNoAlignmentEB_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEB_eminus   = new TH1F("DEtaMCEB_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEB_eminus, DPhiNoAlignmentEB_eminus, DPhiMCEB_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)<1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEB_eminus, DEtaNoAlignmentEB_eminus, DEtaMCEB_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)<1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEB_eminus = new TCanvas("cDphiEB_eminus2011","cDphiEB_eminus2011",700,700);
+//  DPhiDATAEB_eminus->Draw("PE");
+//  DPhiNoAlignmentEB_eminus->Draw("PsameE");
+//  DPhiMCEB_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEB_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus.gif");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus.pdf");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus.png");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEB_eminus->SetLogy(); gPad->Update();
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus_logy.gif");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus_logy.pdf");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus_logy.png");
+//  cDPhiEB_eminus->Print("images/cDPhiEB_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEB_eminus = new TCanvas("cDeta2011EB_eminus","cDeta2011EB_eminus",700,700);
+//  DEtaDATAEB_eminus->Draw("PE");
+//  DEtaNoAlignmentEB_eminus->Draw("PsameE");
+//  DEtaMCEB_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEB_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus.gif");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus.pdf");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus.png");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEB_eminus->SetLogy(); gPad->Update();
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus_logy.gif");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus_logy.pdf");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus_logy.png");
+//  cDEtaEB_eminus->Print("images/cDEtaEB_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EB+ ----
+//  TH1F* DPhiDATAEBplus_eminus = new TH1F("DPhiDATAEBplus_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBplus_eminus   = new TH1F("DPhiNoAlignmentEBplus_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBplus_eminus   = new TH1F("DPhiMCEBplus_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBplus_eminus = new TH1F("DEtaDATAEBplus_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBplus_eminus   = new TH1F("DEtaNoAlignmentEBplus_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBplus_eminus   = new TH1F("DEtaMCEBplus_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBplus_eminus, DPhiNoAlignmentEBplus_eminus, DPhiMCEBplus_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta<1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEBplus_eminus, DEtaNoAlignmentEBplus_eminus, DEtaMCEBplus_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta<1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBplus_eminus = new TCanvas("cDphiEBplus_eminus2011","cDphiEBplus_eminus2011",700,700);
+//  DPhiDATAEBplus_eminus->Draw("PE");
+//  DPhiNoAlignmentEBplus_eminus->Draw("PsameE");
+//  DPhiMCEBplus_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBplus_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus.gif");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus.pdf");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus.png");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEBplus_eminus->SetLogy(); gPad->Update();
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus_logy.gif");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus_logy.pdf");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus_logy.png");
+//  cDPhiEBplus_eminus->Print("images/cDPhiEBplus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBplus_eminus = new TCanvas("cDeta2011EBplus_eminus","cDeta2011EBplus_eminus",700,700);
+//  DEtaDATAEBplus_eminus->Draw("PE");
+//  DEtaNoAlignmentEBplus_eminus->Draw("PsameE");
+//  DEtaMCEBplus_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBplus_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus.gif");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus.pdf");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus.png");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEBplus_eminus->SetLogy(); gPad->Update();
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus_logy.gif");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus_logy.pdf");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus_logy.png");
+//  cDEtaEBplus_eminus->Print("images/cDEtaEBplus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  ///---- EB- ---- 
+//  TH1F* DPhiDATAEBminus_eminus = new TH1F("DPhiDATAEBminus_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBminus_eminus   = new TH1F("DPhiNoAlignmentEBminus_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBminus_eminus   = new TH1F("DPhiMCEBminus_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBminus_eminus = new TH1F("DEtaDATAEBminus_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBminus_eminus   = new TH1F("DEtaNoAlignmentEBminus_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBminus_eminus   = new TH1F("DEtaMCEBminus_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBminus_eminus, DPhiNoAlignmentEBminus_eminus, DPhiMCEBminus_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta>-1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEBminus_eminus, DEtaNoAlignmentEBminus_eminus, DEtaMCEBminus_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta>-1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBminus_eminus = new TCanvas("cDphiEBminus_eminus2011","cDphiEBminus_eminus2011",700,700);
+//  DPhiDATAEBminus_eminus->Draw("PE");
+//  DPhiNoAlignmentEBminus_eminus->Draw("PsameE");
+//  DPhiMCEBminus_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBminus_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus.gif");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus.pdf");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus.png");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEBminus_eminus->SetLogy(); gPad->Update();
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus_logy.gif");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus_logy.pdf");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus_logy.png");
+//  cDPhiEBminus_eminus->Print("images/cDPhiEBminus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBminus_eminus = new TCanvas("cDeta2011EBminus_eminus","cDeta2011EBminus_eminus",700,700);
+//  DEtaDATAEBminus_eminus->Draw("PE");
+//  DEtaNoAlignmentEBminus_eminus->Draw("PsameE");
+//  DEtaMCEBminus_eminus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBminus_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus.gif");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus.pdf");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus.png");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEBminus_eminus->SetLogy(); gPad->Update();
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus_logy.gif");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus_logy.pdf");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus_logy.png");
+//  cDEtaEBminus_eminus->Print("images/cDEtaEBminus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  ///---- EE_eminus ----
+//  TH1F* DPhiDATAEE_eminus = new TH1F("DPhiDATAEE_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEE_eminus   = new TH1F("DPhiNoAlignmentEE_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEE_eminus   = new TH1F("DPhiMCEE_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEE_eminus = new TH1F("DEtaDATAEE_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEE_eminus   = new TH1F("DEtaNoAlignmentEE_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEE_eminus   = new TH1F("DEtaMCEE_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEE_eminus, DPhiNoAlignmentEE_eminus, DPhiMCEE_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)>1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEE_eminus, DEtaNoAlignmentEE_eminus, DEtaMCEE_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)>1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEE_eminus = new TCanvas("cDphiEE_eminus2011","cDphiEE_eminus2011",700,700);
+//  DPhiDATAEE_eminus->Draw("PE");
+//  DPhiNoAlignmentEE_eminus->Draw("PsameE");
+//  DPhiMCEE_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEE_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus.gif");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus.pdf");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus.png");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEE_eminus->SetLogy(); gPad->Update();
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus_logy.gif");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus_logy.pdf");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus_logy.png");
+//  cDPhiEE_eminus->Print("images/cDPhiEE_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEE_eminus = new TCanvas("cDeta2011EE_eminus","cDeta2011EE_eminus",700,700);
+//  DEtaDATAEE_eminus->Draw("PE");
+//  DEtaNoAlignmentEE_eminus->Draw("PsameE");
+//  DEtaMCEE_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEE_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus.gif");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus.pdf");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus.png");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEE_eminus->SetLogy(); gPad->Update();
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus_logy.gif");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus_logy.pdf");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus_logy.png");
+//  cDEtaEE_eminus->Print("images/cDEtaEE_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EE+ ----
+//  TH1F* DPhiDATAEEplus_eminus = new TH1F("DPhiDATAEEplus_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEplus_eminus   = new TH1F("DPhiNoAlignmentEEplus_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEplus_eminus   = new TH1F("DPhiMCEEplus_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEplus_eminus = new TH1F("DEtaDATAEEplus_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEplus_eminus   = new TH1F("DEtaNoAlignmentEEplus_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEplus_eminus   = new TH1F("DEtaMCEEplus_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEplus_eminus, DPhiNoAlignmentEEplus_eminus, DPhiMCEEplus_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta>1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEEplus_eminus, DEtaNoAlignmentEEplus_eminus, DEtaMCEEplus_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta>1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEplus_eminus = new TCanvas("cDphiEEplus_eminus2011","cDphiEEplus_eminus2011",700,700);
+//  DPhiDATAEEplus_eminus->Draw("PE");
+//  DPhiNoAlignmentEEplus_eminus->Draw("PsameE");
+//  DPhiMCEEplus_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEplus_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus.gif");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus.pdf");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus.png");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEEplus_eminus->SetLogy(); gPad->Update();
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus_logy.gif");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus_logy.pdf");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus_logy.png");
+//  cDPhiEEplus_eminus->Print("images/cDPhiEEplus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEplus_eminus = new TCanvas("cDeta2011EEplus_eminus","cDeta2011EEplus_eminus",700,700);
+//  DEtaDATAEEplus_eminus->Draw("PE");
+//  DEtaNoAlignmentEEplus_eminus->Draw("PsameE");
+//  DEtaMCEEplus_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEplus_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus.gif");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus.pdf");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus.png");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEEplus_eminus->SetLogy(); gPad->Update();
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus_logy.gif");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus_logy.pdf");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus_logy.png");
+//  cDEtaEEplus_eminus->Print("images/cDEtaEEplus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  ///---- EE- ---- 
+//  TH1F* DPhiDATAEEminus_eminus = new TH1F("DPhiDATAEEminus_eminus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEminus_eminus   = new TH1F("DPhiNoAlignmentEEminus_eminus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEminus_eminus   = new TH1F("DPhiMCEEminus_eminus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEminus_eminus = new TH1F("DEtaDATAEEminus_eminus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEminus_eminus   = new TH1F("DEtaNoAlignmentEEminus_eminus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEminus_eminus   = new TH1F("DEtaMCEEminus_eminus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEminus_eminus, DPhiNoAlignmentEEminus_eminus, DPhiMCEEminus_eminus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta<-1.5 && eleCharge<0");
+//  createHisto(tinfoDEta,DEtaDATAEEminus_eminus, DEtaNoAlignmentEEminus_eminus, DEtaMCEEminus_eminus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta<-1.5 && eleCharge<0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEminus_eminus = new TCanvas("cDphiEEminus_eminus2011","cDphiEEminus_eminus2011",700,700);
+//  DPhiDATAEEminus_eminus->Draw("PE");
+//  DPhiNoAlignmentEEminus_eminus->Draw("PsameE");
+//  DPhiMCEEminus_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEminus_eminus->SetGrid(); gPad->Update();   
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus.gif");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus.pdf");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus.png");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus.C"); gSystem->Sleep(1);
+//  cDPhiEEminus_eminus->SetLogy(); gPad->Update();
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus_logy.gif");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus_logy.pdf");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus_logy.png");
+//  cDPhiEEminus_eminus->Print("images/cDPhiEEminus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEminus_eminus = new TCanvas("cDeta2011EEminus_eminus","cDeta2011EEminus_eminus",700,700);
+//  DEtaDATAEEminus_eminus->Draw("PE");
+//  DEtaNoAlignmentEEminus_eminus->Draw("PsameE");
+//  DEtaMCEEminus_eminus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEminus_eminus->SetGrid(); gPad->Update();   
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus.gif");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus.pdf");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus.png");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus.C"); gSystem->Sleep(1);
+//  cDEtaEEminus_eminus->SetLogy(); gPad->Update();
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus_logy.gif");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus_logy.pdf");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus_logy.png");
+//  cDEtaEEminus_eminus->Print("images/cDEtaEEminus_eminus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  ///---- positron ----
+//  
+//  
+//  ///---- EB _eplus ----
+//  TH1F* DPhiDATAEB_eplus_eplus = new TH1F("DPhiDATAEB_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEB_eplus_eplus   = new TH1F("DPhiNoAlignmentEB_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEB_eplus   = new TH1F("DPhiMCEB_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEB_eplus = new TH1F("DEtaDATAEB_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEB_eplus   = new TH1F("DEtaNoAlignmentEB_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEB_eplus   = new TH1F("DEtaMCEB_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEB_eplus, DPhiNoAlignmentEB_eplus, DPhiMCEB_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)<1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEB_eplus, DEtaNoAlignmentEB_eplus, DEtaMCEB_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)<1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEB_eplus = new TCanvas("cDphiEB_eplus2011","cDphiEB_eplus2011",700,700);
+//  DPhiDATAEB_eplus->Draw("PE");
+//  DPhiNoAlignmentEB_eplus->Draw("PsameE");
+//  DPhiMCEB_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEB_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus.gif");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus.pdf");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus.png");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEB_eplus->SetLogy(); gPad->Update();
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus_logy.gif");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus_logy.pdf");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus_logy.png");
+//  cDPhiEB_eplus->Print("images/cDPhiEB_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEB_eplus = new TCanvas("cDeta2011EB_eplus","cDeta2011EB_eplus",700,700);
+//  DEtaDATAEB_eplus->Draw("PE");
+//  DEtaNoAlignmentEB_eplus->Draw("PsameE");
+//  DEtaMCEB_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEB_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus.gif");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus.pdf");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus.png");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEB_eplus->SetLogy(); gPad->Update();
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus_logy.gif");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus_logy.pdf");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus_logy.png");
+//  cDEtaEB_eplus->Print("images/cDEtaEB_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EB+ ----
+//  TH1F* DPhiDATAEBplus_eplus = new TH1F("DPhiDATAEBplus_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBplus_eplus   = new TH1F("DPhiNoAlignmentEBplus_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBplus_eplus   = new TH1F("DPhiMCEBplus_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBplus_eplus = new TH1F("DEtaDATAEBplus_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBplus_eplus   = new TH1F("DEtaNoAlignmentEBplus_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBplus_eplus   = new TH1F("DEtaMCEBplus_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBplus_eplus, DPhiNoAlignmentEBplus_eplus, DPhiMCEBplus_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta<1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEBplus_eplus, DEtaNoAlignmentEBplus_eplus, DEtaMCEBplus_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta<1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBplus_eplus = new TCanvas("cDphiEBplus_eplus2011","cDphiEBplus_eplus2011",700,700);
+//  DPhiDATAEBplus_eplus->Draw("PE");
+//  DPhiNoAlignmentEBplus_eplus->Draw("PsameE");
+//  DPhiMCEBplus_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBplus_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus.gif");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus.pdf");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus.png");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEBplus_eplus->SetLogy(); gPad->Update();
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus_logy.gif");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus_logy.pdf");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus_logy.png");
+//  cDPhiEBplus_eplus->Print("images/cDPhiEBplus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBplus_eplus = new TCanvas("cDeta2011EBplus_eplus","cDeta2011EBplus_eplus",700,700);
+//  DEtaDATAEBplus_eplus->Draw("PE");
+//  DEtaNoAlignmentEBplus_eplus->Draw("PsameE");
+//  DEtaMCEBplus_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBplus_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus.gif");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus.pdf");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus.png");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEBplus_eplus->SetLogy(); gPad->Update();
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus_logy.gif");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus_logy.pdf");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus_logy.png");
+//  cDEtaEBplus_eplus->Print("images/cDEtaEBplus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  ///---- EB- ---- 
+//  TH1F* DPhiDATAEBminus_eplus = new TH1F("DPhiDATAEBminus_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEBminus_eplus   = new TH1F("DPhiNoAlignmentEBminus_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEBminus_eplus   = new TH1F("DPhiMCEBminus_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEBminus_eplus = new TH1F("DEtaDATAEBminus_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEBminus_eplus   = new TH1F("DEtaNoAlignmentEBminus_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEBminus_eplus   = new TH1F("DEtaMCEBminus_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEBminus_eplus, DPhiNoAlignmentEBminus_eplus, DPhiMCEBminus_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta>-1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEBminus_eplus, DEtaNoAlignmentEBminus_eplus, DEtaMCEBminus_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta>-1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEBminus_eplus = new TCanvas("cDphiEBminus_eplus2011","cDphiEBminus_eplus2011",700,700);
+//  DPhiDATAEBminus_eplus->Draw("PE");
+//  DPhiNoAlignmentEBminus_eplus->Draw("PsameE");
+//  DPhiMCEBminus_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEBminus_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus.gif");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus.pdf");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus.png");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEBminus_eplus->SetLogy(); gPad->Update();
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus_logy.gif");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus_logy.pdf");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus_logy.png");
+//  cDPhiEBminus_eplus->Print("images/cDPhiEBminus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEBminus_eplus = new TCanvas("cDeta2011EBminus_eplus","cDeta2011EBminus_eplus",700,700);
+//  DEtaDATAEBminus_eplus->Draw("PE");
+//  DEtaNoAlignmentEBminus_eplus->Draw("PsameE");
+//  DEtaMCEBminus_eplus->Draw("same");
+//  tEB->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEBminus_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus.gif");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus.pdf");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus.png");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEBminus_eplus->SetLogy(); gPad->Update();
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus_logy.gif");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus_logy.pdf");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus_logy.png");
+//  cDEtaEBminus_eplus->Print("images/cDEtaEBminus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  ///---- EE_eplus ----
+//  TH1F* DPhiDATAEE_eplus = new TH1F("DPhiDATAEE_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEE_eplus   = new TH1F("DPhiNoAlignmentEE_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEE_eplus   = new TH1F("DPhiMCEE_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEE_eplus = new TH1F("DEtaDATAEE_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEE_eplus   = new TH1F("DEtaNoAlignmentEE_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEE_eplus   = new TH1F("DEtaMCEE_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEE_eplus, DPhiNoAlignmentEE_eplus, DPhiMCEE_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","abs(eta)>1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEE_eplus, DEtaNoAlignmentEE_eplus, DEtaMCEE_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","abs(eta)>1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEE_eplus = new TCanvas("cDphiEE_eplus2011","cDphiEE_eplus2011",700,700);
+//  DPhiDATAEE_eplus->Draw("PE");
+//  DPhiNoAlignmentEE_eplus->Draw("PsameE");
+//  DPhiMCEE_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEE_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus.gif");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus.pdf");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus.png");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEE_eplus->SetLogy(); gPad->Update();
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus_logy.gif");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus_logy.pdf");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus_logy.png");
+//  cDPhiEE_eplus->Print("images/cDPhiEE_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEE_eplus = new TCanvas("cDeta2011EE_eplus","cDeta2011EE_eplus",700,700);
+//  DEtaDATAEE_eplus->Draw("PE");
+//  DEtaNoAlignmentEE_eplus->Draw("PsameE");
+//  DEtaMCEE_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEE_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus.gif");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus.pdf");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus.png");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEE_eplus->SetLogy(); gPad->Update();
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus_logy.gif");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus_logy.pdf");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus_logy.png");
+//  cDEtaEE_eplus->Print("images/cDEtaEE_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  ///---- EE+ ----
+//  TH1F* DPhiDATAEEplus_eplus = new TH1F("DPhiDATAEEplus_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEplus_eplus   = new TH1F("DPhiNoAlignmentEEplus_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEplus_eplus   = new TH1F("DPhiMCEEplus_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEplus_eplus = new TH1F("DEtaDATAEEplus_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEplus_eplus   = new TH1F("DEtaNoAlignmentEEplus_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEplus_eplus   = new TH1F("DEtaMCEEplus_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEplus_eplus, DPhiNoAlignmentEEplus_eplus, DPhiMCEEplus_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta>0 && eta>1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEEplus_eplus, DEtaNoAlignmentEEplus_eplus, DEtaMCEEplus_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta>0 && eta>1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEplus_eplus = new TCanvas("cDphiEEplus_eplus2011","cDphiEEplus_eplus2011",700,700);
+//  DPhiDATAEEplus_eplus->Draw("PE");
+//  DPhiNoAlignmentEEplus_eplus->Draw("PsameE");
+//  DPhiMCEEplus_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEplus_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus.gif");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus.pdf");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus.png");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEEplus_eplus->SetLogy(); gPad->Update();
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus_logy.gif");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus_logy.pdf");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus_logy.png");
+//  cDPhiEEplus_eplus->Print("images/cDPhiEEplus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEplus_eplus = new TCanvas("cDeta2011EEplus_eplus","cDeta2011EEplus_eplus",700,700);
+//  DEtaDATAEEplus_eplus->Draw("PE");
+//  DEtaNoAlignmentEEplus_eplus->Draw("PsameE");
+//  DEtaMCEEplus_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEplus_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus.gif");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus.pdf");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus.png");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEEplus_eplus->SetLogy(); gPad->Update();
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus_logy.gif");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus_logy.pdf");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus_logy.png");
+//  cDEtaEEplus_eplus->Print("images/cDEtaEEplus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  ///---- EE- ---- 
+//  TH1F* DPhiDATAEEminus_eplus = new TH1F("DPhiDATAEEminus_eplus"," Data",500,-0.04,0.04);
+//  TH1F* DPhiNoAlignmentEEminus_eplus   = new TH1F("DPhiNoAlignmentEEminus_eplus",  "No Alignment"  ,500,-0.04,0.04);
+//  TH1F* DPhiMCEEminus_eplus   = new TH1F("DPhiMCEEminus_eplus",  " MC"  ,500,-0.04,0.04);
+//  
+//  TH1F* DEtaDATAEEminus_eplus = new TH1F("DEtaDATAEEminus_eplus"," Data",500,-0.02,0.02);
+//  TH1F* DEtaNoAlignmentEEminus_eplus   = new TH1F("DEtaNoAlignmentEEminus_eplus"  ,"No Alignment"  ,500,-0.02,0.02);
+//  TH1F* DEtaMCEEminus_eplus   = new TH1F("DEtaMCEEminus_eplus"  ," MC"  ,500,-0.02,0.02);
+//  
+//  createHisto(tinfoDPhi,DPhiDATAEEminus_eplus, DPhiNoAlignmentEEminus_eplus, DPhiMCEEminus_eplus, trDATA, trNoAlignment, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi","eta<0 && eta<-1.5 && eleCharge>0");
+//  createHisto(tinfoDEta,DEtaDATAEEminus_eplus, DEtaNoAlignmentEEminus_eplus, DEtaMCEEminus_eplus, trDATA, trNoAlignment, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta","eta<0 && eta<-1.5 && eleCharge>0");
+//  
+//  
+//  
+//  TCanvas* cDPhiEEminus_eplus = new TCanvas("cDphiEEminus_eplus2011","cDphiEEminus_eplus2011",700,700);
+//  DPhiDATAEEminus_eplus->Draw("PE");
+//  DPhiNoAlignmentEEminus_eplus->Draw("PsameE");
+//  DPhiMCEEminus_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDPhi->Draw();
+//  
+//  legend->Draw();
+//  cDPhiEEminus_eplus->SetGrid(); gPad->Update();   
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus.gif");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus.pdf");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus.png");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus.C"); gSystem->Sleep(1);
+//  cDPhiEEminus_eplus->SetLogy(); gPad->Update();
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus_logy.gif");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus_logy.pdf");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus_logy.png");
+//  cDPhiEEminus_eplus->Print("images/cDPhiEEminus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  TCanvas* cDEtaEEminus_eplus = new TCanvas("cDeta2011EEminus_eplus","cDeta2011EEminus_eplus",700,700);
+//  DEtaDATAEEminus_eplus->Draw("PE");
+//  DEtaNoAlignmentEEminus_eplus->Draw("PsameE");
+//  DEtaMCEEminus_eplus->Draw("same");
+//  tEE->Draw();
+//  tinfoDEta->Draw();
+//  
+//  legend->Draw();
+//  cDEtaEEminus_eplus->SetGrid(); gPad->Update();   
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus.gif");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus.pdf");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus.png");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus.C"); gSystem->Sleep(1);
+//  cDEtaEEminus_eplus->SetLogy(); gPad->Update();
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus_logy.gif");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus_logy.pdf");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus_logy.png");
+//  cDEtaEEminus_eplus->Print("images/cDEtaEEminus_eplus_logy.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  ///---- eta distribution ----
+//  TH1F* EtaDATA = new TH1F("EtaDATA","#eta Data",100,-5.0,5.0);
+//  TH1F* EtaNoAlignment   = new TH1F("EtaNoAlignment",  "#etaNo Alignment"  ,100,-5.0,5.0);
+//  TH1F* EtaMC = new TH1F("EtaMC","#eta MC",100,-5.0,5.0);
+//  
+//  createHisto(tinfoDEta,EtaDATA, EtaNoAlignment, EtaMC, trDATA, trNoAlignment, trMC, "etaSC", "#eta_{SC}","1"); 
+//  
+//  TCanvas* cEta = new TCanvas("cEta","cEta",700,700);
+//  EtaDATA -> Draw("PE");
+//  EtaNoAlignment   -> Draw("PsameE");
+//  EtaMC -> Draw("same");
+//  
+//  legend->Draw();
+//  cEta->SetGrid(); gPad->Update();   
+//  //  cEta->Print("cEta.gif");
+//  //  cEta->Print("cEta.pdf");
+//  //  cEta->Print("cEta.png");
+//  //  cEta->Print("images/cEta.C"); gSystem->Sleep(1);
+//  
+//  
+//  
+//  
+//  
+//  std::cout << " Differences " << std::endl;
+//  
+//  //  std::cout << " DPhi V7 = " << DPhiV7->GetMean() << " +/- " << DPhiV7->GetRMS() / sqrt(DPhiV7->GetEntries()) << std::endl;
+//  //  std::cout << " DPhi V8 = " << DPhiV8->GetMean() << " +/- " << DPhiV8->GetRMS() / sqrt(DPhiV8->GetEntries()) << std::endl;
+//  //  
+//  //  std::cout << " DEta V7 = " << DEtaV7->GetMean() << " +/- " << DEtaV7->GetRMS() / sqrt(DEtaV7->GetEntries()) << std::endl;
+//  //  std::cout << " DEta V8 = " << DEtaV8->GetMean() << " +/- " << DEtaV8->GetRMS() / sqrt(DEtaV8->GetEntries()) << std::endl;
+ 
+ 
+//  gApplication->Terminate(0);
  
 }
