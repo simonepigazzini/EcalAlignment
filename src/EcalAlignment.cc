@@ -39,7 +39,7 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   m_passedEvents =     fs -> make<TH1F>("passedEvents", "passedEvents", 1,  0., 1.);
   m_filterEfficiency = fs -> make<TH1F>("filterEfficiency", "filterEfficiency", 1,  0., 1.);
 
-   
+
   ///==== tags ====
   EleTag_ = iConfig.getParameter<edm::InputTag>("EleTag"); 
   CALOMetTag_ = iConfig.getParameter<edm::InputTag>("CALOMetTag");
@@ -50,7 +50,7 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
 
   recHitCollection_EB_ = iConfig.getParameter<edm::InputTag>("recHitCollection_EB");
   recHitCollection_EE_ = iConfig.getParameter<edm::InputTag>("recHitCollection_EE");
-  
+
   std::vector<std::string> empty;
   eleId_names_  = iConfig.getUntrackedParameter< std::vector<std::string> >("eleId_names",empty);
 
@@ -76,8 +76,7 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("runId",         &runId_,        "runId/I");
   myTree_ -> Branch("eventId",       &eventId_,      "eventId/I");
   myTree_ -> Branch("eventNaiveId",  &eventNaiveId_, "eventNaiveId/I" );
-  
- 
+
   myTree_ -> Branch("sumEt",&sumEt_,"sumEt/D");
   myTree_ -> Branch("met",&met_,"met/D");
   myTree_ -> Branch("eta",&eta_,"eta/D");
@@ -289,32 +288,32 @@ void
   double R  = TMath::Sqrt(scRef->x()*scRef->x() + scRef->y()*scRef->y() +scRef->z()*scRef->z());
   double Rt = TMath::Sqrt(scRef->x()*scRef->x() + scRef->y()*scRef->y());
 
-  ETSC_ = scRef->energy() * (Rt/R);   
-  ESC_ = scRef->energy();   
+  ETSC_ = scRef->energy() * (Rt/R);
+  ESC_ = scRef->energy();
   ET_ = electron.p4().Et();
   etaSC_ = scRef->eta();
-  phiSC_ = scRef->phi();   
-   
+  phiSC_ = scRef->phi();
+
   Sigma_Phi_ = scRef->phiWidth();
   Sigma_Eta_ = scRef->etaWidth();
-   
+
   pIn_ = electron.trackMomentumAtVtx().R();
-  pOut_ = electron.trackMomentumOut().R();   
-  pAtCalo_ = electron.trackMomentumAtCalo().R();   
-   
+  pOut_ = electron.trackMomentumOut().R();
+  pAtCalo_ = electron.trackMomentumAtCalo().R();
+
   HoE_ = electron.hadronicOverEm();
-   
+
   SigmaIEtaIEta_ = electron.sigmaIetaIeta();
   eleTrkIso_ = electron.dr03TkSumPt();
   eleEcalIso_ = electron.dr03EcalRecHitSumEt();
   eleHcalIsoD1_ = electron.dr03HcalDepth1TowerSumEt();
   eleHcalIsoD2_ = electron.dr03HcalDepth2TowerSumEt();
-       
+
   EoP_ = ESC_ /p_;
   eleFBrem_ = electron.fbrem();
 
   DeltaEtaIn_ = electron.deltaEtaSuperClusterTrackAtVtx();
-  DeltaPhiIn_ = electron.deltaPhiSuperClusterTrackAtVtx();   
+  DeltaPhiIn_ = electron.deltaPhiSuperClusterTrackAtVtx();
 
   deltaEtaSuperClusterAtVtx_ = electron.deltaEtaSuperClusterTrackAtVtx();
   deltaEtaSeedClusterAtCalo_ = electron.deltaEtaSeedClusterTrackAtCalo();
@@ -327,16 +326,14 @@ void
   dist_ = 0;
   dcot_ = 0;
 
-  float cphi = (electron.p4().x() * metP.p4().Px() 
-    + electron.p4().y() * metP.p4().Py()) 
-     / (met_*electron.p4().Pt());
+  float cphi = (electron.p4().x() * metP.p4().Px()     + electron.p4().y() * metP.p4().Py())     / (met_*electron.p4().Pt());
 
   MT_   = sqrt(2 * ET_ * met_ * (1-cphi));
-   
+
    // cluster shape variables
   E3x3_ = 0;
   E2x2_ = 0;
-   
+
   if (debug_) std::cout << ">>> >>> electron EB / EE" << std::endl;
 
   if ( electron.isEB() )
@@ -370,10 +367,6 @@ void
    
   sev = -1; //---- ??
   seedSeverityLevel_ = sev;
-//   double seed_energy_temp = -1;
-//   int iSC;
-//   int iSM;
-//   int numRecHit = 0;
   const std::vector<std::pair<DetId,float> > & hits= electron.superCluster()->hitsAndFractions();
 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
@@ -432,11 +425,11 @@ void
    ///==== Selections ====
    ///==== if an electron doesn't pass these selections 
    ///==== it's not saved
-   
+
   float EtaCutEB    = 1.5;
   float EtaCutEE    = 1.5;
   float EtaMax      = 3.0;
-  
+
 //    if ( met_ < 10. ) continue;
 //   if ( ETSC_ < 20. ) continue;  //----> filtered afterwards!
 //    if ( fabs(dphiMETEle_) < 0.75) continue;   
@@ -445,27 +438,25 @@ void
   if ( fabs(eta_)> EtaMax ) continue;
 
 //   if ( electrons_classification_ != 0 ) continue;  //----> filtered afterwards!
-   
-   
+
 
 //    if (seedSeverityLevel_ != 0) continue;
 //    if (eleSwissCross_ > 0.95) continue;
-   
-   
+
 //    if (eleMisHits_ > 0) continue;
 //    if (fabs(eta_) <= EtaCutEB && ((eleTrkIso_ + eleEcalIso_ + eleHcalIsoD1_ + eleHcalIsoD2_)/pT_ > 0.07)) continue;
 //    if (fabs(eta_) <= EtaCutEB && (eleTrkIso_/pT_>0.09 || eleEcalIso_/pT_>0.07 || (eleHcalIsoD1_+eleHcalIsoD2_)/pT_>0.09)) continue;
 //    if (fabs(eta_) <= EtaCutEB && (HoE_>0.040 || SigmaIEtaIEta_>0.01)) continue;
 //    if (fabs(eta_) <= EtaCutEB && DeltaPhiIn_ > 0.06) continue;
 //    if (fabs(eta_) <= EtaCutEB && DeltaEtaIn_ > 0.004) continue;
-   
+
 //    if (fabs(eta_) > EtaCutEB && ((eleTrkIso_ + eleEcalIso_ + eleHcalIsoD1_ + eleHcalIsoD2_)/pT_ > 0.06)) continue;
 //    if (fabs(eta_) > EtaCutEB && (eleTrkIso_/pT_>0.04 || eleEcalIso_/pT_>0.05 || (eleHcalIsoD1_+eleHcalIsoD2_)/pT_>0.025)) continue;
 //    if (fabs(eta_) > EtaCutEB && (HoE_>0.025 || SigmaIEtaIEta_>0.03)) continue;
 
-  ///==== save ELECTRON variables ====   
+  ///==== save ELECTRON variables ====
   myTree_->Fill();
-  
+
  }//==== end loop over electrons ====
 
 
