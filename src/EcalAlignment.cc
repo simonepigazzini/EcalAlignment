@@ -143,6 +143,10 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("yvtx",&yvtx_,"yvtx/D");
   myTree_ -> Branch("zvtx",&zvtx_,"zvtx/D");
 
+  myTree_ -> Branch("mc_pt",&mc_pt_,"mc_pt/D");
+  myTree_ -> Branch("mc_eta",&mc_eta_,"mc_eta/D");
+  myTree_ -> Branch("mc_phi",&mc_phi_,"mc_phi/D");
+
 }
 
 
@@ -403,11 +407,28 @@ void
   }
 
 
-   
-  dphiMETEle_ = deltaPhi(metP.phi(),electron.p4().phi());  
-   
-   
-   
+  dphiMETEle_ = deltaPhi(metP.phi(),electron.p4().phi());
+
+   //---- Gen lepton matching
+  if (isMC_) {
+   const reco::GenParticle *match = electron.genLepton();
+   if ( match ) {
+    mc_pt_ = match->pt();
+    mc_eta_ = match->eta();
+    mc_phi_ = match->phi();
+   }
+   else {
+    mc_pt_ = -999.;
+    mc_eta_ = -999.;
+    mc_phi_ = -999.;
+   }
+  }
+  else {
+   mc_pt_ = -999.;
+   mc_eta_ = -999.;
+   mc_phi_ = -999.;
+  }
+
    ///==== Selections ====
    ///==== if an electron doesn't pass these selections 
    ///==== it's not saved
