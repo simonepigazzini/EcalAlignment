@@ -178,6 +178,11 @@ class EcalAlignment : public edm::EDAnalyzer {
   double yvtx_;
   double zvtx_;
 
+  //---- MC information ----
+  double mc_pt_;
+  double mc_eta_;
+  double mc_phi_;
+
 };
 
 
