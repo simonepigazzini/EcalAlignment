@@ -18,8 +18,6 @@ void createHisto(TLatex* tinfo, TH1F* hmc, TTree* tmc, char* variable, char* tit
  hmc->SetFillColor(kTeal);
  hmc->SetFillStyle(3002);
 
- double integralMC  ;
-
  TString  sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
  tinfo -> SetText(0.2,0.85,sinfo);
  tinfo -> SetTextSize(0.040);
@@ -27,7 +25,25 @@ void createHisto(TLatex* tinfo, TH1F* hmc, TTree* tmc, char* variable, char* tit
 }
 
 
+void createHisto2D(TH2F* hmc, TTree* tmc, char* variableY, char* variableX, char* title, char* cut) {
 
+ TString toDraw;
+ TString tcut;
+
+ //  tcut = Form("(%s) * weight_PU",cut);
+ tcut = Form("(%s)",cut);
+ toDraw = Form("%s >> %s",variable,hmc->GetName());
+ tmc   -> Draw(toDraw.Data(),tcut.Data(),"goff");
+
+ hmc -> GetXaxis()->SetTitle(variableX);
+ hmc -> GetYaxis()->SetTitle(variableY);
+
+ hmc->SetLineColor(kTeal);
+ hmc->SetLineWidth(2);
+ hmc->SetFillColor(kTeal);
+ hmc->SetFillStyle(3002);
+
+}
 
 
 void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA){
@@ -69,7 +85,7 @@ void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA
  tEB->SetNDC(true);
  tEE->SetNDC(true);
  ///---- text (end) ----
- 
+
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
  tinfoDPhi->Draw();
@@ -112,6 +128,18 @@ void drawModules(TString nameInFileRoot, TString nameOutputDir, TString nameDATA
  cDEta->Print(std::string(std::string(nameOutputDir.Data())+"/images/cDEta_logy.C").c_str()); gSystem->Sleep(1);
 
 
+ ///---- 2D plot ----
+ createHisto2D(TH2F* hmc, TTree* tmc, char* variableY, char* variableX, char* title, char* cut) {
+ TH2F* DPhiMCvsEta   = new TH2F("DPhiMCvsEta",  "MC"  ,200,-0.04,0.04,20,-3,3);
+ TH2F* DEtaMCvsEta   = new TH2F("DEtaMCvsEta"  ,"MC"  ,200,-0.02,0.02,,20,-3,3);
+ createHisto2D(DPhiMCvsEta, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}","1");
+ createHisto2D(DEtaMCvsEta, trMC, "deltaEtaSuperClusterAtVtx", "etaSC", "#Delta#eta vs #eta_{SC}","1");
+
+ TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
+ DPhiMCvsEta->Draw("colz");
+
+ TCanvas* cDEtavsEta = new TCanvas("cDetavsEta","cDetavsEta",700,700);
+ DEtaMCvsEta->Draw("colz");
 
 
 //  
