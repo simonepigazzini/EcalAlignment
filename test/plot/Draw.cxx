@@ -29,6 +29,7 @@ TH1F * DrawOverflow(TH1F *h) {
  return htmp;
 }
 
+#include "TDRStyle.cc"
 
 void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000, float MIN = 0, float MAX = 1000, std::string varHR = "", std::string globalCut = "1") {
  if (varHR == "") {
@@ -89,6 +90,7 @@ void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000
  //   h_Sig[iSig] = DrawOverflow(h_Sig[iSig]);
  //  }
 
+ 
  //---- normalized
  TCanvas* cn = new TCanvas ("cn","cn",800,600);
  for (int iSig = 0; iSig < nSig; iSig++) {
