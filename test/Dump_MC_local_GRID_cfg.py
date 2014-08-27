@@ -12,8 +12,14 @@ process = cms.Process('EcalAlignment')
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 # add a list of strings for events to process
-options.parseArguments()
 
+options.register ('listFiles',
+    'listFiles.py',
+    VarParsing.multiplicity.singleton,
+    VarParsing.varType.string,
+    'listFiles')
+
+options.parseArguments()
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -42,8 +48,9 @@ process.options = cms.untracked.PSet(
 
 # Input source
 import os.path
-if os.path.exists("list/myfilelist.py"):
-    handle = open("list/myfilelist.py",'r')
+print "listFiles = ",options.listFiles
+if os.path.exists(options.listFiles):
+    handle = open(options.listFiles,'r')
     exec(handle)
     handle.close()
 
