@@ -5,6 +5,11 @@
 #include "TDRStyle.cc"
 
 void Draw2D(std::string nameInFileRoot, std::string var_Y = "etaSC", int NBIN_Y = 1000, float MIN_Y = 0, float MAX_Y = 1000, std::string varHR_Y = "", std::string var_X = "etaSC", int NBIN_X = 1000, float MIN_X = 0, float MAX_X = 1000, std::string varHR_X = "", std::string globalCut = "1") {
+ 
+ TDRStyle();
+ gStyle->SetTitleYOffset(1.1);
+ gStyle->cd();
+ 
  if (varHR_X == "") {
   varHR_X = var_X;
  }
@@ -77,6 +82,12 @@ void Draw2D(std::string nameInFileRoot, std::string var_Y = "etaSC", int NBIN_Y 
  sum_h_Sig->Draw("colz");
  sum_h_Sig_tx->Draw("EPsame");
   
+ 
+ TCanvas* cc2D_x = new TCanvas("cc2D_x","cc2D_x",700,700);
+ cc2D_x->SetGrid();
+ sum_h_Sig_tx->Draw("PE");
+ 
+ 
 }
 
 

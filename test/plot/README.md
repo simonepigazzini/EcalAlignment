@@ -33,9 +33,16 @@ General draw 2D:
     r99t Draw2D.cxx\(\"treeECALAlignment_all_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
     
-    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",8,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
-    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",8,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.02,0.02,\"#Delta#eta\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",200,-0.02,0.02,\"#Delta#eta\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
     
+    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaPhiSuperClusterAtVtx\",100,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaPhiSuperClusterAtVtx\",200,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
+    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaPhiSuperClusterAtVtx\",100,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\>0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaPhiSuperClusterAtVtx\",200,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\>0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
+    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaPhiSuperClusterAtVtx\",100,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\<0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaPhiSuperClusterAtVtx\",200,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\<0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
     
