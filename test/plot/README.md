@@ -32,3 +32,10 @@ General draw 2D:
     r99t Draw2D.cxx\(\"treeECALAlignment_all_ideal_MC.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     r99t Draw2D.cxx\(\"treeECALAlignment_all_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
+    
+    r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",8,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",8,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
+    
+    
+    
