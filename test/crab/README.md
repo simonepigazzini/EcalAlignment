@@ -13,6 +13,10 @@ check if I have writing permissions:
     crab checkwrite --site=T2_CH_CERN
     crab checkwrite --site=T2_CH_CERN  --lfn=/store/user/amassiro/ECAL/
 
+run
+
+    crab submit -c crab_Dump_MC.py
+    
     
 Samples
 ====
