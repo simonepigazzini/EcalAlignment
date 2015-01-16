@@ -10,6 +10,8 @@ check if I have writing permissions:
     source /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh
     source /cvmfs/cms.cern.ch/crab3/crab.sh
     crab checkwrite --site=T2_CH_CERN
+    crab checkwrite --site=T2_CH_CERN  --lfn=/store/user/amassiro/ECAL/
+
     
 Samples
 ====
