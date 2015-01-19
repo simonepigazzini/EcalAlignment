@@ -10,6 +10,13 @@ run:
 
     cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/001DC3E2-0C22-E411-975E-002590DB924E.root    outputFile=/tmp/amassiro/treeECALAlignment.root
 
+
+    
+    cmsRun RAW2RECO_DATA_cfg.py  \
+        inputFiles=file:/tmp/amassiro/FEE043A5-93D4-E111-84DC-0030486790C0.root  \
+        outputFile=reco_raw.root
+
+
     
 Fake GRID
 ====
@@ -27,5 +34,7 @@ See here for the files definition (from DAS, plain dump):
     list/myfilelist.py
 
 
+    
+    
     
     
