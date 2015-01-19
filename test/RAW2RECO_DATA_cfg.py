@@ -20,6 +20,32 @@ print options
 
 process = cms.Process('EcalAlignment')
 
+##--------------------------
+## Define PAT sequence
+##--------------------------
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.patDefaultSequence.remove( process.elPFIsoDepositCharged )
+process.makePatElectrons.remove( process.elPFIsoDepositCharged )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositCharged )
+
+process.patDefaultSequence.remove( process.elPFIsoDepositChargedAll )
+process.makePatElectrons.remove( process.elPFIsoDepositChargedAll )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositChargedAll )
+
+process.patDefaultSequence.remove( process.elPFIsoDepositGamma )
+process.makePatElectrons.remove( process.elPFIsoDepositGamma )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositGamma )
+
+process.patDefaultSequence.remove( process.elPFIsoDepositNeutral )
+process.makePatElectrons.remove( process.elPFIsoDepositNeutral )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositNeutral )
+
+process.patDefaultSequence.remove( process.elPFIsoDepositPU )
+process.makePatElectrons.remove( process.elPFIsoDepositPU )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositPU )
+
+
+
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
@@ -212,7 +238,22 @@ if options.isMC :
 ##--------------------------
 
 ## Standard PAT Configuration File
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.load("PhysicsTools.PatAlgos.producersLayer1.patCandidates_cff")
+#process.load("PhysicsTools.PatAlgos.selectionLayer1.selectedPatCandidates_cff")
+
+
+
+#process.load("EcalValidation.EcalAlignment.MyPat_cfi")
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.patDefaultSequence.remove( process.elPFIsoDepositCharged )
+
+########################from PhysicsTools.PatAlgos.patSequences_cff import *
+
+#########################patDefaultSequence.patCandidates.makePatElectrons.remove(elPFIsoDepositCharged)
+########################patDefaultSequence.remove(elPFIsoDepositCharged)
+########################process.mypatDefaultSequence = cms.Sequence()
+########################process.mypatDefaultSequence = patDefaultSequence
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
 ## remove MC matching from the default sequence
@@ -262,11 +303,11 @@ process.load("PhysicsTools.PatAlgos.patSequences_cff")
     #process.electronPFIsolationValuesSequence
 #)
 
-#process.patDefaultSequence.remove(particleFlowPtrs)
-process.patDefaultSequence.remove(patCandidates)
-process.patDefaultSequence.remove(selectedPatCandidates)
-process.patDefaultSequence.remove(cleanPatCandidates)
-process.patDefaultSequence.remove(countPatCandidates)
+process.patDefaultSequence.remove(process.particleFlowPtrs)
+#process.patDefaultSequence.remove(patCandidates)
+#process.patDefaultSequence.remove(selectedPatCandidates)
+#process.patDefaultSequence.remove(cleanPatCandidates)
+#process.patDefaultSequence.remove(countPatCandidates)
  
  
  
@@ -399,6 +440,7 @@ process.pEcalAlignment = cms.Path(
     ##*process.highetFilter
     #*process.FilterReRECOEvents   # |-> counter   
     process.patDefaultSequence
+    #process.mypatDefaultSequence
     #*process.FilterPatDefaultSequenceEvents   # |-> counter
     #*process.ntupleEcalAlignment
     )
@@ -410,7 +452,7 @@ process.schedule = cms.Schedule(
    process.reconstruction_step,  # | -> reconstruction
    process.endjob_step,          # | -> reconstruction
    process.RECOoutput_step,      # | -> reconstruction
-   process.pEcalAlignment        # | -> selections and ntuple
+   #process.pEcalAlignment        # | -> selections and ntuple
 )
 
 
