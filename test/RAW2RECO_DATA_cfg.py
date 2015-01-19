@@ -173,7 +173,6 @@ process.RECOoutput_step = cms.EndPath(process.RECOoutput)
 
 # Schedule definition
 #process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.endjob_step,process.RECOoutput_step)
-process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.endjob_step,process.RECOoutput_step)
 
 # https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideFrontierConditions?redirectedfrom=CMS.SWGuideFrontierConditions#311X_Releases  
 
@@ -213,10 +212,10 @@ if options.isMC :
 ##--------------------------
 
 ## Standard PAT Configuration File
-#process.load("PhysicsTools.PatAlgos.patSequences_cff")
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
-### remove MC matching from the default sequence
+## remove MC matching from the default sequence
 #removeMCMatching(process, ['All'])
 
 ## bugfix for DATA Run2011 (begin)
@@ -256,6 +255,23 @@ if options.isMC :
 #process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmp")
 #process.pfNoPileUpIso.bottomCollection = cms.InputTag("particleFlowTmp")
 
+#http://cmslxr.fnal.gov/lxr/source/CommonTools/ParticleFlow/python/Isolation/pfElectronIsolation_cff.py?v=CMSSW_7_2_0_pre6
+#process.pfElectronIsolationSequence.replace(process.electronPFIsolationDepositsSequenXce+process.electronPFIsolationValuesSequence, process.electronPFIsolationValuesSequence)
+#process.pfElectronIsolationSequence = cms.Sequence(
+    ##process.electronPFIsolationDepositsSequenXce +
+    #process.electronPFIsolationValuesSequence
+#)
+
+#process.patDefaultSequence.remove(particleFlowPtrs)
+process.patDefaultSequence.remove(patCandidates)
+process.patDefaultSequence.remove(selectedPatCandidates)
+process.patDefaultSequence.remove(cleanPatCandidates)
+process.patDefaultSequence.remove(countPatCandidates)
+ 
+ 
+ 
+#from RecoParticleFlow/PFProducer/python/electronPFIsolationDeposits_cff.py import *
+#process.elPFIsoDepositCharged = 
 
 
 ##--------------------------
@@ -368,7 +384,7 @@ if options.isMC :
 ## paths
 ##--------------------------
 
-#process.pEcalAlignment = cms.Path(
+process.pEcalAlignment = cms.Path(
     #process.AllEvents   # |-> counter
     ##*process.skimming
     ##*process.FilterL1FilterEvents   # |-> counter
@@ -382,20 +398,20 @@ if options.isMC :
     ##*process.highetele
     ##*process.highetFilter
     #*process.FilterReRECOEvents   # |-> counter   
-    #*process.patDefaultSequence
+    process.patDefaultSequence
     #*process.FilterPatDefaultSequenceEvents   # |-> counter
     #*process.ntupleEcalAlignment
-    #)
+    )
 
 
-#process.schedule = cms.Schedule(
-   #process.raw2digi_step,        # | -> reconstruction
-   #process.L1Reco_step,          # | -> reconstruction
-   #process.reconstruction_step,  # | -> reconstruction
-   #process.endjob_step,          # | -> reconstruction
-   ##process.RECOoutput_step,      # | -> reconstruction
-   #process.pEcalAlignment        # | -> selections and ntuple
-#)
+process.schedule = cms.Schedule(
+   process.raw2digi_step,        # | -> reconstruction
+   process.L1Reco_step,          # | -> reconstruction
+   process.reconstruction_step,  # | -> reconstruction
+   process.endjob_step,          # | -> reconstruction
+   process.RECOoutput_step,      # | -> reconstruction
+   process.pEcalAlignment        # | -> selections and ntuple
+)
 
 
 ##process.schedule = cms.Schedule(
