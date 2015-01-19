@@ -16,8 +16,15 @@ check if I have writing permissions:
 run
 
     crab submit -c crab_Dump_MC.py
-    
-    
+    crab status    
+
+details:
+
+    it will save in something like:
+    /eos/cms/store/user/amassiro/ECAL/Alignment/test16Jan2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_MC/150116_161722/0000/treeECALAlignment_1.root
+
+
+
 Samples
 ====
 
@@ -27,6 +34,6 @@ Samples
     /DYToEE_M-50_Tune4C_13TeV-pythia8/Phys14DR-PU40bx25_tsg_castor_PHYS14_25_V1-v2/AODSIM
 
     
-    
+
 
 

@@ -13,7 +13,7 @@ config.JobType.pyCfgParams = ['inputFiles=FAKEINPUT', 'outputFile=treeECALAlignm
 
 config.section_('Data')
 config.Data.inputDataset = '/DYToEE_M-50_Tune4C_13TeV-pythia8/Phys14DR-PU40bx25_tsg_castor_PHYS14_25_V1-v2/AODSIM'
-config.Data.unitsPerJob = 10000
+config.Data.unitsPerJob = 10   # since files based, 10 files per job
 config.Data.inputDBS = 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader/'
 #config.Data.publishDBS = 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter/'
 config.Data.splitting = 'FileBased'    #'LumiBased'
