@@ -20,30 +20,6 @@ print options
 
 process = cms.Process('EcalAlignment')
 
-##--------------------------
-## Define PAT sequence
-##--------------------------
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
-#process.patDefaultSequence.remove( process.elPFIsoDepositCharged )
-process.makePatElectrons.remove( process.elPFIsoDepositCharged )
-process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositCharged )
-
-process.patDefaultSequence.remove( process.elPFIsoDepositChargedAll )
-process.makePatElectrons.remove( process.elPFIsoDepositChargedAll )
-process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositChargedAll )
-
-process.patDefaultSequence.remove( process.elPFIsoDepositGamma )
-process.makePatElectrons.remove( process.elPFIsoDepositGamma )
-process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositGamma )
-
-process.patDefaultSequence.remove( process.elPFIsoDepositNeutral )
-process.makePatElectrons.remove( process.elPFIsoDepositNeutral )
-process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositNeutral )
-
-process.patDefaultSequence.remove( process.elPFIsoDepositPU )
-process.makePatElectrons.remove( process.elPFIsoDepositPU )
-process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositPU )
-
 
 
 # import of standard configurations
@@ -230,6 +206,49 @@ if options.isMC :
     #process.csc2DRecHits.stripDigiTag = cms.InputTag("muonCSCDigis","MuonCSCStripDigi")
 
 
+###############################
+## fix for next PAT sequence ##
+process.pfBasedElectronIsoSequence.remove(process.elPFIsoDepositCharged)
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositCharged )
+
+process.pfBasedElectronIsoSequence.remove(process.elPFIsoDepositChargedAll)
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositChargedAll )
+
+process.pfBasedElectronIsoSequence.remove( process.elPFIsoDepositGamma )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositGamma )
+
+process.pfBasedElectronIsoSequence.remove( process.elPFIsoDepositNeutral )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositNeutral )
+
+process.pfBasedElectronIsoSequence.remove( process.elPFIsoDepositPU )
+process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositPU )
+
+
+
+##--------------------------
+## Define PAT sequence
+##--------------------------
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
+##process.patDefaultSequence.remove( process.elPFIsoDepositCharged )
+#process.makePatElectrons.remove( process.elPFIsoDepositCharged )
+#process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositCharged )
+
+#process.patDefaultSequence.remove( process.elPFIsoDepositChargedAll )
+#process.makePatElectrons.remove( process.elPFIsoDepositChargedAll )
+#process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositChargedAll )
+
+#process.patDefaultSequence.remove( process.elPFIsoDepositGamma )
+#process.makePatElectrons.remove( process.elPFIsoDepositGamma )
+#process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositGamma )
+
+#process.patDefaultSequence.remove( process.elPFIsoDepositNeutral )
+#process.makePatElectrons.remove( process.elPFIsoDepositNeutral )
+#process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositNeutral )
+
+#process.patDefaultSequence.remove( process.elPFIsoDepositPU )
+#process.makePatElectrons.remove( process.elPFIsoDepositPU )
+#process.electronPFIsolationDepositsSequence.remove( process.elPFIsoDepositPU )
+
 
 
 
@@ -291,10 +310,23 @@ if options.isMC :
 
 ##--------------------------------
 ## correct dependencies RECO / PAT
+## to avoid strange loop dependencies
 ##--------------------------------
 
 #process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmp")
 #process.pfNoPileUpIso.bottomCollection = cms.InputTag("particleFlowTmp")
+
+process.pfPileUp.PFCandidates          = cms.InputTag("particleFlowTmpPtrs")
+process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmpPtrs")
+process.pfNoPileUp.bottomCollection    = cms.InputTag("particleFlowTmpPtrs")
+process.pfNoPileUpIso.bottomCollection = cms.InputTag("particleFlowTmpPtrs")
+
+process.muPFIsoDepositCharged.src      = cms.InputTag("muons1stStep")
+process.muPFIsoDepositChargedAll.src   = cms.InputTag("muons1stStep")
+process.muPFIsoDepositGamma.src        = cms.InputTag("muons1stStep")
+process.muPFIsoDepositNeutral.src      = cms.InputTag("muons1stStep")
+process.muPFIsoDepositPU.src           = cms.InputTag("muons1stStep")
+
 
 #http://cmslxr.fnal.gov/lxr/source/CommonTools/ParticleFlow/python/Isolation/pfElectronIsolation_cff.py?v=CMSSW_7_2_0_pre6
 #process.pfElectronIsolationSequence.replace(process.electronPFIsolationDepositsSequenXce+process.electronPFIsolationValuesSequence, process.electronPFIsolationValuesSequence)
@@ -303,7 +335,7 @@ if options.isMC :
     #process.electronPFIsolationValuesSequence
 #)
 
-process.patDefaultSequence.remove(process.particleFlowPtrs)
+#process.patDefaultSequence.remove(process.particleFlowPtrs)
 #process.patDefaultSequence.remove(patCandidates)
 #process.patDefaultSequence.remove(selectedPatCandidates)
 #process.patDefaultSequence.remove(cleanPatCandidates)
