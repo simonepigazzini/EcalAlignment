@@ -56,6 +56,8 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
 
   debug_  = iConfig.getUntrackedParameter< bool >("debug",false);
 
+  pfMetHT_ = consumes<std::vector<pat::MET> >(CALOMetTag_);
+  
 
   //==== output ====
 
@@ -149,8 +151,7 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
 }
 
 
-EcalAlignment::~EcalAlignment()
-{
+EcalAlignment::~EcalAlignment() {
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
  if (eleId_names_.size() != 0) {
@@ -164,9 +165,8 @@ EcalAlignment::~EcalAlignment()
 //
 
 // ------------ method called to for each event  ------------
-void
-  EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
-{
+void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup) {
+ 
  int nTotalEvents = static_cast<int>(m_totalEvents -> GetBinContent(1));
  int nPassedEvents = static_cast<int>(m_passedEvents -> GetBinContent(1));
 
@@ -226,12 +226,20 @@ void
 
 
  ///==== save MET ====
- edm::Handle<edm::View<pat::MET> > calometHandle;
- iEvent.getByLabel(CALOMetTag_,calometHandle);
- edm::View<pat::MET>  mets = *calometHandle;
- pat::MET metP = mets.at(0);
- sumEt_ = metP.sumEt();
- met_   = metP.p4().Et();
+//  edm::Handle<edm::View<pat::MET> > calometHandle;
+//  iEvent.getByLabel(CALOMetTag_,calometHandle);
+ edm::Handle< std::vector<pat::MET> > calometHandle;
+ iEvent.getByToken(pfMetHT_,calometHandle);
+ 
+ 
+ 
+ 
+//  edm::View<pat::MET>  mets = *calometHandle;
+//  pat::MET metP = mets.at(0);
+ 
+ pat::METRef metP = pat::METRef(calometHandle,0);
+ sumEt_ = metP->sumEt();
+ met_   = metP->p4().Et();
  
  ///==== save ELECTRON ====
  
@@ -326,7 +334,7 @@ void
   dist_ = 0;
   dcot_ = 0;
 
-  float cphi = (electron.p4().x() * metP.p4().Px()     + electron.p4().y() * metP.p4().Py())     / (met_*electron.p4().Pt());
+  float cphi = (electron.p4().x() * metP->p4().Px()     + electron.p4().y() * metP->p4().Py())     / (met_*electron.p4().Pt());
 
   MT_   = sqrt(2 * ET_ * met_ * (1-cphi));
 
@@ -400,7 +408,7 @@ void
   }
 
 
-  dphiMETEle_ = deltaPhi(metP.phi(),electron.p4().phi());
+  dphiMETEle_ = deltaPhi(metP->phi(),electron.p4().phi());
 
    //---- Gen lepton matching
   if (isMC_) {

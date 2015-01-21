@@ -274,14 +274,16 @@ process.load("PhysicsTools.PatAlgos.patSequences_cff")
 ########################process.mypatDefaultSequence = cms.Sequence()
 ########################process.mypatDefaultSequence = patDefaultSequence
 
-#from PhysicsTools.PatAlgos.tools.coreTools import *
-## remove MC matching from the default sequence
-#removeMCMatching(process, ['All'])
+from PhysicsTools.PatAlgos.tools.coreTools import *
+# remove MC matching from the default sequence
+if not options.isMC :
+    removeMCMatching(process, ['All'])
 
-## bugfix for DATA Run2011 (begin)
+
+# bugfix for DATA Run2011 (begin)
 #removeSpecificPATObjects( process, ['Taus'] )
 #process.patDefaultSequence.remove( process.patTaus )
-## bugfix for DATA Run2011 (end)
+# bugfix for DATA Run2011 (end)
 
 ## not used! (begin)
 #removeSpecificPATObjects( process, ['Jets'] )
@@ -341,8 +343,13 @@ process.muPFIsoDepositPU.src           = cms.InputTag("muons1stStep")
 #process.patDefaultSequence.remove(cleanPatCandidates)
 #process.patDefaultSequence.remove(countPatCandidates)
  
- 
- 
+if not options.isMC :
+    process.makePatElectrons.remove(process.electronMatch)
+    process.makePatMuons.remove(process.muonMatch)
+
+
+
+
 #from RecoParticleFlow/PFProducer/python/electronPFIsolationDeposits_cff.py import *
 #process.elPFIsoDepositCharged = 
 
@@ -367,28 +374,30 @@ process.muPFIsoDepositPU.src           = cms.InputTag("muons1stStep")
 
 
 ##--------------------------
-## Ntple
+## ECAL alignment ntuple
 ##--------------------------
 
-#process.ntupleEcalAlignment = cms.EDAnalyzer(
-    #'EcalAlignment',
+process.ntupleEcalAlignment = cms.EDAnalyzer(
+    'EcalAlignment',
 
-    #recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
-    #recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
+    recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
+    recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
 ##    recHitCollection_EB = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
 ##    recHitCollection_EE = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
-    #EleTag              = cms.InputTag("patElectrons"),
-    #TrackTag            = cms.InputTag("generalTracks"),
-    #CALOMetTag          = cms.InputTag("patMETs"),
-    #vtxTag              = cms.InputTag("goodPrimaryVertices"),
-    #)
+    EleTag              = cms.InputTag("patElectrons"),
+    TrackTag            = cms.InputTag("generalTracks"),
+    CALOMetTag          = cms.InputTag("patMETs"),
+    vtxTag              = cms.InputTag("goodPrimaryVertices"),
+    isMC                = cms.untracked.bool(False),
+    debug               = cms.untracked.bool(True)
+    )
 
 
 
-#process.TFileService = cms.Service(
-    #"TFileService",
-    #fileName = cms.string("EcalAlignment.root")
-    #)
+process.TFileService = cms.Service(
+    "TFileService",
+    fileName = cms.string("EcalAlignment.root")
+    )
 
 
 ##--------------------------
@@ -411,13 +420,13 @@ process.muPFIsoDepositPU.src           = cms.InputTag("muons1stStep")
 
 
 
-#VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
+VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
-#process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
-  #src = cms.InputTag("offlinePrimaryVertices"),
-  #cut = cms.string(VERTEX_SEL),
-  #filter = cms.bool(True),
-#)
+process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
+  src = cms.InputTag("offlinePrimaryVertices"),
+  cut = cms.string(VERTEX_SEL),
+  filter = cms.bool(True),
+)
 
 ## filter on primary vertex
 #process.primaryVertexFilter = cms.EDFilter(
@@ -464,18 +473,29 @@ process.pEcalAlignment = cms.Path(
     ##*process.hltLevel1GTSeed
     #*process.FilterGoodVertexFilterEvents   # |-> counter   
     ##*process.primaryVertexFilter
-    #*process.goodPrimaryVertices
+    process.goodPrimaryVertices
     #*process.FilterNoScrapingFilterEvents   # |-> counter    
     ##*process.noscraping
     #*process.FilterElectronFilterEvents   # |-> counter   
     ##*process.highetele
     ##*process.highetFilter
     #*process.FilterReRECOEvents   # |-> counter   
-    process.patDefaultSequence
+    #*process.patDefaultSequence
     #process.mypatDefaultSequence
     #*process.FilterPatDefaultSequenceEvents   # |-> counter
     #*process.ntupleEcalAlignment
     )
+
+process.patDefaultPath = cms.Path(process.patDefaultSequence)
+
+
+#process.patCandidates.remove(process.makePatElectrons   )
+process.patCandidates.remove(process.makePatMuons       )
+process.patCandidates.remove(process.makePatTaus        )
+process.patCandidates.remove(process.makePatPhotons     )
+process.patCandidates.remove(process.makePatJets        )
+#process.patCandidates.remove(process.makePatMETs        )
+#process.patCandidates.remove(process.patCandidateSummary)
 
 
 process.schedule = cms.Schedule(
@@ -483,8 +503,9 @@ process.schedule = cms.Schedule(
    process.L1Reco_step,          # | -> reconstruction
    process.reconstruction_step,  # | -> reconstruction
    process.endjob_step,          # | -> reconstruction
-   process.RECOoutput_step,      # | -> reconstruction
-   #process.pEcalAlignment        # | -> selections and ntuple
+   #process.RECOoutput_step,      # | -> reconstruction
+   #process.patDefaultPath,   # | -> pat creation
+   process.pEcalAlignment        # | -> selections and ntuple
 )
 
 

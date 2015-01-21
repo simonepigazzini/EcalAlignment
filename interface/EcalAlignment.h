@@ -91,6 +91,9 @@ class EcalAlignment : public edm::EDAnalyzer {
   edm::InputTag TrackTag_;
   edm::InputTag vtxTag_;
 
+  edm::EDGetTokenT<std::vector<pat::MET> > pfMetHT_;
+  
+  
   bool isMC_;
 
   bool debug_;
