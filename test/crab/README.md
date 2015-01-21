@@ -18,6 +18,11 @@ run
     crab submit -c crab_Dump_MC.py
     crab status    
 
+run on data
+
+    crab submit -c crab_Dump_DATA.py
+    crab status    
+
 details:
 
     it will save in something like:

@@ -472,12 +472,13 @@ process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
     #)
 
 ## select events with at least one gsf electron
-#process.highetele = cms.EDFilter(
-    #"GsfElectronSelector",
-    ##src = cms.InputTag("gsfElectrons","REDIGI311X"),
-    #src = cms.InputTag("gsfElectrons"),
-    #cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
-    #)
+process.highetele = cms.EDFilter(
+    "GsfElectronSelector",
+    #src = cms.InputTag("gsfElectrons","REDIGI311X"),
+    #src = cms.InputTag("electrons","RECO"),
+    src = cms.InputTag("gsfElectrons"),
+    cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
+    )
 
 #process.highetFilter = cms.EDFilter(
     #"CandViewCountFilter",
@@ -490,6 +491,11 @@ process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
 ##--------------------------
 ## paths
 ##--------------------------
+
+process.pEcalAlignmentFilter = cms.Path(
+   process.highetele
+ )
+
 
 process.pEcalAlignment = cms.Path(
     #process.AllEvents   # |-> counter
@@ -524,6 +530,7 @@ process.patDefaultPath = cms.Path(process.patDefaultSequence)
 
 
 process.schedule = cms.Schedule(
+   process.pEcalAlignmentFilter, # | -> first filter! If run on RAW all
    process.raw2digi_step,        # | -> reconstruction
    process.L1Reco_step,          # | -> reconstruction
    process.reconstruction_step,  # | -> reconstruction
