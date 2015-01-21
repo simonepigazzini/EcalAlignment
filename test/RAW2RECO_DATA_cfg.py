@@ -75,7 +75,7 @@ process.RECOoutput = cms.OutputModule("PoolOutputModule",
     splitLevel = cms.untracked.int32(0),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     outputCommands = process.RECOEventContent.outputCommands,
-    fileName = cms.untracked.string(options.outputFile),
+    fileName = cms.untracked.string("recooutput.root"),
     dataset = cms.untracked.PSet(
         filterName = cms.untracked.string(''),
         dataTier = cms.untracked.string('RECO')
@@ -421,7 +421,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
 
 process.TFileService = cms.Service(
     "TFileService",
-    fileName = cms.string("EcalAlignment.root")
+    fileName = cms.string(options.outputFile)
     )
 
 
