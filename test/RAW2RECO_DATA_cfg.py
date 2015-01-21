@@ -318,11 +318,36 @@ if not options.isMC :
 #process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmp")
 #process.pfNoPileUpIso.bottomCollection = cms.InputTag("particleFlowTmp")
 
+
+
+
+#process.pfPileUp.PFCandidates          = cms.InputTag("particleFlowTmpPtrs")
+#process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmpPtrs")
+
 process.pfPileUp.PFCandidates          = cms.InputTag("particleFlowTmpPtrs")
 process.pfPileUpIso.PFCandidates       = cms.InputTag("particleFlowTmpPtrs")
 process.pfNoPileUp.bottomCollection    = cms.InputTag("particleFlowTmpPtrs")
 process.pfNoPileUpIso.bottomCollection = cms.InputTag("particleFlowTmpPtrs")
 
+
+process.patMuons.embedCaloMETMuonCorrs = cms.bool(False)
+
+
+process.makePatJets = cms.Sequence(process.patJetCorrections+process.patJetCharge+process.patJets)
+process.makePatPhotons = cms.Sequence(process.pfParticleSelectionForIsoSequence+process.pfPhotonIsolationSequence+process.patPhotons)
+process.makePatTaus = cms.Sequence(process.patHPSPFTauDiscrimination+process.patPFCandidateIsoDepositSelection+process.patPFTauIsolation+process.patTaus)
+
+process.patMuons.isoDeposits = cms.PSet()
+process.patMuons.embedGenMatch = cms.bool(False)
+process.patMuons.isolationValues = cms.PSet()        
+
+
+process.particleFlow.GsfElectrons = cms.InputTag("gedGsfElectronsTmp") ## -> does it work?
+
+
+
+#process.particleFlowPtrs.src           = cms.InputTag("particleFlowTmp")
+    
 process.muPFIsoDepositCharged.src      = cms.InputTag("muons1stStep")
 process.muPFIsoDepositChargedAll.src   = cms.InputTag("muons1stStep")
 process.muPFIsoDepositGamma.src        = cms.InputTag("muons1stStep")
@@ -480,20 +505,20 @@ process.pEcalAlignment = cms.Path(
     ##*process.highetele
     ##*process.highetFilter
     #*process.FilterReRECOEvents   # |-> counter   
-    #*process.patDefaultSequence
+    *process.patDefaultSequence
     #process.mypatDefaultSequence
     #*process.FilterPatDefaultSequenceEvents   # |-> counter
-    #*process.ntupleEcalAlignment
+    *process.ntupleEcalAlignment
     )
 
 process.patDefaultPath = cms.Path(process.patDefaultSequence)
 
 
 #process.patCandidates.remove(process.makePatElectrons   )
-process.patCandidates.remove(process.makePatMuons       )
-process.patCandidates.remove(process.makePatTaus        )
-process.patCandidates.remove(process.makePatPhotons     )
-process.patCandidates.remove(process.makePatJets        )
+#process.patCandidates.remove(process.makePatMuons       )
+#process.patCandidates.remove(process.makePatTaus        )
+#process.patCandidates.remove(process.makePatPhotons     )
+#process.patCandidates.remove(process.makePatJets        )
 #process.patCandidates.remove(process.makePatMETs        )
 #process.patCandidates.remove(process.patCandidateSummary)
 
