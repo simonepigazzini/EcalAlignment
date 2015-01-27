@@ -68,7 +68,14 @@ process.source = cms.Source("PoolSource",
 
 #.root
 #process.source.inputCommands = cms.untracked.vstring("drop *_MEtoEDMConverter_*_*", "keep FEDRawDataCollection_*_*_*")
-process.source.inputCommands = cms.untracked.vstring("drop *_*_*_RECO", "drop *_MEtoEDMConverter_*_*", "keep FEDRawDataCollection_*_*_*")
+#process.source.inputCommands = cms.untracked.vstring("drop *_*_*_RECO", "drop *_MEtoEDMConverter_*_*", "keep FEDRawDataCollection_*_*_*")
+process.source.inputCommands = cms.untracked.vstring(
+        "drop *",
+        #"drop *_*_*_RECO",
+        "drop *_MEtoEDMConverter_*_*",
+        "keep FEDRawDataCollection_*_*_*",
+        #"keep *_gsfElectrons_*_*"
+        )
 
 # Output definition
 process.RECOoutput = cms.OutputModule("PoolOutputModule",
@@ -299,7 +306,7 @@ if not options.isMC :
 ## my DATA Run2012 (end)
 
 
-## process.patElectrons.electronSource = cms.InputTag("gsfElectrons::EcalAlignment")
+#process.patElectrons.electronSource = cms.InputTag("gsfElectrons::EcalAlignment")
 
 #process.patElectrons.addElectronID = cms.bool(False)
   
@@ -414,7 +421,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
     CALOMetTag          = cms.InputTag("patMETs"),
     vtxTag              = cms.InputTag("goodPrimaryVertices"),
     isMC                = cms.untracked.bool(False),
-    debug               = cms.untracked.bool(True)
+    debug               = cms.untracked.bool(False)
     )
 
 
@@ -476,6 +483,7 @@ process.highetele = cms.EDFilter(
     "GsfElectronSelector",
     #src = cms.InputTag("gsfElectrons","REDIGI311X"),
     #src = cms.InputTag("electrons","RECO"),
+    #src = cms.InputTag("gsfElectrons","RECO"),
     src = cms.InputTag("gsfElectrons"),
     cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
     )
@@ -492,9 +500,9 @@ process.highetele = cms.EDFilter(
 ## paths
 ##--------------------------
 
-process.pEcalAlignmentFilter = cms.Path(
-   process.highetele
- )
+#process.pEcalAlignmentFilter = cms.Path(
+   #process.highetele
+ #)
 
 
 process.pEcalAlignment = cms.Path(
@@ -530,7 +538,7 @@ process.patDefaultPath = cms.Path(process.patDefaultSequence)
 
 
 process.schedule = cms.Schedule(
-   process.pEcalAlignmentFilter, # | -> first filter! If run on RAW all
+   #process.pEcalAlignmentFilter, # | -> first filter! If run on RAW all
    process.raw2digi_step,        # | -> reconstruction
    process.L1Reco_step,          # | -> reconstruction
    process.reconstruction_step,  # | -> reconstruction

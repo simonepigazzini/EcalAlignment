@@ -379,8 +379,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
 //    const edm::Ptr<reco::CaloCluster>& seedCluster = scRef->seed();
-  if(electron.isEB())
-  {
+  if(electron.isEB()) {
    std::pair<DetId, float> id = EcalClusterTools::getMaximum(hits, theBarrelEcalRecHits);   
    EcalRecHitCollection::const_iterator it = theBarrelEcalRecHits->find(id.first);    
    eleSwissCross_ = EcalTools::swissCross(id.first,*theBarrelEcalRecHits,0.);
