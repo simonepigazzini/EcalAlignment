@@ -22,7 +22,7 @@ config.Data.splitting = 'LumiBased'    # FileBased
 config.Data.useParent = True           # Important!
 #config.Data.runRange = '193650-193686'
 
-config.Data.outLFN = '/store/user/amassiro/ECAL/Alignment/test21Jan2015'
+config.Data.outLFN = '/store/user/amassiro/ECAL/Alignment/test27Jan2015'
 
 config.section_('Site')
 config.Site.storageSite = 'T2_CH_CERN'
