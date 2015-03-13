@@ -12,6 +12,7 @@ where:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_0_7_patch1/src/EcalValidation/EcalAlignment
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_2_1/src/EcalValidation/EcalAlignment
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_1/src/EcalValidation/EcalAlignment
+    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_3/src/EcalValidation/EcalAlignment
 
     kate: LXPLUS-ECALAlignment
     xps kate: lxplus-ECAL-alignment
