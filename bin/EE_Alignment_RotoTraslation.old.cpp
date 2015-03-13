@@ -39,7 +39,7 @@
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
-
+#include <memory>
 
 ///==== CLHEP ====
 #include "CLHEP/Vector/EulerAngles.h"
@@ -282,9 +282,6 @@ int main(int argc, char** argv)
   }
  }
  
- ofstream outFile;
- outFile.open (nameFileOut.c_str());
- 
  for (int iSC = 0; iSC<4; iSC++){
   TString cut;
   cut = Form("%s && iDetEB < -10 && iDetEE == %d",genCut.Data(),iSC);
@@ -380,6 +377,15 @@ int main(int argc, char** argv)
   std::cout << "============================================================================" << std::endl;
   std::cout << "============================================================================" << std::endl;
   
+ }
+ 
+ ///==== dump results ====
+ 
+ ofstream outFile;
+ outFile.open (nameFileOut.c_str());
+ //  outFile << "#SC  dx   errdx   dy   errdy   dz   errdz  " << std::endl;
+ 
+ for (int iSC = 0; iSC<4; iSC++){
   outFile << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SC_Mean[iSC] << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SC_Mean[iSC] << " " 
@@ -388,31 +394,9 @@ int main(int argc, char** argv)
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SC_Mean[iSC] << " "
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SC_Mean[iSC] << " "
   << std::endl;
-  
  }
  
- 
- outFile.close();
- 
- ///==== dump results ====
- 
- ofstream outFile2;
- TString fileNamebis = Form ("%s.bis",nameFileOut.c_str());
- outFile2.open (fileNamebis.Data());
- //  outFile << "#SC  dx   errdx   dy   errdy   dz   errdz  " << std::endl;
- 
- for (int iSC = 0; iSC<4; iSC++){
-  outFile2 << " " 
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SC_Mean[iSC] << " " 
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SC_Mean[iSC] << " " 
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPSIe_SC_Mean[iSC] << " " 
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DX_SC_Mean[iSC] << " "
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SC_Mean[iSC] << " "
-  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SC_Mean[iSC] << " "
-  << std::endl;
- }
- 
- outFile2.close(); 
+ outFile.close(); 
  
 }
 
