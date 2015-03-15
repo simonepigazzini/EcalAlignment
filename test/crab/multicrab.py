@@ -11,7 +11,7 @@ config.General.requestName = 'MCtest_13Feb2015'
 config.section_('JobType')
 config.JobType.psetName = '../Dump_MC_cfg.py'
 config.JobType.pluginName = 'Analysis'
-config.JobType.outputFiles = ['stepB_MC.root']
+config.JobType.outputFiles = ['treeECALAlignment.root']
 
 # to fix cmssw releases
 config.JobType.allowNonProductionCMSSW = True
