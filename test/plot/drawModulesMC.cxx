@@ -57,14 +57,22 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
  TChain* trMC   = new TChain("ntupleEcalAlignment/myTree");
  trMC->Add(nameInFileRoot.Data());
 
- std::string FunctionDetaName = "(x>0 && x<1.5) * (-0.000236) \
-                               + (x>0 && x<1.5) * (-4.83e-05) \
-                               + (x>0)          * (-4.83e-05) \
-                               + (x<0 && x>-1.5) * (0.000272) \
-                               + (x<0 && x>-1.5) * (0.000272) \
-                               + (x<-1.5)        * (6.91e-05)";
+ std::string FunctionDetaName = "(x>0.0 && x<1.5)   * (-(0.4e-3)) \
+                               + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75)) \
+                               + (x>2.0)            * ((6.137825e-04)/2.) \
+                               + (x<0.0 && x>-1.5)  * (0.4e-3) \
+                               + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75)) \
+                               + (x<-2.0)           * ((-6.137825e-04)/2.)";
+ 
+ 
+ 
+ 
  TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
-//  FunctionDphi = new TF2 ("DphiBias",FunctionDphiName.c_str(),-5,5,-2,2);
+ FunctionDeta->SetLineColor(kBlue);
+ FunctionDeta->SetLineStyle(2);
+ FunctionDeta->SetLineWidth(2);
+ 
+ //  FunctionDphi = new TF2 ("DphiBias",FunctionDphiName.c_str(),-5,5,-2,2);
  
 //  (x>0 && x<1.5) * (-0.000236) + (x>1.5) * (-4.83e-05) + (x<0 && x>-1.5) * (0.000272) + (x<-1.5) * (6.91e-05) + y*0
  
@@ -134,7 +142,7 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
  tinfoDEta->Draw();
-
+ 
  legend->Draw();
  cDEta->SetGrid(); gPad->Update();   
 
@@ -173,6 +181,7 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
  DEtaMCvsEta->Draw("colz");
  DEtaMCvsEta_tx->Draw("same");
  gPad->SetGrid();
+ FunctionDeta->Draw("same");
  
 
  
