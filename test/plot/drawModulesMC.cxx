@@ -62,19 +62,35 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
                                + (x>2.0)            * ((6.137825e-04)/2.) \
                                + (x<0.0 && x>-1.5)  * (0.4e-3) \
                                + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75)) \
-                               + (x<-2.0)           * ((-6.137825e-04)/2.)";
- 
- 
- 
+                               + (x<-2.0)           * ((-6.137825e-04)/2.)"; 
  
  TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
  FunctionDeta->SetLineColor(kBlue);
  FunctionDeta->SetLineStyle(2);
- FunctionDeta->SetLineWidth(2);
+ FunctionDeta->SetLineWidth(4);
  
- //  FunctionDphi = new TF2 ("DphiBias",FunctionDphiName.c_str(),-5,5,-2,2);
  
-//  (x>0 && x<1.5) * (-0.000236) + (x>1.5) * (-4.83e-05) + (x<0 && x>-1.5) * (0.000272) + (x<-1.5) * (6.91e-05) + y*0
+ std::string FunctionDphiName_ep = "(x>0.0 && x<1.5)   * (1.46233e-03) \
+                                  + (x>1.5)            * (2.73084e-03) \
+                                  + (x<0.0 && x>-1.5)  * (6.59298e-04) \
+                                  + (x<-1.5)           * (2.57010e-03)";
+ 
+ TF1* FunctionDphi_ep = new TF1 ("DphiBias_ep",FunctionDphiName_ep.c_str(),-5,5);
+ FunctionDphi_ep->SetLineColor(kBlue);
+ FunctionDphi_ep->SetLineStyle(2);
+ FunctionDphi_ep->SetLineWidth(4);
+
+
+ 
+ std::string FunctionDphiName_em = "(x>0.0 && x<1.5)   * (-7.24105e-04) \
+                                  + (x>1.5)            * (-1.992615e-03) \
+                                  + (x<0.0 && x>-1.5)  * (-1.527137e-03) \
+                                  + (x<-1.5)           * (-3.437939e-03)";
+ 
+ TF1* FunctionDphi_em = new TF1 ("DphiBias_em",FunctionDphiName_em.c_str(),-5,5);
+ FunctionDphi_em->SetLineColor(kBlue);
+ FunctionDphi_em->SetLineStyle(2);
+ FunctionDphi_em->SetLineWidth(4);
  
  
  ///---- all ----
@@ -118,14 +134,17 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
  tinfoDPhi->Draw();
-
+ gPad->SetGrid();
+ 
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
  tinfoDPhi_ep->Draw();
+ gPad->SetGrid();
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
  tinfoDPhi_em->Draw();
+ gPad->SetGrid();
  
  
  TString toDoShell;
@@ -148,8 +167,8 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
 
  
  ///---- 2D plot vs eta ----
- TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  "MC"  , 80,-3,3,  200,-0.04,0.04);
- TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  "MC"  , 80,-3,3,  200,-0.04,0.04);
+ TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  "MC"  , 40,-3,3,  200,-0.04,0.04);
+ TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  "MC"  , 40,-3,3,  200,-0.04,0.04);
  TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  "MC"  , 80,-3,3,  200,-0.04,0.04);
  TH2F* DEtaMCvsEta    = new TH2F("DEtaMCvsEta"  ,"MC"  , 80,-3,3,  200,-0.04,0.04);
  createHisto2D(DPhiMCvsEta_ep, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",commonCut_ep.Data());
@@ -166,11 +185,13 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
  DPhiMCvsEta_ep->Draw("colz");
  DPhiMCvsEta_ep_tx->Draw("same");
  gPad->SetGrid();
+ FunctionDphi_ep->Draw("same");
  
  TCanvas* cDPhivsEta_em = new TCanvas("cDphivsEta_em","cDphivsEta_em",700,700);
  DPhiMCvsEta_em->Draw("colz");
  DPhiMCvsEta_em_tx->Draw("same");
  gPad->SetGrid();
+ FunctionDphi_em->Draw("same");
  
  TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
  DPhiMCvsEta->Draw("colz");

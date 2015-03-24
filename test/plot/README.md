@@ -8,7 +8,7 @@ Get reference using MC trees:
     r99t drawModulesMC.cxx\(\"root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_1.root\",\"25Aug2014\",\"2015MC\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
 
     r99t drawModulesMC.cxx\(\"root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_*.root\",\"25Aug2014\",\"2015MC\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
-
+    
 
 
 Draw:
