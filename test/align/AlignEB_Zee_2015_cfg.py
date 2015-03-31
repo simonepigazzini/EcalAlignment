@@ -4,16 +4,12 @@ process = cms.Process("TEST")
 
 process.inputTree = cms.PSet(
   nameTree = cms.string("ntupleEcalAlignment/myTree"),
-  #selection = cms.string("(ETSC>20 && met>20 && mishits <= 0 && MT>30)"),
    
-   selection = cms.string("(ETSC>30 && mishits <= 0 ) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
-     
-  #selection = cms.string("(1)"),
-   #selection = cms.string("(eleFBrem<0.8)"),
-#  selection = cms.string("(eleFBrem<0.3)"),
-#  selection = cms.string("(eleFBrem<0.8&&eleCharge>0)"),
-#  selection = cms.string("(eleFBrem<0.8&&eleCharge<0)"),
- # selection = cms.string("1"),
+   
+  selection = cms.string("(electrons_classification==0 && ETSC>20)"),
+  #selection = cms.string("(ETSC>30 && mishits <= 0 ) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
+  #selection = cms.string("1"),
+  
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),
   traslationZ = cms.bool(True),
@@ -26,30 +22,23 @@ process.inputTree = cms.PSet(
   setRotationPsi   = cms.untracked.double(0),
 
 
-  DetaBias = cms.untracked.string("(x>0 && x<1.5) * (-0.000236) + (x>1.5) * (-4.83e-05) + (x<0 && x>-1.5) * (0.000272) + (x<-1.5) * (6.91e-05) + y*0"),
-  DphiBias = cms.untracked.string("(y>0)*((x>0 && x<1.5) * 0.00136 + (x>1.5) * 0.000878 + (x<0 && x>-1.5) * 0.000579 + (x<-1.5) * 0.000797) + (y<0)*((x>0 && x<1.5) * (-0.000721) + (x>1.5) * (-0.000863) + (x<0 && x>-1.5) * (-0.00141) + (x<-1.5) * (-0.000819))"),
 
-        
+  DetaBias = cms.untracked.string("(x>0.0 && x<1.5)   * (-(0.4e-3)) + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75))   + (x>2.0)            * ((6.137825e-04)/2.)   + (x<0.0 && x>-1.5)  * (0.4e-3)   + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75))        + (x<-2.0)           * ((-6.137825e-04)/2.) + y*0"),
+  DphiBias = cms.untracked.string("(y>0)*((x>0.0 && x<1.5)   * (1.46233e-03)  + (x>1.5)            * (2.73084e-03)  + (x<0.0 && x>-1.5)  * (6.59298e-04)  + (x<-1.5)           * (2.57010e-03)) + \
+                                   (y<0)*((x>0.0 && x<1.5)   * (-7.24105e-04)  + (x>1.5)            * (-1.992615e-03)  + (x<0.0 && x>-1.5)  * (-1.527137e-03)  + (x<-1.5)           * (-3.437939e-03))"),
+
   #inputFilesPosition    = cms.untracked.string(
          #'myEBAlignment_2010_OLD.txt'
     #),
 
   inputFiles    = cms.vstring(
-         #'EcalAlignmentJoin.root'
-         #'crab/DATAJSONRawRecoRealign_Correct_Rome_CorrectReAlignDB/SingleElectron_Run2011A-WElectron-PromptSkim-v4_RAW-RECO/newsum.root'
-         #'crab/DATAJSONPrompt_SingleElectron_Run2011A-PromptReco-v4_AOD.root'
-          #'/tmp/amassiro/Run2012ABEE.root'
-          '/tmp/amassiro/Run2012CEE.root'
+          #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_1.root',
+          'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_2.root'
     )
 )
 
 
 process.outputTree = cms.PSet(
-   #outputFile = cms.string("myEBAlignment_2012_new2012MCbias.txt")
-   outputFile = cms.string("myEBAlignment_2012_new2012MCbias_RunC.txt")
-   #outputFile = cms.string("myEBAlignment_2011.txt")
-#  outputFile = cms.string("myEBAlignment_2010_TightFbrem.txt")
-#  outputFile = cms.string("myEBAlignment_2010_Plus.txt")
-  #outputFile = cms.string("myEBAlignment_2010_Minus.txt")
+   outputFile = cms.string("myEBAlignment_2015_MCtest.txt")
 )
 

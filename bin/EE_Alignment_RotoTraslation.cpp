@@ -186,8 +186,7 @@ else {
 
 
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
  //    ROOT::Math::Minimizer* minuit = ROOT::Math::Factory::CreateMinimizer("Genetic");  //---> next ROOT  release!
  ROOT::Math::Minimizer* minuit = ROOT::Math::Factory::CreateMinimizer("Minuit", "Migrad2");
  ROOT::Math::Functor functorChi2(&Chi2Func,6); 
@@ -276,8 +275,7 @@ int main(int argc, char** argv)
  std::ifstream* file;
  if (inputFilesPosition != ""){
   file = new std::ifstream(inputFilesPosition.c_str());
-  if(!file->is_open())
-  {
+  if(!file->is_open()) {
    return false;
   }
  }

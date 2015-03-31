@@ -202,8 +202,7 @@ double Chi2Func(const double *xx ){
 
 
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
 // ROOT::Math::Minimizer* minuit = ROOT::Math::Factory::CreateMinimizer("Genetic");  //---> next ROOT  release!
  ROOT::Math::Minimizer* minuit = ROOT::Math::Factory::CreateMinimizer("Minuit", "Migrad2");
 
@@ -293,8 +292,7 @@ int main(int argc, char** argv)
  std::ifstream* file;
  if (inputFilesPosition != ""){
   file = new std::ifstream(inputFilesPosition.c_str());
-  if(!file->is_open())
-  {
+  if(!file->is_open()) {
    return false;
   }
  }
