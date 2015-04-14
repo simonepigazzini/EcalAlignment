@@ -14,7 +14,7 @@ void createHisto(TLatex* tinfo, TH1F* hmc, TTree* tmc, char* variable, char* tit
  hmc -> GetYaxis()->SetTitle("Number of events");
 
  hmc->SetMarkerColor(kBlue);
- hmc->SetLineColor(kBlue);
+ hmc->SetLineColor(kBlack);
  hmc->SetLineWidth(2);
  hmc->SetFillColor(kBlue);
  hmc->SetFillStyle(3002);
@@ -65,7 +65,7 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
                                + (x<-2.0)           * ((-6.137825e-04)/2.)"; 
  
  TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
- FunctionDeta->SetLineColor(kBlue);
+ FunctionDeta->SetLineColor(kBlack);
  FunctionDeta->SetLineStyle(2);
  FunctionDeta->SetLineWidth(4);
  
@@ -76,7 +76,7 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
                                   + (x<-1.5)           * (2.57010e-03)";
  
  TF1* FunctionDphi_ep = new TF1 ("DphiBias_ep",FunctionDphiName_ep.c_str(),-5,5);
- FunctionDphi_ep->SetLineColor(kBlue);
+ FunctionDphi_ep->SetLineColor(kBlack);
  FunctionDphi_ep->SetLineStyle(2);
  FunctionDphi_ep->SetLineWidth(4);
 
@@ -88,7 +88,7 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir, TString nameDA
                                   + (x<-1.5)           * (-3.437939e-03)";
  
  TF1* FunctionDphi_em = new TF1 ("DphiBias_em",FunctionDphiName_em.c_str(),-5,5);
- FunctionDphi_em->SetLineColor(kBlue);
+ FunctionDphi_em->SetLineColor(kBlack);
  FunctionDphi_em->SetLineStyle(2);
  FunctionDphi_em->SetLineWidth(4);
  

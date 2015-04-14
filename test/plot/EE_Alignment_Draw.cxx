@@ -599,7 +599,27 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  hDPHIe->Draw();
  gPad->SetGrid();  
   
+ 
+ TFile* fileOutput = new TFile ("testEE.root","UPDATE");
+ if (fileOutput->Get("hDX")) {
+  std::cout << " add new distribution ..." << std::endl;
+  TH1F *hDXtemp = (TH1F*) fileOutput->Get("hDX");
+  hDXtemp->Add(hDX);
+  TH1F *hDYtemp = (TH1F*) fileOutput->Get("hDY");
+  hDYtemp->Add(hDY);
+  TH1F *hDZtemp = (TH1F*) fileOutput->Get("hDZ");
+  hDZtemp->Add(hDZ);
   
+  hDXtemp->Write();
+  hDYtemp->Write();
+  hDZtemp->Write();
+ } 
+ else {
+  hDX->Write();
+  hDY->Write();
+  hDZ->Write();
+ }
+ 
 }
 
 

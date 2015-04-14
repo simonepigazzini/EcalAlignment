@@ -546,13 +546,13 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  TCanvas* cDifference = new TCanvas ("cDifference","cDifference",900,350);
  cDifference->Divide(3,1);
   
- TH1F *hDX = new TH1F("hDX","#DeltaX",100,-1,1);
+ TH1F *hDX = new TH1F("hDX","#DeltaX",200,-2,2);
  for (int i = 0; i<36; i++) hDX->Fill(DX_SM_Mean_After[i] - DX_SM_Mean[i]);
 
- TH1F *hDY = new TH1F("hDY","#DeltaY",100,-1,1);
+ TH1F *hDY = new TH1F("hDY","#DeltaY",200,-2,2);
  for (int i = 0; i<36; i++) hDY->Fill(DY_SM_Mean_After[i] - DY_SM_Mean[i]);
 
- TH1F *hDZ = new TH1F("hDZ","#DeltaZ",100,-1,1);
+ TH1F *hDZ = new TH1F("hDZ","#DeltaZ",200,-2,2);
  for (int i = 0; i<36; i++) hDZ->Fill(DZ_SM_Mean_After[i] - DZ_SM_Mean[i]);
  
  cDifference->cd(1);
@@ -580,6 +580,25 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  gPad->SetGrid();  
   
   
+ TFile* fileOutput = new TFile ("testEB.root","UPDATE");
+ if (fileOutput->Get("hDX")) {
+  std::cout << " add new distribution ..." << std::endl;
+  TH1F *hDXtemp = (TH1F*) fileOutput->Get("hDX");
+  hDXtemp->Add(hDX);
+  TH1F *hDYtemp = (TH1F*) fileOutput->Get("hDY");
+  hDYtemp->Add(hDY);
+  TH1F *hDZtemp = (TH1F*) fileOutput->Get("hDZ");
+  hDZtemp->Add(hDZ);
+  
+  hDXtemp->Write();
+  hDYtemp->Write();
+  hDZtemp->Write();
+ } 
+ else {
+  hDX->Write();
+  hDY->Write();
+  hDZ->Write();
+ }
 }
 
 

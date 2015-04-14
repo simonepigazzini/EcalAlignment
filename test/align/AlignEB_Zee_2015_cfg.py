@@ -10,6 +10,9 @@ process.inputTree = cms.PSet(
   #selection = cms.string("(ETSC>30 && mishits <= 0 ) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
   #selection = cms.string("1"),
   
+  #even = cms.untracked.bool(False), # only "odd" events are used
+  #odd  = cms.untracked.bool(False), # only "even" events are used
+  
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),
   traslationZ = cms.bool(True),

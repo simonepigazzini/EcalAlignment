@@ -20,6 +20,17 @@ Draw coefficients comparison:
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_6k.txt\"\)
     r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_4k.txt\"\)
 
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_6k.txt\"\)
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_6k_bis.txt\"\)
+    
+    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_4k.txt\"\)
+    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_4k_bis.txt\"\)
+
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_13k.txt\"\)
+
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_3k.txt\"\)
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_3k_bis.txt\"\)
+            
     
 Draw:
 
