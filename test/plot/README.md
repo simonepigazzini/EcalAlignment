@@ -15,6 +15,12 @@ Draw alignment coefficients:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_3/src/EcalValidation/EcalAlignment/test
     
 
+Draw coefficients comparison:
+
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_6k.txt\"\)
+    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_6k.txt\"\)
+
+    
 Draw:
 
     r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"25Aug2014\",\"2015MC\"\)

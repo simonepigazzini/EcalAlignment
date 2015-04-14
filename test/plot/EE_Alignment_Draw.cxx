@@ -8,7 +8,7 @@ void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
  std::string buffer;
  
  //==== kRed
- std::cerr << " Reference File: " << nameFileComparison << std::endl;
+ std::cout << std::endl << " Reference File: " << nameFileComparison << std::endl;
  
  double DX_SM_Mean[4];
  double DX_SM_RMS[4];
@@ -24,10 +24,10 @@ void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
  double DPHIe_SM_Mean[4];
  double DPHIe_SM_RMS[4];
 
- std::ifstream file (nameFileComparison); 
+ std::ifstream file (nameFileComparison.c_str()); 
 
  if (!file.is_open()){
-  std::cerr << "noooo" << std::endl;
+  std::cout << "noooo" << std::endl;
  }
  int iSM_After = 0;
  while(!file.eof()){
@@ -52,9 +52,9 @@ void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
 
 //==== kBlue
 
- std::cerr << " New File: " << nameFile << std::endl;
+std::cout << std::endl << " New File: " << nameFile << std::endl;
 
- std::ifstream fileEle (nameFile); 
+ std::ifstream fileEle (nameFile.c_str()); 
   
  double DX_SM_Mean_After[4];
  double DX_SM_RMS_After[4];
@@ -74,7 +74,7 @@ void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
  double iSM_SM_Ele_RMS[38];
     
  if (!fileEle.is_open()){
-  std::cerr << "noooo" << std::endl;
+  std::cout << "noooo" << std::endl;
  }
  iSM_After = 0;
  while(!fileEle.eof()){
