@@ -539,9 +539,10 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
   
   
   
-  ///===========================================================================
-  ///===========================================================================
-  ///===========================================================================
+ ///===========================================================================
+ ///===========================================================================
+ ///===========================================================================
+
  TCanvas* cDifference = new TCanvas ("cDifference","cDifference",900,350);
  cDifference->Divide(3,1);
   
@@ -558,6 +559,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  hDX->SetLineColor(kRed);
  hDX->SetFillColor(kRed);
  hDX->SetFillStyle(3002);
+ hDX->GetXaxis()->SetTitle("cm");
  hDX->Draw();
  gPad->SetGrid();
     
@@ -565,6 +567,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  hDY->SetLineColor(kRed);
  hDY->SetFillColor(kRed);
  hDY->SetFillStyle(3002);
+ hDY->GetXaxis()->SetTitle("cm");
  hDY->Draw();
  gPad->SetGrid();
   
@@ -572,6 +575,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  hDZ->SetLineColor(kRed);
  hDZ->SetFillColor(kRed);
  hDZ->SetFillStyle(3002);
+ hDZ->GetXaxis()->SetTitle("cm");
  hDZ->Draw();
  gPad->SetGrid();  
   

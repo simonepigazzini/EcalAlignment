@@ -18,7 +18,7 @@ Draw alignment coefficients:
 Draw coefficients comparison:
 
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_6k.txt\"\)
-    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_6k.txt\"\)
+    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_MCtest_4k.txt\"\)
 
     
 Draw:

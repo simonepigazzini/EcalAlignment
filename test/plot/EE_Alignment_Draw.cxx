@@ -522,11 +522,12 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  gPad->SetGrid();
   
   
-  ///===========================================================================
-  ///===========================================================================
-  ///===========================================================================
- TCanvas* cDifference = new TCanvas ("cDifference","cDifference",900,350);
- cDifference->Divide(3,1);
+ ///===========================================================================
+ ///===========================================================================
+ ///===========================================================================
+ 
+ TCanvas* cDifference = new TCanvas ("cDifference","cDifference",900,700);
+ cDifference->Divide(3,2);
   
  TH1F *hDX = new TH1F("hDX","#DeltaX",100,-1,1);
  for (int i = 0; i<4; i++) hDX->Fill(DX_SM_Mean_After[i] - DX_SM_Mean[i]);
@@ -541,22 +542,62 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  hDX->SetLineColor(kRed);
  hDX->SetFillColor(kRed);
  hDX->SetFillStyle(3002);
+ hDX->GetXaxis()->SetTitle("cm");
  hDX->Draw();
  gPad->SetGrid();
-    
+ 
  cDifference->cd(2);
  hDY->SetLineColor(kRed);
  hDY->SetFillColor(kRed);
  hDY->SetFillStyle(3002);
+ hDY->GetXaxis()->SetTitle("cm");
  hDY->Draw();
  gPad->SetGrid();
-  
+ 
  cDifference->cd(3);
  hDZ->SetLineColor(kRed);
  hDZ->SetFillColor(kRed);
  hDZ->SetFillStyle(3002);
+ hDZ->GetXaxis()->SetTitle("cm");
  hDZ->Draw();
+ gPad->SetGrid();  
+ 
+ 
+ 
+ 
+ 
+ TH1F *hDTHETAe = new TH1F("hDTHETAe","#Delta#Theta",100,-0.01,0.01);
+ for (int i = 0; i<4; i++) hDTHETAe->Fill(DTHETAe_SM_Mean_After[i] - DTHETAe_SM_Mean[i]);
+ 
+ TH1F *hDPSIe = new TH1F("hDPSIe","#Delta#Psi",100,-0.01,0.01);
+ for (int i = 0; i<4; i++) hDPSIe->Fill(DPSIe_SM_Mean_After[i] - DPSIe_SM_Mean[i]);
+ 
+ TH1F *hDPHIe = new TH1F("hDPHIe","#Delta#Phi",100,-0.01,0.01);
+ for (int i = 0; i<4; i++) hDPHIe->Fill(DPHIe_SM_Mean_After[i] - DPHIe_SM_Mean[i]);
+ 
+ cDifference->cd(4);
+ hDTHETAe->SetLineColor(kRed);
+ hDTHETAe->SetFillColor(kRed);
+ hDTHETAe->SetFillStyle(3002);
+ hDTHETAe->GetXaxis()->SetTitle("");
+ hDTHETAe->Draw();
  gPad->SetGrid();
+ 
+ cDifference->cd(5);
+ hDPSIe->SetLineColor(kRed);
+ hDPSIe->SetFillColor(kRed);
+ hDPSIe->SetFillStyle(3002);
+ hDPSIe->GetXaxis()->SetTitle("");
+ hDPSIe->Draw();
+ gPad->SetGrid();
+ 
+ cDifference->cd(6);
+ hDPHIe->SetLineColor(kRed);
+ hDPHIe->SetFillColor(kRed);
+ hDPHIe->SetFillStyle(3002);
+ hDPHIe->GetXaxis()->SetTitle("");
+ hDPHIe->Draw();
+ gPad->SetGrid();  
   
   
 }
