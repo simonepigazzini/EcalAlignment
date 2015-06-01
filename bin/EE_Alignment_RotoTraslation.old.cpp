@@ -40,6 +40,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <memory>
+#include <fstream> 
 
 ///==== CLHEP ====
 #include "CLHEP/Vector/EulerAngles.h"
@@ -381,7 +382,7 @@ int main(int argc, char** argv)
  
  ///==== dump results ====
  
- ofstream outFile;
+ std::ofstream outFile;
  outFile.open (nameFileOut.c_str());
  //  outFile << "#SC  dx   errdx   dy   errdy   dz   errdz  " << std::endl;
  

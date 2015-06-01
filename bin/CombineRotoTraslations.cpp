@@ -39,7 +39,7 @@
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
-
+#include <fstream> 
 
 ///==== CLHEP ====
 #include "CLHEP/Vector/EulerAngles.h"
@@ -111,7 +111,7 @@ int main(int argc, char** argv)
  double inputDPSIe_addition = 0; 
  
 
- ofstream outFile;
+ std::ofstream outFile;
  outFile.open (filePositionsOutput.c_str());
 
  std::string buffer;

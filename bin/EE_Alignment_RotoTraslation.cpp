@@ -39,7 +39,7 @@
 #include <iomanip>
 #include <cmath>
 #include <cstdlib>
-
+#include <fstream> 
 
 ///==== CLHEP ====
 #include "CLHEP/Vector/EulerAngles.h"
@@ -280,7 +280,7 @@ int main(int argc, char** argv) {
   }
  }
  
- ofstream outFile;
+ std::ofstream outFile;
  outFile.open (nameFileOut.c_str());
  
  for (int iSC = 0; iSC<4; iSC++){
@@ -394,7 +394,7 @@ int main(int argc, char** argv) {
  
  ///==== dump results ====
  
- ofstream outFile2;
+ std::ofstream outFile2;
  TString fileNamebis = Form ("%s.bis",nameFileOut.c_str());
  outFile2.open (fileNamebis.Data());
  //  outFile << "#SC  dx   errdx   dy   errdy   dz   errdz  " << std::endl;

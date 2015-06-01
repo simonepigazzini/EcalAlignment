@@ -23,6 +23,8 @@
 // system include files
 #include <memory>
 
+#include <fstream> 
+
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h" 
 #include "RecoEcal/EgammaCoreTools/interface/EcalTools.h"
 
@@ -66,6 +68,11 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 
 
+//---- to get weights
+#include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
+
+
+
 //
 // class declaration
 //
@@ -90,7 +97,9 @@ class EcalAlignment : public edm::EDAnalyzer {
   edm::InputTag CALOMetTag_;
   edm::InputTag TrackTag_;
   edm::InputTag vtxTag_;
-
+  
+  edm::InputTag genEvtInfoTag_;
+  
   edm::EDGetTokenT<std::vector<pat::MET> > pfMetHT_;
   
   
@@ -185,6 +194,8 @@ class EcalAlignment : public edm::EDAnalyzer {
   double mc_pt_;
   double mc_eta_;
   double mc_phi_;
+  
+  double _mc_weight;
 
 };
 

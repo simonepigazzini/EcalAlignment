@@ -47,7 +47,8 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   vtxTag_ = iConfig.getParameter<edm::InputTag>("vtxTag");
 
   isMC_ = iConfig.getUntrackedParameter< bool >("isMC",false);
-
+  genEvtInfoTag_   = iConfig.getUntrackedParameter<edm::InputTag>("genEvtInfoTag",edm::InputTag("generator"));
+  
   recHitCollection_EB_ = iConfig.getParameter<edm::InputTag>("recHitCollection_EB");
   recHitCollection_EE_ = iConfig.getParameter<edm::InputTag>("recHitCollection_EE");
 
@@ -148,6 +149,8 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("mc_eta",&mc_eta_,"mc_eta/D");
   myTree_ -> Branch("mc_phi",&mc_phi_,"mc_phi/D");
 
+  myTree_ -> Branch("mc_weight",&_mc_weight,"mc_weight/D");
+  
 }
 
 
@@ -198,6 +201,12 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     numPUMC_ = PVI->getPU_NumInteractions();
    }
   }
+  
+  edm::Handle<GenEventInfoProduct> genEvtInfo;
+  iEvent.getByLabel( genEvtInfoTag_, genEvtInfo );
+  
+  _mc_weight = genEvtInfo->weight();
+  
  }
  ///====
 

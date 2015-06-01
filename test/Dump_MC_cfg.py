@@ -26,6 +26,7 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 #process.load('Configuration.StandardSequences.Reconstruction_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.load('Configuration.EventContent.EventContent_cff')
 
 process.configurationMetadata = cms.untracked.PSet(
@@ -80,7 +81,11 @@ process.source = cms.Source("PoolSource",
 #process.GlobalTag.globaltag = 'GR_R_39X_V5::All'
 #process.GlobalTag.globaltag = 'MC_39Y_V7::All'
 #process.GlobalTag.globaltag = 'START52_V11C::All'
-process.GlobalTag.globaltag = 'DESIGN70_V7::All'
+#process.GlobalTag.globaltag = 'DESIGN70_V7::All'
+#process.GlobalTag.globaltag = 'auto:run2_mc'
+#process.GlobalTag.globaltag = 'PHYS14_25_V2::All'
+#process.GlobalTag.globaltag = 'PHY1474_STV4::All'
+process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
 
 
 ################################################################################
@@ -201,6 +206,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
     CALOMetTag          = cms.InputTag("patMETs"),
     vtxTag              = cms.InputTag("goodPrimaryVertices"),
     isMC                = cms.untracked.bool(True),
+    genEvtInfoTag       = cms.untracked.InputTag("generator")
     )
 
 
