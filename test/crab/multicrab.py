@@ -2,67 +2,85 @@ import os
 from WMCore.Configuration import Configuration
 config = Configuration()
 
-pyCfgParams = ['inputFiles=FAKEINPUT', 'outputFile=treeECALAlignment.root']
+#pyCfgParams = ['inputFiles=FAKEINPUT', 'outputFile=treeECALAlignment.root']
+pyCfgParams = ['inputFiles=FAKEINPUT']
 
 config.section_('General')
-config.General.transferOutputs = True
-config.General.requestName = 'MCtest_13Feb2015'
+config.General.transferLogs = True
+config.General.workArea     = 'crab_projects_6July'  # Make sure you set this parameter
 
 config.section_('JobType')
 config.JobType.psetName = '../Dump_MC_cfg.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['treeECALAlignment.root']
+config.JobType.maxJobRuntimeMin = 2800
+config.JobType.allowUndistributedCMSSW = True
 
-# to fix cmssw releases
-config.JobType.allowNonProductionCMSSW = True
 
 config.section_('Data')    
-config.Data.unitsPerJob = 10   # since files based, 10 files per job
-config.Data.inputDBS = 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader/'
-config.Data.splitting = 'FileBased'    #'LumiBased'
-config.Data.outLFN = '/store/user/amassiro/ECAL/Alignment/test13Mar2015'
+config.Data.inputDBS      = 'global'
+config.Data.splitting     = 'FileBased'
+config.Data.unitsPerJob   = 10   # since files based, 10 files per job
+config.Data.outLFNDirBase = '/store/user/amassiro/ECAL/Alignment/test06Jul2015'
+
 
 config.section_('Site')
 config.Site.storageSite = 'T2_CH_CERN'
 
 
+from multiprocessing import Process
+
+import sys
 
 if __name__ == '__main__':
 
     from CRABAPI.RawCommand import crabCommand
 
-    # Make sure you set this parameter (here or above in the config it does not matter)
-    config.General.workArea = 'crab_projects_13Mar'
-
     def submit(config):
+        print " to do: ",config
         res = crabCommand('submit', config = config)
 
-    #########    From now on that's what users should modify: this is the a-la-CRAB2 configuration part.
+    ######### From now on this is what users should modify. It is the a-la-CRAB2 configuration part.
    
+  
+    print sys.argv
+    if len(sys.argv) <= 1 :
+       print "no arguments?"
+       print "Usage to submit:     python multicrab.py samples_file.py"
+       print "Usage to get status: python multicrab.py folder"
+       exit()
+       
 
-    # samples to be analysed
+    samples = {}
+    SamplesFile = sys.argv[1]
+    print " SamplesFile = ", SamplesFile
+    
+    # submit
+    if os.path.exists(SamplesFile) and not os.path.isdir(SamplesFile) :
+       handle = open(SamplesFile,'r')
+       exec(handle)
+       handle.close()
+                
+       # samples to be analysed
                    
-    config.General.requestName = 'DYll'
-    config.Data.inputDataset = '/DYToEE_M-50_Tune4C_13TeV-pythia8/Phys14DR-PU40bx25_tsg_castor_PHYS14_25_V1-v2/AODSIM'
-    config.JobType.pyCfgParams = list(pyCfgParams)
-    #config.JobType.pyCfgParams.extend(['label=DYll'])
-    submit(config)
-    #print " pyCfgParams = ", pyCfgParams
-    #print " config.JobType.pyCfgParams = ", config.JobType.pyCfgParams
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+       for key, value in samples.iteritems():
+           print key, ' -> ', value
+        
+           config.General.requestName = key
+           config.Data.inputDataset = value[0]
+           config.JobType.pyCfgParams = list(pyCfgParams)
+           config.JobType.pyCfgParams.extend(value[1])
+        
+           p = Process(target=submit, args=(config,))
+           p.start()
+           p.join()
+           #submit(config)
+           # see https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3FAQ#Multiple_submission_fails_with_a
+        
+    # status
+    else :
+       os.system("ls " + SamplesFile + " | awk '{print \" crab status " + SamplesFile + "/\"$1}'")
+        
+ 
+
     

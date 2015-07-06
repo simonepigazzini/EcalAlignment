@@ -35,7 +35,7 @@ details:
 Multicrab
 ====
 
-    python multicrab.py
+    python multicrab.py   samples/samples_spring15.py
 
     crab status
     

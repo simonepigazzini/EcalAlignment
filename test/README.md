@@ -3,7 +3,6 @@ Examples
 
 Test file with perfect ideal MC geometry:
 
-    scp amassiro@cmsneu.cern.ch:/data/amassiro/CMSSWRoot/Spring14/AODSIM/DYEE_DESIGN_ALIGNMENT/001DC3E2-0C22-E411-975E-002590DB924E.root /tmp/amassiro/
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/RunIISpring15DR74//WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/AODSIM/006D71A7-73FC-E411-8C41-6CC2173BBE60.root /tmp/amassiro/
     
 run:
