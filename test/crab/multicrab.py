@@ -79,7 +79,7 @@ if __name__ == '__main__':
         
     # status
     else :
-       os.system("ls " + SamplesFile + " | awk '{print \" crab status " + SamplesFile + "/\"$1}'")
+       os.system("ls " + SamplesFile + " | awk '{print \" crab status " + SamplesFile + "/\"$1}' | /bin/sh")
         
  
 
