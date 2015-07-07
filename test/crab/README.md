@@ -30,6 +30,7 @@ details:
     /eos/cms/store/user/amassiro/ECAL/Alignment/test21Jan2015/DoubleElectron/crab_DATA/150121_170634/0000
     /eos/cms/store/user/amassiro/ECAL/Alignment/test27Jan2015/DoubleElectron/crab_DATAdoubleEle/150127_100439/
     /eos/cms/store/user/amassiro/ECAL/Alignment/test13Mar2015/
+    /eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/
     
 
 Multicrab
