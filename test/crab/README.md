@@ -32,13 +32,13 @@ details:
     /eos/cms/store/user/amassiro/ECAL/Alignment/test13Mar2015/
     /eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/
     
+    
 
 Multicrab
 ====
 
     python multicrab.py   samples/samples_spring15.py
 
-    
     
     crab status folder_name
 

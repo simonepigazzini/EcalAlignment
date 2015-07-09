@@ -7,13 +7,14 @@ config.General.transferOutputs = True
 config.General.requestName = 'DATAdoubleEle'
 
 config.section_('JobType')
-config.JobType.psetName = '../RAW2RECO_DATA_cfg.py'
+#config.JobType.psetName = '../RAW2RECO_DATA_cfg.py'
+config.JobType.psetName = '../Dump_DATA.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['treeECALAlignment.root']
 config.JobType.pyCfgParams = ['inputFiles=FAKEINPUT', 'outputFile=treeECALAlignment.root']
 
 config.section_('Data')
-config.Data.inputDataset = '/DoubleElectron/Run2012C-24Aug2012-v1/AOD'
+config.Data.inputDataset = '/SingleElectron/Run2015B-PromptReco-v1/AOD'
 #config.Data.inputDataset = '/DoubleElectron/Run2012D-22Jan2013-v1/AOD'
 config.Data.unitsPerJob = 10   # since files based, 10 files per job
 config.Data.inputDBS = 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader/'
