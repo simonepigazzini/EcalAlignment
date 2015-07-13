@@ -12,7 +12,8 @@ run:
 Test file with DATA:
 
     scp amassiro@cmsneu.cern.ch:/data/amassiro/CMSSWRoot/DATA2012/DoubleElectron_Run2012B-ZElectron-13Jul2012-v1_RAW-RECO/FEE043A5-93D4-E111-84DC-0030486790C0.root /tmp/amassiro/
-
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/SingleElectron/PromptReco-v1_AOD/82589B55-5827-E511-AE9F-02163E012704.root /tmp/amassiro/
+    
 run:
     
     cmsRun RAW2RECO_DATA_cfg.py  \
@@ -21,6 +22,11 @@ run:
         isMC=False
 
 
+    cmsRun Dump_DATA_cfg.py  \
+        inputFiles=file:/tmp/amassiro/82589B55-5827-E511-AE9F-02163E012704.root  \
+        outputFile=treeAlignData.root
+        
+        
     
 Fake GRID
 ====

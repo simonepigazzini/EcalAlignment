@@ -38,8 +38,8 @@ process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
 )
 process.options = cms.untracked.PSet(
-
 )
+
 # Input source
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring (options.inputFiles),
@@ -69,7 +69,35 @@ process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
 process.patElectrons.addElectronID = cms.bool(False)
 
+# ---- remove MC references ----
 
+from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
+removeMCMatching(process, ['All'], outputModules=[], postfix="")
+process.makePatElectrons.remove(process.electronMatch)
+process.makePatMuons.remove(process.muonMatch)
+
+process.patCandidates.remove(process.makePatTaus)
+#process.makePatTaus.remove(process.tauMatch)
+#process.makePatTaus.remove(process.tauGenJets)
+
+process.makePatJets.remove(process.patJetPartonMatch)
+process.makePatJets.remove(process.patJetGenJetMatch)
+process.makePatJets.remove(process.patJetFlavourIdLegacy)
+process.makePatJets.remove(process.patJetFlavourId)
+
+
+
+process.makePatPhotons.remove(process.photonMatch)
+
+#process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
+
+#from PhysicsTools.PatAlgos.tools.coreTools import *
+#removeMCMatching(process, names=['All'], outputModules=[])
+#process.patMuons.embedGenMatch = cms.bool(False)
+#process.makePatElectrons.remove(process.electronMatch)
+#process.makePatMuons.remove(process.muonMatch)
+
+process.options.allowUnscheduled = cms.untracked.bool(False)
 
 
 #--------------------------
@@ -104,7 +132,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
     TrackTag            = cms.InputTag("generalTracks"),
     CALOMetTag          = cms.InputTag("patMETs"),
     vtxTag              = cms.InputTag("goodPrimaryVertices"),
-    isMC                = cms.untracked.bool(True),
+    isMC                = cms.untracked.bool(False),
     genEvtInfoTag       = cms.untracked.InputTag("generator")
     )
 
