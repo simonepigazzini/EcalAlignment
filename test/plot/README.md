@@ -9,6 +9,17 @@ Get reference using MC trees:
 
     r99t drawModulesMC.cxx\(\"root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_*.root\",\"25Aug2014\",\"2015MC\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
+    cd /tmp/amassiro/
+    eosmount eos eos
+    cd -
+    r99t drawModulesMC.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_*.root\",\"2015MC\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
+    r99t drawSingleModule.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_*.root\",\"2015MC\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\",0,-100\)
+    iDetEB: 0, 1, ... 35
+    iDetEE: 0, 1, 2, 3
+    
+    
+    
 
 Draw alignment coefficients:
 
@@ -40,6 +51,9 @@ Draw:
 
 General draw:
 
+    r99t Draw.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_1.root\",\"ETSC\",100,0,200,\"E_{T}\",\"1\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_1.root\",\"iDetEB\",36,0,36,\"iDetEB\",\"1\"\)
+    
     r99t Draw.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"ETSC\",100,0,200,\"E_{T}\",\"1\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"ETSC\",100,0,200,\"E_{T}\",\"ETSC\>20\"\)
 

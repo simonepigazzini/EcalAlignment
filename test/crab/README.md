@@ -31,7 +31,7 @@ details:
     /eos/cms/store/user/amassiro/ECAL/Alignment/test27Jan2015/DoubleElectron/crab_DATAdoubleEle/150127_100439/
     /eos/cms/store/user/amassiro/ECAL/Alignment/test13Mar2015/
     /eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/
-    
+    /eos/cms/store/user/amassiro/ECAL/Alignment/data09Jul2015/
     
 
 Multicrab
@@ -46,6 +46,7 @@ Multicrab
     python multicrab.py  folder_name
 
     python multicrab.py crab_projects_6July
+    python multicrab.py crab_projects_13July
     
 
 
