@@ -25,6 +25,8 @@ samples['50ns_WJetsToLNu']   = ['/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pyt
 ########
 
 config.JobType.psetName = '../Dump_MC_cfg.py'
-config.Data.outLFNDirBase = '/store/user/amassiro/ECAL/Alignment/test06Jul2015'
+#config.Data.outLFNDirBase = '/store/user/amassiro/ECAL/Alignment/test06Jul2015'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015'
 
-config.General.workArea     = 'crab_projects_13July'
+
+config.General.workArea     = 'crab_projects_14July'
