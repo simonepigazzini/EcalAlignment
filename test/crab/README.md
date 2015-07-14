@@ -32,8 +32,11 @@ details:
     /eos/cms/store/user/amassiro/ECAL/Alignment/test13Mar2015/
     /eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/
     /eos/cms/store/user/amassiro/ECAL/Alignment/data09Jul2015/
+    
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA14Jul2015
 
+    
 Multicrab
 ====
 
