@@ -96,29 +96,39 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  tEE->SetNDC(true);
  ///---- text (end) ----
  
+ TString toDoShell;
+//  toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
+//  system(toDoShell.Data());
+ toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
+ system(toDoShell.Data());
+ toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
+ system(toDoShell.Data());
+ toDoShell = Form("cp index.php %s/images ;",nameOutputDir.Data());
+ system(toDoShell.Data());
+ 
+ 
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
  tinfoDPhi->Draw();
  gPad->SetGrid();
+ toDoShell = Form("%s/images/cDphi_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
+ gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
  tinfoDPhi_ep->Draw();
  gPad->SetGrid();
+ toDoShell = Form("%s/images/cDPhi_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
+ gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
  tinfoDPhi_em->Draw();
  gPad->SetGrid();
+ toDoShell = Form("%s/images/cDPhi_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
+ gPad->SaveAs(toDoShell.Data());
  
  
- TString toDoShell;
- toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
- system(toDoShell.Data());
- toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
- system(toDoShell.Data());
- toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
- system(toDoShell.Data());
  
  legend->Draw();
  cDPhi->SetGrid(); gPad->Update();
@@ -126,9 +136,10 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
  tinfoDEta->Draw();
- 
  legend->Draw();
  cDEta->SetGrid(); gPad->Update();   
+ toDoShell = Form("%s/images/cDEta_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
+ gPad->SaveAs(toDoShell.Data());
  
  
  ///---- 2D plot vs eta ----
@@ -151,7 +162,7 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  DPhiMCvsEta_ep_tx->Draw("same");
  gPad->SetGrid();
  FunctionDphi_ep->Draw("same");
- toDoShell = Form("%s/images/cDPhivsEta_ep.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsEta_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsEta_em = new TCanvas("cDphivsEta_em","cDphivsEta_em",700,700);
@@ -159,14 +170,14 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  DPhiMCvsEta_em_tx->Draw("same");
  gPad->SetGrid();
  FunctionDphi_em->Draw("same");
- toDoShell = Form("%s/images/cDPhivsEta_em.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsEta_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
  DPhiMCvsEta->Draw("colz");
  DPhiMCvsEta_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsEta.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsEta_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDEtavsEta = new TCanvas("cDetavsEta","cDetavsEta",700,700);
@@ -174,7 +185,7 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  DEtaMCvsEta_tx->Draw("same");
  gPad->SetGrid();
  FunctionDeta->Draw("same");
- toDoShell = Form("%s/images/cDEtavsEta.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDEtavsEta_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  
@@ -204,28 +215,28 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  DPhiMCvsPhi_EB->Draw("colz");
  DPhiMCvsPhi_EB_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EB.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsPhi_EB_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsPhi_EB_ep = new TCanvas("cDphivsPhi_EB_ep","cDphivsPhi_EB_ep",700,700);
  DPhiMCvsPhi_EB_ep->Draw("colz");
  DPhiMCvsPhi_EB_ep_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EB_ep.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsPhi_EB_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsPhi_EB_em = new TCanvas("cDphivsPhi_EB_em","cDphivsPhi_EB_em",700,700);
  DPhiMCvsPhi_EB_em->Draw("colz");
  DPhiMCvsPhi_EB_em_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EB_em.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDphivsPhi_EB_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDEtavsPhi_EB = new TCanvas("cDetavsPhi_EB","cDetavsPhi_EB",700,700);
  DEtaMCvsPhi_EB->Draw("colz");
  DEtaMCvsPhi_EB_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDetavsPhi_EB.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDetavsPhi_EB_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  
@@ -254,28 +265,28 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  DPhiMCvsPhi_EE->Draw("colz");
  DPhiMCvsPhi_EE_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EE.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDPhivsPhi_EE_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsPhi_EE_ep = new TCanvas("cDphivsPhi_EE_ep","cDphivsPhi_EE_ep",700,700);
  DPhiMCvsPhi_EE_ep->Draw("colz");
  DPhiMCvsPhi_EE_ep_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EE_ep.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDphivsPhi_EE_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDPhivsPhi_EE_em = new TCanvas("cDphivsPhi_EE_em","cDphivsPhi_EE_em",700,700);
  DPhiMCvsPhi_EE_em->Draw("colz");
  DPhiMCvsPhi_EE_em_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EE_em.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDphivsPhi_EE_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  TCanvas* cDEtavsPhi_EE = new TCanvas("cDetavsPhi_EE","cDetavsPhi_EE",700,700);
  DEtaMCvsPhi_EE->Draw("colz");
  DEtaMCvsPhi_EE_tx->Draw("same");
  gPad->SetGrid();
- toDoShell = Form("%s/images/cDetavsPhi_EE.png",nameOutputDir.Data());
+ toDoShell = Form("%s/images/cDetavsPhi_EE_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
  
  

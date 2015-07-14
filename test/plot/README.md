@@ -18,6 +18,12 @@ Get reference using MC trees:
     iDetEB: 0, 1, ... 35
     iDetEE: 0, 1, 2, 3
     
+
+Plot all modules:
+
+    python plotAlignmentModules.py
+    
+    
     
     
 
