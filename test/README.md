@@ -12,6 +12,7 @@ run:
 Test file with DATA:
 
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/SingleElectron/PromptReco-v1_AOD/82589B55-5827-E511-AE9F-02163E012704.root /tmp/amassiro/
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/DoubleEG/RAW/0612FA2F-C025-E511-AA96-02163E014770.root /tmp/amassiro/
     
 run:
     
