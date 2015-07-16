@@ -97,7 +97,7 @@ process.makePatPhotons.remove(process.photonMatch)
 #process.makePatElectrons.remove(process.electronMatch)
 #process.makePatMuons.remove(process.muonMatch)
 
-process.options.allowUnscheduled = cms.untracked.bool(False)
+#process.options.allowUnscheduled = cms.untracked.bool(False)
 
 
 #--------------------------
