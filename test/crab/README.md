@@ -42,6 +42,7 @@ Multicrab
 
     python multicrab.py   samples/samples_spring15.py
     python multicrab.py   samples/samples_dataB.py
+    python multicrab.py   samples/samples_dataB_RAW.py
 
     
     crab status folder_name
@@ -50,7 +51,7 @@ Multicrab
 
     python multicrab.py crab_projects_6July
     python multicrab.py crab_projects_13July
-    
+    python multicrab.py crab_projects_16July_fromRaw
 
 
 Samples

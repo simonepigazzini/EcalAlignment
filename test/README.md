@@ -25,7 +25,11 @@ run:
     cmsRun Dump_DATA_cfg.py  \
         inputFiles=file:/tmp/amassiro/82589B55-5827-E511-AE9F-02163E012704.root  \
         outputFile=treeAlignData.root
-        
+    
+    cmsRun reco_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
+        outputFile=treeAlignDataFromRAW.root
+
         
     
 Fake GRID
