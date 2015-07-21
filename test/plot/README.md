@@ -23,7 +23,7 @@ Plot all modules:
 
     python plotAlignmentModules.py
     
-    
+    r99t drawComparison.cxx\(\"MC.txt\",\"DATA.txt\"\)
     
     
 

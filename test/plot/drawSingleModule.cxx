@@ -2,6 +2,10 @@
 
 #include "Functions.h"
 
+#include <iostream>
+#include <fstream>
+
+
 void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1 ){
  TDRStyle();
  
@@ -114,12 +118,31 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  system(toDoShell.Data());
  
  
+ 
+ //---- output txt file
+ std::ofstream myfile;
+ TString nameResults;
+ if (isMC) {
+  nameResults = Form ("MC.txt"); 
+ }
+ else {
+  nameResults = Form ("DATA.txt");   
+ }
+ myfile.open(nameResults.Data(),ios::out | ios::app); 
+ myfile << iEB << " " << iEE << " ";
+ 
+ 
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
  tinfoDPhi->Draw();
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDphi_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
+ myfile << DPhiMC->GetMean() << " " << DPhiMC->GetRMS() << " " << DPhiMC->GetEntries() << "      ";
+
+ 
+ 
+ 
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
@@ -127,6 +150,7 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
+ myfile << DPhiMC_ep->GetMean() << " " << DPhiMC_ep->GetRMS() << " " << DPhiMC_ep->GetEntries() << "      ";
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
@@ -134,6 +158,7 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
+ myfile << DPhiMC_em->GetMean() << " " << DPhiMC_em->GetRMS() << " " << DPhiMC_em->GetEntries() << "      ";
  
  
  
@@ -147,6 +172,12 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  cDEta->SetGrid(); gPad->Update();   
  toDoShell = Form("%s/images/cDEta_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
  gPad->SaveAs(toDoShell.Data());
+ myfile << DEtaMC->GetMean() << " " << DEtaMC->GetRMS() << " " << DEtaMC->GetEntries() << "      ";
+ 
+ myfile << std::endl;
+ myfile.close(); 
+ //--- output text file (end)
+ 
  
  
  ///---- 2D plot vs eta ----
