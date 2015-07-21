@@ -7,7 +7,7 @@
 #include <sstream>
 
 
-void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt = ""){
+void drawComparison(TString nameMCTxt, TString nameDataTxt, TString nameData2Txt = ""){
 
  TDRStyle();
  
@@ -19,53 +19,56 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  std::ifstream fileData2 (nameData2Txt.Data()); 
  std::ifstream fileMC    (nameMCTxt.Data()); 
  
- double Deta_SM_Mean[36];                          double Deta_SM_Mean_DATA[36];
- double Dphi_SM_Mean[36];                          double Dphi_SM_Mean_DATA[36];
- double DphiEm_SM_Mean[36];                        double DphiEm_SM_Mean_DATA[36];
- double DphiEp_SM_Mean[36];                        double DphiEp_SM_Mean_DATA[36]; 
+ double Deta_SM_Mean[36];                          double Deta_SM_Mean_DATA[36];                   double Deta_SM_Mean_DATA2[36];
+ double Dphi_SM_Mean[36];                          double Dphi_SM_Mean_DATA[36];                   double Dphi_SM_Mean_DATA2[36];
+ double DphiEm_SM_Mean[36];                        double DphiEm_SM_Mean_DATA[36];                 double DphiEm_SM_Mean_DATA2[36];
+ double DphiEp_SM_Mean[36];                        double DphiEp_SM_Mean_DATA[36];                 double DphiEp_SM_Mean_DATA2[36]; 
  
- double Deta_SM_RMS[36];                           double Deta_SM_RMS_DATA[36];
- double Dphi_SM_RMS[36];                           double Dphi_SM_RMS_DATA[36];
- double DphiEm_SM_RMS[36];                         double DphiEm_SM_RMS_DATA[36];
- double DphiEp_SM_RMS[36];                         double DphiEp_SM_RMS_DATA[36];
+ double Deta_SM_RMS[36];                           double Deta_SM_RMS_DATA[36];                    double Deta_SM_RMS_DATA2[36];
+ double Dphi_SM_RMS[36];                           double Dphi_SM_RMS_DATA[36];                    double Dphi_SM_RMS_DATA2[36];
+ double DphiEm_SM_RMS[36];                         double DphiEm_SM_RMS_DATA[36];                  double DphiEm_SM_RMS_DATA2[36];
+ double DphiEp_SM_RMS[36];                         double DphiEp_SM_RMS_DATA[36];                  double DphiEp_SM_RMS_DATA2[36];
  
- double Deta_SM_Entries[36];                       double Deta_SM_Entries_DATA[36];
- double Dphi_SM_Entries[36];                       double Dphi_SM_Entries_DATA[36];
- double DphiEm_SM_Entries[36];                     double DphiEm_SM_Entries_DATA[36];
- double DphiEp_SM_Entries[36];                     double DphiEp_SM_Entries_DATA[36]; 
+ double Deta_SM_Entries[36];                       double Deta_SM_Entries_DATA[36];                double Deta_SM_Entries_DATA2[36];
+ double Dphi_SM_Entries[36];                       double Dphi_SM_Entries_DATA[36];                double Dphi_SM_Entries_DATA2[36];
+ double DphiEm_SM_Entries[36];                     double DphiEm_SM_Entries_DATA[36];              double DphiEm_SM_Entries_DATA2[36];
+ double DphiEp_SM_Entries[36];                     double DphiEp_SM_Entries_DATA[36];              double DphiEp_SM_Entries_DATA2[36]; 
  
  
- double Deta_DEE_Mean[4];                          double Deta_DEE_Mean_DATA[4];
- double Dphi_DEE_Mean[4];                          double Dphi_DEE_Mean_DATA[4];
- double DphiEm_DEE_Mean[4];                        double DphiEm_DEE_Mean_DATA[4];
- double DphiEp_DEE_Mean[4];                        double DphiEp_DEE_Mean_DATA[4]; 
+ double Deta_DEE_Mean[4];                          double Deta_DEE_Mean_DATA[4];                   double Deta_DEE_Mean_DATA2[4];
+ double Dphi_DEE_Mean[4];                          double Dphi_DEE_Mean_DATA[4];                   double Dphi_DEE_Mean_DATA2[4];
+ double DphiEm_DEE_Mean[4];                        double DphiEm_DEE_Mean_DATA[4];                 double DphiEm_DEE_Mean_DATA2[4];
+ double DphiEp_DEE_Mean[4];                        double DphiEp_DEE_Mean_DATA[4];                 double DphiEp_DEE_Mean_DATA2[4]; 
  
- double Deta_DEE_RMS[4];                           double Deta_DEE_RMS_DATA[4];
- double Dphi_DEE_RMS[4];                           double Dphi_DEE_RMS_DATA[4];
- double DphiEm_DEE_RMS[4];                         double DphiEm_DEE_RMS_DATA[4];
- double DphiEp_DEE_RMS[4];                         double DphiEp_DEE_RMS_DATA[4];
+ double Deta_DEE_RMS[4];                           double Deta_DEE_RMS_DATA[4];                    double Deta_DEE_RMS_DATA2[4];
+ double Dphi_DEE_RMS[4];                           double Dphi_DEE_RMS_DATA[4];                    double Dphi_DEE_RMS_DATA2[4];
+ double DphiEm_DEE_RMS[4];                         double DphiEm_DEE_RMS_DATA[4];                  double DphiEm_DEE_RMS_DATA2[4];
+ double DphiEp_DEE_RMS[4];                         double DphiEp_DEE_RMS_DATA[4];                  double DphiEp_DEE_RMS_DATA2[4];
  
- double Deta_DEE_Entries[4];                       double Deta_DEE_Entries_DATA[4];
- double Dphi_DEE_Entries[4];                       double Dphi_DEE_Entries_DATA[4];
- double DphiEm_DEE_Entries[4];                     double DphiEm_DEE_Entries_DATA[4];
- double DphiEp_DEE_Entries[4];                     double DphiEp_DEE_Entries_DATA[4]; 
+ double Deta_DEE_Entries[4];                       double Deta_DEE_Entries_DATA[4];                double Deta_DEE_Entries_DATA2[4];
+ double Dphi_DEE_Entries[4];                       double Dphi_DEE_Entries_DATA[4];                double Dphi_DEE_Entries_DATA2[4];
+ double DphiEm_DEE_Entries[4];                     double DphiEm_DEE_Entries_DATA[4];              double DphiEm_DEE_Entries_DATA2[4];
+ double DphiEp_DEE_Entries[4];                     double DphiEp_DEE_Entries_DATA[4];              double DphiEp_DEE_Entries_DATA2[4]; 
  
  
  std::string buffer;
  int numSM;
  int numDEE;
   
+ bool isData2 = true;
+ 
  if(!fileData.is_open()) {
   std::cerr << "** ERROR: Can't open '" << nameDataTxt.Data() << "' for input" << std::endl;
  }
  if(!fileData2.is_open()) {
   std::cerr << "** ERROR: Can't open '" << nameData2Txt.Data() << "' for input" << std::endl;
+  isData2 = false;
  }
  if(!fileMC.is_open()) {
   std::cerr << "** ERROR: Can't open '" << nameMCTxt.Data() << "' for input" << std::endl;
  }
  
- while(!fileMC.eof()) {
+ while (!fileMC.eof()) {
   getline(fileMC,buffer);
 //   std::cout << "buffer = " << buffer << std::endl;
   if (buffer != ""){ ///---> save from empty line at the end!
@@ -117,7 +120,7 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
 
  
  
- while(!fileData.eof()) {
+ while (!fileData.eof()) {
   getline(fileData,buffer);
   //   std::cout << "buffer = " << buffer << std::endl;
   if (buffer != ""){ ///---> save from empty line at the end!
@@ -172,6 +175,63 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  
  
  
+ while ( isData2 && !fileData2.eof()) {
+  getline(fileData2,buffer);
+  //   std::cout << "buffer = " << buffer << std::endl;
+  if (buffer != ""){ ///---> save from empty line at the end!
+   std::stringstream line( buffer );      
+   line >> numSM; 
+   std::cout << numSM << " ";
+   line >> numDEE; 
+   std::cout << numDEE << " ";
+   
+   if (numSM!=-100) {
+    line >> Dphi_SM_Mean_DATA2[numSM];    std::cout << " " << Dphi_SM_Mean_DATA2[numSM];
+    line >> Dphi_SM_RMS_DATA2[numSM];     std::cout << " " << Dphi_SM_RMS_DATA2[numSM];
+    line >> Dphi_SM_Entries_DATA2[numSM]; std::cout << " " << Dphi_SM_Entries_DATA2[numSM];
+    
+    line >> DphiEp_SM_Mean_DATA2[numSM];    std::cout << " " << DphiEp_SM_Mean_DATA2[numSM];
+    line >> DphiEp_SM_RMS_DATA2[numSM];     std::cout << " " << DphiEp_SM_RMS_DATA2[numSM];
+    line >> DphiEp_SM_Entries_DATA2[numSM]; std::cout << " " << DphiEp_SM_Entries_DATA2[numSM];
+    
+    line >> DphiEm_SM_Mean_DATA2[numSM];    std::cout << " " << DphiEm_SM_Mean_DATA2[numSM];
+    line >> DphiEm_SM_RMS_DATA2[numSM];     std::cout << " " << DphiEm_SM_RMS_DATA2[numSM];
+    line >> DphiEm_SM_Entries_DATA2[numSM]; std::cout << " " << DphiEm_SM_Entries_DATA2[numSM];
+    
+    line >> Deta_SM_Mean_DATA2[numSM];    std::cout << " " << Deta_SM_Mean_DATA2[numSM];
+    line >> Deta_SM_RMS_DATA2[numSM];     std::cout << " " << Deta_SM_RMS_DATA2[numSM];
+    line >> Deta_SM_Entries_DATA2[numSM]; std::cout << " " << Deta_SM_Entries_DATA2[numSM];
+    
+   }
+   else {
+    line >> Dphi_DEE_Mean_DATA2[numDEE];    std::cout << " " << Dphi_DEE_Mean_DATA2[numDEE];
+    line >> Dphi_DEE_RMS_DATA2[numDEE];     std::cout << " " << Dphi_DEE_RMS_DATA2[numDEE];
+    line >> Dphi_DEE_Entries_DATA2[numDEE]; std::cout << " " << Dphi_DEE_Entries_DATA2[numDEE];
+    
+    line >> DphiEp_DEE_Mean_DATA2[numDEE];    std::cout << " " << DphiEp_DEE_Mean_DATA2[numDEE];
+    line >> DphiEp_DEE_RMS_DATA2[numDEE];     std::cout << " " << DphiEp_DEE_RMS_DATA2[numDEE];
+    line >> DphiEp_DEE_Entries_DATA2[numDEE]; std::cout << " " << DphiEp_DEE_Entries_DATA2[numDEE];
+    
+    line >> DphiEm_DEE_Mean_DATA2[numDEE];    std::cout << " " << DphiEm_DEE_Mean_DATA2[numDEE];
+    line >> DphiEm_DEE_RMS_DATA2[numDEE];     std::cout << " " << DphiEm_DEE_RMS_DATA2[numDEE];
+    line >> DphiEm_DEE_Entries_DATA2[numDEE]; std::cout << " " << DphiEm_DEE_Entries_DATA2[numDEE];
+    
+    line >> Deta_DEE_Mean_DATA2[numDEE];    std::cout << " " << Deta_DEE_Mean_DATA2[numDEE];
+    line >> Deta_DEE_RMS_DATA2[numDEE];     std::cout << " " << Deta_DEE_RMS_DATA2[numDEE];
+    line >> Deta_DEE_Entries_DATA2[numDEE]; std::cout << " " << Deta_DEE_Entries_DATA2[numDEE];
+    
+   }
+  } 
+  
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -216,6 +276,13 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
   DphiEm_SM_RMS_DATA[i] = DphiEm_SM_RMS_DATA[i] / sqrt (DphiEm_SM_Entries_DATA[i]);
   DphiEp_SM_RMS_DATA[i] = DphiEp_SM_RMS_DATA[i] / sqrt (DphiEp_SM_Entries_DATA[i]);
   Deta_SM_RMS_DATA[i] = Deta_SM_RMS_DATA[i] / sqrt (Deta_SM_Entries_DATA[i]);
+
+  if (isData2) {
+   Dphi_SM_RMS_DATA2[i] = Dphi_SM_RMS_DATA2[i] / sqrt (Dphi_SM_Entries_DATA2[i]);
+   DphiEm_SM_RMS_DATA2[i] = DphiEm_SM_RMS_DATA2[i] / sqrt (DphiEm_SM_Entries_DATA2[i]);
+   DphiEp_SM_RMS_DATA2[i] = DphiEp_SM_RMS_DATA2[i] / sqrt (DphiEp_SM_Entries_DATA2[i]);
+   Deta_SM_RMS_DATA2[i] = Deta_SM_RMS_DATA2[i] / sqrt (Deta_SM_Entries_DATA2[i]);
+  }
  }
  
  
@@ -248,7 +315,19 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_SM_Dphi_DATA->SetLineWidth(1);
  gr_SM_Dphi_DATA->GetYaxis()->SetTitle("#Delta#phi");
  gr_SM_Dphi_DATA->Draw("P");
-
+ 
+ if (isData2) {
+  TGraphErrors* gr_SM_Dphi_DATA2 = new TGraphErrors(36,SM,Dphi_SM_Mean_DATA2,Zero,Dphi_SM_RMS_DATA2);
+  gr_SM_Dphi_DATA2->SetTitle("#Delta#phi");
+  gr_SM_Dphi_DATA2->SetMarkerColor(kGreen);
+  gr_SM_Dphi_DATA2->SetLineColor(kGreen);
+  gr_SM_Dphi_DATA2->SetMarkerStyle(21);
+  gr_SM_Dphi_DATA2->SetMarkerSize(1);
+  gr_SM_Dphi_DATA2->SetLineWidth(1);
+  gr_SM_Dphi_DATA2->GetYaxis()->SetTitle("#Delta#phi");
+  gr_SM_Dphi_DATA2->Draw("P");
+ }
+ 
  gPad->SetGrid();
 
  cSM_Dphi->cd(2);
@@ -273,6 +352,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_SM_DphiEp_DATA->GetYaxis()->SetTitle("#Delta#phi e^{+}");
  gr_SM_DphiEp_DATA->Draw("P");
  
+ if (isData2) {
+  TGraphErrors* gr_SM_DphiEp_DATA2 = new TGraphErrors(36,SM,DphiEp_SM_Mean_DATA2,Zero,DphiEp_SM_RMS_DATA2);
+  gr_SM_DphiEp_DATA2->SetTitle("#Delta#phiEp");
+  gr_SM_DphiEp_DATA2->SetMarkerColor(kGreen);
+  gr_SM_DphiEp_DATA2->SetLineColor(kGreen);
+  gr_SM_DphiEp_DATA2->SetMarkerStyle(21);
+  gr_SM_DphiEp_DATA2->SetMarkerSize(1);
+  gr_SM_DphiEp_DATA2->SetLineWidth(1);
+  gr_SM_DphiEp_DATA2->GetYaxis()->SetTitle("#Delta#phi e^{+}");
+  gr_SM_DphiEp_DATA2->Draw("P");
+ }
+ 
  gPad->SetGrid();
  
  cSM_Dphi->cd(3);
@@ -296,6 +387,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_SM_DphiEm_DATA->SetLineWidth(1);
  gr_SM_DphiEm_DATA->GetYaxis()->SetTitle("#Delta#phi e^{-}");
  gr_SM_DphiEm_DATA->Draw("P");
+ 
+ if (isData2) {
+  TGraphErrors* gr_SM_DphiEm_DATA2 = new TGraphErrors(36,SM,DphiEm_SM_Mean_DATA2,Zero,DphiEm_SM_RMS_DATA2);
+  gr_SM_DphiEm_DATA2->SetTitle("#Delta#phiEm");
+  gr_SM_DphiEm_DATA2->SetMarkerColor(kGreen);
+  gr_SM_DphiEm_DATA2->SetLineColor(kGreen);
+  gr_SM_DphiEm_DATA2->SetMarkerStyle(21);
+  gr_SM_DphiEm_DATA2->SetMarkerSize(1);
+  gr_SM_DphiEm_DATA2->SetLineWidth(1);
+  gr_SM_DphiEm_DATA2->GetYaxis()->SetTitle("#Delta#phi e^{-}");
+  gr_SM_DphiEm_DATA2->Draw("P");
+ }
  
  gPad->SetGrid();
  
@@ -326,6 +429,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_DEE_Dphi_DATA->GetYaxis()->SetTitle("#Delta#phi");
  gr_DEE_Dphi_DATA->Draw("P");
  
+ if (isData2) {
+  TGraphErrors* gr_DEE_Dphi_DATA2 = new TGraphErrors(4,DEE,Dphi_DEE_Mean_DATA2,Zero,Dphi_DEE_RMS_DATA2);
+  gr_DEE_Dphi_DATA2->SetTitle("#Delta#phi");
+  gr_DEE_Dphi_DATA2->SetMarkerColor(kGreen);
+  gr_DEE_Dphi_DATA2->SetLineColor(kGreen);
+  gr_DEE_Dphi_DATA2->SetMarkerStyle(21);
+  gr_DEE_Dphi_DATA2->SetMarkerSize(1);
+  gr_DEE_Dphi_DATA2->SetLineWidth(1);
+  gr_DEE_Dphi_DATA2->GetYaxis()->SetTitle("#Delta#phi");
+  gr_DEE_Dphi_DATA2->Draw("P");
+ }
+ 
  gPad->SetGrid();
  
  cDEE_Dphi->cd(2);
@@ -350,6 +465,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_DEE_DphiEp_DATA->GetYaxis()->SetTitle("#Delta#phi e^{+}");
  gr_DEE_DphiEp_DATA->Draw("P");
  
+ if (isData2) {
+  TGraphErrors* gr_DEE_DphiEp_DATA2 = new TGraphErrors(4,DEE,DphiEp_DEE_Mean_DATA2,Zero,DphiEp_DEE_RMS_DATA2);
+  gr_DEE_DphiEp_DATA2->SetTitle("#Delta#phiEp");
+  gr_DEE_DphiEp_DATA2->SetMarkerColor(kGreen);
+  gr_DEE_DphiEp_DATA2->SetLineColor(kGreen);
+  gr_DEE_DphiEp_DATA2->SetMarkerStyle(21);
+  gr_DEE_DphiEp_DATA2->SetMarkerSize(1);
+  gr_DEE_DphiEp_DATA2->SetLineWidth(1);
+  gr_DEE_DphiEp_DATA2->GetYaxis()->SetTitle("#Delta#phi e^{+}");
+  gr_DEE_DphiEp_DATA2->Draw("P");
+ }
+ 
  gPad->SetGrid();
  
  cDEE_Dphi->cd(3);
@@ -373,6 +500,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_DEE_DphiEm_DATA->SetLineWidth(1);
  gr_DEE_DphiEm_DATA->GetYaxis()->SetTitle("#Delta#phi e^{-}");
  gr_DEE_DphiEm_DATA->Draw("P");
+ 
+ if (isData2) {
+  TGraphErrors* gr_DEE_DphiEm_DATA2 = new TGraphErrors(4,DEE,DphiEm_DEE_Mean_DATA2,Zero,DphiEm_DEE_RMS_DATA2);
+  gr_DEE_DphiEm_DATA2->SetTitle("#Delta#phiEm");
+  gr_DEE_DphiEm_DATA2->SetMarkerColor(kGreen);
+  gr_DEE_DphiEm_DATA2->SetLineColor(kGreen);
+  gr_DEE_DphiEm_DATA2->SetMarkerStyle(21);
+  gr_DEE_DphiEm_DATA2->SetMarkerSize(1);
+  gr_DEE_DphiEm_DATA2->SetLineWidth(1);
+  gr_DEE_DphiEm_DATA2->GetYaxis()->SetTitle("#Delta#phi e^{-}");
+  gr_DEE_DphiEm_DATA2->Draw("P");
+ }
  
  gPad->SetGrid();
  
@@ -404,6 +543,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_SM_Deta_DATA->GetYaxis()->SetTitle("#Delta#eta");
  gr_SM_Deta_DATA->Draw("P");
  
+ if (isData2) { 
+  TGraphErrors* gr_SM_Deta_DATA2 = new TGraphErrors(36,SM,Deta_SM_Mean_DATA2,Zero,Deta_SM_RMS_DATA2);
+  gr_SM_Deta_DATA2->SetTitle("#Delta#eta");
+  gr_SM_Deta_DATA2->SetMarkerColor(kGreen);
+  gr_SM_Deta_DATA2->SetLineColor(kGreen);
+  gr_SM_Deta_DATA2->SetMarkerStyle(21);
+  gr_SM_Deta_DATA2->SetMarkerSize(1);
+  gr_SM_Deta_DATA2->SetLineWidth(1);
+  gr_SM_Deta_DATA2->GetYaxis()->SetTitle("#Delta#eta");
+  gr_SM_Deta_DATA2->Draw("P");
+ }
+ 
  gPad->SetGrid();
  
  
@@ -430,6 +581,18 @@ void drawComparison(TString nameDataTxt, TString nameMCTxt, TString nameData2Txt
  gr_DEE_Deta_DATA->SetLineWidth(1);
  gr_DEE_Deta_DATA->GetYaxis()->SetTitle("#Delta#eta");
  gr_DEE_Deta_DATA->Draw("P");
+ 
+ if (isData2) {
+  TGraphErrors* gr_DEE_Deta_DATA2 = new TGraphErrors(4,DEE,Deta_DEE_Mean_DATA2,Zero,Deta_DEE_RMS_DATA2);
+  gr_DEE_Deta_DATA2->SetTitle("#Delta#eta");
+  gr_DEE_Deta_DATA2->SetMarkerColor(kGreen);
+  gr_DEE_Deta_DATA2->SetLineColor(kGreen);
+  gr_DEE_Deta_DATA2->SetMarkerStyle(21);
+  gr_DEE_Deta_DATA2->SetMarkerSize(1);
+  gr_DEE_Deta_DATA2->SetLineWidth(1);
+  gr_DEE_Deta_DATA2->GetYaxis()->SetTitle("#Delta#eta");
+  gr_DEE_Deta_DATA2->Draw("P");
+ }
  
  gPad->SetGrid();
  
