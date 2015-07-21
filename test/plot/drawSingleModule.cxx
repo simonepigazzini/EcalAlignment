@@ -2,7 +2,7 @@
 
 #include "Functions.h"
 
-void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100 ){
+void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1 ){
  TDRStyle();
  
  gStyle->SetTitleYOffset(1.1);
@@ -84,7 +84,12 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  ///---- legend (begin) ----
  TLegend* legend = new TLegend(0.62,0.72,0.88,0.93);
- legend->AddEntry(DEtaMC,"MC","f");
+ if (isMC) {
+  legend->AddEntry(DEtaMC,"MC","f");
+ }
+ else {
+  legend->AddEntry(DEtaMC,"DATA","f"); 
+ }
  legend->SetFillColor(kWhite);
  ///---- legend (end) ----
  
@@ -102,6 +107,8 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
  system(toDoShell.Data());
  toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
+ system(toDoShell.Data());
+ toDoShell = Form("cp index.php %s/ ;",nameOutputDir.Data());
  system(toDoShell.Data());
  toDoShell = Form("cp index.php %s/images ;",nameOutputDir.Data());
  system(toDoShell.Data());
@@ -143,10 +150,17 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  
  ///---- 2D plot vs eta ----
- TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  "MC"  , 40,-3,3,  200,-0.04,0.04);
- TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  "MC"  , 40,-3,3,  200,-0.04,0.04);
- TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  "MC"  , 80,-3,3,  200,-0.04,0.04);
- TH2F* DEtaMCvsEta    = new TH2F("DEtaMCvsEta"  ,"MC"  , 80,-3,3,  200,-0.04,0.04);
+ TString nameIsMC;
+ if (isMC) {
+  nameIsMC = Form ("MC"); 
+ }
+ else {
+  nameIsMC = Form ("DATA");   
+ }
+ TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
+ TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
+ TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
+ TH2F* DEtaMCvsEta    = new TH2F("DEtaMCvsEta"  ,nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
  createHisto2D(DPhiMCvsEta_ep, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_ep.Data());
  createHisto2D(DPhiMCvsEta_em, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_em.Data());
  createHisto2D(DPhiMCvsEta,    trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut.Data());
@@ -196,10 +210,10 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  TString CompleteCut_EB_ep = Form ("(%s) && (iDetEE < -10)",CompleteCut_ep.Data());
  TString CompleteCut_EB_em = Form ("(%s) && (iDetEE < -10)",CompleteCut_em.Data());
  
- TH2F* DPhiMCvsPhi_EB_ep = new TH2F("DPhiMCvsPhi_EB_ep",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EB_em = new TH2F("DPhiMCvsPhi_EB_em",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EB    = new TH2F("DPhiMCvsPhi_EB",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DEtaMCvsPhi_EB    = new TH2F("DEtaMCvsPhi_EB"  ,"MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EB_ep = new TH2F("DPhiMCvsPhi_EB_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EB_em = new TH2F("DPhiMCvsPhi_EB_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EB    = new TH2F("DPhiMCvsPhi_EB",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DEtaMCvsPhi_EB    = new TH2F("DEtaMCvsPhi_EB"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
  
  createHisto2D(DPhiMCvsPhi_EB_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_ep.Data());
  createHisto2D(DPhiMCvsPhi_EB_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_em.Data());
@@ -246,10 +260,10 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  TString CompleteCut_EE_ep = Form ("(%s) && (iDetEE < -10)",CompleteCut_ep.Data());
  TString CompleteCut_EE_em = Form ("(%s) && (iDetEE < -10)",CompleteCut_em.Data());
  
- TH2F* DPhiMCvsPhi_EE_ep = new TH2F("DPhiMCvsPhi_EE_ep",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EE_em = new TH2F("DPhiMCvsPhi_EE_em",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EE    = new TH2F("DPhiMCvsPhi_EE",  "MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DEtaMCvsPhi_EE    = new TH2F("DEtaMCvsPhi_EE"  ,"MC"  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EE_ep = new TH2F("DPhiMCvsPhi_EE_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EE_em = new TH2F("DPhiMCvsPhi_EE_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DPhiMCvsPhi_EE    = new TH2F("DPhiMCvsPhi_EE",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+ TH2F* DEtaMCvsPhi_EE    = new TH2F("DEtaMCvsPhi_EE"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
  
  createHisto2D(DPhiMCvsPhi_EE_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_ep.Data());
  createHisto2D(DPhiMCvsPhi_EE_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_em.Data());
