@@ -123,10 +123,10 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  std::ofstream myfile;
  TString nameResults;
  if (isMC) {
-  nameResults = Form ("MC.txt"); 
+  nameResults = Form ("%s/MC.txt", nameOutputDir.Data()); 
  }
  else {
-  nameResults = Form ("DATA.txt");   
+  nameResults = Form ("%s/DATA.txt", nameOutputDir.Data());   
  }
  myfile.open(nameResults.Data(),ios::out | ios::app); 
  myfile << iEB << " " << iEE << " ";

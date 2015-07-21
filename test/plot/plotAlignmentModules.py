@@ -27,3 +27,19 @@ for x in range(0, 4):
   toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root\\\",\\\"2015DataOldTrk\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&met\>30\\\",-100," + str(x) + ",0\)"
   print "toexec = ", toexec
   os.system (toexec)
+
+
+
+#######  
+# data2
+
+for x in range(0, 36):
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA21Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_073502/0000/treeECALAlignment_*.root\\\",\\\"2015DataNewTrk\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&met\>30\\\"," + str(x) + ",-100,0\)"
+  print "toexec = ", toexec
+  os.system (toexec)
+  
+for x in range(0, 4):
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA21Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_073502/0000/treeECALAlignment_*.root\\\",\\\"2015DataNewTrk\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&met\>30\\\",-100," + str(x) + ",0\)"
+  print "toexec = ", toexec
+  os.system (toexec)
+
