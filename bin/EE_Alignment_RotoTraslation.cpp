@@ -407,6 +407,14 @@ int main(int argc, char** argv) {
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DX_SC_Mean[iSC] << " "
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SC_Mean[iSC] << " "
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SC_Mean[iSC] << " "
+
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SC_RMS[iSC] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SC_RMS[iSC] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPSIe_SC_RMS[iSC] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DX_SC_RMS[iSC] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SC_RMS[iSC] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SC_RMS[iSC] << " "
+
   << std::endl;
  }
  

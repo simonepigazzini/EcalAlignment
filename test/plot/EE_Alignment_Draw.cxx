@@ -41,7 +41,6 @@ void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
    line >> DX_SM_Mean[iSM_After];      std::cout << " " << DX_SM_Mean[iSM_After];
    line >> DY_SM_Mean[iSM_After];      std::cout << " " << DY_SM_Mean[iSM_After];
    line >> DZ_SM_Mean[iSM_After];      std::cout << " " << DZ_SM_Mean[iSM_After];
-
    std::cout << std::endl;
    iSM_After++;
   }
@@ -62,6 +61,15 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  double DY_SM_RMS_After[4];
  double DZ_SM_Mean_After[4];
  double DZ_SM_RMS_After[4];
+ 
+ for (int i=0; i<4; i++) {
+  DX_SM_RMS[i] = 0;
+  DY_SM_RMS[i] = 0;
+  DZ_SM_RMS[i] = 0;
+//   DX_SM_RMS_After[i] = 0;
+//   DY_SM_RMS_After[i] = 0;
+//   DZ_SM_RMS_After[i] = 0;
+ }
  
  double DTHETAe_SM_Mean_After[4];
  double DTHETAe_SM_RMS_After[4];
@@ -91,6 +99,14 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
    line >> DX_SM_Mean_After[iSM_After];      std::cout << " " << DX_SM_Mean_After[iSM_After];
    line >> DY_SM_Mean_After[iSM_After];      std::cout << " " << DY_SM_Mean_After[iSM_After];
    line >> DZ_SM_Mean_After[iSM_After];      std::cout << " " << DZ_SM_Mean_After[iSM_After];
+
+   line >> DTHETAe_SM_RMS_After[iSM_After]; std::cout << " " << DTHETAe_SM_RMS_After[iSM_After];
+   line >> DPSIe_SM_RMS_After[iSM_After];   std::cout << " " << DPSIe_SM_RMS_After[iSM_After];
+   line >> DPHIe_SM_RMS_After[iSM_After];   std::cout << " " << DPHIe_SM_RMS_After[iSM_After];
+   line >> DX_SM_RMS_After[iSM_After];      std::cout << " " << DX_SM_RMS_After[iSM_After];
+   line >> DY_SM_RMS_After[iSM_After];      std::cout << " " << DY_SM_RMS_After[iSM_After];
+   line >> DZ_SM_RMS_After[iSM_After];      std::cout << " " << DZ_SM_RMS_After[iSM_After];
+
    std::cout << std::endl;
    
    iSM_After++;

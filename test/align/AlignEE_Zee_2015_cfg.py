@@ -6,8 +6,10 @@ process.inputTree = cms.PSet(
   nameTree = cms.string("ntupleEcalAlignment/myTree"),
   #selection = cms.string("(ETSC>20 && met>30 && mishits <= 0 && MT>30)"),
   
-  selection = cms.string("(electrons_classification==0 && ETSC>20)"),    
-  #selection = cms.string("(1)"),
+  #selection = cms.string("(electrons_classification==0 && ETSC>20)"),    
+  selection = cms.string("(electrons_classification==0 && ETSC>30) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
+
+#selection = cms.string("(1)"),
   #selection = cms.string("(eleFBrem<0.8)"),
 #  selection = cms.string("(eleFBrem<0.8&&eleCharge>0)"),
   #selection = cms.string("(eleFBrem<0.8&&eleCharge<0)"),
@@ -38,7 +40,11 @@ process.inputTree = cms.PSet(
                #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_1.root',
 
           #'root://eoscms.cern.ch//eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA14Jul2015/SingleElectron/crab_SingleElectron/150715_154047/treeECALAlignment_DATA_oldTrkAlign.root'
-          'file:/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root'
+          #'file:/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root'
+          
+          #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_164215/
+          'file:/tmp/amassiro/dataNewTrk.root'
+
 
 
     #'crab/DATAJSONPrompt_SingleElectron_Run2011A-PromptReco-v4_AOD.root'
@@ -50,6 +56,7 @@ process.inputTree = cms.PSet(
 
 process.outputTree = cms.PSet(
   #outputFile = cms.string("myEEAlignment_2015_MCtest.txt")
-  outputFile = cms.string("myEEAlignment_2015_OldTrkAlign.txt")
+  #outputFile = cms.string("myEEAlignment_2015_OldTrkAlign.txt")
+  outputFile = cms.string("myEEAlignment_2015_NewTrkAlign.txt")
 )
 

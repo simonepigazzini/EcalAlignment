@@ -16,12 +16,14 @@ Get reference using MC trees:
     r99t drawModulesMC.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150714_075454/0000/treeECALAlignment_*.root\",\"2015MCall\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
     r99t drawModulesMC.cxx\(\"/tmp/amassiro/wjets.root\",\"2015MCall\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
     
-    r99t drawModulesMC.cxx\(\"/tmp/amassiro/data.root\",\"2015DataOldTrkAll\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     
-    
-    r99t drawSingleModule.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_*.root\",\"2015MC\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\",0,-100\)
-    iDetEB: 0, 1, ... 35
-    iDetEE: 0, 1, 2, 3
+    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015_oldTrkAlign/SingleElectron/crab_SingleElectron/150722_131032/0000/
+    r99t drawModules.cxx\(\"/tmp/amassiro/data.root\",\"2015DataOldTrkAll\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t drawModules.cxx\(\"/tmp/amassiro/data.root\",\"2015DataOldTrkAll\",\"electrons_classification\=\=0\&\&ETSC\>30\"\)
+    r99t drawModules.cxx\(\"/tmp/amassiro/data.root\",\"2015DataOldTrkAll\",\"ETSC\>30\"\)
+      
+    r99t drawModules.cxx\(\"/tmp/amassiro/dataNewTrk.root\",\"2015DataNewTrkAll\",\"ETSC\>30\"\)
+      
     
 
 Plot all modules:
@@ -58,6 +60,10 @@ Draw coefficients comparison:
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_3k.txt\"\)
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_MCtest_3k_bis.txt\"\)
             
+    r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015_NewTrkAlign.txt.bis\"\)
+    
+    
+    
     
 Draw:
 
