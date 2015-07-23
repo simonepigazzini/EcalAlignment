@@ -1,14 +1,20 @@
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("TEST")
-process.load("EcalTrivialAlignment_cfi")
-#process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
+#process.load("EcalTrivialAlignment_cfi")
+process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
+
+process.EcalTrivialConditionRetriever.getEBAlignmentFromFile = cms.untracked.bool(True)
+process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_NewTrkAlign.txt')
+
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 
 #process.CondDBCommon.connect = 'sqlite_file:EBAlign_2010_GlobalAlignment.db'
-process.CondDBCommon.connect = 'sqlite_file:EBAlign_2011.db'
+#process.CondDBCommon.connect = 'sqlite_file:EBAlign_2011.db'
 #process.CondDBCommon.connect = 'sqlite_file:EBAlign_2010_NoAlign.db'
+
+process.CondDBCommon.connect = 'sqlite_file:EEAlign_2015.db'
 
 process.MessageLogger = cms.Service("MessageLogger",
     debugModules = cms.untracked.vstring('*'),
