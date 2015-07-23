@@ -11,6 +11,12 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  gStyle->SetTitleYOffset(1.1);
  gStyle->cd();
+
+ //---- for data
+ TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
+ if (isMC == 0) {
+  commonCut = tempCut;
+ }
  
  //---- correct cut
  TString CompleteCut;
