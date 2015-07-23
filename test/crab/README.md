@@ -53,10 +53,12 @@ Multicrab
 
     python multicrab.py crab_projects_6July
     python multicrab.py crab_projects_13July
+    python multicrab.py crab_projects_15July
     python multicrab.py crab_projects_16July_fromRaw
     python multicrab.py crab_projects_22July_fromRaw status
     python multicrab.py crab_projects_22July_fromRaw resubmit
 
+    python multicrab.py crab_projects_22July_oldTrkAlign   status
     
     
 Samples

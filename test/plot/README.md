@@ -13,6 +13,11 @@ Get reference using MC trees:
     eosmount eos eos
     cd -
     r99t drawModulesMC.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_*.root\",\"2015MC\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t drawModulesMC.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150714_075454/0000/treeECALAlignment_*.root\",\"2015MCall\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t drawModulesMC.cxx\(\"/tmp/amassiro/wjets.root\",\"2015MCall\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
+    r99t drawModulesMC.cxx\(\"/tmp/amassiro/data.root\",\"2015DataOldTrkAll\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
     
     r99t drawSingleModule.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_*.root\",\"2015MC\",\"mc_weight*electrons_classification\=\=0\&\&ETSC\>20\",0,-100\)
     iDetEB: 0, 1, ... 35
@@ -31,6 +36,11 @@ Draw alignment coefficients:
 
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_3/src/EcalValidation/EcalAlignment/test
     
+
+Get Luminosity:
+    
+    cp -r /afs/cern.ch/user/m/marlow/public/lcr2 ./
+    python lcr2/lcr2.py -i json.txt
 
 Draw coefficients comparison:
 
