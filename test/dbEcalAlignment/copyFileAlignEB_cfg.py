@@ -14,7 +14,7 @@ process.load("CondCore.DBCommon.CondDBCommon_cfi")
 #process.CondDBCommon.connect = 'sqlite_file:EBAlign_2011.db'
 #process.CondDBCommon.connect = 'sqlite_file:EBAlign_2010_NoAlign.db'
 
-process.CondDBCommon.connect = 'sqlite_file:EEAlign_2015.db'
+process.CondDBCommon.connect = 'sqlite_file:EBAlign_2015.db'
 
 process.MessageLogger = cms.Service("MessageLogger",
     debugModules = cms.untracked.vstring('*'),

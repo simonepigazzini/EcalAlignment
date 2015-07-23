@@ -76,8 +76,7 @@ process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
 process.GlobalTag.toGet = cms.VPSet(
           cms.PSet(record = cms.string("TrackerAlignmentRcd"),
                    tag = cms.string("testTag"),
-                   connect = 
-cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
+                   connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
                   )
          ) 
 

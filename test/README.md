@@ -30,6 +30,11 @@ run:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAW.root
 
+closure test:
+
+    cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
+        outputFile=treeAlignDataFromRAWmyTag.root
         
     
 Fake GRID
