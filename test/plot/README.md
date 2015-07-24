@@ -24,8 +24,11 @@ Get reference using MC trees:
       
     r99t drawModules.cxx\(\"/tmp/amassiro/dataNewTrk.root\",\"2015DataNewTrkAll\",\"ETSC\>30\"\)
       
+      
+    /tmp/amassiro//eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA23Jul2015AODRAWmyTag/SingleElectron/crab_SingleElectron/150723_185304/000?/tr*.root
+    r99t drawModules.cxx\(\"/tmp/amassiro/data_my_tag.root\",\"2015DataNewTrkNewECALAll\",\"ETSC\>30\"\)
     
-
+    
 Plot all modules:
 
     python plotAlignmentModules.py
