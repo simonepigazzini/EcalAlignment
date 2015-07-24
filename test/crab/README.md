@@ -38,6 +38,7 @@ details:
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA21Jul2015AODRAW/   --> crab crashed
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015AODRAW/
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA23Jul2015AODRAWmyTag/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA24Jul2015AODRAWmyTag/
     
     
     
@@ -60,7 +61,10 @@ Multicrab
     python multicrab.py crab_projects_22July_fromRaw status
     python multicrab.py crab_projects_22July_fromRaw resubmit
 
-    python multicrab.py crab_projects_22July_oldTrkAlign   status
+    python multicrab.py crab_projects_22July_oldTrkAlign     status
+    python multicrab.py crab_projects_23July_fromRaw_myTag   status
+    python multicrab.py crab_projects_24July_fromRaw_myTag   status
+    python multicrab.py crab_projects_24July_fromRaw_myTag_allData   status
     
     
 Samples
