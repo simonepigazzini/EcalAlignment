@@ -28,6 +28,10 @@ Get reference using MC trees:
     /tmp/amassiro//eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA23Jul2015AODRAWmyTag/SingleElectron/crab_SingleElectron/150723_185304/000?/tr*.root
     r99t drawModules.cxx\(\"/tmp/amassiro/data_my_tag.root\",\"2015DataNewTrkNewECALAll\",\"ETSC\>30\"\)
     
+    /tmp/amassiro//eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA24Jul2015AODRAWmyTag/SingleElectron/crab_SingleElectron/150724_090616/000?/tr*.root
+    r99t drawModules.cxx\(\"/tmp/amassiro/newEcalTag.root\",\"2015DataNewTrkNewECALAll\",\"ETSC\>30\"\)
+    
+    
     
 Plot all modules:
 
