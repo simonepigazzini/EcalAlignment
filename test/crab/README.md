@@ -41,6 +41,7 @@ details:
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA24Jul2015AODRAWmyTag/
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA24Jul2015AODRAWAllData
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA27Jul2015AODRAWAllData
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA28Jul2015AODRAWAllData   ---> max memory 4GB
     
     
 Multicrab
@@ -68,6 +69,7 @@ Multicrab
     python multicrab.py crab_projects_24July_fromRaw_myTag_allData   status
     python multicrab.py crab_projects_24July_fromRaw_allData         status
     python multicrab.py crab_projects_27July_fromRaw_allData         status
+    python multicrab.py crab_projects_28July_fromRaw_allData         status
 
     
     

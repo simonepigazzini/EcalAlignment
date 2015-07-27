@@ -55,7 +55,17 @@ config.Data.unitsPerJob   = 1   # 10 was too much? Error 50660: too much ram
 #config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-251883_13TeV_PromptReco_Collisions15_JSON.txt"
 
 #config.Data.splitting = 'FileBased'    # FileBased
-config.General.workArea     = 'crab_projects_27July_fromRaw_allData'
+#config.General.workArea     = 'crab_projects_27July_fromRaw_allData'
+#config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA27Jul2015AODRAWAllData'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-251883_13TeV_PromptReco_Collisions15_JSON.txt"
+
+
+config.General.workArea     = 'crab_projects_28July_fromRaw_allData'
 config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA27Jul2015AODRAWAllData'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA28Jul2015AODRAWAllData'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-251883_13TeV_PromptReco_Collisions15_JSON.txt"
+config.JobType.maxMemoryMB = 4000    # 4 GB
+
+
+
