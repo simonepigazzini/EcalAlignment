@@ -59,7 +59,8 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     fileName = cms.untracked.string('reco_RAW2DIGI_RECO.root'),
-    outputCommands = process.RECOSIMEventContent.outputCommands,
+    #outputCommands = process.RECOSIMEventContent.outputCommands,
+    outputCommands = cms.untracked.vstring("drop *"),
     splitLevel = cms.untracked.int32(0)
 )
 
