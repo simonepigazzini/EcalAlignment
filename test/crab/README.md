@@ -70,6 +70,9 @@ Multicrab
     python multicrab.py crab_projects_24July_fromRaw_allData         status
     python multicrab.py crab_projects_27July_fromRaw_allData         status
     python multicrab.py crab_projects_28July_fromRaw_allData         status
+    
+    python multicrab.py crab_projects_27July_fromRaw_allData         resubmit     --maxjobruntime=2600
+    python multicrab.py crab_projects_24July_fromRaw_allData         resubmit     --maxjobruntime=2600
 
     
     
