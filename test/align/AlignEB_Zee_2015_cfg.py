@@ -45,8 +45,8 @@ process.inputTree = cms.PSet(
           #'root://eoscms.cern.ch//eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA14Jul2015/SingleElectron/crab_SingleElectron/150715_154047/treeECALAlignment_DATA_oldTrkAlign.root'
           #'file:/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root'
         #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_164215/
-          'file:/tmp/amassiro/dataNewTrk.root'
-
+          #'file:/tmp/amassiro/dataNewTrk.root'
+          'file:/tmp/amassiro/treeECALnewTrkOldEcal.root'
     )
 )
 

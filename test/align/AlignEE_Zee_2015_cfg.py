@@ -43,8 +43,10 @@ process.inputTree = cms.PSet(
           #'file:/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root'
           
           #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_164215/
-          'file:/tmp/amassiro/dataNewTrk.root'
+          #'file:/tmp/amassiro/dataNewTrk.root'
 
+          #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Jul2015AODRAWAllData/SingleElectron/crab_SingleElectron/150728_162006/treeECALnewTrkOldEcal.root
+          'file:/tmp/amassiro/treeECALnewTrkOldEcal.root'
 
 
     #'crab/DATAJSONPrompt_SingleElectron_Run2011A-PromptReco-v4_AOD.root'
