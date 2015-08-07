@@ -79,7 +79,25 @@ e.g.
 
 
 
+Check alignment in GT
+====
 
+Tag used for alignment:
+    
+    conddb list 74X_dataRun2_Prompt_v0 |grep EEAlig
+    EEAlignmentRcd - EEAlignment_measured_v02_express
+
+Check time when payloads have been prepared:
+
+    conddb list EEAlignment_measured_v02_express
+
+    Since   Insertion Time Payload                                   Object Type ------ -------------------  ---------------------------------------- ----------- 1       2008-01-01 00:00:42 0ea551bf621ce4610d0a86a8fb854c6cfe8b297c  Alignments 164492 2008-01-01 00:00:42  da6ea141a70d5d97eba7f895ff617d19f478ddde Alignments 184519  2008-01-01 00:00:42 049a24d4eca8dc8bfa35092de7ed079d5fda056d  Alignments
+
+Dump last payload:
+
+    conddb dump --type payload --format xml 049a24d4eca8dc8bfa35092de7ed079d5fda056d > dump.xml
+
+    
 
 
     
