@@ -51,6 +51,7 @@ Multicrab
     python multicrab.py   samples/samples_spring15.py
     python multicrab.py   samples/samples_dataB.py
     python multicrab.py   samples/samples_dataB_RAW.py
+    python multicrab.py   samples/samples_dataC_RAW.py
 
     
     crab status folder_name
@@ -80,6 +81,8 @@ Multicrab
 
     python multicrab.py  crab_projects_31July_fromRaw_myTag_allData  status
     
+    python multicrab.py  crab_projects_29Aug_fromRaw_allDataB  status
+
     
 Samples
 ====
