@@ -16,10 +16,10 @@ config.Data.splitting = 'LumiBased'    # FileBased
 #config.Data.splitting = 'FileBased'    # FileBased
 config.Data.unitsPerJob   = 1   # 10 was too much? Error 50660: too much ram
 
-config.General.workArea     = 'crab_projects_29Aug_fromRaw_allDataB'
+config.General.workArea     = 'crab_projects_29Aug_fromRaw_allDataC'
 config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
 config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData'
-config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-254349_13TeV_PromptReco_Collisions15_JSON.txt"
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-254879_13TeV_PromptReco_Collisions15_JSON.txt"
 config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
