@@ -45,6 +45,19 @@ details:
     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Jul2015AODRAWAllData   ---> max memory 2.5GB --> good!
     
     
+    RunC PromptReco
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODAllData/SingleElectron/crab_SingleElectron/150827_143017/treeECALAlignment.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODAllData/SingleElectron/crab_SingleElectron/150827_143017/0000/treeECALAlignment_*.root
+    
+    RunB myReReco
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150827_134335/treeECALAlignment.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150827_134335/0000/treeECALAlignment_*.root
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150826_214823/treeECALAlignment.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150826_214823/000?/treeECALAlignment_*.root
+    
+    
+    hadd /tmp/amassiro/treeECALAlignment.root \
+        /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODAllData/SingleElectron/crab_SingleElectron/150827_143017/treeECALAlignment.root    \
+        /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150826_214823/treeECALAlignment.root  
+    
+    
 Multicrab
 ====
 
@@ -52,6 +65,7 @@ Multicrab
     python multicrab.py   samples/samples_dataB.py
     python multicrab.py   samples/samples_dataB_RAW.py
     python multicrab.py   samples/samples_dataC_RAW.py
+    python multicrab.py   samples/samples_dataC.py
 
     
     crab status folder_name
@@ -83,6 +97,8 @@ Multicrab
     
     python multicrab.py  crab_projects_29Aug_fromRaw_allDataB  status
     python multicrab.py  crab_projects_29Aug_fromRaw_allDataC  status
+    python multicrab.py  crab_projects_27Aug_PromptTrkAlign    status
+    
 
     
 Samples

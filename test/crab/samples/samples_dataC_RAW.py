@@ -15,6 +15,9 @@ config.Data.useParent = True           # Important!
 config.Data.splitting = 'LumiBased'    # FileBased
 #config.Data.splitting = 'FileBased'    # FileBased
 config.Data.unitsPerJob   = 1   # 10 was too much? Error 50660: too much ram
+config.Data.runRange = '251562-254790'
+
+
 
 config.General.workArea     = 'crab_projects_29Aug_fromRaw_allDataC'
 config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'

@@ -46,7 +46,16 @@ process.inputTree = cms.PSet(
           #'file:/tmp/amassiro/treeECALAlignment_DATA_oldTrkAlign.root'
         #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA22Jul2015AODRAW/SingleElectron/crab_SingleElectron/150721_164215/
           #'file:/tmp/amassiro/dataNewTrk.root'
-          'file:/tmp/amassiro/treeECALnewTrkOldEcal.root'
+
+          #'file:/tmp/amassiro/treeECALnewTrkOldEcal.root'
+
+
+   #hadd /tmp/amassiro/treeECALAlignment.root \
+        #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODAllData/SingleElectron/crab_SingleElectron/150827_143017/treeECALAlignment.root    \
+        #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150826_214823/treeECALAlignment.root  
+
+          'file:/tmp/amassiro/treeECALAlignment.root'
+
     )
 )
 
@@ -54,6 +63,7 @@ process.inputTree = cms.PSet(
 process.outputTree = cms.PSet(
    #outputFile = cms.string("myEBAlignment_2015_MCtest.txt")
    #outputFile = cms.string("myEBAlignment_2015_OldTrkAlign.txt")
-   outputFile = cms.string("myEBAlignment_2015_NewTrkAlign.txt")
+   #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign.txt")
+   outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_31Aug2015.txt")
 )
 
