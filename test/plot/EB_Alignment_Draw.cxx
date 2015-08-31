@@ -23,6 +23,16 @@ void EB_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../
  double DPHIe_SM_Mean[36];
  double DPHIe_SM_RMS[36];
 
+ 
+ for (int i=0; i<36; i++) {
+  DTHETAe_SM_RMS[i] = 0;
+  DPSIe_SM_RMS[i] = 0;
+  DPHIe_SM_RMS[i] = 0;
+  DX_SM_RMS[i] = 0;
+  DY_SM_RMS[i] = 0;
+  DZ_SM_RMS[i] = 0;
+ }
+ 
  std::ifstream file (nameFileComparison.c_str()); 
  
  if (!file.is_open()){
@@ -84,6 +94,16 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  double DPHIe_SM_Mean_After[36];
  double DPHIe_SM_RMS_After[36];
 
+ for (int i=0; i<36; i++) {
+  DTHETAe_SM_RMS_After[i] = 0;
+  DPSIe_SM_RMS_After[i] = 0;
+  DPHIe_SM_RMS_After[i] = 0;
+  DX_SM_RMS_After[i] = 0;
+  DY_SM_RMS_After[i] = 0;
+  DZ_SM_RMS_After[i] = 0;
+ }
+ 
+ 
  double iSM_SM_Ele[36];
  double iSM_SM_Ele_RMS[38];
     

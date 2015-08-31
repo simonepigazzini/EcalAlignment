@@ -1,4 +1,4 @@
-void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../data/myEEAlignment_default.txt") {
+void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../data/myEEAlignment_default.txt", int withError = 0) {
  
  double Z = 3.205;
 
@@ -100,13 +100,14 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
    line >> DY_SM_Mean_After[iSM_After];      std::cout << " " << DY_SM_Mean_After[iSM_After];
    line >> DZ_SM_Mean_After[iSM_After];      std::cout << " " << DZ_SM_Mean_After[iSM_After];
 
-   line >> DTHETAe_SM_RMS_After[iSM_After]; std::cout << " " << DTHETAe_SM_RMS_After[iSM_After];
-   line >> DPSIe_SM_RMS_After[iSM_After];   std::cout << " " << DPSIe_SM_RMS_After[iSM_After];
-   line >> DPHIe_SM_RMS_After[iSM_After];   std::cout << " " << DPHIe_SM_RMS_After[iSM_After];
-   line >> DX_SM_RMS_After[iSM_After];      std::cout << " " << DX_SM_RMS_After[iSM_After];
-   line >> DY_SM_RMS_After[iSM_After];      std::cout << " " << DY_SM_RMS_After[iSM_After];
-   line >> DZ_SM_RMS_After[iSM_After];      std::cout << " " << DZ_SM_RMS_After[iSM_After];
-
+   if (withError) {
+    line >> DTHETAe_SM_RMS_After[iSM_After]; std::cout << " " << DTHETAe_SM_RMS_After[iSM_After];
+    line >> DPSIe_SM_RMS_After[iSM_After];   std::cout << " " << DPSIe_SM_RMS_After[iSM_After];
+    line >> DPHIe_SM_RMS_After[iSM_After];   std::cout << " " << DPHIe_SM_RMS_After[iSM_After];
+    line >> DX_SM_RMS_After[iSM_After];      std::cout << " " << DX_SM_RMS_After[iSM_After];
+    line >> DY_SM_RMS_After[iSM_After];      std::cout << " " << DY_SM_RMS_After[iSM_After];
+    line >> DZ_SM_RMS_After[iSM_After];      std::cout << " " << DZ_SM_RMS_After[iSM_After];
+   }
    std::cout << std::endl;
    
    iSM_After++;

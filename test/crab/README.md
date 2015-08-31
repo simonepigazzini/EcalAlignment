@@ -99,6 +99,11 @@ Multicrab
     python multicrab.py  crab_projects_29Aug_fromRaw_allDataC  status
     python multicrab.py  crab_projects_27Aug_PromptTrkAlign    status
     
+    
+    python multicrab.py  crab_projects_31Aug_fromRaw_newECAL_allData_RunB    status
+    python multicrab.py  crab_projects_31Aug_fromRaw_newECAL_allData_RunC    status
+    
+    
 
     
 Samples

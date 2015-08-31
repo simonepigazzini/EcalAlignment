@@ -130,7 +130,7 @@ int main(int argc, char** argv)
   line >> inputDZ;  inputDZ /= 100.; 
 
   std::cout << " " << inputDPHIe << " " << inputDTHETAe << " " << inputDPSIe ;
-  std::cout << " " << inputDX << " " << inputDY << " " << inputDZ << " ===> " ;
+  std::cout << " " << 100*inputDX << " " << 100*inputDY << " " << 100*inputDZ << " [+] " ;
 
   getline(*fileInAddition,buffer);
   std::stringstream lineAddition( buffer );
@@ -140,11 +140,8 @@ int main(int argc, char** argv)
   lineAddition >> inputDPSIe_addition;
   lineAddition >> inputDX_addition;    inputDX_addition /= 100.;
   lineAddition >> inputDY_addition;    inputDY_addition /= 100.; 
-  lineAddition >> inputDZ_addition;    inputDZ_addition /= 100.; 
-
-  std::cout << " " << inputDPHIe_addition << " " << inputDTHETAe_addition << " " << inputDPSIe_addition ;
-  std::cout << " " << inputDX_addition << " " << inputDY_addition << " " << inputDZ_addition << std::endl;
-
+  lineAddition >> inputDZ_addition;    inputDZ_addition /= 100.;   
+  
   if (sign == -1) {
    std::cout << " Sign = -1 " <<std::endl;
    std::cout << " ---> inversion " << std::endl;
@@ -155,6 +152,11 @@ int main(int argc, char** argv)
    inputDTHETAe_addition = - inputDTHETAe_addition;
    inputDPSIe_addition   = - inputDPSIe_addition;
   }
+  
+  std::cout << " " << inputDPHIe_addition << " " << inputDTHETAe_addition << " " << inputDPSIe_addition ;
+  std::cout << " " << 100*inputDX_addition << " " << 100*inputDY_addition << " " << 100*inputDZ_addition;
+  
+ 
   CLHEP::Hep3Vector translation(inputDX,inputDY,inputDZ);
   CLHEP::HepEulerAngles euler(inputDPHIe, inputDTHETAe, inputDPSIe);
   CLHEP::HepRotation rotation(euler);
@@ -169,6 +171,11 @@ int main(int argc, char** argv)
   CLHEP::Hep3Vector translation_Combination = Combination.getTranslation();
   CLHEP::HepRotation rotation_Combination = Combination.getRotation();
 
+  
+  std::cout << "  ==> " << rotation_Combination.getPhi() << " " << rotation_Combination.getTheta() << " " << rotation_Combination.getPsi() ;
+  std::cout << " " << 100 * translation_Combination.getX() << " " << 100 * translation_Combination.getY() << " " << 100 * translation_Combination.getZ() << std::endl;
+  
+  
   outFile << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << rotation_Combination.getPhi() << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << rotation_Combination.getTheta() << " " 

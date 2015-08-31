@@ -19,9 +19,9 @@ process.inputTree = cms.PSet(
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),
   traslationZ = cms.bool(True),
-  rotationPhi   = cms.bool(False), # True
+  rotationPhi   = cms.bool(True), # True
   rotationTheta = cms.bool(False),
-  rotationPsi   = cms.bool(False), # True
+  rotationPsi   = cms.bool(True), # True
 
   setRotationPhi   = cms.untracked.double(0),
   setRotationTheta = cms.untracked.double(0),

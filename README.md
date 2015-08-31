@@ -53,6 +53,9 @@ e.g.
     CombineRotoTraslations   myEBAlignment_2011.txt   myEBAlignment_2012.txt    myEBAlignment_2011_2012_difference.txt
 
 
+    CombineRotoTraslations   data/myEBAlignment_2015_startup.txt   myEBAlignment_2015_NewTrkAlign_31Aug2015.txt    myEBAlignment_2015.txt
+    CombineRotoTraslations   data/myEEAlignment_2015_startup.txt   myEEAlignment_2015_NewTrkAlign_31Aug2015.txt    myEEAlignment_2015.txt
+    
 
 
 

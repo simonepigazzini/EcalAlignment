@@ -25,7 +25,7 @@ void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, co
 }
 
 
-void createHisto2D (TH2F* hmc, TTree* tmc, const char* variableY, const char* variableX, const char* title, const char* cut) {
+void createHisto2D (TH2F* hmc, TTree* tmc, const char* variableY, const char* variableX, const char* title, const char* cut, const char* titleY = "", const char* titleX = "") {
  
  TString toDraw;
  TString tcut;
@@ -37,6 +37,10 @@ void createHisto2D (TH2F* hmc, TTree* tmc, const char* variableY, const char* va
  
  hmc -> GetXaxis()->SetTitle(variableX);
  hmc -> GetYaxis()->SetTitle(variableY);
+ 
+ 
+ if (titleX != "") hmc -> GetXaxis()->SetTitle(titleX);
+ if (titleY != "") hmc -> GetYaxis()->SetTitle(titleY);
  
  hmc->SetMarkerColor(kRed);
  hmc->SetLineColor(kRed);
