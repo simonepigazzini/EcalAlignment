@@ -6,7 +6,7 @@
 #include <fstream>
 
 
-void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1 ){
+void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, TString nameInFileRootComparison = ""){
  TDRStyle();
  
  gStyle->SetTitleYOffset(1.1);
@@ -69,16 +69,37 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  
  ///---- all ----
- TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,200,-0.04,0.04);
- TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.04,0.04);
- TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.04,0.04);
- TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,200,-0.02,0.02);
+//  TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,200,-0.04,0.04);
+//  TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.04,0.04);
+//  TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.04,0.04);
+//  TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,200,-0.02,0.02);
+//  
+//  TH1F* DPhiMC_ref     = new TH1F("DPhiMC_ref",     " MC"  ,200,-0.04,0.04);
+//  TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.04,0.04);
+//  TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.04,0.04);
+//  TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,200,-0.02,0.02);
+
+ TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,50,-0.01,0.01);
+ TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,50,-0.005,0.005);
+ 
+ TH1F* DPhiMC_ref     = new TH1F("DPhiMC_ref",     " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,50,-0.01,0.01);
+ TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,50,-0.005,0.005);
+ 
  
  ///---- text info (begin) ----
  TLatex*  tinfoDPhi    = new TLatex(0.2,0.8,"");
  TLatex*  tinfoDEta    = new TLatex(0.2,0.8,"");
  TLatex*  tinfoDPhi_ep = new TLatex(0.2,0.8,"");
  TLatex*  tinfoDPhi_em = new TLatex(0.2,0.8,"");
+
+ TLatex*  tinfoDPhi_ref    = new TLatex(0.2,0.6,"");
+ TLatex*  tinfoDEta_ref    = new TLatex(0.2,0.6,"");
+ TLatex*  tinfoDPhi_ref_ep = new TLatex(0.2,0.6,"");
+ TLatex*  tinfoDPhi_ref_em = new TLatex(0.2,0.6,"");
  ///---- text info (end) ----
  
  createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data());
@@ -91,7 +112,18 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  createHisto(tinfoDPhi_em, DPhiMC_em, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data());
  
  
+ if ( nameInFileRootComparison != "" ) {
  
+  TChain* trMC_ref   = new TChain("ntupleEcalAlignment/myTree");
+  trMC_ref->Add(nameInFileRootComparison.Data());
+  
+  createHisto(tinfoDPhi_ref, DPhiMC_ref, trMC_ref, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 1);
+  createHisto(tinfoDEta_ref, DEtaMC_ref, trMC_ref, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 1);
+ 
+  createHisto(tinfoDPhi_ref_ep, DPhiMC_ref_ep, trMC_ref, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 1);
+  createHisto(tinfoDPhi_ref_em, DPhiMC_ref_em, trMC_ref, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 1);
+ }
+  
  ///---- legend (begin) ----
  TLegend* legend = new TLegend(0.62,0.72,0.88,0.93);
  if (isMC) {
@@ -101,6 +133,12 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
   legend->AddEntry(DEtaMC,"DATA","f"); 
  }
  legend->SetFillColor(kWhite);
+
+ if ( nameInFileRootComparison != "" ) {
+  legend->AddEntry(DEtaMC_ref,"MC","f");
+ }
+ 
+ 
  ///---- legend (end) ----
  
  
@@ -140,6 +178,13 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
+ if ( nameInFileRootComparison != "" ) {
+  float integral = DPhiMC->Integral();
+  DPhiMC_ref->Scale(integral / DPhiMC_ref->Integral());
+  DPhiMC_ref->Draw("same");
+  DPhiMC->Draw("PE same");
+  tinfoDPhi_ref->Draw();
+ }
  tinfoDPhi->Draw();
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDphi_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
@@ -152,6 +197,13 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
+ if ( nameInFileRootComparison != "" ) {
+  float integral = DPhiMC_ep->Integral();
+  DPhiMC_ref_ep->Scale(integral / DPhiMC_ref_ep->Integral());
+  DPhiMC_ref_ep->Draw("same");
+  DPhiMC_ep->Draw("PE same");
+  tinfoDPhi_ref_ep->Draw();
+ }
  tinfoDPhi_ep->Draw();
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
@@ -160,6 +212,13 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
+ if ( nameInFileRootComparison != "" ) {
+  float integral = DPhiMC_em->Integral();
+  DPhiMC_ref_em->Scale(integral / DPhiMC_ref_em->Integral());
+  DPhiMC_ref_em->Draw("same");
+  DPhiMC_em->Draw("PE same");
+  tinfoDPhi_ref_em->Draw();
+ }
  tinfoDPhi_em->Draw();
  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_em_%d_%d.png",nameOutputDir.Data(), iEB, iEE);
@@ -173,6 +232,13 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
+ if ( nameInFileRootComparison != "" ) {
+  float integral = DEtaMC->Integral();
+  DEtaMC_ref->Scale(integral / DEtaMC_ref->Integral());
+  DEtaMC_ref->Draw("same");
+  DEtaMC->Draw("PE same");
+  tinfoDEta_ref->Draw();
+ }
  tinfoDEta->Draw();
  legend->Draw();
  cDEta->SetGrid(); gPad->Update();   

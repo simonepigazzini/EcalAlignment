@@ -77,7 +77,8 @@ process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
 process.GlobalTag.toGet = cms.VPSet(
           cms.PSet(record = cms.string("TrackerAlignmentRcd"),
                    tag = cms.string("testTag"),
-                   connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
+                   connect = cms.untracked.string('sqlite_file:TkAlignment.db')
+                   #connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
                   ),
           #cms.PSet(record = cms.string("EBAlignmentRcd"),
              #tag = cms.string("EBAlignment_measured_v08_offline"),
@@ -87,11 +88,13 @@ process.GlobalTag.toGet = cms.VPSet(
              tag = cms.string("EEAlignment_measured_v05_offline"),
              #connect = cms.untracked.string("sqlite_file:dbEcalAlignment/EEAlign_2015.db")  #### New ####
              #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/23Jul/EEAlign_2015.db")  #### New ####
-             connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
+             connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
+             #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
              ),
           cms.PSet(record = cms.string("EBAlignmentRcd"),
              tag = cms.string("EBAlignment_measured_v05_offline"),
-             connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
+             connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
+             #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
              )
          ) 
 

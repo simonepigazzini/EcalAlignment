@@ -1,5 +1,5 @@
 
-void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, const char* title, const char* cut) {
+void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, const char* title, const char* cut, int col = 0) {
  
  TString toDraw;
  TString tcut;
@@ -12,14 +12,26 @@ void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, co
  hmc -> GetXaxis()->SetTitle(title);
  hmc -> GetYaxis()->SetTitle("Number of events");
  
- hmc->SetMarkerColor(kBlue);
- hmc->SetLineColor(kBlack);
- hmc->SetLineWidth(2);
- hmc->SetFillColor(kBlue);
- hmc->SetFillStyle(3002);
+ if (col == 0) {
+  hmc->SetMarkerColor(kBlue);
+  hmc->SetLineColor(kBlack);
+  hmc->SetLineWidth(2);
+  hmc->SetFillColor(kBlue);
+  hmc->SetFillStyle(3002);
+ }
+ else {
+  hmc->SetMarkerColor(kRed);
+  hmc->SetLineColor(kRed);
+  hmc->SetLineWidth(2);
+  hmc->SetFillColor(kRed);
+  hmc->SetFillStyle(3002); 
+ }
  
- TString  sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
- tinfo -> SetText(0.2,0.85,sinfo);
+ TString  sinfo;
+ if (col == 0) sinfo = Form ("#splitline{<%s>_{DATA} = %.2f #times 10^{-3}}{#sigma_{DATA} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
+ else          sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
+ if (col == 0) tinfo -> SetText(0.2,0.85,sinfo);
+ else          tinfo -> SetText(0.2,0.60,sinfo);
  tinfo -> SetTextSize(0.040);
  tinfo -> SetNDC(true); 
 }

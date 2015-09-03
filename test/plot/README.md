@@ -35,6 +35,21 @@ Get reference using MC trees:
     r99t drawModules.cxx\(\"/tmp/amassiro/treeECALnewTrkOldEcal.root\",\"2015DataNewTrkOldECALAll\",\"ETSC\>30\"\)
     
     
+    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150831_145837/treeECALAlignment.root
+    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"2015DataNewTrkNewECALSep2015\",\"ETSC\>30\"\)
+    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"2015DataNewTrkNewECALSep2015\",\"ETSC\>20\"\)
+    
+    
+    RunC myReReco
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150903_113327/treeECALAlignment.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150903_113327/0000/tree*.root
+
+    cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150903_113327/treeECALAlignment.root   /tmp/amassiro/tree_RunC.root
+    r99t drawModules.cxx\(\"/tmp/amassiro/tree_RunC.root\",\"2015CDataNewTrkNewECALSep2015\",\"ETSC\>30\"\)
+    cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150831_145837/treeECALAlignment.root   /tmp/amassiro/tree_RunB.root   
+    hadd /tmp/amassiro/tree_Run.root /tmp/amassiro/tree_RunC.root /tmp/amassiro/tree_RunB.root
+    r99t drawModules.cxx\(\"/tmp/amassiro/tree_Run.root\",\"2015DataNewTrkNewECALSep2015\",\"ETSC\>30\"\)
+    
+    
 Compare data with reference MC:
     
     hadd /tmp/amassiro/treeECALAlignment.root \
@@ -43,6 +58,13 @@ Compare data with reference MC:
 
     r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"2015Data\",\"electrons_classification\=\=0\&\&ETSC\>30\"\)
 
+    
+    
+    
+    hadd \
+      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150831_145837/treeECALAlignment.root \
+      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150831_145837/0000/treeECALAlign*.root
+    
     
     
     
