@@ -64,6 +64,8 @@ details:
     
     
     
+    ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC
+    ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB
     
     
     
@@ -112,7 +114,9 @@ Multicrab
     python multicrab.py  crab_projects_31Aug_fromRaw_newECAL_allData_RunB    status
     python multicrab.py  crab_projects_31Aug_fromRaw_newECAL_allData_RunC    status
     
-
+    python multicrab.py  crab_projects_04Sep_fromRaw_newECAL_allData_RunB    status
+    python multicrab.py  crab_projects_04Sep_fromRaw_newECAL_allData_RunC    status
+ 
     
 Samples
 ====

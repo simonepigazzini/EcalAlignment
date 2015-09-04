@@ -359,9 +359,9 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  ///---- 2D plot dphi/deta in EE ----
  
- TString CompleteCut_EE = Form ("(%s) && (iDetEE < -10)",CompleteCut.Data());
- TString CompleteCut_EE_ep = Form ("(%s) && (iDetEE < -10)",CompleteCut_ep.Data());
- TString CompleteCut_EE_em = Form ("(%s) && (iDetEE < -10)",CompleteCut_em.Data());
+ TString CompleteCut_EE = Form ("(%s) && (iDetEB < -10)",CompleteCut.Data());
+ TString CompleteCut_EE_ep = Form ("(%s) && (iDetEB < -10)",CompleteCut_ep.Data());
+ TString CompleteCut_EE_em = Form ("(%s) && (iDetEB < -10)",CompleteCut_em.Data());
  
  TH2F* DPhiMCvsPhi_EE_ep = new TH2F("DPhiMCvsPhi_EE_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
  TH2F* DPhiMCvsPhi_EE_em = new TH2F("DPhiMCvsPhi_EE_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);

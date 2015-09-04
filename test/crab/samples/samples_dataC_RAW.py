@@ -27,9 +27,19 @@ config.Data.runRange = '251562-254790'
 
 
 
-config.General.workArea     = 'crab_projects_31Aug_fromRaw_newECAL_allData_RunC'
+#config.General.workArea     = 'crab_projects_31Aug_fromRaw_newECAL_allData_RunC'
+#config.JobType.psetName = '../reco_my_tag_RAW2DIGI_RECO_AOD.py'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-254879_13TeV_PromptReco_Collisions15_JSON.txt"
+#config.JobType.maxMemoryMB = 2500    # 2.5 GB
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db', '../TkAlignment.db']
+
+
+
+
+config.General.workArea     = 'crab_projects_04Sep_fromRaw_newECAL_allData_RunC'
 config.JobType.psetName = '../reco_my_tag_RAW2DIGI_RECO_AOD.py'
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-254879_13TeV_PromptReco_Collisions15_JSON.txt"
 config.JobType.maxMemoryMB = 2500    # 2.5 GB
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db', '../TkAlignment.db']
