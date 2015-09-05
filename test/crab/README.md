@@ -127,6 +127,14 @@ Multicrab
     python multicrab.py  crab_projects_04Sep_fromRaw_newECAL_allData_RunB    status
     python multicrab.py  crab_projects_04Sep_fromRaw_newECAL_allData_RunC    status
  
+    python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_allData_RunB    status
+    python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_allData_RunC    status
+
+    python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_lastTrk_allData_RunB    status
+    python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_lastTrk_allData_RunC    status
+
+    
+    
     
 Samples
 ====

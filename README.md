@@ -59,6 +59,8 @@ e.g.
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_31Aug2015_additional.txt    myEEAlignment_2015.txt
     
 
+    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_31Aug2015_additional_NEW.txt    myEEAlignment_2015.txt
+    
 
 
 
