@@ -67,6 +67,16 @@ details:
     ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC
     ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB
     
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150904_093122/treeNew04Sep.root      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150904_093122/0000/tree*.root
+    hadd /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150904_092708/treeNew04SepRunB.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150904_092708/000*/tree*.root
+    
+
+    hadd /tmp/amassiro/newData04Sep.root \
+        /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150904_093122/treeNew04Sep.root     \
+        /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150904_092708/treeNew04SepRunB.root 
+    
+    
+    
     
     
 Multicrab
