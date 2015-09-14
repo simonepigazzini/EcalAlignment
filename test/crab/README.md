@@ -76,9 +76,29 @@ details:
         /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA04Sep2015AODRAWAllDataRunB/SingleElectron/crab_SingleElectron/150904_092708/treeNew04SepRunB.root 
     
     
+    ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Sep2015AODRAWAllDataRunClastTrk
+    ls -alrth /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Sep2015AODRAWAllDataRunBlastTrk
+    
+    hadd /tmp/amassiro/newData05SepLastTrk.root  \
+      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Sep2015AODRAWAllDataRunClastTrk/SingleElectron/crab_SingleElectron/150905_170323/0000/tre*.root  \
+      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Sep2015AODRAWAllDataRunBlastTrk/SingleElectron/crab_SingleElectron/150905_170304/*/tre*.root
     
     
     
+    TFile *_file0 = TFile::Open("/tmp/amassiro/dataOld.root")
+    TFile *_file1 = TFile::Open("/tmp/amassiro/newData05SepLastTrk.root")
+    TTree* t0 = (TTree*) _file0->Get("ntupleEcalAlignment/myTree")
+    TTree* t1 = (TTree*) _file1->Get("ntupleEcalAlignment/myTree")
+    TH1F es0 ("es0","before", 100, 0, 100)
+    TH1F es1 ("es1","after", 100, 0, 100)
+    t0->Draw("eleES >> es0")
+    t1->Draw("eleES >> es1")
+    es0.DrawNormalized()
+    es1.SetLineColor(kRed)
+    es1.DrawNormalized("same")
+
+
+
 Multicrab
 ====
 

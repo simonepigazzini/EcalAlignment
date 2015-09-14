@@ -77,9 +77,13 @@ process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
 process.GlobalTag.toGet = cms.VPSet(
 
           cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                   tag = cms.string("TrackerAlignment_forRun2015D_v0"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
+           tag = cms.string("Alignments"),
+           connect = cms.untracked.string("sqlite_file:alignments_MP.db")
+          ),
+          #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                   #tag = cms.string("TrackerAlignment_forRun2015D_v0"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
           cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
                    tag = cms.string("TrackerAlignmentExtendedErrors_forRun2015C"),
                    connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")

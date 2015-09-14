@@ -50,6 +50,13 @@ Get reference using MC trees:
     r99t drawModules.cxx\(\"/tmp/amassiro/tree_Run.root\",\"2015DataNewTrkNewECALSep2015\",\"ETSC\>30\"\)
     
     
+    hadd /tmp/amassiro/RunCalone.root    /tmp/amassiro/eos/cms//store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA07Sep2015AODRAWAllDataRunClastTrk/SingleElectron/crab_SingleElectron/150909_123538/0000/tr*.root
+    
+    hadd /tmp/amassiro/tree_Run.root    /tmp/amassiro/RunCalone.root  /tmp/amassiro/tree_RunB.root
+ 
+ 
+ 
+ 
 Compare data with reference MC:
     
     hadd /tmp/amassiro/treeECALAlignment.root \
