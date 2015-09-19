@@ -53,8 +53,23 @@ Get reference using MC trees:
     hadd /tmp/amassiro/RunCalone.root    /tmp/amassiro/eos/cms//store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA07Sep2015AODRAWAllDataRunClastTrk/SingleElectron/crab_SingleElectron/150909_123538/0000/tr*.root
     
     hadd /tmp/amassiro/tree_Run.root    /tmp/amassiro/RunCalone.root  /tmp/amassiro/tree_RunB.root
+    
+    r99t drawModules.cxx\(\"/tmp/amassiro/tree_Run.root\",\"2015DataNewTrkNewECALSep2015_MioTest\",\"ETSC\>30\"\)
+    r99t drawModules.cxx\(\"/tmp/amassiro/RunCalone.root\",\"2015DataNewTrkNewECALSep2015_MioTest\",\"ETSC\>30\"\)
+    
  
- 
+    TFile *_file0 = TFile::Open("/tmp/amassiro/dataOld.root")
+    TFile *_file1 = TFile::Open("/tmp/amassiro/newData05SepLastTrk.root")
+    TTree* t0 = (TTree*) _file0->Get("ntupleEcalAlignment/myTree")
+    TTree* t1 = (TTree*) _file1->Get("ntupleEcalAlignment/myTree")
+    TH1F es0 ("es0","before", 100, 0, 100)
+    TH1F es1 ("es1","after", 100, 0, 100)
+    t0->Draw("eleES >> es0")
+    t1->Draw("eleES >> es1")
+    es0.DrawNormalized()
+    es1.SetLineColor(kRed)
+    es1.DrawNormalized("same")
+    gPad->BuildLegend()
  
  
 Compare data with reference MC:

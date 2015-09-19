@@ -153,7 +153,9 @@ Multicrab
     python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_lastTrk_allData_RunB    status
     python multicrab.py  crab_projects_05Sep_fromRaw_newECAL_lastTrk_allData_RunC    status
 
-    
+    python multicrab.py  crab_projects_15Sep_PromptTrkAlign_RunB    status
+    python multicrab.py  crab_projects_15Sep_PromptTrkAlign_RunC    status
+
     
     
 Samples
