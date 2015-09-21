@@ -25,8 +25,8 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 #process.load('Configuration.StandardSequences.L1Reco_cff')
 #process.load('Configuration.StandardSequences.Reconstruction_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.load('Configuration.EventContent.EventContent_cff')
 
 process.configurationMetadata = cms.untracked.PSet(
@@ -51,7 +51,8 @@ process.source = cms.Source("PoolSource",
 # Additional output definition
 
 # Other statements
-process.GlobalTag.globaltag = 'GR_P_V56::All'
+#process.GlobalTag.globaltag = 'GR_P_V56::All'
+process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
 
 
 ################################################################################
@@ -76,7 +77,19 @@ removeMCMatching(process, ['All'], outputModules=[], postfix="")
 process.makePatElectrons.remove(process.electronMatch)
 process.makePatMuons.remove(process.muonMatch)
 
+# fix for private central reco
 process.patCandidates.remove(process.makePatTaus)
+process.patTaus.tauIDSources.chargedIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+process.patTaus.tauIDSources.neutralIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+process.patTaus.tauIDSources.puCorrPtSum     =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+
+
+
+#process.makePatTaus.remove(process.tauMatch)
+#process.makePatTaus.remove(process.tauGenJets)
+#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+#process.makePatTaus.remove(process.tauGenJetMatch)
+
 #process.makePatTaus.remove(process.tauMatch)
 #process.makePatTaus.remove(process.tauGenJets)
 
