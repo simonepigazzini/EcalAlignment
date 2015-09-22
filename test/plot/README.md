@@ -72,6 +72,11 @@ Get reference using MC trees:
     gPad->BuildLegend()
  
  
+ 
+    hadd /tmp/amassiro/runC.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA15Sep2015AODAllDataRunC/SingleElectron/crab_SingleElectron/150921_151702/0000/tr*.root
+    hadd /tmp/amassiro/runB.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA15Sep2015AODAllDataRunB/SingleElectron/crab_SingleElectron/150921_113742/0000/tr*.root
+    
+ 
 Compare data with reference MC:
     
     hadd /tmp/amassiro/treeECALAlignment.root \

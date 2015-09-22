@@ -66,21 +66,47 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Additional output definition
 
-# Other statements
-from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Prompt_v0', '')
-
 ###########################
 ## new tracker alignment ##
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
 process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
 process.GlobalTag.toGet = cms.VPSet(
-          cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                   tag = cms.string("testTag"),
-                   connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
-                  )
-         ) 
 
+          cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+           tag = cms.string("Alignments"),
+           connect = cms.untracked.string("sqlite_file:alignments_MP.db")
+          ),
+          #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                   #tag = cms.string("TrackerAlignment_forRun2015D_v0"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
+          cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
+                   tag = cms.string("TrackerAlignmentExtendedErrors_forRun2015C"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ),
+          cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
+                   tag = cms.string("SiPixelTemplateDBObject_38T_2015_v3_hltvalidation"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ),
+          cms.PSet(record = cms.string("SiPixelLorentzAngleRcd"),
+                   tag = cms.string("SiPixelLorentzAngle_2015_v3_hltvalidation"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ),
+          cms.PSet(record = cms.string("SiPixelGenErrorDBObjectRcd"),
+                   tag = cms.string("SiPixelGenErrorDBObject_38T_2015_v3_hltvalidation"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ),
+          cms.PSet(record = cms.string("SiStripLorentzAngleRcd"),
+                   tag = cms.string("SiStripLorentzAngleDeco_v3_offline"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS"),
+                   label = cms.untracked.string("deconvolution") 
+                  ),
+          cms.PSet(record = cms.string("SiStripBackPlaneCorrectionRcd"),
+                   tag = cms.string("SiStripBackPlaneCorrection_deco_GR10_v4_offline"),
+                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ),
+         
+)
 
 ###########################
 ###########################

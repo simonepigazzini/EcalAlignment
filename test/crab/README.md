@@ -107,6 +107,7 @@ Multicrab
     python multicrab.py   samples/samples_dataB_RAW.py
     python multicrab.py   samples/samples_dataC_RAW.py
     python multicrab.py   samples/samples_dataC.py
+    python multicrab.py   samples/samples_dataB_ElectronStream_RAW.py
 
     
     crab status folder_name

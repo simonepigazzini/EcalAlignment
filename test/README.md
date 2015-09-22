@@ -35,6 +35,12 @@ run:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAW.root
 
+    @raw level (electron stream)
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/ElectronStream/RAW/4C45E949-8A2E-E511-BE26-02163E011DDE.root /tmp/amassiro/
+    cmsRun reco_STREAMRAW2DIGI_RECO_AOD.py  \
+        inputFiles=file:/tmp/amassiro/4C45E949-8A2E-E511-BE26-02163E011DDE.root  \
+        outputFile=treeAlignDataElectronStream.root
+        
 closure test:
 
     cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
