@@ -12,6 +12,8 @@ process = cms.Process('EcalAlignment')
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 # add a list of strings for events to process
+process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
+
 options.parseArguments()
 
 
