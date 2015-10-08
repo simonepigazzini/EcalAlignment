@@ -77,6 +77,9 @@ Get reference using MC trees:
     hadd /tmp/amassiro/runB.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA15Sep2015AODAllDataRunB/SingleElectron/crab_SingleElectron/150921_113742/0000/tr*.root
     
  
+    hadd /tmp/amassiro/runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Oct2015AODAllDataRunD/SingleElectron/crab_SingleElectron/151005_072553/0000/treeECALAlignment_*.root
+ 
+ 
 Compare data with reference MC:
     
     hadd /tmp/amassiro/treeECALAlignment.root \
