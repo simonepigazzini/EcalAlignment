@@ -12,8 +12,6 @@ process = cms.Process('EcalAlignment')
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 # add a list of strings for events to process
-process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-
 options.parseArguments()
 
 
@@ -68,47 +66,73 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Additional output definition
 
+# Other statements
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_10_09_09_41_36', '')
+
 ###########################
 ## new tracker alignment ##
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
-process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
-process.GlobalTag.toGet = cms.VPSet(
+process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
 
-          cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-           tag = cms.string("Alignments"),
-           connect = cms.untracked.string("sqlite_file:alignments_MP.db")
-          ),
+#process.GlobalTag.toGet = cms.VPSet(
+
           #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                   #tag = cms.string("TrackerAlignment_forRun2015D_v0"),
+           #tag = cms.string("Alignments"),
+           #connect = cms.untracked.string("sqlite_file:alignments_MP.db")
+          #),
+          ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                   ##tag = cms.string("TrackerAlignment_forRun2015D_v0"),
+                   ##connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  ##),
+          #cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
+                   #tag = cms.string("TrackerAlignmentExtendedErrors_forRun2015C"),
                    #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
                   #),
-          cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
-                   tag = cms.string("TrackerAlignmentExtendedErrors_forRun2015C"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
-          cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
-                   tag = cms.string("SiPixelTemplateDBObject_38T_2015_v3_hltvalidation"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
-          cms.PSet(record = cms.string("SiPixelLorentzAngleRcd"),
-                   tag = cms.string("SiPixelLorentzAngle_2015_v3_hltvalidation"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
-          cms.PSet(record = cms.string("SiPixelGenErrorDBObjectRcd"),
-                   tag = cms.string("SiPixelGenErrorDBObject_38T_2015_v3_hltvalidation"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
-          cms.PSet(record = cms.string("SiStripLorentzAngleRcd"),
-                   tag = cms.string("SiStripLorentzAngleDeco_v3_offline"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS"),
-                   label = cms.untracked.string("deconvolution") 
-                  ),
-          cms.PSet(record = cms.string("SiStripBackPlaneCorrectionRcd"),
-                   tag = cms.string("SiStripBackPlaneCorrection_deco_GR10_v4_offline"),
-                   connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ),
-         
-)
+          #cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
+                   #tag = cms.string("SiPixelTemplateDBObject_38T_2015_v3_hltvalidation"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
+          #cms.PSet(record = cms.string("SiPixelLorentzAngleRcd"),
+                   #tag = cms.string("SiPixelLorentzAngle_2015_v3_hltvalidation"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
+          #cms.PSet(record = cms.string("SiPixelGenErrorDBObjectRcd"),
+                   #tag = cms.string("SiPixelGenErrorDBObject_38T_2015_v3_hltvalidation"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
+          #cms.PSet(record = cms.string("SiStripLorentzAngleRcd"),
+                   #tag = cms.string("SiStripLorentzAngleDeco_v3_offline"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS"),
+                   #label = cms.untracked.string("deconvolution") 
+                  #),
+          #cms.PSet(record = cms.string("SiStripBackPlaneCorrectionRcd"),
+                   #tag = cms.string("SiStripBackPlaneCorrection_deco_GR10_v4_offline"),
+                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                  #),
+         ##)
+                  ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                 ##tag = cms.string("testTag"),
+                 ##connect = cms.untracked.string('sqlite_file:TkAlignment.db')
+                 ###connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
+                ##),
+          ##cms.PSet(record = cms.string("EBAlignmentRcd"),
+             ##tag = cms.string("EBAlignment_measured_v08_offline"),
+             ##connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")   #### New ####
+             ##),
+          #cms.PSet(record = cms.string("EEAlignmentRcd"),
+             #tag = cms.string("EEAlignment_measured_v05_offline"),
+             ##connect = cms.untracked.string("sqlite_file:dbEcalAlignment/EEAlign_2015.db")  #### New ####
+             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/23Jul/EEAlign_2015.db")  #### New ####
+             #connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
+             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
+             #),
+          #cms.PSet(record = cms.string("EBAlignmentRcd"),
+             #tag = cms.string("EBAlignment_measured_v05_offline"),
+             #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
+             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
+             #)
+         #) 
 
 ###########################
 ###########################
