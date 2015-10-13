@@ -98,6 +98,10 @@ details:
     es1.DrawNormalized("same")
 
 
+    hadd /tmp/amassiro/runDraw.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA12Oct2015AODAllDataRunDRAW/SingleElectron/crab_SingleElectron/151012_160046/*/tr*
+    
+    
+    
 
 Multicrab
 ====
@@ -160,7 +164,9 @@ Multicrab
     python multicrab.py  crab_projects_15Sep_PromptTrkAlign_RunC    status
 
     python multicrab.py  crab_projects_05Oct_PromptTrkAlign_RunD    status
+    
     python multicrab.py  crab_projects_12Oct_PromptTrkAlign_RunD_RAW    status
+    python multicrab.py  crab_projects_13Oct_PromptTrkAlign_RunD_RAW    status
 
     
 Samples

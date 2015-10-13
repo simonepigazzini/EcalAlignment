@@ -52,6 +52,7 @@ print "Check all SM and Dee alignment"
 
 
    #hadd /tmp/amassiro/tree_MC.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150714_075454/0000/treeECALAlignment_*.root
+   #cp    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150714_075454/wjets.root   /tmp/amassiro/tree_MC.root 
 
 #for x in range(0, 36):
   ##toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA31Aug2015AODRAWAllDataRunC/SingleElectron/crab_SingleElectron/150903_113327/treeECALAlignment.root\\\",\\\"2015DataNewTrk\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&met\>30\\\"," + str(x) + ",-100,0\)"
@@ -126,17 +127,27 @@ print "Check all SM and Dee alignment"
 
 
 
+#for x in range(0, 36):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runD.root\\\",\\\"2015DataNew22SepLastTrkRunD\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+  
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runD.root\\\",\\\"2015DataNew22SepLastTrkRunD\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+
+
+
 for x in range(0, 36):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runD.root\\\",\\\"2015DataNew22SepLastTrkRunD\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDraw.root\\\",\\\"2015DataLastTrkRunDraw13Oct\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   print "toexec = ", toexec
   os.system (toexec)
   
 for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runD.root\\\",\\\"2015DataNew22SepLastTrkRunD\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDraw.root\\\",\\\"2015DataLastTrkRunDraw13Oct\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   print "toexec = ", toexec
   os.system (toexec)
-
-
 
 
 
