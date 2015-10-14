@@ -36,6 +36,11 @@ run:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAW.root
 
+    cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
+        outputFile=treeAlignDataFromRAWmyTag.root
+
+        
     @raw level (electron stream)
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/ElectronStream/RAW/4C45E949-8A2E-E511-BE26-02163E011DDE.root /tmp/amassiro/
     cmsRun reco_STREAMRAW2DIGI_RECO_AOD.py  \
@@ -83,6 +88,10 @@ CombineRotoTraslations
     CombineRotoTraslations   origin.txt    modification.txt    new.txt
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/1Mar2011/myEEAlignment_2010.txt   myEEAlignment_2011.txt    myEEAlignment_2011_combined.txt
 
+    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt  myEBAlignment_2015_NewTrkAlign_13Oct2015.txt    myEBAlignment_2015_combined.txt
+    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_13Oct2015.txt    myEEAlignment_2015_combined.txt
+
+    
 e.g.
 
     subtract two tags
@@ -90,6 +99,14 @@ e.g.
     CombineRotoTraslations   myEBAlignment_2011.txt   myEBAlignment_2012.txt    myEBAlignment_2011_2012_difference.txt
 
 
+Create local sqlite db
+====
+
+
+    cmsRun  copyFileAlignEE_cfg.py
+    cmsRun  copyFileAlignEB_cfg.py
+
+    
 
 Check alignment in GT
 ====

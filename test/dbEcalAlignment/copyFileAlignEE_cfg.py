@@ -6,7 +6,8 @@ process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_c
 
 process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.bool(True)
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_NewTrkAlign.txt')
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015.txt')
+#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015.txt')
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined.txt')
 
 
 
