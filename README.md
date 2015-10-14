@@ -19,6 +19,12 @@ where:
     kate: LXPLUS-ECALAlignment
     xps kate: lxplus-ECAL-alignment
 
+
+    
+    /home/amassiro/Cern/Code/ECAL/ECALAlignment
+    just to make plots faster in local
+
+    
 to setup:
 
     mkdir EcalValidation

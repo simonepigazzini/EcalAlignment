@@ -78,6 +78,10 @@ Get reference using MC trees:
     
  
     hadd /tmp/amassiro/runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA05Oct2015AODAllDataRunD/SingleElectron/crab_SingleElectron/151005_072553/0000/treeECALAlignment_*.root
+
+    hadd /tmp/amassiro/runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA12Oct2015AODAllDataRunDRAW/SingleElectron/crab_SingleElectron/151012_160046/000*/tr*.root 
+ 
+ 
  
  
 Compare data with reference MC:
@@ -115,6 +119,11 @@ Get Luminosity:
     
     cp -r /afs/cern.ch/user/m/marlow/public/lcr2 ./
     python lcr2/lcr2.py -i json.txt
+    
+    
+    export PATH=$HOME/.local/bin:/nfshome0/lumipro/brilconda/bin:$PATH
+    brilcalc lumi -i json.txt
+    
 
 Draw coefficients comparison:
 
@@ -139,14 +148,19 @@ Draw coefficients comparison:
     r99t EE_Alignment_Draw.cxx\(\"../myEEAlignment_2015.txt\",\"../data/myEEAlignment_2015_startup.txt\"\)
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015.txt\",\"../data/myEBAlignment_2015_startup.txt\"\)
 
+    r99t EE_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEEAlignment_2015.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEEAlignment_2015.txt\"\)
+    r99t EB_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEBAlignment_2015.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt\"\)
     
     
 Draw:
 
-    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"25Aug2014\",\"2015MC\"\)
-    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"25Aug2014\",\"2015MC\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
+    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"25Aug2014\")
+    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"25Aug2014\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
 
-
+    r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"14Oct2015\",\"1\"\)
+    r99t drawModules.cxx\(\"runD.root\",\"14Oct2015\",\"1\"\)
+    
+    
 General draw:
 
     r99t Draw.cxx\(\"/tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/test06Jul2015/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/crab_50ns_WJetsToLNu/150708_201650/0000/treeECALAlignment_1.root\",\"ETSC\",100,0,200,\"E_{T}\",\"1\"\)

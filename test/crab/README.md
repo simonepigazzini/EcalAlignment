@@ -167,6 +167,7 @@ Multicrab
     
     python multicrab.py  crab_projects_12Oct_PromptTrkAlign_RunD_RAW    status
     python multicrab.py  crab_projects_13Oct_PromptTrkAlign_RunD_RAW    status
+    python multicrab.py  crab_projects_13Oct_PromptTrkAlign_RunD_RAW    report
 
     python multicrab.py  crab_projects_14Oct_PromptTrkAlign_RunD_RAW_myTag    status
 
