@@ -81,6 +81,8 @@ Get reference using MC trees:
 
     hadd /tmp/amassiro/runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA12Oct2015AODAllDataRunDRAW/SingleElectron/crab_SingleElectron/151012_160046/000*/tr*.root 
  
+    hadd /tmp/amassiro/runDnew.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_14Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151014_135228/000*/tr*.root
+    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_14Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151014_135228/runDnew.root
  
  
  
@@ -104,6 +106,7 @@ Compare data with reference MC:
     
 Plot all modules:
 
+    
     python plotAlignmentModules.py
     
     r99t drawComparison.cxx\(\"2015MC/MC.txt\",\"2015DataOldTrk/DATA.txt\",\"2015DataNewTrk/DATA.txt\"\)
@@ -159,6 +162,8 @@ Draw:
 
     r99t drawModules.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"14Oct2015\",\"1\"\)
     r99t drawModules.cxx\(\"runD.root\",\"14Oct2015\",\"1\"\)
+    
+    r99t drawModules.cxx\(\"/tmp/amassiro/runDnew.root\",\"23Oct2015\",\"1\"\)
     
     
 General draw:
