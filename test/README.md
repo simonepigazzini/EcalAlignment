@@ -91,6 +91,8 @@ CombineRotoTraslations
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt  myEBAlignment_2015_NewTrkAlign_13Oct2015.txt    myEBAlignment_2015_combined.txt
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_13Oct2015.txt    myEEAlignment_2015_combined.txt
 
+    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEBAlignment_2015.txt   myEBAlignment_2015_NewTrkAlign_23Oct2015.txt    myEBAlignment_2015_combined.txt
+
     
 e.g.
 
