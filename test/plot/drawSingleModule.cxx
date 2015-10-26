@@ -6,7 +6,7 @@
 #include <fstream>
 
 
-void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, TString nameInFileRootComparison = ""){
+void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, TString nameInFileRootComparison = "", int specialRegions = 0){
  TDRStyle();
  
  gStyle->SetTitleYOffset(1.1);
@@ -27,6 +27,14 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  if (iEE != -100) {
   CompleteCut = Form("(%s) * (iDetEE == %d)", commonCut.Data(), iEE);
  }
+ 
+ if (specialRegions != 0) {
+  if (specialRegions == 1) { CompleteCut = Form("(%s) * (etaSC>0 && etaSC<1.5 )", commonCut.Data()); } //---- EB+
+  if (specialRegions == 2) { CompleteCut = Form("(%s) * (etaSC<0 && etaSC>-1.5)", commonCut.Data()); } //---- EB-
+  if (specialRegions == 3) { CompleteCut = Form("(%s) * (etaSC>1.5 )", commonCut.Data()); } //---- EE+
+  if (specialRegions == 4) { CompleteCut = Form("(%s) * (etaSC<-1.5)", commonCut.Data()); } //---- EE-
+ }
+ 
  //---- ---- ---- 
  
  TChain* trMC   = new TChain("ntupleEcalAlignment/myTree");

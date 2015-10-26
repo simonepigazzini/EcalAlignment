@@ -101,6 +101,10 @@ details:
     hadd /tmp/amassiro/runDraw.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA12Oct2015AODAllDataRunDRAW/SingleElectron/crab_SingleElectron/151012_160046/*/tr*
     
     
+    hadd /tmp/amassiro/runDnewnew.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151023_210315/000*/tr*.root
+    cp /tmp/amassiro/runDnewnew.root      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151023_210315/
+    
+    
     
 
 Multicrab

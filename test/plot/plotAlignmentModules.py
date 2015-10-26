@@ -152,15 +152,33 @@ print "Check all SM and Dee alignment"
 
 
 
-for x in range(0, 36):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew.root\\\",\\\"2015DataLastTrkRunDraw16OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
-  print "toexec = ", toexec
-  os.system (toexec)
+#for x in range(0, 36):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew.root\\\",\\\"2015DataLastTrkRunDraw16OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
   
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew.root\\\",\\\"2015DataLastTrkRunDraw16OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+
+
+
+#for x in range(0, 36):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewnew.root\\\",\\\"2015DataLastTrkRunDraw26OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+  
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewnew.root\\\",\\\"2015DataLastTrkRunDraw26OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+
 for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew.root\\\",\\\"2015DataLastTrkRunDraw16OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewnew.root\\\",\\\"2015DataLastTrkRunDraw26OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
   print "toexec = ", toexec
   os.system (toexec)
+
 
 
 
