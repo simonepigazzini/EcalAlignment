@@ -108,6 +108,7 @@ Plot all modules:
 
     
     python plotAlignmentModules.py
+    python plotAlignmentModulesBis.py
     
     r99t drawComparison.cxx\(\"2015MC/MC.txt\",\"2015DataOldTrk/DATA.txt\",\"2015DataNewTrk/DATA.txt\"\)
     

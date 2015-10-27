@@ -103,7 +103,10 @@ details:
     
     hadd /tmp/amassiro/runDnewnew.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151023_210315/000*/tr*.root
     cp /tmp/amassiro/runDnewnew.root      /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151023_210315/
+    cp    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151023_210315/runDnewnew.root  /tmp/amassiro/runDnewnew.root   
     
+    hadd /tmp/amassiro/runDnewnewClose.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151023_210245/000*/tr*.root
+    cp   /tmp/amassiro/runDnewnewClose.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151023_210245/
     
     
 
