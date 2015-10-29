@@ -113,6 +113,8 @@ details:
 Multicrab
 ====
 
+    voms-proxy-init --voms cms
+
     python multicrab.py   samples/samples_spring15.py
     python multicrab.py   samples/samples_dataB.py
     python multicrab.py   samples/samples_dataB_RAW.py

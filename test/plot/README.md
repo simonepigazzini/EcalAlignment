@@ -84,7 +84,9 @@ Get reference using MC trees:
     hadd /tmp/amassiro/runDnew.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_14Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151014_135228/000*/tr*.root
     /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_14Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151014_135228/runDnew.root
  
- 
+
+    hadd /tmp/amassiro/runDnew28Oct.root     /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151027_225555/000*/tr*.root
+    cp /tmp/amassiro/runDnew28Oct.root       /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151027_225555
  
 Compare data with reference MC:
     
