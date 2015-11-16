@@ -88,6 +88,13 @@ Get reference using MC trees:
     hadd /tmp/amassiro/runDnew28Oct.root     /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151027_225555/000*/tr*.root
     cp /tmp/amassiro/runDnew28Oct.root       /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151027_225555
  
+ 
+    hadd /tmp/amassiro/runDnew28OctV4.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151027_225612/000*/tr*.root
+    
+    
+    
+    
+ 
 Compare data with reference MC:
     
     hadd /tmp/amassiro/treeECALAlignment.root \
@@ -156,7 +163,9 @@ Draw coefficients comparison:
 
     r99t EE_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEEAlignment_2015.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEEAlignment_2015.txt\"\)
     r99t EB_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEBAlignment_2015.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt\"\)
-    
+
+    r99t EB_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEBAlignment_2015_combined_27Oct.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt\"\)
+
     
 Draw:
 

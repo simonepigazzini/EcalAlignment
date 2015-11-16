@@ -69,13 +69,18 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Prompt_v0', '')
-process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_10_09_09_41_36', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_10_09_09_41_36', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_11_03_11_22_18', '')
 
 ###########################
 ## new tracker alignment ##
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
 #process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
-process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
+#process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
+process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_11_03_11_22_18'
+
+#cp /afs/cern.ch/cms/CAF/CMSALCA/ALCA_TRACKERALIGN/MP/MPproduction/mp1885/jobData/jobm1/alignments_MP.db test/
+#https://hypernews.cern.ch/HyperNews/CMS/get/tif-alignment/490/2/1.html
 
 process.GlobalTag.toGet = cms.VPSet(
 
@@ -113,11 +118,11 @@ process.GlobalTag.toGet = cms.VPSet(
                    #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
                   #),
          #)
-                  #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                 #tag = cms.string("testTag"),
-                 #connect = cms.untracked.string('sqlite_file:TkAlignment.db')
-                 ##connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
-                #),
+         cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+              tag = cms.string("Alignments"),
+              connect = cms.untracked.string('sqlite_file:alignments_MP.db')
+              #connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
+              ),
           #cms.PSet(record = cms.string("EBAlignmentRcd"),
              #tag = cms.string("EBAlignment_measured_v08_offline"),
              #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")   #### New ####

@@ -11,6 +11,7 @@ check if I have writing permissions:
     source /cvmfs/cms.cern.ch/crab3/crab.sh
     crab checkwrite --site=T2_CH_CERN
     crab checkwrite --site=T2_CH_CERN  --lfn=/store/user/amassiro/ECAL/
+    crab checkwrite --site=T2_CH_CERN  --lfn=/store/group/dpg_ecal/alca_ecalcalib/amassiro/
 
 run
 
@@ -108,8 +109,8 @@ details:
     hadd /tmp/amassiro/runDnewnewClose.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151023_210245/000*/tr*.root
     cp   /tmp/amassiro/runDnewnewClose.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151023_210245/
     
-    
 
+    
 Multicrab
 ====
 
@@ -184,6 +185,7 @@ Multicrab
 
     python multicrab.py  crab_projects_27Oct_PromptTrkAlign_RunD_RAW_myTag    status
     
+    python multicrab.py  crab_projects_15Nov_NewTrkAlign_RunD_RAW_myTag       status
     
     
 Samples

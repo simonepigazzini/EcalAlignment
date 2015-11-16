@@ -60,14 +60,34 @@ config.Data.unitsPerJob   = 10
 
 
 
+#config.JobType.psetName = '../reco_my_tag_RAW2DIGI_RECO_AOD.py'
+#config.JobType.maxMemoryMB = 2500    # 2.5 GB
+
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-258750_13TeV_PromptReco_Collisions15_25ns_JSON.txt"
+#config.General.workArea     = 'crab_projects_27Oct_PromptTrkAlign_RunD_RAW_myTag'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
+
+
+
+
 config.JobType.psetName = '../reco_my_tag_RAW2DIGI_RECO_AOD.py'
 config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag'
-config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-258750_13TeV_PromptReco_Collisions15_25ns_JSON.txt"
-config.General.workArea     = 'crab_projects_27Oct_PromptTrkAlign_RunD_RAW_myTag'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_15Nov2015_RunD_RAW_newTrk_myTag'
+config.Data.outLFNDirBase = '/store/user/amassiro/ECAL/Alignment/DATA_15Nov2015_RunD_RAW_newTrk_myTag'
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-260627_13TeV_PromptReco_Collisions15_25ns_JSON.txt"
+config.General.workArea     = 'crab_projects_15Nov_NewTrkAlign_RunD_RAW_myTag'
 config.Data.allowNonValidInputDataset = True
-config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
+config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db', '../alignments_MP.db']
+
+# 74X_dataRun2_Candidate_2015_11_03_11_22_18
+
+
+
+
+
 
 
 
