@@ -88,6 +88,18 @@ process.GlobalTag.toGet = cms.VPSet(
            #tag = cms.string("Alignments"),
            #connect = cms.untracked.string("sqlite_file:alignments_MP.db")
           #),
+          
+          cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                  tag = cms.string("TrackerAlignment_2015-EOY_v1"),
+                  connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                 ),
+
+          cms.PSet(record = cms.string("TrackerSurfaceDeformationRcd"),
+                  tag = cms.string("TrackerSurfaceDeformations_2015-EOY_v1"),
+                  connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                 ),
+
+
           ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
                    ##tag = cms.string("TrackerAlignment_forRun2015D_v0"),
                    ##connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
@@ -118,11 +130,11 @@ process.GlobalTag.toGet = cms.VPSet(
                    #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
                   #),
          #)
-         cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-              tag = cms.string("Alignments"),
-              connect = cms.untracked.string('sqlite_file:alignments_MP.db')
+         #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+              #tag = cms.string("Alignments"),
+              #connect = cms.untracked.string('sqlite_file:alignments_MP.db')
               #connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
-              ),
+              #),
           #cms.PSet(record = cms.string("EBAlignmentRcd"),
              #tag = cms.string("EBAlignment_measured_v08_offline"),
              #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")   #### New ####
