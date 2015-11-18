@@ -189,6 +189,9 @@ Multicrab
     
     python multicrab.py  crab_projects_16Nov_NewTrkAlign_RunD_RAW_myTag       status
 
+    python multicrab.py  crab_projects_16Nov_NewTrkAlign_RunD_RAW_myTag       dry     status
+    
+    
     
     
 Samples

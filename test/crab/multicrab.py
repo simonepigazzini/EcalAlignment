@@ -92,6 +92,8 @@ if __name__ == '__main__':
            os.system("ls " + SamplesFile + " | awk '{print \" crab status "   + SamplesFile + "/\"$1" + "\" " + additionalConfiguration + "\"}' | /bin/sh")
           if sys.argv[2] == 'resubmit' :
            os.system("ls " + SamplesFile + " | awk '{print \" crab resubmit " + SamplesFile + "/\"$1" + "\" " + additionalConfiguration + "\"}' | /bin/sh") 
+          if sys.argv[2] == 'dry' :
+           os.system("ls " + SamplesFile + " | awk '{print \" crab " + additionalConfiguration + " "   + SamplesFile + "/\"$1" + "\" " + "\"}' ")
        else :
           os.system("ls " + SamplesFile + " | awk '{print \" crab status " + SamplesFile + "/\"$1}' | /bin/sh")
         
