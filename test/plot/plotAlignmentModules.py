@@ -181,20 +181,40 @@ print "Check all SM and Dee alignment"
 
 
 
-for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
-  print "toexec = ", toexec
-  os.system (toexec)
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+
+#for x in range(0, 36):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+  
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
+
+
+
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
 
 for x in range(0, 36):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   print "toexec = ", toexec
   os.system (toexec)
   
 for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnew28Oct.root\\\",\\\"2015DataLastTrkRunDraw28OctValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   print "toexec = ", toexec
   os.system (toexec)
+
+
+ 
 
 
 

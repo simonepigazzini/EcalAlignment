@@ -110,6 +110,12 @@ details:
     cp   /tmp/amassiro/runDnewnewClose.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_23Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectron/151023_210245/
     
 
+    hadd /tmp/amassiro/runDnewTrk2015.root      /tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/DATA_16Nov2015_RunD_RAW_newTrk_myTag/SingleElectron/crab_SingleElectronV4/151117_112354/000*/tr*.root
+    hadd /tmp/amassiro/runDnewTrk2015_V0.root   /tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/DATA_16Nov2015_RunD_RAW_newTrk_myTag/SingleElectron/crab_SingleElectron/151117_112328/000*/tr*.root
+    
+    
+    
+    
     
 Multicrab
 ====
