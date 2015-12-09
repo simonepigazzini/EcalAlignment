@@ -46,6 +46,15 @@ run:
     cmsRun reco_STREAMRAW2DIGI_RECO_AOD.py  \
         inputFiles=file:/tmp/amassiro/4C45E949-8A2E-E511-BE26-02163E011DDE.root  \
         outputFile=treeAlignDataElectronStream.root
+
+    0 Tesla
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015D/DoubleEG_0T/AOD/028FF375-2C7E-E511-84DA-02163E01197C.root /tmp/amassiro/
+    cmsRun Dump_DATA_cfg.py  \
+        inputFiles=file:/tmp/amassiro/028FF375-2C7E-E511-84DA-02163E01197C.root  \
+        outputFile=treeAlignData0Tesla.root
+
+    
+    
         
 closure test:
 
@@ -136,6 +145,14 @@ Dump last payload:
 
     
 
+PickEvent
+====
 
+s
+    edmPickEvents.py  "/DoubleEG/Run2015D-PromptReco-v4/MINIAOD" 254294:2:131
+    
+    edmCopyPickMerge outputFile=pickevents.root \
+       eventsToProcess=207279:114339019 \
+       inputFiles=/store/data/Run2012D/MuEG/AOD/PromptReco-v1/000/207/279/3ECCEBEF-6831-E211-99E5-003048D2BC5C.root
     
     

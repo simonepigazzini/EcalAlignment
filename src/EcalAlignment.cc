@@ -87,6 +87,7 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("pT",&pT_,"pT/D");
   myTree_ -> Branch("ET",&ET_,"ET/D");
   myTree_ -> Branch("MT",&MT_,"MT/D");
+  myTree_ -> Branch("mll",&mll_,"mll/D");
   myTree_ -> Branch("EoP",&EoP_,"EoP/D");
   myTree_ -> Branch("eleFBrem",&eleFBrem_,"eleFBrem/D");
   myTree_ -> Branch("eleES",&eleES_,"eleES/D");
@@ -283,8 +284,29 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
  edm::View<pat::Electron> electrons = *electronHandle;
  
 
-
- // Loop over electrons
+ reco::Candidate::LorentzVector L1;
+ reco::Candidate::LorentzVector L2;
+ bool found1 = false;
+ bool found2 = false;
+ 
+ // First loop over electrons -> pre-loop mll
+ //---- the first two are used to build mll
+ mll_ = -999;
+ for ( unsigned int i=0; i<electrons.size(); ++i ){
+  if (debug_) std::cout << ">>> >>> electron " << i << " : " << electrons.size() << std::endl;
+  pat::Electron electron = electrons.at(i);
+  if (found1 == false) {
+   L1 = electron.p4();
+   found1 = true;
+  }
+  else if (found2 == false) {
+   L2 = electron.p4();
+   found2 = true;
+   mll_ = (L1+L2).mass();
+  }
+ }
+ 
+ // Second loop over electrons
  for ( unsigned int i=0; i<electrons.size(); ++i ){
   if (debug_) std::cout << ">>> >>> electron " << i << " : " << electrons.size() << std::endl;
   pat::Electron electron = electrons.at(i);
@@ -470,6 +492,9 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 //    if (fabs(eta_) > EtaCutEB && (eleTrkIso_/pT_>0.04 || eleEcalIso_/pT_>0.05 || (eleHcalIsoD1_+eleHcalIsoD2_)/pT_>0.025)) continue;
 //    if (fabs(eta_) > EtaCutEB && (HoE_>0.025 || SigmaIEtaIEta_>0.03)) continue;
 
+  if ( i >= 2 ) mll_ = -999;
+  
+  
   ///==== save ELECTRON variables ====
   myTree_->Fill();
 

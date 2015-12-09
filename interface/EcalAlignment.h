@@ -71,6 +71,8 @@
 //---- to get weights
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
 
+//---- LorentzVector
+#include "DataFormats/Candidate/interface/Candidate.h"
 
 
 //
@@ -155,6 +157,7 @@ class EcalAlignment : public edm::EDAnalyzer {
   double pT_;
   double ET_;
   double MT_;
+  double mll_;
   double EoP_;
   double eleFBrem_;
   double eleES_;
