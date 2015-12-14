@@ -13,7 +13,7 @@ config.section_('JobType')
 config.JobType.psetName = '../Dump_MC_cfg.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['treeECALAlignment.root']
-config.JobType.maxJobRuntimeMin = 2800
+config.JobType.maxJobRuntimeMin = 2700
 config.JobType.allowUndistributedCMSSW = True
 
 
