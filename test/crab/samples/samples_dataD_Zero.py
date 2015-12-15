@@ -24,6 +24,8 @@ config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Coll
 config.General.workArea     = 'crab_projects_08Dec2015_RunD_0Tesla'
 config.Data.allowNonValidInputDataset = True
 
+# hadd /tmp/amassiro/ECAL0Tesla.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_08Dec2015_RunD_0Tesla/DoubleEG_0T/crab_DoubleEG/151214_125637/0000/tr*.root
+
 
 
 

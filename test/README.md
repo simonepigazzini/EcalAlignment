@@ -4,10 +4,12 @@ Examples
 Test file with perfect ideal MC geometry:
 
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/RunIISpring15DR74//WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/AODSIM/006D71A7-73FC-E411-8C41-6CC2173BBE60.root /tmp/amassiro/
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/RunIISpring15DR74/DYToEE_NNPDF30_13TeV-powheg-pythia8/AODSIM/007B5BA2-FF5E-E511-90B7-00266CF9B7AC.root /tmp/amassiro/
     
 run:
 
     cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/006D71A7-73FC-E411-8C41-6CC2173BBE60.root    outputFile=/tmp/amassiro/treeECALAlignment.root
+    cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/007B5BA2-FF5E-E511-90B7-00266CF9B7AC.root    outputFile=/tmp/amassiro/treeECALAlignment_DY.root
 
 Test file with DATA:
 
