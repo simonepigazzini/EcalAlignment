@@ -25,6 +25,7 @@ samples['25ns_DYJetsToEE']   = ['/DYToEE_NNPDF30_13TeV-powheg-pythia8/RunIISprin
 # Alternative global configuration
 ########
 
+config.JobType.maxMemoryMB = 2500    # 2.5 GB
 config.JobType.psetName = '../Dump_MC_cfg.py'
 #config.Data.outLFNDirBase = '/store/user/amassiro/ECAL/Alignment/test06Jul2015'
 #config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jul2015'
