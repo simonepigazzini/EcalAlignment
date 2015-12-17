@@ -3,6 +3,10 @@
 ########
 #        CRAB task name          DAS name                                                                                                              
 samples['25ns_DYJetsToEE']   = ['/DYToEE_NNPDF30_13TeV-powheg-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v1/AODSIM',  ['outputFile=treeECALAlignment.root']]
+
+# hadd /tmp/amassiro/ECAL_DYMC.root /store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC15Dec2015/DYToEE_NNPDF30_13TeV-powheg-pythia8/crab_25ns_DYJetsToEE/151215_105021/0000/tr*.root
+
+
 #samples['25ns_DYJetsToLL']   = ['/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v3/AODSIM',  ['outputFile=treeECALAlignment.root']]
 #samples['25ns_WJetsToLNu']   = ['/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v1/AODSIM',       ['outputFile=treeECALAlignment.root']]
 
