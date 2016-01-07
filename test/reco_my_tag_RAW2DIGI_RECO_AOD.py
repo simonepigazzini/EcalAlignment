@@ -77,7 +77,8 @@ process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_11
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
 #process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v0'
 #process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
-process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_11_03_11_22_18'
+#process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_11_03_11_22_18'
+process.GlobalTag.globaltag = '74X_dataRun2_EOY_Candidate_v0'
 
 #cp /afs/cern.ch/cms/CAF/CMSALCA/ALCA_TRACKERALIGN/MP/MPproduction/mp1885/jobData/jobm1/alignments_MP.db test/
 #https://hypernews.cern.ch/HyperNews/CMS/get/tif-alignment/490/2/1.html
@@ -89,15 +90,24 @@ process.GlobalTag.toGet = cms.VPSet(
            #connect = cms.untracked.string("sqlite_file:alignments_MP.db")
           #),
           
-          cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                  tag = cms.string("TrackerAlignment_2015-EOY_v1"),
-                  connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                 ),
+          #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                  #tag = cms.string("TrackerAlignment_2015-EOY_v1"),
+                  #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                 #),
 
-          cms.PSet(record = cms.string("TrackerSurfaceDeformationRcd"),
-                  tag = cms.string("TrackerSurfaceDeformations_2015-EOY_v1"),
-                  connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+          #cms.PSet(record = cms.string("TrackerSurfaceDeformationRcd"),
+                  #tag = cms.string("TrackerSurfaceDeformations_2015-EOY_v1"),
+                  #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
+                 #),
+
+##################
+#    0 Tesla     #
+         cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                  tag = cms.string("TrackerAlignment_v14_0T_offline"),
+                  connect = cms.untracked.string("frontier://FrontierPrep/CMS_CONDITIONS")
                  ),
+##################
+
 
 
           ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
@@ -139,18 +149,18 @@ process.GlobalTag.toGet = cms.VPSet(
              #tag = cms.string("EBAlignment_measured_v08_offline"),
              #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")   #### New ####
              #),
-          cms.PSet(record = cms.string("EEAlignmentRcd"),
-             tag = cms.string("EEAlignment_measured_v05_offline"),
-             #connect = cms.untracked.string("sqlite_file:dbEcalAlignment/EEAlign_2015.db")  #### New ####
-             #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/23Jul/EEAlign_2015.db")  #### New ####
-             connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
-             #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
-             ),
-          cms.PSet(record = cms.string("EBAlignmentRcd"),
-             tag = cms.string("EBAlignment_measured_v05_offline"),
-             connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
-             #connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
-             )
+          #########cms.PSet(record = cms.string("EEAlignmentRcd"),
+             #########tag = cms.string("EEAlignment_measured_v05_offline"),
+             ##########connect = cms.untracked.string("sqlite_file:dbEcalAlignment/EEAlign_2015.db")  #### New ####
+             ##########connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/23Jul/EEAlign_2015.db")  #### New ####
+             #########connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
+             ##########connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
+             #########),
+          #########cms.PSet(record = cms.string("EBAlignmentRcd"),
+             #########tag = cms.string("EBAlignment_measured_v05_offline"),
+             #########connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
+             ##########connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
+             #########)
          ) 
 
 ###########################

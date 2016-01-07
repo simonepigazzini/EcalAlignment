@@ -55,6 +55,10 @@ run:
         inputFiles=file:/tmp/amassiro/028FF375-2C7E-E511-84DA-02163E01197C.root  \
         outputFile=treeAlignData0Tesla.root
 
+    scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/DoubleEG/RAW/0612FA2F-C025-E511-AA96-02163E014770.root /tmp/amassiro/            
+    cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
+        outputFile=treeAlignData0TeslaMyTag.root
     
     
         
