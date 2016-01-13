@@ -114,6 +114,7 @@ details:
     hadd /tmp/amassiro/runDnewTrk2015_V0.root   /tmp/amassiro/eos/cms/store/user/amassiro/ECAL/Alignment/DATA_16Nov2015_RunD_RAW_newTrk_myTag/SingleElectron/crab_SingleElectron/151117_112328/000*/tr*.root
     
     
+    hadd /tmp/amassiro/data_0T.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_07Jan2016_RunD_RAW_Trk_0Tesla/DoubleEG_0T/crab_DoubleEG/160111_094920/0000/tr*.root
     
     
     
