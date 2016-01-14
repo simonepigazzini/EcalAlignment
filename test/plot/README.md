@@ -93,7 +93,6 @@ Get reference using MC trees:
     
     
     
-    
  
 Compare data with reference MC:
     
@@ -195,6 +194,12 @@ General draw:
     r99t Draw.cxx\(\"treeECALAlignment_all_ideal_MC.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     r99t Draw.cxx\(\"treeECALAlignment_all_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
 
+    /tmp/amassiro/data_0T.root
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\",\"data\ 0\ Tesla\"\)
+
+    
 General draw 2D:
 
 

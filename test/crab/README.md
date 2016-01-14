@@ -115,6 +115,8 @@ details:
     
     
     hadd /tmp/amassiro/data_0T.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_07Jan2016_RunD_RAW_Trk_0Tesla/DoubleEG_0T/crab_DoubleEG/160111_094920/0000/tr*.root
+    scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/Jan14/data_0T.root /tmp/amassiro/
+    
     
     
     
@@ -133,6 +135,7 @@ Multicrab
     python multicrab.py   samples/samples_dataD_RAW.py
     python multicrab.py   samples/samples_dataD_Zero.py
     python multicrab.py   samples/samples_dataD_Zero_RAW.py
+    python multicrab.py   samples/samples_ZeroTesla.py
     
 
     

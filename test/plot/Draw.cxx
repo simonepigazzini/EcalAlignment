@@ -31,7 +31,7 @@ TH1F * DrawOverflow(TH1F *h) {
 
 #include "TDRStyle.cc"
 
-void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000, float MIN = 0, float MAX = 1000, std::string varHR = "", std::string globalCut = "1") {
+void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000, float MIN = 0, float MAX = 1000, std::string varHR = "", std::string globalCut = "1",  std::string sampleHR = "MC") {
 
  TDRStyle();
  gStyle->SetTitleYOffset(1.1);
@@ -49,7 +49,7 @@ void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000
  std::vector<std::string> vNameSigHR;
  std::vector<double> vXsecSig;
  
- vNameSig.push_back(nameInFileRoot); vNameSigHR.push_back("MC");
+ vNameSig.push_back(nameInFileRoot); vNameSigHR.push_back(sampleHR);
  vXsecSig.push_back(1.); //---- pb
  
  nSig = vXsecSig.size();
