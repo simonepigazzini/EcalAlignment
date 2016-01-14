@@ -14,3 +14,6 @@ config.JobType.psetName = '../Dump_MC_cfg.py'
 config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jan2016'
 
 config.General.workArea     = 'crab_projects_14Jan'
+
+# private sample that was published on phys03
+config.Data.inputDBS='phys03'
