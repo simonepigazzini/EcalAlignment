@@ -199,6 +199,15 @@ General draw:
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\",\"data\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\",\"data\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"etaSC\",100,-3,3,\"#eta_{electron}\",\"electrons_classification\=\=0\&\&ETSC\>30\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&etaSC\>1.5\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&etaSC\<-1.5\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-1,1,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&etaSC\<-1.5\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-1,1,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&etaSC\>1.5\",\"data\ 0\ Tesla\"\)
+     
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>1.5\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\<-1.5\",\"data\ 0\ Tesla\"\)
+      
+      
      
     /tmp/amassiro/mc_0Tesla.root
     scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/Jan14/*.root /tmp/amassiro/
@@ -207,6 +216,10 @@ General draw:
     r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\",\"mc\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"etaSC\",100,-3,3,\"#eta_{electron}\",\"electrons_classification\=\=0\&\&ETSC\>30\",\"mc\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"ETSC\",100,0,400,\"E_{T}\",\"electrons_classification\=\=0\&\&ETSC\>10\",\"mc\ 0\ Tesla\"\)
+    
+    r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>1.5\",\"MC\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\<-1.5\",\"MC\ 0\ Tesla\"\)
+    
     
     
 General draw 2D:

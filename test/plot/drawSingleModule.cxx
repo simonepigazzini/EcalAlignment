@@ -6,14 +6,19 @@
 #include <fstream>
 
 
-void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, TString nameInFileRootComparison = "", int specialRegions = 0){
+void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, TString nameInFileRootComparison = "", int specialRegions = 0, int specialZeroTesla = 0){
  TDRStyle();
  
  gStyle->SetTitleYOffset(1.1);
  gStyle->cd();
 
  //---- for data
- TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
+ TString tempCut;
+ if (specialZeroTesla == 0) tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
+ else                       tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.Data());
+
+ 
+ 
  if (isMC == 0) {
   commonCut = tempCut;
  }
@@ -87,15 +92,23 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
 //  TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.04,0.04);
 //  TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,200,-0.02,0.02);
 
- TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC;
+ if (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,50,-0.01,0.01);
+ else                       DPhiMC = new TH1F("DPhiMC"     ," MC"  ,150,-0.025,0.025);
  TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,50,-0.01,0.01);
  TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,50,-0.01,0.01);
- TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,50,-0.005,0.005);
+ TH1F* DEtaMC;
+ if (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,50,-0.005,0.005);
+ else                       DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
  
- TH1F* DPhiMC_ref     = new TH1F("DPhiMC_ref",     " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ref;
+ if (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,50,-0.01,0.01);
+ else                       DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,150,-0.025,0.025);
  TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,50,-0.01,0.01);
  TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,50,-0.01,0.01);
- TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,50,-0.005,0.005);
+ TH1F* DEtaMC_ref;
+ if (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,50,-0.005,0.005);
+ else                       DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
  
  
  ///---- text info (begin) ----
@@ -260,159 +273,159 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
  
  
  
- ///---- 2D plot vs eta ----
- TString nameIsMC;
- if (isMC) {
-  nameIsMC = Form ("MC"); 
- }
- else {
-  nameIsMC = Form ("DATA");   
- }
- TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
- TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
- TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
- TH2F* DEtaMCvsEta    = new TH2F("DEtaMCvsEta"  ,nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
- createHisto2D(DPhiMCvsEta_ep, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_ep.Data());
- createHisto2D(DPhiMCvsEta_em, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_em.Data());
- createHisto2D(DPhiMCvsEta,    trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut.Data());
- createHisto2D(DEtaMCvsEta,    trMC, "deltaEtaSuperClusterAtVtx", "etaSC", "#Delta#eta vs #eta_{SC}",CompleteCut.Data());
- 
- TProfile* DPhiMCvsEta_ep_tx = (TProfile*) DPhiMCvsEta_ep->ProfileX();
- TProfile* DPhiMCvsEta_em_tx = (TProfile*) DPhiMCvsEta_em->ProfileX();
- TProfile* DPhiMCvsEta_tx    = (TProfile*) DPhiMCvsEta->ProfileX();
- TProfile* DEtaMCvsEta_tx    = (TProfile*) DEtaMCvsEta->ProfileX();
- 
- TCanvas* cDPhivsEta_ep = new TCanvas("cDphivsEta_ep","cDphivsEta_ep",700,700);
- DPhiMCvsEta_ep->Draw("colz");
- DPhiMCvsEta_ep_tx->Draw("same");
- gPad->SetGrid();
- FunctionDphi_ep->Draw("same");
- toDoShell = Form("%s/images/cDPhivsEta_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsEta_em = new TCanvas("cDphivsEta_em","cDphivsEta_em",700,700);
- DPhiMCvsEta_em->Draw("colz");
- DPhiMCvsEta_em_tx->Draw("same");
- gPad->SetGrid();
- FunctionDphi_em->Draw("same");
- toDoShell = Form("%s/images/cDPhivsEta_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
- DPhiMCvsEta->Draw("colz");
- DPhiMCvsEta_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDEtavsEta = new TCanvas("cDetavsEta","cDetavsEta",700,700);
- DEtaMCvsEta->Draw("colz");
- DEtaMCvsEta_tx->Draw("same");
- gPad->SetGrid();
- FunctionDeta->Draw("same");
- toDoShell = Form("%s/images/cDEtavsEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- 
- 
- ///---- 2D plot dphi/deta in EB ----
- 
- TString CompleteCut_EB = Form ("(%s) && (iDetEE < -10)",CompleteCut.Data());
- TString CompleteCut_EB_ep = Form ("(%s) && (iDetEE < -10)",CompleteCut_ep.Data());
- TString CompleteCut_EB_em = Form ("(%s) && (iDetEE < -10)",CompleteCut_em.Data());
- 
- TH2F* DPhiMCvsPhi_EB_ep = new TH2F("DPhiMCvsPhi_EB_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EB_em = new TH2F("DPhiMCvsPhi_EB_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EB    = new TH2F("DPhiMCvsPhi_EB",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DEtaMCvsPhi_EB    = new TH2F("DEtaMCvsPhi_EB"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- 
- createHisto2D(DPhiMCvsPhi_EB_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_ep.Data());
- createHisto2D(DPhiMCvsPhi_EB_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_em.Data());
- createHisto2D(DPhiMCvsPhi_EB, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB.Data());
- createHisto2D(DEtaMCvsPhi_EB, trMC, "deltaEtaSuperClusterAtVtx", "phiSC", "#Delta#eta vs #phi_{SC}",CompleteCut_EB.Data());
- 
- TProfile* DPhiMCvsPhi_EB_tx    = (TProfile*) DPhiMCvsPhi_EB->ProfileX();
- TProfile* DPhiMCvsPhi_EB_ep_tx = (TProfile*) DPhiMCvsPhi_EB_ep->ProfileX();
- TProfile* DPhiMCvsPhi_EB_em_tx = (TProfile*) DPhiMCvsPhi_EB_em->ProfileX();
- TProfile* DEtaMCvsPhi_EB_tx    = (TProfile*) DEtaMCvsPhi_EB->ProfileX();
- 
- TCanvas* cDPhivsPhi_EB = new TCanvas("cDphivsPhi_EB","cDphivsPhi_EB",700,700);
- DPhiMCvsPhi_EB->Draw("colz");
- DPhiMCvsPhi_EB_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EB_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsPhi_EB_ep = new TCanvas("cDphivsPhi_EB_ep","cDphivsPhi_EB_ep",700,700);
- DPhiMCvsPhi_EB_ep->Draw("colz");
- DPhiMCvsPhi_EB_ep_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EB_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsPhi_EB_em = new TCanvas("cDphivsPhi_EB_em","cDphivsPhi_EB_em",700,700);
- DPhiMCvsPhi_EB_em->Draw("colz");
- DPhiMCvsPhi_EB_em_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EB_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDEtavsPhi_EB = new TCanvas("cDetavsPhi_EB","cDetavsPhi_EB",700,700);
- DEtaMCvsPhi_EB->Draw("colz");
- DEtaMCvsPhi_EB_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDetavsPhi_EB_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- 
- ///---- 2D plot dphi/deta in EE ----
- 
- TString CompleteCut_EE = Form ("(%s) && (iDetEB < -10)",CompleteCut.Data());
- TString CompleteCut_EE_ep = Form ("(%s) && (iDetEB < -10)",CompleteCut_ep.Data());
- TString CompleteCut_EE_em = Form ("(%s) && (iDetEB < -10)",CompleteCut_em.Data());
- 
- TH2F* DPhiMCvsPhi_EE_ep = new TH2F("DPhiMCvsPhi_EE_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EE_em = new TH2F("DPhiMCvsPhi_EE_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DPhiMCvsPhi_EE    = new TH2F("DPhiMCvsPhi_EE",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- TH2F* DEtaMCvsPhi_EE    = new TH2F("DEtaMCvsPhi_EE"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
- 
- createHisto2D(DPhiMCvsPhi_EE_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_ep.Data());
- createHisto2D(DPhiMCvsPhi_EE_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_em.Data());
- createHisto2D(DPhiMCvsPhi_EE, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE.Data());
- createHisto2D(DEtaMCvsPhi_EE, trMC, "deltaEtaSuperClusterAtVtx", "phiSC", "#Delta#eta vs #phi_{SC}",CompleteCut_EE.Data());
- 
- TProfile* DPhiMCvsPhi_EE_tx    = (TProfile*) DPhiMCvsPhi_EE->ProfileX();
- TProfile* DPhiMCvsPhi_EE_ep_tx = (TProfile*) DPhiMCvsPhi_EE_ep->ProfileX();
- TProfile* DPhiMCvsPhi_EE_em_tx = (TProfile*) DPhiMCvsPhi_EE_em->ProfileX();
- TProfile* DEtaMCvsPhi_EE_tx    = (TProfile*) DEtaMCvsPhi_EE->ProfileX();
- 
- TCanvas* cDPhivsPhi_EE = new TCanvas("cDphivsPhi_EE","cDphivsPhi_EE",700,700);
- DPhiMCvsPhi_EE->Draw("colz");
- DPhiMCvsPhi_EE_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhivsPhi_EE_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsPhi_EE_ep = new TCanvas("cDphivsPhi_EE_ep","cDphivsPhi_EE_ep",700,700);
- DPhiMCvsPhi_EE_ep->Draw("colz");
- DPhiMCvsPhi_EE_ep_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EE_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDPhivsPhi_EE_em = new TCanvas("cDphivsPhi_EE_em","cDphivsPhi_EE_em",700,700);
- DPhiMCvsPhi_EE_em->Draw("colz");
- DPhiMCvsPhi_EE_em_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDphivsPhi_EE_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- 
- TCanvas* cDEtavsPhi_EE = new TCanvas("cDetavsPhi_EE","cDetavsPhi_EE",700,700);
- DEtaMCvsPhi_EE->Draw("colz");
- DEtaMCvsPhi_EE_tx->Draw("same");
- gPad->SetGrid();
- toDoShell = Form("%s/images/cDetavsPhi_EE_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
+//  ///---- 2D plot vs eta ----
+//  TString nameIsMC;
+//  if (isMC) {
+//   nameIsMC = Form ("MC"); 
+//  }
+//  else {
+//   nameIsMC = Form ("DATA");   
+//  }
+//  TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  nameIsMC.Data()  , 40,-3,3,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
+//  TH2F* DEtaMCvsEta    = new TH2F("DEtaMCvsEta"  ,nameIsMC.Data()  , 80,-3,3,  200,-0.04,0.04);
+//  createHisto2D(DPhiMCvsEta_ep, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_ep.Data());
+//  createHisto2D(DPhiMCvsEta_em, trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut_em.Data());
+//  createHisto2D(DPhiMCvsEta,    trMC, "deltaPhiSuperClusterAtVtx", "etaSC", "#Delta#phi vs #eta_{SC}",CompleteCut.Data());
+//  createHisto2D(DEtaMCvsEta,    trMC, "deltaEtaSuperClusterAtVtx", "etaSC", "#Delta#eta vs #eta_{SC}",CompleteCut.Data());
+//  
+//  TProfile* DPhiMCvsEta_ep_tx = (TProfile*) DPhiMCvsEta_ep->ProfileX();
+//  TProfile* DPhiMCvsEta_em_tx = (TProfile*) DPhiMCvsEta_em->ProfileX();
+//  TProfile* DPhiMCvsEta_tx    = (TProfile*) DPhiMCvsEta->ProfileX();
+//  TProfile* DEtaMCvsEta_tx    = (TProfile*) DEtaMCvsEta->ProfileX();
+//  
+//  TCanvas* cDPhivsEta_ep = new TCanvas("cDphivsEta_ep","cDphivsEta_ep",700,700);
+//  DPhiMCvsEta_ep->Draw("colz");
+//  DPhiMCvsEta_ep_tx->Draw("same");
+//  gPad->SetGrid();
+//  FunctionDphi_ep->Draw("same");
+//  toDoShell = Form("%s/images/cDPhivsEta_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsEta_em = new TCanvas("cDphivsEta_em","cDphivsEta_em",700,700);
+//  DPhiMCvsEta_em->Draw("colz");
+//  DPhiMCvsEta_em_tx->Draw("same");
+//  gPad->SetGrid();
+//  FunctionDphi_em->Draw("same");
+//  toDoShell = Form("%s/images/cDPhivsEta_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsEta = new TCanvas("cDphivsEta","cDphivsEta",700,700);
+//  DPhiMCvsEta->Draw("colz");
+//  DPhiMCvsEta_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDPhivsEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDEtavsEta = new TCanvas("cDetavsEta","cDetavsEta",700,700);
+//  DEtaMCvsEta->Draw("colz");
+//  DEtaMCvsEta_tx->Draw("same");
+//  gPad->SetGrid();
+//  FunctionDeta->Draw("same");
+//  toDoShell = Form("%s/images/cDEtavsEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  
+//  
+//  ///---- 2D plot dphi/deta in EB ----
+//  
+//  TString CompleteCut_EB = Form ("(%s) && (iDetEE < -10)",CompleteCut.Data());
+//  TString CompleteCut_EB_ep = Form ("(%s) && (iDetEE < -10)",CompleteCut_ep.Data());
+//  TString CompleteCut_EB_em = Form ("(%s) && (iDetEE < -10)",CompleteCut_em.Data());
+//  
+//  TH2F* DPhiMCvsPhi_EB_ep = new TH2F("DPhiMCvsPhi_EB_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsPhi_EB_em = new TH2F("DPhiMCvsPhi_EB_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsPhi_EB    = new TH2F("DPhiMCvsPhi_EB",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DEtaMCvsPhi_EB    = new TH2F("DEtaMCvsPhi_EB"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  
+//  createHisto2D(DPhiMCvsPhi_EB_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_ep.Data());
+//  createHisto2D(DPhiMCvsPhi_EB_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB_em.Data());
+//  createHisto2D(DPhiMCvsPhi_EB, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EB.Data());
+//  createHisto2D(DEtaMCvsPhi_EB, trMC, "deltaEtaSuperClusterAtVtx", "phiSC", "#Delta#eta vs #phi_{SC}",CompleteCut_EB.Data());
+//  
+//  TProfile* DPhiMCvsPhi_EB_tx    = (TProfile*) DPhiMCvsPhi_EB->ProfileX();
+//  TProfile* DPhiMCvsPhi_EB_ep_tx = (TProfile*) DPhiMCvsPhi_EB_ep->ProfileX();
+//  TProfile* DPhiMCvsPhi_EB_em_tx = (TProfile*) DPhiMCvsPhi_EB_em->ProfileX();
+//  TProfile* DEtaMCvsPhi_EB_tx    = (TProfile*) DEtaMCvsPhi_EB->ProfileX();
+//  
+//  TCanvas* cDPhivsPhi_EB = new TCanvas("cDphivsPhi_EB","cDphivsPhi_EB",700,700);
+//  DPhiMCvsPhi_EB->Draw("colz");
+//  DPhiMCvsPhi_EB_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDPhivsPhi_EB_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsPhi_EB_ep = new TCanvas("cDphivsPhi_EB_ep","cDphivsPhi_EB_ep",700,700);
+//  DPhiMCvsPhi_EB_ep->Draw("colz");
+//  DPhiMCvsPhi_EB_ep_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDPhivsPhi_EB_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsPhi_EB_em = new TCanvas("cDphivsPhi_EB_em","cDphivsPhi_EB_em",700,700);
+//  DPhiMCvsPhi_EB_em->Draw("colz");
+//  DPhiMCvsPhi_EB_em_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDphivsPhi_EB_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDEtavsPhi_EB = new TCanvas("cDetavsPhi_EB","cDetavsPhi_EB",700,700);
+//  DEtaMCvsPhi_EB->Draw("colz");
+//  DEtaMCvsPhi_EB_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDetavsPhi_EB_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  
+//  ///---- 2D plot dphi/deta in EE ----
+//  
+//  TString CompleteCut_EE = Form ("(%s) && (iDetEB < -10)",CompleteCut.Data());
+//  TString CompleteCut_EE_ep = Form ("(%s) && (iDetEB < -10)",CompleteCut_ep.Data());
+//  TString CompleteCut_EE_em = Form ("(%s) && (iDetEB < -10)",CompleteCut_em.Data());
+//  
+//  TH2F* DPhiMCvsPhi_EE_ep = new TH2F("DPhiMCvsPhi_EE_ep",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsPhi_EE_em = new TH2F("DPhiMCvsPhi_EE_em",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DPhiMCvsPhi_EE    = new TH2F("DPhiMCvsPhi_EE",  nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  TH2F* DEtaMCvsPhi_EE    = new TH2F("DEtaMCvsPhi_EE"  ,nameIsMC.Data()  , 36,-3.15,3.15,  200,-0.04,0.04);
+//  
+//  createHisto2D(DPhiMCvsPhi_EE_ep, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_ep.Data());
+//  createHisto2D(DPhiMCvsPhi_EE_em, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE_em.Data());
+//  createHisto2D(DPhiMCvsPhi_EE, trMC, "deltaPhiSuperClusterAtVtx", "phiSC", "#Delta#phi vs #phi_{SC}",CompleteCut_EE.Data());
+//  createHisto2D(DEtaMCvsPhi_EE, trMC, "deltaEtaSuperClusterAtVtx", "phiSC", "#Delta#eta vs #phi_{SC}",CompleteCut_EE.Data());
+//  
+//  TProfile* DPhiMCvsPhi_EE_tx    = (TProfile*) DPhiMCvsPhi_EE->ProfileX();
+//  TProfile* DPhiMCvsPhi_EE_ep_tx = (TProfile*) DPhiMCvsPhi_EE_ep->ProfileX();
+//  TProfile* DPhiMCvsPhi_EE_em_tx = (TProfile*) DPhiMCvsPhi_EE_em->ProfileX();
+//  TProfile* DEtaMCvsPhi_EE_tx    = (TProfile*) DEtaMCvsPhi_EE->ProfileX();
+//  
+//  TCanvas* cDPhivsPhi_EE = new TCanvas("cDphivsPhi_EE","cDphivsPhi_EE",700,700);
+//  DPhiMCvsPhi_EE->Draw("colz");
+//  DPhiMCvsPhi_EE_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDPhivsPhi_EE_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsPhi_EE_ep = new TCanvas("cDphivsPhi_EE_ep","cDphivsPhi_EE_ep",700,700);
+//  DPhiMCvsPhi_EE_ep->Draw("colz");
+//  DPhiMCvsPhi_EE_ep_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDphivsPhi_EE_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDPhivsPhi_EE_em = new TCanvas("cDphivsPhi_EE_em","cDphivsPhi_EE_em",700,700);
+//  DPhiMCvsPhi_EE_em->Draw("colz");
+//  DPhiMCvsPhi_EE_em_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDphivsPhi_EE_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
+//  
+//  TCanvas* cDEtavsPhi_EE = new TCanvas("cDetavsPhi_EE","cDetavsPhi_EE",700,700);
+//  DEtaMCvsPhi_EE->Draw("colz");
+//  DEtaMCvsPhi_EE_tx->Draw("same");
+//  gPad->SetGrid();
+//  toDoShell = Form("%s/images/cDetavsPhi_EE_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+//  gPad->SaveAs(toDoShell.Data());
  
  
  
