@@ -198,20 +198,20 @@ print "Check all SM and Dee alignment"
 
 
 
-#for x in range(0, 4):
-  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
+##for x in range(0, 4):
+  ##toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100,-100,0,\\\"/tmp/amassiro/tree_MC.root\\\","+ str(x+1) +"\)"
+  ##print "toexec = ", toexec
+  ##os.system (toexec)
+
+#for x in range(0, 36):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   #print "toexec = ", toexec
   #os.system (toexec)
-
-for x in range(0, 36):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
-  print "toexec = ", toexec
-  os.system (toexec)
   
-for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
-  print "toexec = ", toexec
-  os.system (toexec)
+#for x in range(0, 4):
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/runDnewTrk2015.root\\\",\\\"2015DataLastTrkRunDraw18NovValidation\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
+  #print "toexec = ", toexec
+  #os.system (toexec)
 
 
  
@@ -249,4 +249,47 @@ for x in range(0, 4):
   #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/dataOld.root\\\",\\\"2015DataOld\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/tree_MC.root\\\"\)"
   #print "toexec = ", toexec
   #os.system (toexec)
+
+
+
+
+
+###########
+# 0 Tesla #
+# Z>ee cuts 
+
+
+for x in range(0, 4):
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_0T.root\\\",\\\"2015ZeroTesla18Jan2016\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/mc_0Tesla.root\\\","+ str(x+1) +"\)"
+  print "toexec = ", toexec
+  os.system (toexec)
+
+for x in range(0, 36):
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_0T.root\\\",\\\"2015ZeroTesla18Jan2016\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/mc_0Tesla.root\\\"\)"
+  print "toexec = ", toexec
+  os.system (toexec)
+  
+for x in range(0, 4):
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_0T.root\\\",\\\"2015ZeroTesla18Jan2016\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100," + str(x) + ",0,\\\"/tmp/amassiro/mc_0Tesla.root\\\"\)"
+  print "toexec = ", toexec
+  os.system (toexec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

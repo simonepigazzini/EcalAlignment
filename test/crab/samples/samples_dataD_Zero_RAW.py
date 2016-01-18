@@ -31,6 +31,9 @@ config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Coll
 config.General.workArea     = 'crab_projects_07Jan2016_RunD_RAW_0Tesla'
 config.Data.allowNonValidInputDataset = True
 #config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
+# /media/data/amassiro/ECALalignment/2016/Jan14
+
+
 
 
 

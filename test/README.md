@@ -154,7 +154,7 @@ Dump last payload:
 PickEvent
 ====
 
-s
+
     edmPickEvents.py  "/DoubleEG/Run2015D-PromptReco-v4/MINIAOD" 254294:2:131
     
     edmCopyPickMerge outputFile=pickevents.root \

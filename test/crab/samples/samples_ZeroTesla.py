@@ -13,6 +13,10 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 config.JobType.psetName = '../Dump_MC_cfg.py'
 config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jan2016'
 
+# hadd /tmp/amassiro/mc_0Tesla.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC14Jan2016/DYToEE_NNPDF30_13TeV-powheg-pythia8/crab_25ns_DYJetsToEE/160114_230555/0000/tr*.root
+# /media/data/amassiro/ECALalignment/2016/Jan14
+
+
 config.General.workArea     = 'crab_projects_14Jan'
 
 # private sample that was published on phys03
