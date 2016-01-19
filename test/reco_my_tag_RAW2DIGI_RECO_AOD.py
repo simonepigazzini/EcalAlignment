@@ -153,11 +153,10 @@ process.GlobalTag.toGet = cms.VPSet(
              tag = cms.string("EEAlignment_measured_v05_offline"),
              connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
              ),
-          #########cms.PSet(record = cms.string("EBAlignmentRcd"),
-             #########tag = cms.string("EBAlignment_measured_v05_offline"),
-             #########connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
-             ##########connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
-             #########)
+          cms.PSet(record = cms.string("EBAlignmentRcd"),
+             tag = cms.string("EBAlignment_measured_v05_offline"),
+             connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
+             ),
          ) 
 
 ###########################

@@ -48,11 +48,21 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
 
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_0Tesla'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_0Tesla'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-260627_13TeV_PromptReco_Collisions15_ZeroTesla_25ns_JSON.txt"
+#config.General.workArea     = 'crab_projects_19Jan2016_RunD_RAW_0Tesla'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EEAlign_2015.db']
+
+
+
+
+
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_and_EB_0Tesla'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-260627_13TeV_PromptReco_Collisions15_ZeroTesla_25ns_JSON.txt"
-config.General.workArea     = 'crab_projects_19Jan2016_RunD_RAW_0Tesla'
+config.General.workArea     = 'crab_projects_19Jan2016_RunD_RAW_0Tesla_EE_and_EB'
 config.Data.allowNonValidInputDataset = True
-config.JobType.inputFiles = ['../EEAlign_2015.db']
+config.JobType.inputFiles = ['../EEAlign_2015.db', '../EBAlign_2015.db']
 
 
 
