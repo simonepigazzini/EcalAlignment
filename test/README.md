@@ -111,7 +111,11 @@ CombineRotoTraslations
     CombineRotoTraslations  myEBAlignment_2015_combined.txt   myEBAlignment_2015_NewTrkAlign_26Oct2015.txt   myEBAlignment_2015_combined_27Oct.txt
     CombineRotoTraslations  myEEAlignment_2015_combined.txt   myEEAlignment_2015_NewTrkAlign_26Oct2015.txt   myEEAlignment_2015_combined_27Oct.txt
 
+    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/    
+    CombineRotoTraslations  myEBAlignment_2015_combined_27Oct.txt   myEBAlignment_2015_18Jan2016_0Tesla.txt  myEBAlignment_2015_0Tesla_combined.txt   
+    CombineRotoTraslations  myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_18Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_combined.txt   
     
+    CombineRotoTraslations  myEEAlignment_2015_0Tesla_combined.txt  myEEAlignment_2015_19Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_19Jan_combined.txt   
     
     
     
