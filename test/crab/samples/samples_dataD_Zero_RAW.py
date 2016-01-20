@@ -63,7 +63,8 @@ config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Coll
 config.General.workArea     = 'crab_projects_19Jan2016_RunD_RAW_0Tesla_EE_and_EB'
 config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EEAlign_2015.db', '../EBAlign_2015.db']
-
+##hadd /tmp/amassiro/data_0T_EE_EB.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_and_EB_0Tesla/DoubleEG_0T/crab_DoubleEG/160119_171605/0000/tr*.root
+#/media/data/amassiro/ECALalignment/2016/Jan14/data_0T_EE_EB.root
 
 
 
