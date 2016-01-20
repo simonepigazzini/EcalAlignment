@@ -165,6 +165,8 @@ Draw coefficients comparison:
 
     r99t EB_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEBAlignment_2015_combined_27Oct.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt\"\)
 
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_0Tesla_combined.txt\",\"../myEBAlignment_2015_combined_27Oct.txt\"\)
+
     
 Draw:
 
@@ -206,6 +208,7 @@ General draw:
      
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>1.5\",\"data\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\<-1.5\",\"data\ 0\ Tesla\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>-1.5\&\&etaSC\<1.5\",\"data\ 0\ Tesla\"\)
       
       
      
