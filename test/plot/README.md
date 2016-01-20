@@ -211,7 +211,9 @@ General draw:
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>-1.5\&\&etaSC\<1.5\",\"data\ 0\ Tesla\"\)
       
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\",\"data\ 0\ Tesla\",\"ETSC\"\)
-    
+    r99t Draw.cxx\(\"/tmp/amassiro/data_38T.root\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\",\"data\ 3.8\ Tesla\",\"ETSC\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\",\"data\ 0\ Tesla\",\"1\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/data_38T.root\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\",\"data\ 3.8\ Tesla\",\"1\"\)
     
     
      
@@ -230,6 +232,8 @@ General draw:
     
 General draw 2D:
 
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_0T.root\",\"ETSC\",100,30,200,\"ET\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_38T.root\",\"ETSC\",100,30,200,\"ET\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
 
     r99t Draw2D.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>30\"\)
     r99t Draw2D.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"ETSC\>20\"\)
