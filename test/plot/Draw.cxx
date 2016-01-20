@@ -31,8 +31,12 @@ TH1F * DrawOverflow(TH1F *h) {
 
 #include "TDRStyle.cc"
 
-void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000, float MIN = 0, float MAX = 1000, std::string varHR = "", std::string globalCut = "1",  std::string sampleHR = "MC") {
+void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000, float MIN = 0, float MAX = 1000, std::string varHR = "", std::string globalCut = "1",  std::string sampleHR = "MC", std::string moreweight = "1") {
 
+ globalCut = "(" + globalCut + ")*(" + moreweight + ")";
+ std::cout << " globalCut = " << globalCut << std::endl;
+ 
+ 
  TDRStyle();
  gStyle->SetTitleYOffset(1.1);
  gStyle->cd();

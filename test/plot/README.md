@@ -210,7 +210,10 @@ General draw:
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\<-1.5\",\"data\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\>-1.5\&\&etaSC\<1.5\",\"data\ 0\ Tesla\"\)
       
-      
+    r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\",\"data\ 0\ Tesla\",\"ETSC\"\)
+    
+    
+    
      
     /tmp/amassiro/mc_0Tesla.root
     scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/Jan14/*.root /tmp/amassiro/
