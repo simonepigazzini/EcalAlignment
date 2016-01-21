@@ -87,6 +87,7 @@ void Draw2D(std::string nameInFileRoot, std::string var_Y = "etaSC", int NBIN_Y 
  cc2D_x->SetGrid();
  sum_h_Sig_tx->Draw("PE");
  
+ sum_h_Sig_tx->SaveAs("test.root");
  
 }
 

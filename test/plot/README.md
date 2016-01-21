@@ -232,9 +232,17 @@ General draw:
     
 General draw 2D:
 
-    r99t Draw2D.cxx\(\"/tmp/amassiro/data_0T.root\",\"ETSC\",100,30,200,\"ET\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
-    r99t Draw2D.cxx\(\"/tmp/amassiro/data_38T.root\",\"ETSC\",100,30,200,\"ET\",\"etaSC\",100,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_0T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",1000,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_38T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",1000,-3,3,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_0T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",200,-0.5,0.5,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_38T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",200,-0.5,0.5,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
 
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_0T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",1000,-0.1,0.1,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+    r99t Draw2D.cxx\(\"/tmp/amassiro/data_38T.root\",\"ETSC\",200,30,200,\"ET\",\"etaSC\",1000,-0.1,0.1,\"#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\"\)
+
+    
+    
     r99t Draw2D.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"electrons_classification\=\=0\&\&ETSC\>30\"\)
     r99t Draw2D.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"ETSC\>20\"\)
     r99t Draw2D.cxx\(\"/tmp/amassiro/treeECALAlignment.root\",\"deltaEtaSuperClusterAtVtx\",50,-0.01,0.01,\"#Delta#eta\",\"etaSC\",10,-3,3,\"#eta_{SC}\",\"ETSC\<20\"\)
