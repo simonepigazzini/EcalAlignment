@@ -91,6 +91,13 @@ Get reference using MC trees:
  
     hadd /tmp/amassiro/runDnew28OctV4.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151027_225612/000*/tr*.root
     
+Test:
+
+    hadd /tmp/amassiro/MC.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC15Dec2015/DYToEE_NNPDF30_13TeV-powheg-pythia8/crab_25ns_DYJetsToEE/151215_105021/0000/treeECALAlignment_*.root
+    r99t /tmp/amassiro/MC.root 
+    myTree->Draw("DeltaEtaIn:nvtx")
+    myTree->Draw("DeltaPhiIn:nvtx")
+
     
     
  
