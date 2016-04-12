@@ -95,9 +95,67 @@ Test:
 
     hadd /tmp/amassiro/MC.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC15Dec2015/DYToEE_NNPDF30_13TeV-powheg-pythia8/crab_25ns_DYJetsToEE/151215_105021/0000/treeECALAlignment_*.root
     r99t /tmp/amassiro/MC.root 
-    myTree->Draw("DeltaEtaIn:nvtx")
-    myTree->Draw("DeltaPhiIn:nvtx")
+    myTree = (TTree*) _file0->Get("ntupleEcalAlignment/myTree");
+    myTree->Draw("DeltaEtaIn:nvtx","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))","colz")
+    myTree->Draw("DeltaPhiIn:nvtx","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))","colz")
 
+    myTree = (TTree*) _file0->Get("ntupleEcalAlignment/myTree");
+    TH2F histoDeta("histoDeta","Deta",40,0,40,100,-0.005, 0.005);
+    // myTree->Draw("DeltaEtaIn:nvtx >> histoDeta","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))","colz");
+    myTree->Draw("DeltaEtaIn:nvtx >> histoDeta","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3)) && (etaSC>0.0 && etaSC<1.5)","colz");
+    // myTree->Draw("DeltaEtaIn:nvtx >> histoDeta","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3)) && (etaSC>1.5)","colz");
+    histoDeta.Draw("colz");
+    TProfile* sum_h_Sig_tx = (TProfile*) histoDeta.ProfileX();
+    sum_h_Sig_tx->SetMarkerSize (1.5);
+    sum_h_Sig_tx->SetMarkerStyle (22);
+    sum_h_Sig_tx->SetMarkerColor (kRed);
+    sum_h_Sig_tx->SetLineColor (kRed);
+    sum_h_Sig_tx->SetLineWidth(3);
+    sum_h_Sig_tx->SetLineStyle(1);
+    
+    histoDeta.GetYaxis()->SetRangeUser(-0.001, 0.001);
+    histoDeta.GetXaxis()->SetTitle("number vertices");
+    histoDeta.GetYaxis()->SetTitle("#Delta #eta");
+    sum_h_Sig_tx->Draw("P same");
+     
+
+    histoDeta.GetYaxis()->SetRangeUser(-0.0005, 0.0005);
+    sum_h_Sig_tx->Draw("P same");
+
+    
+    
+    myTree = (TTree*) _file0->Get("ntupleEcalAlignment/myTree");
+    TH2F histoDphi("histoDphi","Dphi",40,0,40,100,-0.005, 0.005);
+    // myTree->Draw("DeltaPhiIn:nvtx >> histoDphi","eleCharge > 0 && (electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))","colz");
+    myTree->Draw("DeltaPhiIn:nvtx >> histoDphi","eleCharge > 0 && (electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3)) && (etaSC>0.0 && etaSC<1.5)","colz");
+    // myTree->Draw("DeltaPhiIn:nvtx >> histoDphi","eleCharge > 0 && (electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3)) && (etaSC>1.5)","colz");
+    histoDphi.Draw("colz");
+    TProfile* sum_h_Sig_tx = (TProfile*) histoDphi.ProfileX();
+    sum_h_Sig_tx->SetMarkerSize (1.5);
+    sum_h_Sig_tx->SetMarkerStyle (22);
+    sum_h_Sig_tx->SetMarkerColor (kRed);
+    sum_h_Sig_tx->SetLineColor (kRed);
+    sum_h_Sig_tx->SetLineWidth(3);
+    sum_h_Sig_tx->SetLineStyle(1);
+    
+    histoDphi.GetYaxis()->SetRangeUser(0.000, 0.002);
+    histoDphi.GetXaxis()->SetTitle("number vertices");
+    histoDphi.GetYaxis()->SetTitle("#Delta #varphi");
+    sum_h_Sig_tx->Draw("P same");
+     
+
+     
+    TH2F histoDphi("histoDphi","Dphi",40,0,40,100,-0.001, 0.001);
+    myTree->Draw("DeltaPhiIn:nvtx >> histoDphi","(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))","colz");
+
+    
+    
+    TFile *f1 = new TFile("/tmp/amassiro/MC.root");
+    TTree *ntuple = (TTree*) f1->Get("ntupleEcalAlignment/myTree");
+    TFile *f2 = new TFile("/tmp/amassiro/small.root","recreate");
+    TTree *small = ntuple->CopyTree("(electrons_classification==0 && ETSC>30) && mll<95 && mll>85  && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))");
+    small->Write();
+    
     
     
  
