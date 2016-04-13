@@ -274,7 +274,7 @@ int main(int argc, char** argv)
  double DPHIe_SC_RMS[4];
  
  
- std::ifstream* file;
+ std::ifstream* file = new std::ifstream();
  if (inputFilesPosition != ""){
   file = new std::ifstream(inputFilesPosition.c_str());
   if(!file->is_open())
