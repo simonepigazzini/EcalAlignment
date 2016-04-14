@@ -128,16 +128,7 @@ int main(int argc, char** argv)
 
  number_line = 0; 
  for (int iDee=0; iDee<4; iDee++) {
-  
-//   outFile << " "   ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << rotation_Combination.getPhi() << " "          ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << rotation_Combination.getTheta() << " "        ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << rotation_Combination.getPsi() << " "          ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100 * translation_Combination.getX() << " "   ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100 * translation_Combination.getY() << " "   ;
-//   outFile << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100 * translation_Combination.getZ() << " "   ;
-//   outFile << std::endl;
-  
+    
   int sign = -1; // EE- or EE+
   double DPHI;
   double DTHETA;
@@ -149,21 +140,21 @@ int main(int argc, char** argv)
 
   if (number_line == 0 || number_line == 1) { 
    sign = -1;
-   DPHI   = EE_minus_fromES_DPHI;
-   DTHETA = EE_minus_fromES_DTHETA;
-   DPSI   = EE_minus_fromES_DPSI;
-   DX = EE_minus_fromES_DX;
-   DY = EE_minus_fromES_DY;
-   DZ = EE_minus_fromES_DZ;
+   DPHI   = EE_minus_fromES_DPHI /1000.;
+   DTHETA = EE_minus_fromES_DTHETA /1000.;
+   DPSI   = EE_minus_fromES_DPSI /1000.;
+   DX = EE_minus_fromES_DX /100.;
+   DY = EE_minus_fromES_DY /100.;
+   DZ = EE_minus_fromES_DZ /100.;
   }
   else {
    sign = -1;
-   DPHI   = EE_plus_fromES_DPHI;
-   DTHETA = EE_plus_fromES_DTHETA;
-   DPSI   = EE_plus_fromES_DPSI;
-   DX = EE_plus_fromES_DX;
-   DY = EE_plus_fromES_DY;
-   DZ = EE_plus_fromES_DZ;
+   DPHI   = EE_plus_fromES_DPHI /1000.;
+   DTHETA = EE_plus_fromES_DTHETA /1000.;
+   DPSI   = EE_plus_fromES_DPSI /1000.;
+   DX = EE_plus_fromES_DX /100.;
+   DY = EE_plus_fromES_DY /100.;
+   DZ = EE_plus_fromES_DZ /100.;
   }
   
   
@@ -171,6 +162,18 @@ int main(int argc, char** argv)
   CLHEP::Hep3Vector translationOtoEE(DX,DY,   Z * sign + DZ);
   CLHEP::HepEulerAngles euler(DPHI, DTHETA, DPSI);
   CLHEP::HepRotation rotation(euler);
+  
+  if (number_line == 0 ) {
+   std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+   std::cout << "EE- = " << std::endl;
+   std::cout << rotation << std::endl;
+  }
+  if (number_line == 2 ) {
+   std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+   std::cout << "EE+ = " << std::endl;
+   std::cout << rotation << std::endl;
+  }
+  
   HepGeom::Translate3D transformEEtoO  ( translationEEtoO );
   HepGeom::Rotate3D    transformRotate ( rotation );
   HepGeom::Translate3D transformOtoEE  ( translationOtoEE );
