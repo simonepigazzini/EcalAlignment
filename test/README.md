@@ -11,6 +11,11 @@ run:
     cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/006D71A7-73FC-E411-8C41-6CC2173BBE60.root    outputFile=/tmp/amassiro/treeECALAlignment.root
     cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/007B5BA2-FF5E-E511-90B7-00266CF9B7AC.root    outputFile=/tmp/amassiro/treeECALAlignment_DY.root
 
+    cmsRun Dump_MC_cfg.py     inputFiles=/store/relval/CMSSW_8_0_3/RelValZEE_13/MINIAODSIM/80X_mcRun2_asymptotic_2016_v3_gs7120p2NewGTv3-v1/00000/7C72E40D-E3EF-E511-99F1-0CC47A78A4BA.root  \
+                              outputFile=/tmp/amassiro/treeECALAlignment_DY.root
+
+
+    
 Test file with DATA:
 
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/SingleElectron/PromptReco-v1_AOD/82589B55-5827-E511-AE9F-02163E012704.root /tmp/amassiro/

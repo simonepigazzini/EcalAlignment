@@ -45,7 +45,8 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   CALOMetTag_ = iConfig.getParameter<edm::InputTag>("CALOMetTag");
   TrackTag_ = iConfig.getParameter<edm::InputTag>("TrackTag");
   vtxTag_ = iConfig.getParameter<edm::InputTag>("vtxTag");
-
+  puTag_  = iConfig.getUntrackedParameter<edm::InputTag>("puLabel",edm::InputTag(""));
+  
   isMC_ = iConfig.getUntrackedParameter< bool >("isMC",false);
   genEvtInfoTag_   = iConfig.getUntrackedParameter<edm::InputTag>("genEvtInfoTag",edm::InputTag("generator"));
   
@@ -59,7 +60,20 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
 
   pfMetHT_ = consumes<std::vector<pat::MET> >(CALOMetTag_);
   
-
+  puSummaryT_     = consumes<std::vector<PileupSummaryInfo> >(puTag_);
+  
+  if (isMC_) {
+   GenInfoT_     = consumes<GenEventInfoProduct>(genEvtInfoTag_);
+  }
+  
+  vtxHT_         = consumes<reco::VertexCollection>(vtxTag_);
+ 
+  Token_recHitCollection_EB_         = consumes<EcalRecHitCollection>(recHitCollection_EB_);
+  Token_recHitCollection_EE_         = consumes<EcalRecHitCollection>(recHitCollection_EE_);
+  
+  Token_EleTag_      = consumes<std::vector<pat::Electron> >(EleTag_);
+  
+  
   //==== output ====
 
   if (eleId_names_.size() != 0) {
@@ -194,7 +208,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
  ///==== only if MC ====
  if (isMC_) {
   edm::Handle<std::vector<PileupSummaryInfo> > PupInfo;
-  iEvent.getByLabel("addPileupInfo", PupInfo);
+  iEvent.getByToken(puSummaryT_,PupInfo);
   std::vector<PileupSummaryInfo>::const_iterator PVI;
   for(PVI = PupInfo->begin(); PVI != PupInfo->end(); ++PVI) {
  // in-time pileup
@@ -204,8 +218,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   }
   
   edm::Handle<GenEventInfoProduct> genEvtInfo;
-  iEvent.getByLabel( genEvtInfoTag_, genEvtInfo );
-  
+  iEvent.getByToken(GenInfoT_, genEvtInfo);
   _mc_weight = genEvtInfo->weight();
   
  }
@@ -218,7 +231,8 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
  ///==== save VTX ====
  edm::Handle<reco::VertexCollection> vtxH;
- iEvent.getByLabel(vtxTag_,vtxH);
+ iEvent.getByToken(vtxHT_,vtxH);
+ 
 
  nvtx_ = vtxH -> size();
  if(nvtx_!=0){
@@ -264,7 +278,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
  //*********** EB REC HITS
  edm::Handle<EcalRecHitCollection> recHitsEB;
- iEvent.getByLabel( recHitCollection_EB_, recHitsEB );
+ iEvent.getByToken( Token_recHitCollection_EB_, recHitsEB );
  const EcalRecHitCollection* theBarrelEcalRecHits = recHitsEB.product () ;
  if ( ! recHitsEB.isValid() ) {
   std::cerr << "SimpleNtple::analyze --> recHitsEB not found" << std::endl; 
@@ -272,15 +286,17 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   
  //*********** EE REC HITS
  edm::Handle<EcalRecHitCollection> recHitsEE;
- iEvent.getByLabel( recHitCollection_EE_, recHitsEE );
+ iEvent.getByToken( Token_recHitCollection_EE_, recHitsEE );
  const EcalRecHitCollection* theEndcapEcalRecHits = recHitsEE.product () ;
  if ( ! recHitsEE.isValid() ) {
   std::cerr << "SimpleNtple::analyze --> recHitsEE not found" << std::endl; 
  }
 
  //************* ELECTRONS
+//  edm::Handle<edm::View<pat::Electron> > electronHandle;
  edm::Handle<edm::View<pat::Electron> > electronHandle;
- iEvent.getByLabel(EleTag_,electronHandle);
+ //  iEvent.getByLabel(EleTag_,electronHandle);
+ iEvent.getByToken(Token_EleTag_,electronHandle);
  edm::View<pat::Electron> electrons = *electronHandle;
  
 

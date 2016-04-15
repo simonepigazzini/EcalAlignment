@@ -99,10 +99,19 @@ class EcalAlignment : public edm::EDAnalyzer {
   edm::InputTag CALOMetTag_;
   edm::InputTag TrackTag_;
   edm::InputTag vtxTag_;
+  edm::InputTag puTag_;
   
   edm::InputTag genEvtInfoTag_;
   
   edm::EDGetTokenT<std::vector<pat::MET> > pfMetHT_;
+  edm::EDGetTokenT<std::vector<PileupSummaryInfo> > puSummaryT_ ;
+  edm::EDGetTokenT<GenEventInfoProduct> GenInfoT_ ;
+  edm::EDGetTokenT<reco::VertexCollection> vtxHT_;
+  edm::EDGetTokenT<EcalRecHitCollection> Token_recHitCollection_EB_;
+  edm::EDGetTokenT<EcalRecHitCollection> Token_recHitCollection_EE_;
+  edm::EDGetTokenT<std::vector<pat::Electron> > Token_EleTag_;
+  
+  
   
   
   bool isMC_;

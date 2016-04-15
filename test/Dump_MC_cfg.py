@@ -25,8 +25,8 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 #process.load('Configuration.StandardSequences.L1Reco_cff')
 #process.load('Configuration.StandardSequences.Reconstruction_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.load('Configuration.EventContent.EventContent_cff')
 
 process.configurationMetadata = cms.untracked.PSet(
@@ -85,7 +85,8 @@ process.source = cms.Source("PoolSource",
 #process.GlobalTag.globaltag = 'auto:run2_mc'
 #process.GlobalTag.globaltag = 'PHYS14_25_V2::All'
 #process.GlobalTag.globaltag = 'PHY1474_STV4::All'
-process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
+#process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
+process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
 #process.GlobalTag.globaltag = '74X_mcRun2_asymptotic_v4::All'
 
 
@@ -101,16 +102,20 @@ process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
 #--------------------------
 
 # Standard PAT Configuration File
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
 ## remove MC matching from the default sequence
 #removeMCMatching(process, ['All'])
 
 
+# not used and not yet updated to 80X release
+#removeSpecificPATObjects( process, ['Taus'] )
+#process.patDefaultSequence.remove( process.patTaus )
+ 
 #process.patElectrons.electronSource = cms.InputTag("gsfElectrons::EcalAlignment")
 
-process.patElectrons.addElectronID = cms.bool(False)
+#process.patElectrons.addElectronID = cms.bool(False)
 
 # Add tcMET and pfMET
 #from PhysicsTools.PatAlgos.tools.metTools import *
@@ -199,16 +204,17 @@ process.FilterPatDefaultSequenceEvents = cms.EDProducer("EventCountProducer")
 
 process.ntupleEcalAlignment = cms.EDAnalyzer(
     'EcalAlignment',
-    recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
-    recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
+    recHitCollection_EB = cms.InputTag("reducedEgamma","reducedEBRecHits"),    #   "reducedEcalRecHitsEB"),
+    recHitCollection_EE = cms.InputTag("reducedEgamma","reducedEERecHits"),     #   "reducedEcalRecHitsEE"),
 #    recHitCollection_EB = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
 #    recHitCollection_EE = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
-    EleTag              = cms.InputTag("patElectrons"),
+    EleTag              = cms.InputTag("slimmedElectrons"),  # "patElectrons"
     TrackTag            = cms.InputTag("generalTracks"),
-    CALOMetTag          = cms.InputTag("patMETs"),
+    CALOMetTag          = cms.InputTag("slimmedMETs"),      # "patMETs"
     vtxTag              = cms.InputTag("goodPrimaryVertices"),
     isMC                = cms.untracked.bool(True),
-    genEvtInfoTag       = cms.untracked.InputTag("generator")
+    genEvtInfoTag       = cms.untracked.InputTag("generator"),
+    puLabel             = cms.untracked.InputTag("slimmedAddPileupInfo"),
     )
 
 
@@ -242,7 +248,7 @@ process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
 process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
-  src = cms.InputTag("offlinePrimaryVertices"),
+  src = cms.InputTag("offlineSlimmedPrimaryVertices"),     # "offlinePrimaryVertices"
   cut = cms.string(VERTEX_SEL),
   filter = cms.bool(True),
 )
@@ -250,7 +256,7 @@ process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
 # filter on primary vertex
 process.primaryVertexFilter = cms.EDFilter(
     "GoodVertexFilter",
-    vertexCollection = cms.InputTag('offlinePrimaryVertices'),
+    vertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices"),     # "offlinePrimaryVertices"
     minimumNDOF = cms.uint32(4) ,
     maxAbsZ = cms.double(24),
     maxd0 = cms.double(2)
@@ -267,8 +273,8 @@ process.noscraping = cms.EDFilter(
 
 # select events with at least one gsf electron
 process.highetele = cms.EDFilter(
-    "GsfElectronSelector",
-    src = cms.InputTag("gedGsfElectrons"),  # -> new!
+    "PATElectronSelector",   #"GsfElectronSelector",
+    src = cms.InputTag("slimmedElectrons"),  # "gedGsfElectrons"
     cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
     )
 
@@ -299,7 +305,7 @@ process.pEcalAlignment = cms.Path(
     *process.highetele
     *process.highetFilter
     *process.FilterReRECOEvents   # |-> counter   
-    *process.patDefaultSequence
+    #*process.patDefaultSequence
     *process.FilterPatDefaultSequenceEvents   # |-> counter
     *process.ntupleEcalAlignment
     )
