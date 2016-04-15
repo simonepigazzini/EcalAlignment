@@ -165,11 +165,13 @@ int main(int argc, char** argv)
   
   if (number_line == 0 ) {
    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+   std::cout << " DPHI, DTHETA, DPSI = " << DPHI << " , " << DTHETA << " , " << DPSI << std::endl;
    std::cout << "EE- = " << std::endl;
    std::cout << rotation << std::endl;
   }
   if (number_line == 2 ) {
    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+   std::cout << " DPHI, DTHETA, DPSI = " << DPHI << " , " << DTHETA << " , " << DPSI << std::endl;
    std::cout << "EE+ = " << std::endl;
    std::cout << rotation << std::endl;
   }
