@@ -294,10 +294,11 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
  //************* ELECTRONS
 //  edm::Handle<edm::View<pat::Electron> > electronHandle;
- edm::Handle<edm::View<pat::Electron> > electronHandle;
+ edm::Handle<std::vector <pat::Electron> > electronHandle;
  //  iEvent.getByLabel(EleTag_,electronHandle);
  iEvent.getByToken(Token_EleTag_,electronHandle);
- edm::View<pat::Electron> electrons = *electronHandle;
+//  edm::View<pat::Electron> electrons = *electronHandle;
+ std::vector<pat::Electron> electrons = *electronHandle;
  
 
  reco::Candidate::LorentzVector L1;
