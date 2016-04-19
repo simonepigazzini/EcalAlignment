@@ -120,7 +120,7 @@ int main(int argc, char** argv)
  
  //---- transform ES rototranslations into EE rototranslations;
  
- double Z = 3.205;
+ double Z = 3.205;  // ---- meters
  
  
  std::ofstream outFile;
