@@ -123,7 +123,10 @@ CombineRotoTraslations
     CombineRotoTraslations  myEEAlignment_2015_0Tesla_combined.txt  myEEAlignment_2015_19Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_19Jan_combined.txt   
     
 
-    
+    CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_19Apr.txt
+
+    CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
+
     
 e.g.
 

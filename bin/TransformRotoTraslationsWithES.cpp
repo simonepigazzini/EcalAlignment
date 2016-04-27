@@ -180,7 +180,8 @@ int main(int argc, char** argv)
   HepGeom::Rotate3D    transformRotate ( rotation );
   HepGeom::Translate3D transformOtoEE  ( translationOtoEE );
   
-  HepGeom::Transform3D Combination = transformOtoEE * transformRotate * transformEEtoO;
+//   HepGeom::Transform3D Combination = transformOtoEE * transformRotate * transformEEtoO;   ---> bad ... it did not work
+  HepGeom::Transform3D Combination = transformEEtoO * transformRotate * transformOtoEE;
   CLHEP::Hep3Vector translation_Combination = Combination.getTranslation();
   CLHEP::HepRotation rotation_Combination   = Combination.getRotation();
   

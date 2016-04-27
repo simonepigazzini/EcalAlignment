@@ -79,4 +79,13 @@ Transform ES to EE
     TransformRotoTraslationsWithES   originES.txt   newForEE.txt
 
     
+    CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt   \
+                               macro/newForEE.txt      \
+                               myEEAlignment_2016_combined_19Apr.txt
+                               
+                               
+    
+    
+    
+    
     
