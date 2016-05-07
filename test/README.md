@@ -14,6 +14,10 @@ run:
     cmsRun Dump_MC_cfg.py     inputFiles=/store/relval/CMSSW_8_0_3/RelValZEE_13/MINIAODSIM/80X_mcRun2_asymptotic_2016_v3_gs7120p2NewGTv3-v1/00000/7C72E40D-E3EF-E511-99F1-0CC47A78A4BA.root  \
                               outputFile=/tmp/amassiro/treeECALAlignment_DY.root
 
+    cmsRun Dump_MC_cfg.py     inputFiles=root://xrootd.unl.edu//store/mc/RunIISpring16MiniAODv1/WW_TuneCUETP8M1_13TeV-pythia8/MINIAODSIM/PUSpring16_80X_mcRun2_asymptotic_2016_v3-v1/00000/B8F93EDE-EF03-E611-B569-002590A370B2.root  \
+                              outputFile=/tmp/amassiro/treeECALAlignment_DY.root
+
+
 
     
 Test file with DATA:
