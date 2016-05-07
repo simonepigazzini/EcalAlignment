@@ -125,7 +125,8 @@ CombineRotoTraslations
 
     CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_19Apr.txt
 
-    CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
+    cp /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_combined_27Oct_modified.txt
+    CombineRotoTraslations     myEEAlignment_2015_combined_27Oct_modified.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
 
     
 e.g.
