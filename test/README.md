@@ -69,6 +69,12 @@ run:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignData0TeslaMyTag.root
     
+
+    2016 data
+    cmsRun reco_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/158/00000/0079F1EC-7518-E611-9650-02163E011E38.root  \
+        outputFile=/tmp/amassiro/treeAlignData2016data.root
+    
     
         
 closure test:
@@ -77,6 +83,25 @@ closure test:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAWmyTag.root
         
+Cleaning
+====
+
+    ls /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_19Apr2016_RunD_RAW_newTrk_myTag_fromES/*/*/*/*/reco_RAW2DIGI_RECO_*.root
+
+    rm /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_12May2016_RunD_RAW_newTrk_myTag_fromES/*/*/*/*/reco_RAW2DIGI_RECO_*.root
+
+
+    DATA_18Jan2016_RunD_RAW_Trk_myECAL_EE_0Tesla
+    DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_0Tesla
+    DATA_19Jan2016_RunD_RAW_Trk_myECAL_EE_and_EB_0Tesla
+    DATA_19Apr2016_RunD_RAW_newTrk_myTag_fromES
+    DATA_28Apr2016_RunD_RAW_newTrk_myTag_fromES
+    DATA_10May2016_RunD_RAW_newTrk_myTag_fromES
+
+MC07May2016
+
+
+
     
 Fake GRID
 ====

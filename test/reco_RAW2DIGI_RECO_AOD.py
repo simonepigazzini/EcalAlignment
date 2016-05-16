@@ -16,6 +16,17 @@ options.parseArguments()
 
 
 
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
+process.load('Configuration.StandardSequences.L1Reco_cff')
+#process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
+#process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
+#process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
+#process.load('RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi')
+process.load("RecoVertex.BeamSpotProducer.BeamSpot_cff")
+
+
+
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
@@ -68,12 +79,14 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_10_09_09_41_36', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '74X_dataRun2_Candidate_2015_10_09_09_41_36', '')
 
 ###########################
 ## new tracker alignment ##
-process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
-process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
+#process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff")
+#process.GlobalTag.globaltag = '74X_dataRun2_Candidate_2015_10_09_09_41_36'
+#process.GlobalTag.globaltag = '80X_dataRun2_HLT_v12'
+process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
 
 #process.GlobalTag.toGet = cms.VPSet(
 
@@ -144,6 +157,14 @@ process.endjob_step = cms.EndPath(process.endOfProcess)
 process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
 
+##################################
+#### costumization for Stage2 ####
+
+from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
+#process = customizeHLTforAll(process,"GRun",_customInfo)
+
+from HLTrigger.Configuration.customizeHLTforCMSSW import customizeHLTforCMSSW
+process = customizeHLTforCMSSW(process,"GRun")
 
 
 
@@ -165,15 +186,15 @@ process.patElectrons.addElectronID = cms.bool(False)
 # ---- remove MC references ----
 
 from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
-removeMCMatching(process, ['All'], outputModules=[], postfix="")
+#removeMCMatching(process, ['All'], outputModules=[], postfix="")
 process.makePatElectrons.remove(process.electronMatch)
 process.makePatMuons.remove(process.muonMatch)
 
 #process.patCandidates.remove(process.makePatTaus)
-process.makePatTaus.remove(process.tauMatch)
-process.makePatTaus.remove(process.tauGenJets)
-process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
-process.makePatTaus.remove(process.tauGenJetMatch)
+#process.makePatTaus.remove(process.tauMatch)
+#process.makePatTaus.remove(process.tauGenJets)
+#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+#process.makePatTaus.remove(process.tauGenJetMatch)
 
 
 process.makePatJets.remove(process.patJetPartonMatch)
