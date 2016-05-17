@@ -17,7 +17,8 @@ where:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_6_patch4/src/EcalValidation/EcalAlignment  --> 2015
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_3/src/EcalValidation/EcalAlignment/
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_5/src/EcalValidation/EcalAlignment/
+    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_5/src/EcalValidation/EcalAlignment/  --> bad
+    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_8/src/EcalValidation/EcalAlignment/
     
     
     kate: LXPLUS-ECALAlignment

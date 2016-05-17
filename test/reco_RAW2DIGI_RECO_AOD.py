@@ -17,7 +17,7 @@ options.parseArguments()
 
 
 #process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
-process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
+#process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
 #process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
@@ -191,10 +191,15 @@ process.makePatElectrons.remove(process.electronMatch)
 process.makePatMuons.remove(process.muonMatch)
 
 #process.patCandidates.remove(process.makePatTaus)
-#process.makePatTaus.remove(process.tauMatch)
-#process.makePatTaus.remove(process.tauGenJets)
-#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
-#process.makePatTaus.remove(process.tauGenJetMatch)
+process.makePatTaus.remove(process.tauMatch)
+process.makePatTaus.remove(process.tauGenJets)
+process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+process.makePatTaus.remove(process.tauGenJetMatch)
+
+process.cleanPatTaus.preselection = cms.string('tauID("decayModeFinding") > 0.5 & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 & tauID("againstMuonTight3") > 0.5 ')
+    
+
+process.patMETs.addGenMET = cms.bool(False)
 
 
 process.makePatJets.remove(process.patJetPartonMatch)
