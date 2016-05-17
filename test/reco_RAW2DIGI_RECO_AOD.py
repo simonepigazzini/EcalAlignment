@@ -88,7 +88,7 @@ from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 #process.GlobalTag.globaltag = '80X_dataRun2_HLT_v12'
 process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
 
-#process.GlobalTag.toGet = cms.VPSet(
+process.GlobalTag.toGet = cms.VPSet(
 
           #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
            #tag = cms.string("Alignments"),
@@ -145,7 +145,17 @@ process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
              #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
              ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
              #)
-         #) 
+
+          cms.PSet(record = cms.string("EEAlignmentRcd"),
+             tag = cms.string("EEAlignment_measured_v05_offline"),
+             connect = cms.string("sqlite_file:EEAlign_2015.db")   #### The ZERO ####
+             ),
+          cms.PSet(record = cms.string("EBAlignmentRcd"),
+             tag = cms.string("EBAlignment_measured_v05_offline"),
+             connect = cms.string("sqlite_file:EBAlign_2015.db")   #### The ZERO ####
+             ),
+
+         ) 
 
 ###########################
 ###########################
