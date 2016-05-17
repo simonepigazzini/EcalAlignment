@@ -81,6 +81,7 @@ run:
         outputFile=/tmp/amassiro/treeAlignData2016data.root
     
     
+    cmsDriver.py reco -s RAW2DIGI,RECO -n 100 --filein=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/450/00000/F448588C-4F1A-E611-AEB9-02163E0145B3.root --data --conditions=80X_dataRun2_Prompt_v8 --nThreads=4
     
         
 closure test:
