@@ -76,6 +76,12 @@ run:
         outputFile=/tmp/amassiro/treeAlignData2016data.root
     
     
+    cmsRun reco_RAW2DIGI_RECO_AOD.py  \
+        inputFiles=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/450/00000/F448588C-4F1A-E611-AEB9-02163E0145B3.root  \
+        outputFile=/tmp/amassiro/treeAlignData2016data.root
+    
+    
+    
         
 closure test:
 
