@@ -8,14 +8,15 @@ process.EcalTrivialConditionRetriever.getEBAlignmentFromFile = cms.untracked.boo
 #process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_NewTrkAlign.txt')
 #process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015.txt')
 #process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_combined.txt')
-#process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_combined_27Oct.txt')
+process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_combined_27Oct.txt')
+#/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEBAlignment_2015_combined_27Oct.txt
 
 # 0 Tesla
 #process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_2015_0Tesla_combined.txt')
 
 
 # Zero alignment
-process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_Zero.txt')
+#process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_Zero.txt')
 
 
 

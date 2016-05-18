@@ -8,14 +8,15 @@ process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.boo
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_NewTrkAlign.txt')
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015.txt')
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt')
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt')
+#/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
 
 # 0 Tesla
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_0Tesla_combined.txt')
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_0Tesla_19Jan_combined.txt')
 
 # Zero alignment
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_Zero.txt')
+#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_Zero.txt')
 
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
