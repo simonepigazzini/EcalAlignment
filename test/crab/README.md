@@ -222,6 +222,8 @@ Multicrab
     python multicrab.py  crab_projects_May18ZeroAlignmentEEEB        status
     python multicrab.py  crab_projects_May18TeslaFrom2015AlignmentEEEB        status
     
+    python multicrab.py  crab_projects_May18ZeroAlignmentEEEB_bis        status
+    python multicrab.py  crab_projects_May18TeslaFrom2015AlignmentEEEB_bis        status
     
     
     

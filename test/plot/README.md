@@ -294,6 +294,15 @@ General draw:
     r99t Draw.cxx\(\"/tmp/amassiro/mc_0Tesla.root\",\"mll\",100,0,200,\"m_{ll}\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&HoE\<0.3\&\&eleEcalIso\<15\&\&etaSC\<-1.5\",\"MC\ 0\ Tesla\"\)
     
     
+    hadd /tmp/amassiro/ecal_fromLastYear.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB_bis/SingleElectron/crab_SingleElectron/160518_213655/0000/treeECALAlignment_*.root
+    r99t Draw.cxx\(\"/tmp/amassiro/ecal_fromLastYear.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.04,0.04,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&abs\\\(etaSC\\\)\>1.5\",\"data\ EE\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/ecal_fromLastYear.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.04,0.04,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&abs\\\(etaSC\\\)\<1.5\",\"data\ EB\"\)
+
+    r99t Draw.cxx\(\"/tmp/amassiro/ecal_fromLastYear.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.04,0.04,\"#Delta#eta\",\"mll\>80\&\&mll\<100\&\&ETSC\>20\&\&abs\\\(etaSC\\\)\>1.5\",\"data\ EE\"\)
+    r99t Draw.cxx\(\"/tmp/amassiro/ecal_fromLastYear.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.04,0.04,\"#Delta#eta\",\"mll\>80\&\&mll\<100\&\&ETSC\>20\&\&abs\\\(etaSC\\\)\<1.5\",\"data\ EB\"\)
+
+    
+    
     
 General draw 2D:
 
