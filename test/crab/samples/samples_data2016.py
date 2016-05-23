@@ -64,17 +64,22 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
 
-#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB'
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB_bis'
-#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt"
-#config.Data.lumiMask = "/afs/cern.ch/user/c/cmkuo/public/ForShervin/ecal_good_runs_Bon_20160512.json"
-config.Data.lumiMask = "ecal_good_runs_Bon_20160512.json"
-#config.General.workArea     = 'crab_projects_May18TeslaFrom2015AlignmentEEEB'
-config.General.workArea     = 'crab_projects_May18TeslaFrom2015AlignmentEEEB_bis'
+##config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB_bis'
+##config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt"
+##config.Data.lumiMask = "/afs/cern.ch/user/c/cmkuo/public/ForShervin/ecal_good_runs_Bon_20160512.json"
+#config.Data.lumiMask = "ecal_good_runs_Bon_20160512.json"
+##config.General.workArea     = 'crab_projects_May18TeslaFrom2015AlignmentEEEB'
+#config.General.workArea     = 'crab_projects_May18TeslaFrom2015AlignmentEEEB_bis'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
+##hadd /tmp/amassiro/ecal_fromLastYear.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB_bis/SingleElectron/crab_SingleElectron/160518_213655/0000/treeECALAlignment_*.root
+
+
+
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May23AlignmentEEEB_newTrk2016'
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273450_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
+config.General.workArea     = 'crab_projects_May23AlignmentEEEB_newTrk2016'
 config.Data.allowNonValidInputDataset = True
-config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
-#hadd /tmp/amassiro/ecal_fromLastYear.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May18TeslaFrom2015AlignmentEEEB_bis/SingleElectron/crab_SingleElectron/160518_213655/0000/treeECALAlignment_*.root
-
-
-
+config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the zero alignment for EE/EB
 

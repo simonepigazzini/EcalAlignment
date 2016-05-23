@@ -88,8 +88,18 @@ from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
 #process.GlobalTag.globaltag = '80X_dataRun2_HLT_v12'
 process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
 
+
+#process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
+
 process.GlobalTag.toGet = cms.VPSet(
 
+
+              cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                       tag =  cms.string("TrackerAlignment_MP_Run2016B"),
+                       connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+                       ),
+                                             
+                                             
           #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
            #tag = cms.string("Alignments"),
            #connect = cms.untracked.string("sqlite_file:alignments_MP.db")
