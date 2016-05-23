@@ -93,19 +93,19 @@ void drawSingleModule(TString nameInFileRoot, TString nameOutputDir, TString com
 //  TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,200,-0.02,0.02);
 
  TH1F* DPhiMC;
- if (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,50,-0.01,0.01);
+ if (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
  else                       DPhiMC = new TH1F("DPhiMC"     ," MC"  ,150,-0.025,0.025);
- TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,50,-0.01,0.01);
- TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.02,0.02);
+ TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.02,0.02);
  TH1F* DEtaMC;
  if (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,50,-0.005,0.005);
  else                       DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_ref;
- if (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,50,-0.01,0.01);
+ if (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
  else                       DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,150,-0.025,0.025);
- TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,50,-0.01,0.01);
- TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,50,-0.01,0.01);
+ TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.02,0.02);
+ TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.02,0.02);
  TH1F* DEtaMC_ref;
  if (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,50,-0.005,0.005);
  else                       DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);

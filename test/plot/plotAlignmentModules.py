@@ -330,6 +330,7 @@ print "Check all SM and Dee alignment"
 
 
 # measure MC bias
+# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC07May2016/DYToEE_NNPDF30_13TeV-powheg-pythia8/ECAL_DYMC.root  /tmp/amassiro/
 
 for x in range(0, 4):
   toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/ECAL_DYMC.root\\\",\\\"2016MCbias\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",1\)"
