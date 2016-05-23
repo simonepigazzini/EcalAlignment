@@ -19,7 +19,7 @@ process.inputTree = cms.PSet(
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),
   traslationZ = cms.bool(True),
-  rotationPhi   = cms.bool(False), # True
+  rotationPhi   = cms.bool(True), # True
   rotationTheta = cms.bool(False),
   rotationPsi   = cms.bool(False), # True
 
@@ -29,9 +29,30 @@ process.inputTree = cms.PSet(
 
   #DetaBias = cms.untracked.string("(x>0.0 && x<1.5)   * (-(0.4e-3)) + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75))   + (x>2.0)            * ((6.137825e-04)/2.)   + (x<0.0 && x>-1.5)  * (0.4e-3)   + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75))        + (x<-2.0)           * ((-6.137825e-04)/2.) + y*0"),
   #DetaBias = cms.untracked.string("(x>0.0 && x<1.5)   * (-(0.23e-3)) + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75))   + (x>2.0)            * ((6.137825e-04)/2.)   + (x<0.0 && x>-1.5)  * (0.23e-3)   + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75))        + (x<-2.0)           * ((-6.137825e-04)/2.) + y*0"),
-  DetaBias = cms.untracked.string("(x>0.0 && x<1.5)   * (-(0.23e-3)) + (x>1.5) * (-0.05e-3) + (x<0.0 && x>-1.5)  * (0.23e-3)   + (x<-1.5) * (0.05e-3) + y*0"),   # TEST
-  DphiBias = cms.untracked.string("(y>0)*((x>0.0 && x<1.5)   * (1.46233e-03)  + (x>1.5)            * (2.73084e-03)  + (x<0.0 && x>-1.5)  * (6.59298e-04)  + (x<-1.5)           * (2.57010e-03)) + \
-                                   (y<0)*((x>0.0 && x<1.5)   * (-7.24105e-04)  + (x>1.5)            * (-1.992615e-03)  + (x<0.0 && x>-1.5)  * (-1.527137e-03)  + (x<-1.5)           * (-3.437939e-03))"),
+  #DetaBias = cms.untracked.string("(x>0.0 && x<1.5)   * (-(0.23e-3)) + (x>1.5) * (-0.05e-3) + (x<0.0 && x>-1.5)  * (0.23e-3)   + (x<-1.5) * (0.05e-3) + y*0"),   # TEST
+  #DphiBias = cms.untracked.string("(y>0)*((x>0.0 && x<1.5)   * (1.46233e-03)  + (x>1.5)            * (2.73084e-03)  + (x<0.0 && x>-1.5)  * (6.59298e-04)  + (x<-1.5)           * (2.57010e-03)) + \
+                                   #(y<0)*((x>0.0 && x<1.5)   * (-7.24105e-04)  + (x>1.5)            * (-1.992615e-03)  + (x<0.0 && x>-1.5)  * (-1.527137e-03)  + (x<-1.5)           * (-3.437939e-03))"),
+        
+  # 2016
+
+  #
+  DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.30e-3)) \
+                                     + (x>1.5)            * (0.05)  \
+                                     + (x<0.0 && x>-1.5)  * (0.19e-3)  \
+                                     + (x<-1.5)           * (-(0.01e-3))   \
+                                     + y*0"),
+  
+  DphiBias = cms.untracked.string("(y>0)*    \
+                                  ((x>0.0 && x<1.5)   * (1.36e-03)  \
+                                 + (x>1.5)            * (1.23e-03)  \
+                                 + (x<0.0 && x>-1.5)  * (0.64e-03)  \
+                                 + (x<-1.5)           * (1.28e-03)) \
+                                 + (y<0)*   \
+                                   ((x>0.0 && x<1.5)   * (-0.57e-03) \
+                                 + (x>1.5)             * (-1.13e-03) \
+                                 + (x<0.0 && x>-1.5)  * (-1.26e-03)  \
+                                 + (x<-1.5)           * (-1.17e-03))"),
+        
         
   #inputFilesPosition    = cms.untracked.string(
          #'myEEAlignment_2010_OLD.txt'
@@ -71,6 +92,7 @@ process.outputTree = cms.PSet(
   #outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_31Aug2015.txt")
   #outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_13Oct2015.txt")
   #outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_23Oct2015.txt")
-  outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_26Oct2015.txt")
+  #outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_26Oct2015.txt")
+  outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_23May2016.txt")
 )
 
