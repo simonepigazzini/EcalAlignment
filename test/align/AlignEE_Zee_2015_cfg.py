@@ -37,7 +37,7 @@ process.inputTree = cms.PSet(
 
   #
   DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.30e-3)) \
-                                     + (x>1.5)            * (0.05)  \
+                                     + (x>1.5)            * (0.05e-3)  \
                                      + (x<0.0 && x>-1.5)  * (0.19e-3)  \
                                      + (x<-1.5)           * (-(0.01e-3))   \
                                      + y*0"),  
