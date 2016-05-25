@@ -186,6 +186,8 @@ Plot all modules:
     r99t drawComparison.cxx\(\"2015MC/MC.txt\",\"2015DataOldTrk/DATA.txt\",\"2015DataNewTrk/DATA.txt\"\)
     
     
+    drawSingleModule  configurationPlot_cfg.py
+    
 
 Draw alignment coefficients:
 
@@ -231,6 +233,8 @@ Draw coefficients comparison:
     r99t EB_Alignment_Draw.cxx\(\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEBAlignment_2015_combined_27Oct.txt\",\"/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt\"\)
 
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2015_0Tesla_combined.txt\",\"../myEBAlignment_2015_combined_27Oct.txt\"\)
+
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt\",\"../myEBAlignment_2015_combined_27Oct.txt\"\)
 
     
 Draw:

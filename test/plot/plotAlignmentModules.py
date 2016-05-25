@@ -335,12 +335,12 @@ print "Check all SM and Dee alignment"
 #
 
 #for x in range(0, 4):
-  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/ECAL_DYMC.root\\\",\\\"2016MCbias\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",1\)"
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/ECAL_DYMC.root\\\",\\\"2016MCbias\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",0\)"
   #print "toexec = ", toexec
   #os.system (toexec)
 
 #for x in range(0, 36):
-  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/ECAL_DYMC.root\\\",\\\"2016MCbias\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,1\)"
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/ECAL_DYMC.root\\\",\\\"2016MCbias\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,0)"
   #print "toexec = ", toexec
   #os.system (toexec)
 
@@ -353,12 +353,12 @@ print "Check all SM and Dee alignment"
 
 
 #for x in range(0, 4):
-  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk.root\\\",\\\"2016ECAL24May_EcalZero_newTraker\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",1\)"
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk.root\\\",\\\"2016ECAL24May_EcalZero_newTraker\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",0\)"
   #print "toexec = ", toexec
   #os.system (toexec)
 
 #for x in range(0, 36):
-  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk.root\\\",\\\"2016ECAL24May_EcalZero_newTraker\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,1\)"
+  #toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk.root\\\",\\\"2016ECAL24May_EcalZero_newTraker\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,0\)"
   #print "toexec = ", toexec
   #os.system (toexec)
 
@@ -370,12 +370,12 @@ print "Check all SM and Dee alignment"
 
 
 for x in range(0, 4):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk_24Nov.root\\\",\\\"2016ECAL24May_EcalZero_newTraker_newPix\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",1\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk_24Nov.root\\\",\\\"2016ECAL24May_EcalZero_newTraker_newPix\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\",-100,-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\","+ str(x+1) +",0\)"
   print "toexec = ", toexec
   os.system (toexec)
 
 for x in range(0, 36):
-  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk_24Nov.root\\\",\\\"2016ECAL24May_EcalZero_newTraker_newPix\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,1\)"
+  toexec = "root -b -q drawSingleModule.cxx\(\\\"/tmp/amassiro/data_noECAL_newTrk_24Nov.root\\\",\\\"2016ECAL24May_EcalZero_newTraker_newPix\\\",\\\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\\\"," + str(x) + ",-100,0,\\\"/tmp/amassiro/ECAL_DYMC.root\\\",0,0\)"
   print "toexec = ", toexec
   os.system (toexec)
 

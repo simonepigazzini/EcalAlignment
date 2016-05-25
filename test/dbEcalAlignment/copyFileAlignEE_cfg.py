@@ -8,7 +8,9 @@ process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.boo
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_NewTrkAlign.txt')
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015.txt')
 #process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined.txt')
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt')
+#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt')
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2016_NewTrkAlign_newPix_24May2016.txt')
+
 #/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
 
 # 0 Tesla
