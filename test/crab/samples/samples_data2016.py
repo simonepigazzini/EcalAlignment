@@ -92,5 +92,7 @@ config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Coll
 config.General.workArea     = 'crab_projects_May24AlignmentEEEB_newTrk2016'
 config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the zero alignment for EE/EB
-# hadd /tmp/amassiro/data_noECAL_newTrk.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May23AlignmentEEEB_newTrk2016/DoubleEG/crab_DoubleElectron/160523_123338/0000/tree*.root
+# hadd /tmp/amassiro/data_noECAL_newTrk_24Nov.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016/DoubleEG/crab_DoubleElectron/160524_135137/0000/tree*.root
+
+
 
