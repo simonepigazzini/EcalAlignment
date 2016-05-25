@@ -86,13 +86,23 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
 
-# latest and greates trakcer and pixel tag
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016'
+## latest and greates trakcer and pixel tag
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273450_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
+#config.General.workArea     = 'crab_projects_May24AlignmentEEEB_newTrk2016'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the zero alignment for EE/EB
+## hadd /tmp/amassiro/data_noECAL_newTrk_24Nov.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016/DoubleEG/crab_DoubleElectron/160524_135137/0000/tree*.root
+
+
+# latest and greates trakcer and pixel tag and new ECAL
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May25AlignmentEEEB_newTrk2016_newECAL'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273450_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
-config.General.workArea     = 'crab_projects_May24AlignmentEEEB_newTrk2016'
+config.General.workArea     = 'crab_projects_May25AlignmentEEEB_newTrk2016_newECAL'
 config.Data.allowNonValidInputDataset = True
-config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the zero alignment for EE/EB
-# hadd /tmp/amassiro/data_noECAL_newTrk_24Nov.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016/DoubleEG/crab_DoubleElectron/160524_135137/0000/tree*.root
+config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
+
+
 
 
 

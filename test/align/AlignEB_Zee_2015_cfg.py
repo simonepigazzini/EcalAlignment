@@ -91,6 +91,7 @@ process.outputTree = cms.PSet(
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_13Oct2015.txt")
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_23Oct2015.txt")
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_26Oct2015.txt")
-    outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_23May2016.txt")
+   #outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_23May2016.txt")
+   outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt")
 )
 
