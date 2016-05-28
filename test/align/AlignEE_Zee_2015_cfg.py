@@ -37,25 +37,43 @@ process.inputTree = cms.PSet(
         
   # 2016
 
+  #DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.30e-3)) \
+                                     #+ (x>1.5)            * (0.05e-3)  \
+                                     #+ (x<0.0 && x>-1.5)  * (0.19e-3)  \
+                                     #+ (x<-1.5)           * (-(0.01e-3))   \
+                                     #+ y*0"),  
+  
+  #DphiBias = cms.untracked.string("(y>0)*    \
+                                  #((x>0.0 && x<1.5)   * (1.49e-03)  \
+                                 #+ (x>1.5)            * (2.15e-03)  \
+                                 #+ (x<0.0 && x>-1.5)  * (0.74e-03)  \
+                                 #+ (x<-1.5)           * (2.16e-03)) \
+                                 #+ (y<0)*   \
+                                   #((x>0.0 && x<1.5)   * (-0.67e-03) \
+                                 #+ (x>1.5)             * (-2.03e-03) \
+                                 #+ (x<0.0 && x>-1.5)  * (-1.39e-03)  \
+                                 #+ (x<-1.5)           * (-2.05e-03))"),
+
+
+
   #
-  DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.30e-3)) \
-                                     + (x>1.5)            * (0.05e-3)  \
-                                     + (x<0.0 && x>-1.5)  * (0.19e-3)  \
-                                     + (x<-1.5)           * (-(0.01e-3))   \
-                                     + y*0"),  
+  DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * ((0.04e-3)) \
+                                     + (x>1.5)            * (0.0e-3)  \
+                                     + (x<0.0 && x>-1.5)  * (0.02e-3)  \
+                                     + (x<-1.5)           * ((0.0e-3))   \
+                                     + y*0"),
   
   DphiBias = cms.untracked.string("(y>0)*    \
                                   ((x>0.0 && x<1.5)   * (1.49e-03)  \
-                                 + (x>1.5)            * (2.15e-03)  \
+                                 + (x>1.5)            * (1.41e-03)  \
                                  + (x<0.0 && x>-1.5)  * (0.74e-03)  \
-                                 + (x<-1.5)           * (2.16e-03)) \
+                                 + (x<-1.5)           * (1.41e-03)) \
                                  + (y<0)*   \
                                    ((x>0.0 && x<1.5)   * (-0.67e-03) \
-                                 + (x>1.5)             * (-2.03e-03) \
+                                 + (x>1.5)             * (-1.27e-03) \
                                  + (x<0.0 && x>-1.5)  * (-1.39e-03)  \
-                                 + (x<-1.5)           * (-2.05e-03))"),
-        
-        
+                                 + (x<-1.5)           * (-1.25e-03))"),
+       
   #inputFilesPosition    = cms.untracked.string(
          #'myEEAlignment_2010_OLD.txt'
   #),
@@ -97,6 +115,10 @@ process.outputTree = cms.PSet(
   #outputFile = cms.string("myEEAlignment_2015_NewTrkAlign_26Oct2015.txt")
   #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_23May2016.txt")
   #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_24May2016.txt")
-  outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_27May2016.txt")
+  #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_27May2016.txt")
+  #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_28May2016.txt")
+  #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_28May2016_testWithoutRotations.txt")
+  #outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_28May2016_testWithoutRotations_newAlgoWithFabs.txt")
+  outputFile = cms.string("myEEAlignment_2016_NewTrkAlign_newPix_28May2016_newAlgoWithFabs.txt")
 )
 

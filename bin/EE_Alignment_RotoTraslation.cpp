@@ -151,8 +151,8 @@ else {
    
    
    ///==== (x,y,z) 
-   HepGeom::Point3D<double> xyz( Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * cos (vPhi[iEntry]),
-                                 Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * sin (vPhi[iEntry]),
+   HepGeom::Point3D<double> xyz( fabs(Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry])))) * cos (vPhi[iEntry]),
+                                 fabs(Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry])))) * sin (vPhi[iEntry]),
                                  Z * (vEta[iEntry])/fabs(vEta[iEntry]) );
    
    

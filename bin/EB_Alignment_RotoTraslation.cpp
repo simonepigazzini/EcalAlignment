@@ -167,6 +167,9 @@ double Chi2Func(const double *xx ){
 //     vErrEta = 0.0;
 //     vErrPhi = 0.0;
 
+    //---- theta = 2*atan(exp(-vEta[iEntry]))
+    //---- eta = - ln tg (theta/2)
+    
     ///==== (x,y,z) 
     HepGeom::Point3D<double> xyz( R / sin(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * cos (vPhi[iEntry]),
 				  R / sin(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * sin (vPhi[iEntry]),
