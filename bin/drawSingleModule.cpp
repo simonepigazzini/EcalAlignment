@@ -230,6 +230,14 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  delete DPhiMC_ref_em; 
  delete DEtaMC_ref;    
  
+ delete cDPhi;
+ delete cDPhi_em;
+ delete cDPhi_ep;
+ delete cDEta;
+ 
+ delete tEB;
+ delete tEE;
+ 
 }
 
 
