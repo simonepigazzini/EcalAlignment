@@ -153,7 +153,7 @@ else {
    ///==== (x,y,z) 
    HepGeom::Point3D<double> xyz( Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * cos (vPhi[iEntry]),
                                  Z / cos(2*atan(exp(-vEta[iEntry]))) * sin(2*atan(exp(-vEta[iEntry]))) * sin (vPhi[iEntry]),
-                                 Z );
+                                 Z * (vEta[iEntry])/fabs(vEta[iEntry]) );
    
    
    ///==== (x',y',z') = RotoTrasl(x,y,z) 

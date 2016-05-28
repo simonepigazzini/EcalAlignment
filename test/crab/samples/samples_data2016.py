@@ -22,7 +22,9 @@ config.Data.useParent = True           # Important!
 
 config.Data.splitting = 'LumiBased'    # FileBased
 #config.Data.splitting = 'FileBased'    # FileBased
-config.Data.unitsPerJob   = 1
+#config.Data.unitsPerJob   = 1
+config.Data.unitsPerJob   = 3   # 1 is creating 12k jobs ... max from crab is 10k
+
 
 config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
 config.JobType.maxMemoryMB = 2500    # 2.5 GB
@@ -95,10 +97,19 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 ## hadd /tmp/amassiro/data_noECAL_newTrk_24Nov.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May24AlignmentEEEB_newTrk2016/DoubleEG/crab_DoubleElectron/160524_135137/*/tree*.root
 
 
-# latest and greates trakcer and pixel tag and new ECAL
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May25AlignmentEEEB_newTrk2016_newECAL'
-config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273450_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
-config.General.workArea     = 'crab_projects_May25AlignmentEEEB_newTrk2016_newECAL'
+## latest and greates trakcer and pixel tag and new ECAL
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May25AlignmentEEEB_newTrk2016_newECAL'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273450_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
+#config.General.workArea     = 'crab_projects_May25AlignmentEEEB_newTrk2016_newECAL'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
+## hadd /tmp/amassiro/data_newECAL_newTrk_25Nov.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May25AlignmentEEEB_newTrk2016_newECAL/DoubleEG/crab_DoubleElectron/160525_111346/*/tree*.root
+
+
+# latest and greates trakcer and pixel tag and new ECAL  -> after corrected ECAL 
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May27AlignmentEEEB_newTrk2016_newECAL'
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt"
+config.General.workArea     = 'crab_projects_May27AlignmentEEEB_newTrk2016_newECAL'
 config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
 # hadd /tmp/amassiro/data_newECAL_newTrk_25Nov.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May25AlignmentEEEB_newTrk2016_newECAL/DoubleEG/crab_DoubleElectron/160525_111346/*/tree*.root

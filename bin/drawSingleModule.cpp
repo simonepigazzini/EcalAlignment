@@ -55,55 +55,6 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  //---- ---- ---- 
  
- //  TChain* InFile   = new TChain("ntupleEcalAlignment/myTree");
- //  InFile->Add(nameInFileRoot.Data());
- 
-//  std::string FunctionDetaName = "(x>0.0 && x<1.5)   * (-(0.4e-3)) \
-//  + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75)) \
-//  + (x>2.0)            * ((6.137825e-04)/2.) \
-//  + (x<0.0 && x>-1.5)  * (0.4e-3) \
-//  + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75)) \
-//  + (x<-2.0)           * ((-6.137825e-04)/2.)"; 
-//  
-//  TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
-//  FunctionDeta->SetLineColor(kBlack);
-//  FunctionDeta->SetLineStyle(2);
-//  FunctionDeta->SetLineWidth(4);
-//  
-//  
-//  std::string FunctionDphiName_ep = "(x>0.0 && x<1.5)   * (1.46233e-03) \
-//  + (x>1.5)            * (2.73084e-03) \
-//  + (x<0.0 && x>-1.5)  * (6.59298e-04) \
-//  + (x<-1.5)           * (2.57010e-03)";
- 
-//  TF1* FunctionDphi_ep = new TF1 ("DphiBias_ep",FunctionDphiName_ep.c_str(),-5,5);
-//  FunctionDphi_ep->SetLineColor(kBlack);
-//  FunctionDphi_ep->SetLineStyle(2);
-//  FunctionDphi_ep->SetLineWidth(4);
-//  
- 
- 
-//  std::string FunctionDphiName_em = "(x>0.0 && x<1.5)   * (-7.24105e-04) \
-//  + (x>1.5)            * (-1.992615e-03) \
-//  + (x<0.0 && x>-1.5)  * (-1.527137e-03) \
-//  + (x<-1.5)           * (-3.437939e-03)";
-//  
-//  TF1* FunctionDphi_em = new TF1 ("DphiBias_em",FunctionDphiName_em.c_str(),-5,5);
-//  FunctionDphi_em->SetLineColor(kBlack);
-//  FunctionDphi_em->SetLineStyle(2);
-//  FunctionDphi_em->SetLineWidth(4);
- 
- 
- ///---- all ----
-//  TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,200,-0.04,0.04);
-//  TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.04,0.04);
-//  TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.04,0.04);
-//  TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,200,-0.02,0.02);
-//  
-//  TH1F* DPhiMC_ref     = new TH1F("DPhiMC_ref",     " MC"  ,200,-0.04,0.04);
-//  TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.04,0.04);
-//  TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.04,0.04);
-//  TH1F* DEtaMC_ref     = new TH1F("DEtaMC_ref"     ," MC"  ,200,-0.02,0.02);
 
  TH1F* DPhiMC;
  if (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
@@ -177,15 +128,15 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  TString toDoShell;
 //  toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
 //  system(toDoShell.Data());
- toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
- system(toDoShell.Data());
- toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
- system(toDoShell.Data());
- toDoShell = Form("cp index.php %s/ ;",nameOutputDir.Data());
- system(toDoShell.Data());
- toDoShell = Form("cp index.php %s/images ;",nameOutputDir.Data());
- system(toDoShell.Data());
- 
+//  toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
+//  system(toDoShell.Data());
+//  toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
+//  system(toDoShell.Data());
+//  toDoShell = Form("cp index.php %s/ ;",nameOutputDir.Data());
+//  system(toDoShell.Data());
+//  toDoShell = Form("cp index.php %s/images ;",nameOutputDir.Data());
+//  system(toDoShell.Data());
+//  
  
  
  //---- output txt file
@@ -267,6 +218,18 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  myfile.close(); 
  //--- output text file (end)
  
+ 
+ //---- cleaning not to have memory leak
+ delete DPhiMC;
+ delete DPhiMC_ep; 
+ delete DPhiMC_em; 
+ delete DEtaMC;    
+  
+ delete DPhiMC_ref;
+ delete DPhiMC_ref_ep; 
+ delete DPhiMC_ref_em; 
+ delete DEtaMC_ref;    
+ 
 }
 
 
@@ -324,6 +287,16 @@ int main(int argc, char** argv) {
   TEntryList *myListMC = (TEntryList*) gDirectory->Get("myListMC");
   InFileComparison->SetEntryList(myListMC); 
   
+  //---- create directories
+  TString toDoShell;
+  toDoShell = Form("mkdir %s ;",nameOutputDir.c_str());
+  system(toDoShell.Data());
+  toDoShell = Form("mkdir %s/images ;",nameOutputDir.c_str());
+  system(toDoShell.Data());
+  toDoShell = Form("cp index.php %s/ ;",nameOutputDir.c_str());
+  system(toDoShell.Data());
+  toDoShell = Form("cp index.php %s/images ;",nameOutputDir.c_str());
+  system(toDoShell.Data());
   
   
   
