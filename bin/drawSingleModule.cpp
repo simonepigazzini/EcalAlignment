@@ -306,7 +306,11 @@ int main(int argc, char** argv) {
   toDoShell = Form("cp index.php %s/images ;",nameOutputDir.c_str());
   system(toDoShell.Data());
   
-  
+
+  //---- summary regions
+  for (int iSpecial = 0; iSpecial <4; iSpecial++) {
+    drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, 0);
+  }
   
   //---- EE
   for (int iEE = 0; iEE <4; iEE++) {
@@ -318,11 +322,6 @@ int main(int argc, char** argv) {
     drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, 0);
   }
 
-  //---- summary regions
-  for (int iSpecial = 0; iSpecial <4; iSpecial++) {
-    drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, 0);
-  }
-  
 }
 
 

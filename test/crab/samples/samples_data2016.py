@@ -134,3 +134,12 @@ config.General.workArea     = 'crab_projects_May28AlignmentEEEB_newTrk2016_newEC
 config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
 # 
+## hadd /tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_29May.root    /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May28AlignmentEEEB_newTrk2016_newECAL_signFix/DoubleEG/crab_DoubleElectron/160528_222959/*/tree*.root
+
+
+
+
+
+
+
+
