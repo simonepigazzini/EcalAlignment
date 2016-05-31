@@ -40,9 +40,9 @@ process.inputTree = cms.PSet(
   # 2016
 
   #
-  DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.30e-3)) \
+  DetaBias = cms.untracked.string("    (x>0.0 && x<1.5)   * (-(0.27e-3)) \
                                      + (x>1.5)            * (0.05e-3)  \
-                                     + (x<0.0 && x>-1.5)  * (0.19e-3)  \
+                                     + (x<0.0 && x>-1.5)  * (0.17e-3)  \
                                      + (x<-1.5)           * (-(0.01e-3))   \
                                      + y*0"),
     
@@ -93,6 +93,7 @@ process.outputTree = cms.PSet(
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_23Oct2015.txt")
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_26Oct2015.txt")
    #outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_23May2016.txt")
-   outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt")
+   #outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt")
+   outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_newPix_30May2016.txt")
 )
 
