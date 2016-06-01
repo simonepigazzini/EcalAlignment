@@ -124,6 +124,7 @@ Multicrab
 ====
 
     voms-proxy-init --voms cms
+    myproxy-init -v
 
     python multicrab.py   samples/samples_spring15.py
     python multicrab.py   samples/samples_dataB.py
@@ -236,6 +237,7 @@ Multicrab
     python multicrab.py  crab_projects_May28AlignmentEEEB_newTrk2016_oldECALfrom2015        status
     
     python multicrab.py  crab_projects_May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB        status
+    python multicrab.py  crab_projects_May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON        status
     
     
     
