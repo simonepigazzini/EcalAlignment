@@ -236,6 +236,11 @@ Draw coefficients comparison:
 
     r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt\",\"../myEBAlignment_2015_combined_27Oct.txt\"\)
 
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2016_NewTrkAlign_newPix_30May2016.txt\",\"../myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt\"\)
+    r99t EB_Alignment_Draw.cxx\(\"../myEBAlignment_2016_NewTrkAlign_newPix_30May2016.txt\",\"../myEBAlignment_2015_combined_27Oct.txt\"\)
+
+    
+    
     
 Draw:
 
