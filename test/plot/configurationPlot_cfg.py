@@ -2,6 +2,8 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("TEST")
 
+# scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/May25/MC/ECAL_DYMC.root  /tmp/amassiro/
+
 #process.ConfigurationToDraw = cms.PSet(
   #nameInFileRoot = cms.string("/tmp/amassiro/data_noECAL_newTrk_24Nov.root"),
   #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),

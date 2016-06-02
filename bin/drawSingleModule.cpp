@@ -81,10 +81,10 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  TLatex*  tinfoDPhi_ep = new TLatex(0.2,0.8,"");
  TLatex*  tinfoDPhi_em = new TLatex(0.2,0.8,"");
 
- TLatex*  tinfoDPhi_ref    = new TLatex(0.2,0.6,"");
- TLatex*  tinfoDEta_ref    = new TLatex(0.2,0.6,"");
- TLatex*  tinfoDPhi_ref_ep = new TLatex(0.2,0.6,"");
- TLatex*  tinfoDPhi_ref_em = new TLatex(0.2,0.6,"");
+ TLatex*  tinfoDPhi_ref    = new TLatex(0.2,0.7,"");
+ TLatex*  tinfoDEta_ref    = new TLatex(0.2,0.7,"");
+ TLatex*  tinfoDPhi_ref_ep = new TLatex(0.2,0.7,"");
+ TLatex*  tinfoDPhi_ref_em = new TLatex(0.2,0.7,"");
  ///---- text info (end) ----
  
  createHisto(tinfoDPhi, DPhiMC, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data());
@@ -103,7 +103,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  createHisto(tinfoDPhi_ref_em, DPhiMC_ref_em, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 1);
   
  ///---- legend (begin) ----
- TLegend* legend = new TLegend(0.62,0.72,0.88,0.93);
+ TLegend* legend = new TLegend(0.62,0.62,0.88,0.83);
  if (isMC) {
   legend->AddEntry(DEtaMC,"MC","f");
  }
@@ -154,6 +154,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
+ DPhiMC->GetYaxis()->SetRangeUser( 0, 1.5 * DPhiMC->GetMaximum() );
  float integral = DPhiMC->Integral();
  DPhiMC_ref->Scale(integral / DPhiMC_ref->Integral());
  DPhiMC_ref->Draw("same");
@@ -171,6 +172,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
+ DPhiMC_ep->GetYaxis()->SetRangeUser( 0, 1.5 * DPhiMC_ep->GetMaximum() );
  integral = DPhiMC_ep->Integral();
  DPhiMC_ref_ep->Scale(integral / DPhiMC_ref_ep->Integral());
  DPhiMC_ref_ep->Draw("same");
@@ -184,6 +186,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
+ DPhiMC_em->GetYaxis()->SetRangeUser( 0, 1.5 * DPhiMC_em->GetMaximum() );
  integral = DPhiMC_em->Integral();
  DPhiMC_ref_em->Scale(integral / DPhiMC_ref_em->Integral());
  DPhiMC_ref_em->Draw("same");
@@ -202,6 +205,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
+ DEtaMC->GetYaxis()->SetRangeUser( 0, 1.5 * DEtaMC->GetMaximum() );
  integral = DEtaMC->Integral();
  DEtaMC_ref->Scale(integral / DEtaMC_ref->Integral());
  DEtaMC_ref->Draw("same");
@@ -285,8 +289,14 @@ int main(int argc, char** argv) {
   
   //---- filter the big trees
   
+  //---- for data
+  TString tempCut_data;
+  if (specialZeroTesla == 0) tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.c_str());
+  else                       tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.c_str());
+  
+  
   InFile->SetEntryList(0); 
-  InFile->Draw(">> myList",commonCut.c_str(),"entrylist");
+  InFile->Draw(">> myList",tempCut_data.Data(),"entrylist");
   TEntryList *myList = (TEntryList*) gDirectory->Get("myList");
   InFile->SetEntryList(myList); 
   
