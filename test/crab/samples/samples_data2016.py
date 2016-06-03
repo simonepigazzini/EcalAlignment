@@ -178,7 +178,7 @@ config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
 # 
 ### 
-
+#hadd /tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160601_150049/*/tree*.root
 
 
 
