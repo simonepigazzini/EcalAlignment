@@ -277,6 +277,88 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  gPad->SaveAs(toDoShell.Data());
  myfile << DEtaMC->GetMean() << " " << DEtaMC->GetRMS() << " " << DEtaMC->GetEntries() << "      ";
  
+ 
+ 
+ //---------------------------------
+ //---- now without the numbers ----
+ 
+ ScaleAxis = 1.2 * (1./ScaleAxis);
+ 
+ legend->SetBBoxY1(0.7);
+ legend->SetBBoxY2(0.9);
+ 
+ 
+ cDPhi->cd();
+ DPhiMC->Draw("PE");
+ DPhiMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC->GetMaximum() );
+ DPhiMC_ref->Draw("same");
+ DPhiMC->Draw("PE same");
+ if (InFileAlternative != 0) { DPhiMC_alt->Draw("PE same"); }
+ legend->Draw();
+ gPad->SetGrid();
+ toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ CMS_lumi( cDPhi, 4, 10 );
+ cDPhi->SetGrid(); gPad->Update();
+ 
+ 
+ cDPhi_ep->cd();
+ DPhiMC_ep->Draw("PE");
+ DPhiMC_ep->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_ep->GetMaximum() );
+ DPhiMC_ref_ep->Draw("same");
+ DPhiMC_ep->Draw("PE same");
+ if (InFileAlternative != 0) { DPhiMC_alt_ep->Draw("PE same"); }
+ legend->Draw();
+ CMS_lumi( cDPhi_ep, 4, 10 );
+ gPad->SetGrid();
+ toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+
+ 
+ cDPhi_em->cd();
+ DPhiMC_em->Draw("PE");
+ DPhiMC_em->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_em->GetMaximum() );
+ DPhiMC_ref_em->Draw("same");
+ DPhiMC_em->Draw("PE same");
+ if (InFileAlternative != 0) { DPhiMC_alt_em->Draw("PE same"); }
+ legend->Draw();
+ CMS_lumi( cDPhi_em, 4, 10 );
+ gPad->SetGrid();
+ toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ 
+ 
+ cDEta->cd();
+ DEtaMC->Draw("PE");
+ DEtaMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DEtaMC->GetMaximum() );
+ DEtaMC_ref->Draw("same");
+ DEtaMC->Draw("PE same");
+ if (InFileAlternative != 0) { DEtaMC_alt->Draw("PE same"); }
+ legend->Draw();
+ cDEta->SetGrid(); gPad->Update();
+ CMS_lumi( cDEta, 4, 10 );
+ toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  myfile << std::endl;
  myfile.close(); 
  //--- output text file (end)
