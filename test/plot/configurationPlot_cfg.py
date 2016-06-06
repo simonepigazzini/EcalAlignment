@@ -4,7 +4,7 @@ process = cms.Process("TEST")
 
 # scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/May25/MC/ECAL_DYMC.root  /tmp/amassiro/
 # scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/May25/MC/ECAL_DYMC_small.root    /tmp/amassiro/
-
+# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC07May2016/DYToEE_NNPDF30_13TeV-powheg-pythia8/ECAL_DYMC_small.root    /tmp/amassiro/ 
 
 
 #process.ConfigurationToDraw = cms.PSet(
@@ -93,7 +93,12 @@ process = cms.Process("TEST")
 # .q
 #
 ################################################################
-
+#
+#
+# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root   /tmp/amassiro/ 
+# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May28AlignmentEEEB_newTrk2016_oldECALfrom2015/DoubleEG/data_oldECAL_newTrk_30May_small.root   /tmp/amassiro/ 
+#
+#
 
 process.ConfigurationToDraw = cms.PSet(
   nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root"),
