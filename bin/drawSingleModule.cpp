@@ -62,32 +62,56 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
 
  TH1F* DPhiMC;
- if (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
- else                       DPhiMC = new TH1F("DPhiMC"     ," MC"  ,150,-0.025,0.025);
- TH1F* DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.02,0.02);
- TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.02,0.02);
+ if      (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
+ else                            DPhiMC = new TH1F("DPhiMC"     ," MC"  ,150,-0.025,0.025);
+ 
+ TH1F* DPhiMC_ep;
+ if (specialZeroTesla == 2) DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.02,0.02);
+ TH1F* DPhiMC_em;
+ if (specialZeroTesla == 2) DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.02,0.02);
+  
  TH1F* DEtaMC;
- if (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
- else                       DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
+ if      (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
+ else if (specialZeroTesla == 2) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,120,-0.010,0.010);
+ else                            DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_ref;
- if (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
- else                       DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,150,-0.025,0.025);
- TH1F* DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.02,0.02);
- TH1F* DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.02,0.02);
+ if      (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
+ else                            DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,150,-0.025,0.025);
+ 
+ TH1F* DPhiMC_ref_ep;
+ if (specialZeroTesla == 2) DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.02,0.02);
+ TH1F* DPhiMC_ref_em;
+ if (specialZeroTesla == 2) DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.02,0.02);
+ 
  TH1F* DEtaMC_ref;
- if (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
- else                       DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
+ if      (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
+ else if (specialZeroTesla == 2) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,120,-0.010,0.010);
+ else                            DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
  
 
  TH1F* DPhiMC_alt;
- if (specialZeroTesla == 0) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,200,-0.02,0.02);
- else                       DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,150,-0.025,0.025);
- TH1F* DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,200,-0.02,0.02);
- TH1F* DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,200,-0.02,0.02);
+ if      (specialZeroTesla == 0) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,200,-0.02,0.02);
+ else                            DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,150,-0.025,0.025);
+ 
+ TH1F* DPhiMC_alt_ep;
+ if (specialZeroTesla == 2) DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,200,-0.02,0.02);
+ TH1F* DPhiMC_alt_em;
+ if (specialZeroTesla == 2) DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,100,-0.02,0.02);
+ else                       DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,200,-0.02,0.02);
+ 
  TH1F* DEtaMC_alt;
- if (specialZeroTesla == 0) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
- else                       DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
+ if      (specialZeroTesla == 0) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
+ else if (specialZeroTesla == 2) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,120,-0.010,0.010);
+ else                            DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
  
  
  ///---- text info (begin) ----
@@ -284,8 +308,21 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  ScaleAxis = 1.2 * (1./ScaleAxis);
  
- legend->SetBBoxY1(0.7);
- legend->SetBBoxY2(0.9);
+ min_legend = 0.65;
+ TLegend* legendNoNumber = new TLegend(0.62,min_legend,0.88,min_legend+(0.83-0.65));
+ if (isMC) {
+   legendNoNumber->AddEntry(DEtaMC,"MC","f");
+ }
+ else {
+   legendNoNumber->AddEntry(DEtaMC,"DATA","f"); 
+ }
+ legendNoNumber->SetFillColor(kWhite);
+ 
+ legendNoNumber->AddEntry(DEtaMC_ref,"MC","f");
+ 
+ if (InFileAlternative != 0) {
+   legendNoNumber->AddEntry(DEtaMC_alt,"DATA old","f");
+ }
  
  
  cDPhi->cd();
@@ -294,7 +331,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_ref->Draw("same");
  DPhiMC->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt->Draw("PE same"); }
- legend->Draw();
+ legendNoNumber->Draw();
  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -310,7 +347,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_ref_ep->Draw("same");
  DPhiMC_ep->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Draw("PE same"); }
- legend->Draw();
+ legendNoNumber->Draw();
  CMS_lumi( cDPhi_ep, 4, 10 );
  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -325,7 +362,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_ref_em->Draw("same");
  DPhiMC_em->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_em->Draw("PE same"); }
- legend->Draw();
+ legendNoNumber->Draw();
  CMS_lumi( cDPhi_em, 4, 10 );
  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -335,12 +372,13 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  
  cDEta->cd();
+//  DEtaMC->GetXaxis()->SetRangeUser( -0.010, 0.010 );
  DEtaMC->Draw("PE");
  DEtaMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DEtaMC->GetMaximum() );
  DEtaMC_ref->Draw("same");
  DEtaMC->Draw("PE same");
  if (InFileAlternative != 0) { DEtaMC_alt->Draw("PE same"); }
- legend->Draw();
+ legendNoNumber->Draw();
  cDEta->SetGrid(); gPad->Update();
  CMS_lumi( cDEta, 4, 10 );
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -485,10 +523,10 @@ int main(int argc, char** argv) {
   //---- summary regions
   for (int iSpecial = 0; iSpecial <4; iSpecial++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, 0, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla, InFileAlternative);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, 0);      
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla);      
     }
   }
   
@@ -496,10 +534,10 @@ int main(int argc, char** argv) {
   //---- EE
   for (int iEE = 0; iEE <4; iEE++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, 0, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, InFileAlternative);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, 0);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla);
     }
   }
 
@@ -507,10 +545,10 @@ int main(int argc, char** argv) {
   //---- EB
   for (int iEB = 0; iEB <36; iEB++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, 0, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla, InFileAlternative);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, 0);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla);
     }
   }
 

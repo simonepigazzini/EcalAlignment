@@ -105,7 +105,7 @@ process.ConfigurationToDraw = cms.PSet(
   nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC_small.root"),
   nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun_newJSON_forPublic"),
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  specialZeroTesla = cms.untracked.int32(0),
+  specialZeroTesla = cms.untracked.int32(2),   # special binning for public
 
   treeName = cms.untracked.string("myTree"),  
   
