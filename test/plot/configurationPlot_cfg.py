@@ -107,6 +107,8 @@ process.ConfigurationToDraw = cms.PSet(
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
   specialZeroTesla = cms.untracked.int32(2),   # special binning for public
 
+  onlyRMS = cms.untracked.int32(1),   # special for public to show only RMS
+
   treeName = cms.untracked.string("myTree"),  
   
   nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_oldECAL_newTrk_30May_small.root"),

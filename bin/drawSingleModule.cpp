@@ -28,7 +28,7 @@
 
 
 
-void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, int specialRegions = 0, int specialZeroTesla = 0, TChain* InFileAlternative = 0){
+void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOutputDir, TString commonCut = "1", int iEB=-100, int iEE=-100, int isMC=1, int specialRegions = 0, int specialZeroTesla = 0, TChain* InFileAlternative = 0, int onlyRMS = 0){
   
  //---- for data
  TString tempCut;
@@ -63,54 +63,54 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 
  TH1F* DPhiMC;
  if      (specialZeroTesla == 0) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
- else if (specialZeroTesla == 2) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC = new TH1F("DPhiMC"     ," MC"  ,100,-0.02,0.02);
  else                            DPhiMC = new TH1F("DPhiMC"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_ep;
- if (specialZeroTesla == 2) DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,100,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_ep  = new TH1F("DPhiMC_ep",  " MC"  ,200,-0.02,0.02);
  TH1F* DPhiMC_em;
- if (specialZeroTesla == 2) DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,100,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.02,0.02);
   
  TH1F* DEtaMC;
  if      (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
- else if (specialZeroTesla == 2) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,120,-0.010,0.010);
+ else if (specialZeroTesla == 2) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,60,-0.010,0.010);
  else                            DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_ref;
  if      (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
- else if (specialZeroTesla == 2) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,100,-0.02,0.02);
  else                            DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_ref_ep;
- if (specialZeroTesla == 2) DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,100,-0.02,0.02);
- else                       DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,200,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,50,-0.02,0.02);
+ else                       DPhiMC_ref_ep  = new TH1F("DPhiMC_ref_ep",  " MC"  ,100,-0.02,0.02);
  TH1F* DPhiMC_ref_em;
- if (specialZeroTesla == 2) DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,100,-0.02,0.02);
- else                       DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,200,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,50,-0.02,0.02);
+ else                       DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,100,-0.02,0.02);
  
  TH1F* DEtaMC_ref;
  if      (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
- else if (specialZeroTesla == 2) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,120,-0.010,0.010);
+ else if (specialZeroTesla == 2) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,60,-0.010,0.010);
  else                            DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
  
 
  TH1F* DPhiMC_alt;
  if      (specialZeroTesla == 0) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,200,-0.02,0.02);
- else if (specialZeroTesla == 2) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,200,-0.02,0.02);
+ else if (specialZeroTesla == 2) DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,100,-0.02,0.02);
  else                            DPhiMC_alt = new TH1F("DPhiMC_alt"     ," MC"  ,150,-0.025,0.025);
  
  TH1F* DPhiMC_alt_ep;
- if (specialZeroTesla == 2) DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,100,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_alt_ep  = new TH1F("DPhiMC_alt_ep",  " MC"  ,200,-0.02,0.02);
  TH1F* DPhiMC_alt_em;
- if (specialZeroTesla == 2) DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,100,-0.02,0.02);
+ if (specialZeroTesla == 2) DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_alt_em  = new TH1F("DPhiMC_alt_em",  " MC"  ,200,-0.02,0.02);
  
  TH1F* DEtaMC_alt;
  if      (specialZeroTesla == 0) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
- else if (specialZeroTesla == 2) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,120,-0.010,0.010);
+ else if (specialZeroTesla == 2) DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,60,-0.010,0.010);
  else                            DEtaMC_alt = new TH1F("DEtaMC_alt"     ," MC"  ,150,-0.025,0.025);
  
  
@@ -134,50 +134,62 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  float ScaleAxis = 1.5;
  
- createHisto(tinfoDPhi, DPhiMC, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data());
- createHisto(tinfoDEta, DEtaMC, InFile, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data());
+ createHisto(tinfoDPhi, DPhiMC, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 0, onlyRMS);
+ createHisto(tinfoDEta, DEtaMC, InFile, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 0, onlyRMS);
  
- createHisto(tinfoDPhi_ref, DPhiMC_ref, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 1);
- createHisto(tinfoDEta_ref, DEtaMC_ref, InFileComparison, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 1);
+ createHisto(tinfoDPhi_ref, DPhiMC_ref, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 1, onlyRMS);
+ createHisto(tinfoDEta_ref, DEtaMC_ref, InFileComparison, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 1, onlyRMS);
  
  TString CompleteCut_ep = Form ("(%s) && (eleCharge>0)",CompleteCut.Data());
  TString CompleteCut_em = Form ("(%s) && (eleCharge<0)",CompleteCut.Data());
  
- createHisto(tinfoDPhi_ep, DPhiMC_ep, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data());
- createHisto(tinfoDPhi_em, DPhiMC_em, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data());
+ createHisto(tinfoDPhi_ep, DPhiMC_ep, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 0, onlyRMS);
+ createHisto(tinfoDPhi_em, DPhiMC_em, InFile, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 0, onlyRMS);
   
- createHisto(tinfoDPhi_ref_ep, DPhiMC_ref_ep, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 1);
- createHisto(tinfoDPhi_ref_em, DPhiMC_ref_em, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 1);
+ createHisto(tinfoDPhi_ref_ep, DPhiMC_ref_ep, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 1, onlyRMS);
+ createHisto(tinfoDPhi_ref_em, DPhiMC_ref_em, InFileComparison, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 1, onlyRMS);
   
  float min_legend = 0.62;
  
  if (InFileAlternative != 0) {
 //    ScaleAxis = 2.5;
 //    min_legend = 0.65;
-   ScaleAxis = 3.7;
-   min_legend = 0.54;
+
+   if (onlyRMS == 0) {
+     ScaleAxis = 3.7;
+     min_legend = 0.54;  
+   }
+   else {
+     ScaleAxis = 1.6;
+     min_legend = 0.20;    
+   }
    
-   createHisto(tinfoDPhi_alt, DPhiMC_alt, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 2);
-   createHisto(tinfoDEta_alt, DEtaMC_alt, InFileAlternative, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 2);
+   createHisto(tinfoDPhi_alt, DPhiMC_alt, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 2, onlyRMS);
+   createHisto(tinfoDEta_alt, DEtaMC_alt, InFileAlternative, "deltaEtaSuperClusterAtVtx", "#Delta#eta",CompleteCut.Data(), 2, onlyRMS);
  
-   createHisto(tinfoDPhi_alt_ep, DPhiMC_alt_ep, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 2);
-   createHisto(tinfoDPhi_alt_em, DPhiMC_alt_em, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 2);
+   createHisto(tinfoDPhi_alt_ep, DPhiMC_alt_ep, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_ep.Data(), 2, onlyRMS);
+   createHisto(tinfoDPhi_alt_em, DPhiMC_alt_em, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut_em.Data(), 2, onlyRMS);
  }
  
  ///---- legend (begin) ----
- TLegend* legend = new TLegend(0.62,min_legend,0.88,min_legend+(0.83-0.65));
+//  TLegend* legend = new TLegend(0.62,min_legend,0.88,min_legend+(0.83-0.65));
+//  TLegend* legend = new TLegend(0.62,min_legend,0.88,0.89);
+
+ TLegend* legend = new TLegend(0.62,min_legend,0.87,min_legend + (0.89 - 0.54));
+ 
+ legend->AddEntry(DEtaMC_ref,"MC","f");
+ 
  if (isMC) {
   legend->AddEntry(DEtaMC,"MC","f");
  }
  else {
-  legend->AddEntry(DEtaMC,"DATA","f"); 
+  legend->AddEntry(DEtaMC,"DATA after alignment","f"); 
  }
  legend->SetFillColor(kWhite);
-
- legend->AddEntry(DEtaMC_ref,"MC","f");
-
+ legend->SetLineColor(kWhite);
+ 
  if (InFileAlternative != 0) {
-   legend->AddEntry(DEtaMC_alt,"DATA old","f");
+   legend->AddEntry(DEtaMC_alt,"DATA before alignment","f");
  }
  
  ///---- legend (end) ----
@@ -222,7 +234,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC->GetMaximum() );
  float integral = DPhiMC->Integral();
  DPhiMC_ref->Scale(integral / DPhiMC_ref->Integral());
- DPhiMC_ref->Draw("same");
+ DPhiMC_ref->Draw("histo same");
  DPhiMC->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt->Scale(integral / DPhiMC_alt->Integral());  DPhiMC_alt->Draw("PE same");  tinfoDPhi_alt->Draw(); }
  tinfoDPhi_ref->Draw();
@@ -243,7 +255,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_ep->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_ep->GetMaximum() );
  integral = DPhiMC_ep->Integral();
  DPhiMC_ref_ep->Scale(integral / DPhiMC_ref_ep->Integral());
- DPhiMC_ref_ep->Draw("same");
+ DPhiMC_ref_ep->Draw("histo same");
  DPhiMC_ep->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Scale(integral / DPhiMC_alt_ep->Integral());  DPhiMC_alt_ep->Draw("PE same"); tinfoDPhi_alt_ep->Draw();  }
  tinfoDPhi_ref_ep->Draw();
@@ -261,7 +273,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_em->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_em->GetMaximum() );
  integral = DPhiMC_em->Integral();
  DPhiMC_ref_em->Scale(integral / DPhiMC_ref_em->Integral());
- DPhiMC_ref_em->Draw("same");
+ DPhiMC_ref_em->Draw("histo same");
  DPhiMC_em->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_em->Scale(integral / DPhiMC_alt_em->Integral()); DPhiMC_alt_em->Draw("PE same");  tinfoDPhi_alt_em->Draw();  }
  tinfoDPhi_ref_em->Draw();
@@ -287,7 +299,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DEtaMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DEtaMC->GetMaximum() );
  integral = DEtaMC->Integral();
  DEtaMC_ref->Scale(integral / DEtaMC_ref->Integral());
- DEtaMC_ref->Draw("same");
+ DEtaMC_ref->Draw("histo same");
  DEtaMC->Draw("PE same");
  if (InFileAlternative != 0) {  DEtaMC_alt->Scale(integral / DEtaMC_alt->Integral()); DEtaMC_alt->Draw("PE same");  tinfoDEta_alt->Draw(); }
  tinfoDEta_ref->Draw();
@@ -308,27 +320,28 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  ScaleAxis = 1.2 * (1./ScaleAxis);
  
- min_legend = 0.65;
- TLegend* legendNoNumber = new TLegend(0.62,min_legend,0.88,min_legend+(0.83-0.65));
+ min_legend = 0.65 + 0.05;
+ TLegend* legendNoNumber = new TLegend(0.62 - 0.02,min_legend,0.88,min_legend+(0.83-0.65));
+
+ legendNoNumber->AddEntry(DEtaMC_ref,"MC","f");
+
  if (isMC) {
    legendNoNumber->AddEntry(DEtaMC,"MC","f");
  }
  else {
-   legendNoNumber->AddEntry(DEtaMC,"DATA","f"); 
+   legendNoNumber->AddEntry(DEtaMC,"DATA","p"); 
  }
  legendNoNumber->SetFillColor(kWhite);
  
- legendNoNumber->AddEntry(DEtaMC_ref,"MC","f");
- 
  if (InFileAlternative != 0) {
-   legendNoNumber->AddEntry(DEtaMC_alt,"DATA old","f");
+   legendNoNumber->AddEntry(DEtaMC_alt,"DATA old","p");
  }
  
  
  cDPhi->cd();
  DPhiMC->Draw("PE");
  DPhiMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC->GetMaximum() );
- DPhiMC_ref->Draw("same");
+ DPhiMC_ref->Draw("histo same");
  DPhiMC->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt->Draw("PE same"); }
  legendNoNumber->Draw();
@@ -344,7 +357,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  cDPhi_ep->cd();
  DPhiMC_ep->Draw("PE");
  DPhiMC_ep->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_ep->GetMaximum() );
- DPhiMC_ref_ep->Draw("same");
+ DPhiMC_ref_ep->Draw("histo same");
  DPhiMC_ep->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Draw("PE same"); }
  legendNoNumber->Draw();
@@ -359,7 +372,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  cDPhi_em->cd();
  DPhiMC_em->Draw("PE");
  DPhiMC_em->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_em->GetMaximum() );
- DPhiMC_ref_em->Draw("same");
+ DPhiMC_ref_em->Draw("histo same");
  DPhiMC_em->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_em->Draw("PE same"); }
  legendNoNumber->Draw();
@@ -375,7 +388,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  DEtaMC->GetXaxis()->SetRangeUser( -0.010, 0.010 );
  DEtaMC->Draw("PE");
  DEtaMC->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DEtaMC->GetMaximum() );
- DEtaMC_ref->Draw("same");
+ DEtaMC_ref->Draw("histo same");
  DEtaMC->Draw("PE same");
  if (InFileAlternative != 0) { DEtaMC_alt->Draw("PE same"); }
  legendNoNumber->Draw();
@@ -443,6 +456,7 @@ int main(int argc, char** argv) {
   
   //---- special setup
   int specialZeroTesla = subPSetInput.getUntrackedParameter<int> ("specialZeroTesla", 0) ;
+  int onlyRMS = subPSetInput.getUntrackedParameter<int> ("onlyRMS", 0) ;
   
   //---- if you want to compare 2 sets of data
   std::string nameInFileRootAlternative = subPSetInput.getUntrackedParameter<std::string> ("nameInFileRootAlternative", "NONE") ;
@@ -457,6 +471,7 @@ int main(int argc, char** argv) {
   std::cout << " commonCut =                " << commonCut << std::endl;
   std::cout << " nameOutputDir =            " << nameOutputDir << std::endl;
   std::cout << " specialZeroTesla =         " << specialZeroTesla << std::endl;
+  std::cout << " onlyRMS =                  " << onlyRMS << std::endl;
   
   
   if (nameInFileRootAlternative != "NONE")   std::cout << " nameInFileRootAlternative = " << nameInFileRootAlternative << std::endl;
@@ -523,10 +538,10 @@ int main(int argc, char** argv) {
   //---- summary regions
   for (int iSpecial = 0; iSpecial <4; iSpecial++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla, InFileAlternative, onlyRMS);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla);      
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla, 0, onlyRMS);      
     }
   }
   
@@ -537,7 +552,7 @@ int main(int argc, char** argv) {
       drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, InFileAlternative);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, 0, onlyRMS);
     }
   }
 
@@ -545,10 +560,10 @@ int main(int argc, char** argv) {
   //---- EB
   for (int iEB = 0; iEB <36; iEB++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla, InFileAlternative, onlyRMS);
     }
     else {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, iEB, -100, 0, 0, specialZeroTesla, 0, onlyRMS);
     }
   }
 
