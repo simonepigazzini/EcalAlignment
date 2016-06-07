@@ -95,7 +95,8 @@ void TDRStyle(){
  gStyle->SetTitleXOffset(0.9);
  // gStyle->SetTitleYOffset(1.25);
  //gStyle->SetTitleXOffset(0.5);
- gStyle->SetTitleYOffset(1.0);
+//  gStyle->SetTitleYOffset(1.0);
+ gStyle->SetTitleYOffset(1.3);
  
  // For the axis labels:
  gStyle->SetLabelColor(1, "XYZ");
@@ -118,7 +119,7 @@ void TDRStyle(){
  // CC style  
  gStyle->SetTitleXOffset(0.8);
  //   gStyle->SetTitleYOffset(0.8);
- gStyle->SetTitleYOffset(1.0);
+//  gStyle->SetTitleYOffset(1.0);
  
  gStyle->SetLabelOffset(0.005, "XYZ");
  gStyle->SetTitleSize(0.07, "XYZ");
@@ -184,8 +185,9 @@ void TDRStyle(){
  
  
  
- TGaxis::SetMaxDigits(2);
- 
+//  TGaxis::SetMaxDigits(2);
+//  TGaxis::SetMaxDigits(1);
+ TGaxis::SetMaxDigits(3);
  
  gStyle->cd(); 
  

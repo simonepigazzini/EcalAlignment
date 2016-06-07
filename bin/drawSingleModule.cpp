@@ -56,6 +56,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
   if (specialRegions == 2) { CompleteCut = Form("(%s) * (etaSC<0 && etaSC>-1.479)", commonCut.Data()); } //---- EB-
   if (specialRegions == 3) { CompleteCut = Form("(%s) * (etaSC>1.5 )", commonCut.Data()); } //---- EE+
   if (specialRegions == 4) { CompleteCut = Form("(%s) * (etaSC<-1.5)", commonCut.Data()); } //---- EE-
+  if (specialRegions == 5) { CompleteCut = Form("(%s) * (abs(etaSC)<1.5)", commonCut.Data()); } //---- EB
+  if (specialRegions == 6) { CompleteCut = Form("(%s) * (abs(etaSC)>1.5)", commonCut.Data()); } //---- EE
  }
  
  //---- ---- ---- 
@@ -160,8 +162,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
      min_legend = 0.54;  
    }
    else {
-     ScaleAxis = 1.6;
-     min_legend = 0.20;    
+     ScaleAxis = 1.78;
+     min_legend = 0.39;    
    }
    
    createHisto(tinfoDPhi_alt, DPhiMC_alt, InFileAlternative, "deltaPhiSuperClusterAtVtx", "#Delta#phi",CompleteCut.Data(), 2, onlyRMS);
@@ -175,7 +177,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  TLegend* legend = new TLegend(0.62,min_legend,0.88,min_legend+(0.83-0.65));
 //  TLegend* legend = new TLegend(0.62,min_legend,0.88,0.89);
 
- TLegend* legend = new TLegend(0.62,min_legend,0.87,min_legend + (0.89 - 0.54));
+ TLegend* legend = new TLegend(0.62,min_legend,0.87,min_legend + (0.89 - 0.54 - 0.05));
  
  legend->AddEntry(DEtaMC_ref,"MC","f");
  
@@ -183,13 +185,13 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
   legend->AddEntry(DEtaMC,"MC","f");
  }
  else {
-  legend->AddEntry(DEtaMC,"DATA after alignment","f"); 
+  legend->AddEntry(DEtaMC,"#splitline{DATA}{after alignment}","p"); 
  }
  legend->SetFillColor(kWhite);
  legend->SetLineColor(kWhite);
  
  if (InFileAlternative != 0) {
-   legend->AddEntry(DEtaMC_alt,"DATA before alignment","f");
+   legend->AddEntry(DEtaMC_alt,"#splitline{DATA}{before alignment}","p");
  }
  
  ///---- legend (end) ----
@@ -239,7 +241,12 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (InFileAlternative != 0) { DPhiMC_alt->Scale(integral / DPhiMC_alt->Integral());  DPhiMC_alt->Draw("PE same");  tinfoDPhi_alt->Draw(); }
  tinfoDPhi_ref->Draw();
  tinfoDPhi->Draw();
- gPad->SetGrid();
+ legend->Draw();
+ // writing the lumi information and the CMS "logo"
+ CMS_lumi( cDPhi, 4, 10 );
+//  cDPhi->SetGrid();
+ gPad->Update();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -260,8 +267,9 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Scale(integral / DPhiMC_alt_ep->Integral());  DPhiMC_alt_ep->Draw("PE same"); tinfoDPhi_alt_ep->Draw();  }
  tinfoDPhi_ref_ep->Draw();
  tinfoDPhi_ep->Draw();
+ legend->Draw();
  CMS_lumi( cDPhi_ep, 4, 10 );
- gPad->SetGrid();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -278,8 +286,9 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (InFileAlternative != 0) { DPhiMC_alt_em->Scale(integral / DPhiMC_alt_em->Integral()); DPhiMC_alt_em->Draw("PE same");  tinfoDPhi_alt_em->Draw();  }
  tinfoDPhi_ref_em->Draw();
  tinfoDPhi_em->Draw();
+ legend->Draw();
  CMS_lumi( cDPhi_em, 4, 10 );
- gPad->SetGrid();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -288,11 +297,10 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  
  
- legend->Draw();
- // writing the lumi information and the CMS "logo"
- CMS_lumi( cDPhi, 4, 10 );
  
- cDPhi->SetGrid(); gPad->Update();
+ 
+ 
+ 
  
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
  DEtaMC->Draw("PE");
@@ -305,7 +313,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  tinfoDEta_ref->Draw();
  tinfoDEta->Draw();
  legend->Draw();
- cDEta->SetGrid(); gPad->Update();
+//  cDEta->SetGrid();
+ gPad->Update();
  CMS_lumi( cDEta, 4, 10 );
  toDoShell = Form("%s/images/cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -337,6 +346,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
    legendNoNumber->AddEntry(DEtaMC_alt,"DATA old","p");
  }
  
+ legendNoNumber->SetLineColor(kWhite);
+ 
  
  cDPhi->cd();
  DPhiMC->Draw("PE");
@@ -345,13 +356,14 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt->Draw("PE same"); }
  legendNoNumber->Draw();
- gPad->SetGrid();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  CMS_lumi( cDPhi, 4, 10 );
- cDPhi->SetGrid(); gPad->Update();
+//  cDPhi->SetGrid(); 
+ gPad->Update();
  
  
  cDPhi_ep->cd();
@@ -362,7 +374,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Draw("PE same"); }
  legendNoNumber->Draw();
  CMS_lumi( cDPhi_ep, 4, 10 );
- gPad->SetGrid();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -377,7 +389,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (InFileAlternative != 0) { DPhiMC_alt_em->Draw("PE same"); }
  legendNoNumber->Draw();
  CMS_lumi( cDPhi_em, 4, 10 );
- gPad->SetGrid();
+//  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -392,7 +404,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DEtaMC->Draw("PE same");
  if (InFileAlternative != 0) { DEtaMC_alt->Draw("PE same"); }
  legendNoNumber->Draw();
- cDEta->SetGrid(); gPad->Update();
+//  cDEta->SetGrid();
+ gPad->Update();
  CMS_lumi( cDEta, 4, 10 );
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -536,7 +549,7 @@ int main(int argc, char** argv) {
   std::cout << " first the special regions ..." << std::endl;
   
   //---- summary regions
-  for (int iSpecial = 0; iSpecial <4; iSpecial++) {
+  for (int iSpecial = 0; iSpecial <6; iSpecial++) {
     if (nameInFileRootAlternative != "NONE") {
       drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, -100, 0, iSpecial+1, specialZeroTesla, InFileAlternative, onlyRMS);
     }

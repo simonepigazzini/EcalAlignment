@@ -5,7 +5,7 @@
 #include "TFile.h"
 
 
-void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, const char* title, const char* cut, int col = 0) {
+void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, const char* title, const char* cut, int col = 0, int onlyRMS = 0) {
  
  TString toDraw;
  TString tcut;
@@ -20,38 +20,56 @@ void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, co
  
  if (col == 0) {
   hmc->SetMarkerColor(kBlue);
-  hmc->SetLineColor(kBlack);
+  hmc->SetLineColor(kBlue);
   hmc->SetLineWidth(2);
   hmc->SetFillColor(kBlue);
   hmc->SetFillStyle(3002);
  }
  else if (col == 1) {
-  hmc->SetMarkerColor(kRed);
-  hmc->SetLineColor(kRed);
+  hmc->SetMarkerColor(kBlack);
+  hmc->SetLineColor(kBlack);
   hmc->SetLineWidth(2);
-  hmc->SetFillColor(kRed);
-  hmc->SetFillStyle(3002); 
+  hmc->SetFillColor(kBlack);
+  hmc->SetFillStyle(0);   /// 3002
  }
  else {
-   hmc->SetMarkerColor(kMagenta);
-   hmc->SetMarkerStyle(23);
-   hmc->SetLineColor(kMagenta);
+   hmc->SetMarkerColor(kRed);
+   hmc->SetMarkerStyle(26);
+   hmc->SetLineColor(kRed);
    hmc->SetLineWidth(2);
-   hmc->SetFillColor(kMagenta);
+   hmc->SetFillColor(kRed);
    hmc->SetFillStyle(3002);   
  }
  
  TString  sinfo;
-//  if (col == 0) sinfo = Form ("#splitline{<%s>_{DATA} = %.2f #times 10^{-3}}{#sigma_{DATA} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
- if (col == 0) sinfo = Form ("#splitline{<%s>_{DATA} = (%.2f  #pm  %.2f )#times 10^{-3}}{#sigma_{DATA} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000, hmc->GetRMS()/sqrt(hmc->GetEntries())*1000 ,hmc->GetRMS()*1000);
- else if (col == 1) sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
- else sinfo = Form ("#splitline{<%s>_{DATA old} = (%.2f  #pm  %.2f )#times 10^{-3}}{#sigma_{DATAold} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000, hmc->GetRMS()/sqrt(hmc->GetEntries())*1000 ,hmc->GetRMS()*1000);
+ 
+ if ( onlyRMS == 0 ) {
+   //  if (col == 0) sinfo = Form ("#splitline{<%s>_{DATA} = %.2f #times 10^{-3}}{#sigma_{DATA} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
+   if (col == 0) sinfo = Form ("#splitline{<%s>_{DATA} = (%.2f  #pm  %.2f )#times 10^{-3}}{#sigma_{DATA} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000, hmc->GetRMS()/sqrt(hmc->GetEntries())*1000 ,hmc->GetRMS()*1000);
+   else if (col == 1) sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
+   else sinfo = Form ("#splitline{<%s>_{DATA old} = (%.2f  #pm  %.2f )#times 10^{-3}}{#sigma_{DATAold} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000, hmc->GetRMS()/sqrt(hmc->GetEntries())*1000 ,hmc->GetRMS()*1000);
+ }
+ else {
+   if (col == 0)      sinfo = Form ("RMS_{DATA after alignment} = %.1f #times 10^{-3}", hmc->GetRMS()*1000);
+//    else if (col == 1) sinfo = Form ("#sigma_{MC} = %.2f #times 10^{-3}", hmc->GetRMS()*1000);
+   else if (col == 1) sinfo = Form (" ");
+   else sinfo = Form ("RMS_{DATA before alignment} = %.1f #times 10^{-3}", hmc->GetRMS()*1000);   
+ }
 //  if (col == 0)      tinfo -> SetText(0.2,0.85,sinfo);
 //  else if (col == 1) tinfo -> SetText(0.2,0.70,sinfo);
 //  else               tinfo -> SetText(0.2,0.55,sinfo);
- if (col == 0)      tinfo -> SetText(0.2,0.70+0.02,sinfo);
- else if (col == 1) tinfo -> SetText(0.2,0.55+0.02,sinfo);
- else               tinfo -> SetText(0.2,0.40+0.02,sinfo);
+
+ if ( onlyRMS == 0 ) {
+   if (col == 0)      tinfo -> SetText(0.2,0.70+0.02,sinfo);
+   else if (col == 1) tinfo -> SetText(0.2,0.40+0.02,sinfo);
+   else               tinfo -> SetText(0.2,0.55+0.02,sinfo);
+ }
+ else {
+   if (col == 0)      tinfo -> SetText(0.2,0.70+0.04+0.08,sinfo);
+   else if (col == 1) tinfo -> SetText(0.2,0.58+0.04+0.08,sinfo);
+   else               tinfo -> SetText(0.2,0.64+0.04+0.08,sinfo);   
+ }
+   
  tinfo -> SetTextSize(0.040);
  tinfo -> SetNDC(true); 
 }
