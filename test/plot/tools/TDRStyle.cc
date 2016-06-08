@@ -185,7 +185,7 @@ void TDRStyle(){
 //  TGaxis::SetMaxDigits(2);
 //  TGaxis::SetMaxDigits(1);
  TGaxis::SetMaxDigits(3);
- TGaxis::SetExponentOffset(-0.20, 0.01, "y"); // X and Y offset for Y axis
+ TGaxis::SetExponentOffset(-0.09, 0.01, "y"); // X and Y offset for Y axis
  
  gStyle->cd(); 
  
