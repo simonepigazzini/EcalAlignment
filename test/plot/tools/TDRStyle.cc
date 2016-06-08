@@ -181,13 +181,11 @@ void TDRStyle(){
  gStyle->SetLineStyleString(8,"20 12 4 12 4 12");
  gStyle->SetLineStyleString(9,"80 20");
  
- 
- 
- 
- 
+  
 //  TGaxis::SetMaxDigits(2);
 //  TGaxis::SetMaxDigits(1);
  TGaxis::SetMaxDigits(3);
+ TGaxis::SetExponentOffset(-0.01, 0.01, "y"); // X and Y offset for Y axis
  
  gStyle->cd(); 
  
