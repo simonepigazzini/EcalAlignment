@@ -162,7 +162,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
      min_legend = 0.54;  
    }
    else {
-     ScaleAxis = 1.78;
+//      ScaleAxis = 1.78;
+     ScaleAxis = 1.40;
      min_legend = 0.39;    
    }
    

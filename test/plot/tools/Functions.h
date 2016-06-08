@@ -65,9 +65,12 @@ void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, co
    else               tinfo -> SetText(0.2,0.55+0.02,sinfo);
  }
  else {
-   if (col == 0)      tinfo -> SetText(0.2,0.70+0.04+0.08,sinfo);
-   else if (col == 1) tinfo -> SetText(0.2,0.58+0.04+0.08,sinfo);
-   else               tinfo -> SetText(0.2,0.64+0.04+0.08,sinfo);   
+//    if (col == 0)      tinfo -> SetText(0.2,0.70+0.04+0.08,sinfo);
+//    else if (col == 1) tinfo -> SetText(0.2,0.58+0.04+0.08,sinfo);
+//    else               tinfo -> SetText(0.2,0.64+0.04+0.08,sinfo);   
+   if (col == 0)      tinfo -> SetText(0.2,0.70+0.04+0.08+0.05,sinfo);
+   else if (col == 1) tinfo -> SetText(0.2,0.58+0.04+0.08+0.05,sinfo);
+   else               tinfo -> SetText(0.2,0.64+0.04+0.08+0.05,sinfo);   
  }
    
  tinfo -> SetTextSize(0.040);
