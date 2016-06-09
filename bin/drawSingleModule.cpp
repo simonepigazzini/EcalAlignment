@@ -250,6 +250,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/cDphi_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  myfile << DPhiMC->GetMean() << " " << DPhiMC->GetRMS() << " " << DPhiMC->GetEntries() << "      ";
@@ -273,6 +275,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  myfile << DPhiMC_ep->GetMean() << " " << DPhiMC_ep->GetRMS() << " " << DPhiMC_ep->GetEntries() << "      ";
@@ -291,6 +295,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  CMS_lumi( cDPhi_em, 4, 10 );
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -318,6 +324,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  gPad->Update();
  CMS_lumi( cDEta, 4, 10 );
  toDoShell = Form("%s/images/cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/cDEta_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDEta_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -360,6 +368,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  CMS_lumi( cDPhi, 4, 10 );
@@ -378,6 +388,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
 
@@ -392,6 +404,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  CMS_lumi( cDPhi_em, 4, 10 );
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -409,6 +423,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  gPad->Update();
  CMS_lumi( cDEta, 4, 10 );
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ gPad->SaveAs(toDoShell.Data());
+ toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
