@@ -168,20 +168,30 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
 
-#  -----> this is GOOD! .... same as before but new JSON
-# latest and greates trakcer and pixel tag and new ECAL  -> after corrected ECAL and redone because the previous one was not working
-#  and now after the sign fix: why did it work before (last year) ?????
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON'
+##  -----> this is GOOD! .... same as before but new JSON
+## latest and greates trakcer and pixel tag and new ECAL  -> after corrected ECAL and redone because the previous one was not working
+##  and now after the sign fix: why did it work before (last year) ?????
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt"
+#config.General.workArea     = 'crab_projects_May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
+## 
+#### 
+##hadd /tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160601_150049/*/tree*.root
+
+
+
+
+
+# 
+# old trakcer and pixel tag and new ECAL 
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt"
-config.General.workArea     = 'crab_projects_May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON'
+config.General.workArea     = 'crab_projects_May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
 config.Data.allowNonValidInputDataset = True
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
 # 
-### 
-#hadd /tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160601_150049/*/tree*.root
-
-
-
 
 
 

@@ -104,18 +104,18 @@ process.GlobalTag.toGet = cms.VPSet(
                        #),
                                              
        # May 24 recipe, definitive!
-              cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                       tag =  cms.string("TrackerAlignment_MP_Run2016B_v2"),
-                       connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       ),
-              cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
-                       tag =  cms.string("TrackerAlignmentExtendedErrors_MP_Run2016B"),
-                       connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       ),
-              cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
-                       tag =  cms.string("SiPixelTemplateDBObject_38T_2016_v1_hltvalidation"),
-                       connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       ),
+              #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                       #tag =  cms.string("TrackerAlignment_MP_Run2016B_v2"),
+                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+                       #),
+              #cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
+                       #tag =  cms.string("TrackerAlignmentExtendedErrors_MP_Run2016B"),
+                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+                       #),
+              #cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
+                       #tag =  cms.string("SiPixelTemplateDBObject_38T_2016_v1_hltvalidation"),
+                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
+                       #),
        
        
           #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
