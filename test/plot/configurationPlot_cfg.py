@@ -92,6 +92,8 @@ process = cms.Process("TEST")
 # small->Write();
 # .q
 #
+#
+#
 ################################################################
 #
 #
@@ -100,10 +102,46 @@ process = cms.Process("TEST")
 #
 #
 
+#process.ConfigurationToDraw = cms.PSet(
+  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root"),
+  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC_small.root"),
+  #nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun_newJSON_forPublic"),
+  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
+  #specialZeroTesla = cms.untracked.int32(2),   # special binning for public
+
+  #onlyRMS = cms.untracked.int32(1),   # special for public to show only RMS
+
+  #treeName = cms.untracked.string("myTree"),  
+  
+  #nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_oldECAL_newTrk_30May_small.root"),
+
+#)
+
+
+
+
+################################################################
+# Pre-filter
+#
+#TFile *f1 = new TFile("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON.root");
+#TTree *ntuple = (TTree*) f1->Get("ntupleEcalAlignment/myTree");
+#TFile *f2 = new TFile("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root","recreate");
+#TTree *small = ntuple->CopyTree("(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) ) && electrons_classification==0 && ETSC>20 && mll<95 && mll>85");
+#small->Write();
+#.q
+#
+# 
+################################################################
+#
+# cp /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160610_113435/
+#
+#
+
+
 process.ConfigurationToDraw = cms.PSet(
   nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root"),
   nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC_small.root"),
-  nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun_newJSON_forPublic"),
+  nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_vs_oldTrk_13Jun_newJSON_forPublic"),
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
   specialZeroTesla = cms.untracked.int32(2),   # special binning for public
 
@@ -111,9 +149,7 @@ process.ConfigurationToDraw = cms.PSet(
 
   treeName = cms.untracked.string("myTree"),  
   
-  nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_oldECAL_newTrk_30May_small.root"),
+  nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root"),
 
 )
-
-
 
