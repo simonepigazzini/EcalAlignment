@@ -90,6 +90,12 @@ Get reference using MC trees:
  
  
     hadd /tmp/amassiro/runDnew28OctV4.root   /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA_27Oct2015_RunD_RAW_myTag/SingleElectron/crab_SingleElectronV4/151027_225612/000*/tr*.root
+ 
+
+Cleaning:
+
+    ls /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/ | awk '{print "rm /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/"$1"/*/*/*/*/reco*.root"}'
+    
     
 Test:
 
