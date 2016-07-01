@@ -172,6 +172,11 @@ CombineRotoTraslations
     CombineRotoTraslations     myEEAlignment_2015_combined_27Oct_modified.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
 
     
+    cp /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt     myEEAlignment_2016_0TeslaShifted.txt 
+    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/20Jan/myEEAlignment_2015_0Tesla_combined.txt
+    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
+    
+    
 e.g.
 
     subtract two tags
