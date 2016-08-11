@@ -52,7 +52,9 @@ process.source = cms.Source("PoolSource",
 
 # Other statements
 #process.GlobalTag.globaltag = 'GR_P_V56::All'
-process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
+#process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
+process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
+
 
 
 ################################################################################
@@ -65,52 +67,52 @@ process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
 #Define PAT sequence
 #--------------------------
 
-# Standard PAT Configuration File
-process.load("PhysicsTools.PatAlgos.patSequences_cff")
+## Standard PAT Configuration File
+#process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
-process.patElectrons.addElectronID = cms.bool(False)
+#process.patElectrons.addElectronID = cms.bool(False)
 
-# ---- remove MC references ----
+## ---- remove MC references ----
 
-from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
-removeMCMatching(process, ['All'], outputModules=[], postfix="")
-process.makePatElectrons.remove(process.electronMatch)
-process.makePatMuons.remove(process.muonMatch)
-
-# fix for private central reco
-process.patCandidates.remove(process.makePatTaus)
-process.patTaus.tauIDSources.chargedIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
-process.patTaus.tauIDSources.neutralIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
-process.patTaus.tauIDSources.puCorrPtSum     =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
-
-
-
-#process.makePatTaus.remove(process.tauMatch)
-#process.makePatTaus.remove(process.tauGenJets)
-#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
-#process.makePatTaus.remove(process.tauGenJetMatch)
-
-#process.makePatTaus.remove(process.tauMatch)
-#process.makePatTaus.remove(process.tauGenJets)
-
-process.makePatJets.remove(process.patJetPartonMatch)
-process.makePatJets.remove(process.patJetGenJetMatch)
-process.makePatJets.remove(process.patJetFlavourIdLegacy)
-process.makePatJets.remove(process.patJetFlavourId)
-
-
-
-process.makePatPhotons.remove(process.photonMatch)
-
-#process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
-
-#from PhysicsTools.PatAlgos.tools.coreTools import *
-#removeMCMatching(process, names=['All'], outputModules=[])
-#process.patMuons.embedGenMatch = cms.bool(False)
+#from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
+#removeMCMatching(process, ['All'], outputModules=[], postfix="")
 #process.makePatElectrons.remove(process.electronMatch)
 #process.makePatMuons.remove(process.muonMatch)
 
-#process.options.allowUnscheduled = cms.untracked.bool(False)
+## fix for private central reco
+#process.patCandidates.remove(process.makePatTaus)
+#process.patTaus.tauIDSources.chargedIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+#process.patTaus.tauIDSources.neutralIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+#process.patTaus.tauIDSources.puCorrPtSum     =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+
+
+
+##process.makePatTaus.remove(process.tauMatch)
+##process.makePatTaus.remove(process.tauGenJets)
+##process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+##process.makePatTaus.remove(process.tauGenJetMatch)
+
+##process.makePatTaus.remove(process.tauMatch)
+##process.makePatTaus.remove(process.tauGenJets)
+
+#process.makePatJets.remove(process.patJetPartonMatch)
+#process.makePatJets.remove(process.patJetGenJetMatch)
+#process.makePatJets.remove(process.patJetFlavourIdLegacy)
+#process.makePatJets.remove(process.patJetFlavourId)
+
+
+
+#process.makePatPhotons.remove(process.photonMatch)
+
+##process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
+
+##from PhysicsTools.PatAlgos.tools.coreTools import *
+##removeMCMatching(process, names=['All'], outputModules=[])
+##process.patMuons.embedGenMatch = cms.bool(False)
+##process.makePatElectrons.remove(process.electronMatch)
+##process.makePatMuons.remove(process.muonMatch)
+
+##process.options.allowUnscheduled = cms.untracked.bool(False)
 
 
 #--------------------------
@@ -237,7 +239,7 @@ process.pEcalAlignment = cms.Path(
     *process.highetele
     *process.highetFilter
     *process.FilterReRECOEvents   # |-> counter   
-    *process.patDefaultSequence
+    #*process.patDefaultSequence
     *process.FilterPatDefaultSequenceEvents   # |-> counter
     *process.ntupleEcalAlignment
     )

@@ -4,7 +4,12 @@
 
 #        CRAB task name          DAS name                                 
 #samples['SingleElectron']   = ['/SingleElectron/Run2016B-PromptReco-v2/AOD',  ['outputFile=treeECALAlignment.root']]
-samples['DoubleElectron']   = ['/DoubleEG/Run2016B-PromptReco-v2/AOD',        ['outputFile=treeECALAlignment.root']]
+#samples['DoubleElectron']   = ['/DoubleEG/Run2016B-PromptReco-v2/AOD',        ['outputFile=treeECALAlignment.root']]
+
+samples['DoubleElectron2016B']   = ['/DoubleEG/Run2016B-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2016C']   = ['/DoubleEG/Run2016C-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2016D']   = ['/DoubleEG/Run2016D-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+
 config.Data.useParent = True           # Important!
 
  
@@ -14,20 +19,30 @@ config.Data.useParent = True           # Important!
 # Alternative global configuration
 ########
 
-#config.JobType.psetName = '../Dump_DATA_cfg.py'
-#config.Data.splitting = 'LumiBased'    # FileBased
-#config.Data.unitsPerJob   = 10
+config.JobType.psetName = '../Dump_DATA_cfg.py'
+config.Data.splitting = 'LumiBased'    # FileBased
+config.Data.unitsPerJob   = 10
 # config.Data.runRange = '251562-254790'
 
 
-config.Data.splitting = 'LumiBased'    # FileBased
-#config.Data.splitting = 'FileBased'    # FileBased
-#config.Data.unitsPerJob   = 1
-config.Data.unitsPerJob   = 3   # 1 is creating 12k jobs ... max from crab is 10k
+####config.Data.splitting = 'LumiBased'    # FileBased
+#####config.Data.splitting = 'FileBased'    # FileBased
+#####config.Data.unitsPerJob   = 1
+####config.Data.unitsPerJob   = 3   # 1 is creating 12k jobs ... max from crab is 10k
+
+#config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
+#config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
-config.JobType.psetName = '../reco_RAW2DIGI_RECO_AOD.py'
-config.JobType.maxMemoryMB = 2500    # 2.5 GB
+
+
+
+
+
+
+################
+
+
 
 #config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May17ZeroAlignmentEEEB'
 ##config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt"
@@ -184,24 +199,34 @@ config.JobType.maxMemoryMB = 2500    # 2.5 GB
 
 
 
+## 
+## old trakcer and pixel tag and new ECAL 
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt"
+#config.General.workArea     = 'crab_projects_May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
+#config.Data.allowNonValidInputDataset = True
+#config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
+## 
+## hadd /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160610_113435/*/tree*.root
+## /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root
+##
+##
+
+
+
+
+
+
+
+# dump all data
+
 # 
 # old trakcer and pixel tag and new ECAL 
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
-config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt"
-config.General.workArea     = 'crab_projects_May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump'
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-277148_13TeV_PromptReco_Collisions16_JSON.txt"
+config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump'
 config.Data.allowNonValidInputDataset = True
-config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']   # this is the new ECAL alignment
-# 
-# hadd /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON.root  /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160610_113435/*/tree*.root
-# /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root
 #
-#
-
-
-
-
-
-
 
 
 
