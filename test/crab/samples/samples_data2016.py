@@ -10,7 +10,7 @@ samples['DoubleElectron2016B']   = ['/DoubleEG/Run2016B-PromptReco-v2/MINIAOD', 
 samples['DoubleElectron2016C']   = ['/DoubleEG/Run2016C-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
 samples['DoubleElectron2016D']   = ['/DoubleEG/Run2016D-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
 
-config.Data.useParent = True           # Important!
+#config.Data.useParent = True           # Important!
 
  
 
@@ -225,9 +225,10 @@ config.Data.unitsPerJob   = 10
 config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump'
 config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-277148_13TeV_PromptReco_Collisions16_JSON.txt"
 config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump'
-config.Data.allowNonValidInputDataset = True
+#config.Data.allowNonValidInputDataset = True
 #
-
+# /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/*/*/*/*.root
+#
 
 
 

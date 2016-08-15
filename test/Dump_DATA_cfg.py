@@ -139,13 +139,15 @@ process.FilterPatDefaultSequenceEvents = cms.EDProducer("EventCountProducer")
 
 process.ntupleEcalAlignment = cms.EDAnalyzer(
     'EcalAlignment',
-    recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
-    recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
+    recHitCollection_EB = cms.InputTag("reducedEgamma","reducedEBRecHits"),    #   "reducedEcalRecHitsEB"),
+    recHitCollection_EE = cms.InputTag("reducedEgamma","reducedEERecHits"),     #   "reducedEcalRecHitsEE"),
+    #recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
+    #recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
 #    recHitCollection_EB = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
 #    recHitCollection_EE = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
-    EleTag              = cms.InputTag("patElectrons"),
+    EleTag              = cms.InputTag("slimmedElectrons"),  # "patElectrons"
     TrackTag            = cms.InputTag("generalTracks"),
-    CALOMetTag          = cms.InputTag("patMETs"),
+    CALOMetTag          = cms.InputTag("slimmedMETs"),      # "patMETs"
     vtxTag              = cms.InputTag("goodPrimaryVertices"),
     isMC                = cms.untracked.bool(False),
     genEvtInfoTag       = cms.untracked.InputTag("generator")
@@ -182,7 +184,7 @@ process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
 process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
-  src = cms.InputTag("offlinePrimaryVertices"),
+  src = cms.InputTag("offlineSlimmedPrimaryVertices"),     # "offlinePrimaryVertices"
   cut = cms.string(VERTEX_SEL),
   filter = cms.bool(True),
 )
@@ -190,7 +192,7 @@ process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
 # filter on primary vertex
 process.primaryVertexFilter = cms.EDFilter(
     "GoodVertexFilter",
-    vertexCollection = cms.InputTag('offlinePrimaryVertices'),
+    vertexCollection = cms.InputTag("offlineSlimmedPrimaryVertices"),     # "offlinePrimaryVertices"
     minimumNDOF = cms.uint32(4) ,
     maxAbsZ = cms.double(24),
     maxd0 = cms.double(2)
@@ -207,8 +209,10 @@ process.noscraping = cms.EDFilter(
 
 # select events with at least one gsf electron
 process.highetele = cms.EDFilter(
-    "GsfElectronSelector",
-    src = cms.InputTag("gedGsfElectrons"),  # -> new!
+    "PATElectronSelector",   #"GsfElectronSelector",
+    src = cms.InputTag("slimmedElectrons"),  # "gedGsfElectrons"
+    #"GsfElectronSelector",
+    #src = cms.InputTag("gedGsfElectrons"),  # -> new!
     cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
     )
 
