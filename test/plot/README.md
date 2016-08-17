@@ -276,6 +276,8 @@ General draw:
     r99t Draw.cxx\(\"treeECALAlignment_all_ideal_MC.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
     r99t Draw.cxx\(\"treeECALAlignment_all_MC_standard.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>20\"\)
 
+    electrons_classification==0 && ETSC>30 && mll<95 && mll>85
+    
     /tmp/amassiro/data_0T.root
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\",\"data\ 0\ Tesla\"\)
     r99t Draw.cxx\(\"/tmp/amassiro/data_0T.root\",\"deltaEtaSuperClusterAtVtx\",100,-0.01,0.01,\"#Delta#eta\",\"electrons_classification\=\=0\&\&ETSC\>30\&\&mll\<95\&\&mll\>85\",\"data\ 0\ Tesla\"\)
@@ -357,4 +359,22 @@ General draw 2D:
     
     r99t Draw2D.cxx\(\"treeECALAlignment_ideal.root\",\"deltaPhiSuperClusterAtVtx\",100,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\<0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
     r99t Draw2D.cxx\(\"treeECALAlignment_MC_standard.root\",\"deltaPhiSuperClusterAtVtx\",200,-0.08,0.08,\"#Delta#phi\",\"etaSC\",12,-3,3,\"#eta_{SC}\",\"eleCharge\<0\&\&electrons_classification\=\=0\&\&ETSC\>20\"\)
+    
+    
+    
+    r99t Draw2D.cxx\(\"/tmp/amassiro/ECALalignDATA_runC.root\",\"deltaEtaSuperClusterAtVtx\",200,-0.02,0.02,\"#Delta#eta\",\"time\",2000,1466500000,1468000000,\"time\",\"mll\>80\&\&mll\<100\&\&ETSC\>20\&\&abs\\\(etaSC\\\)\>1.5\"\)
+    
+    r99t Draw2D.cxx\(\"/tmp/amassiro/ECALalignDATA_runC.root\",\"deltaEtaSuperClusterAtVtx\",200,-0.02,0.02,\"#Delta#eta\",\"time\",2000,1466500000,1468000000,\"time\",\"mll\>80\&\&mll\<100\&\&ETSC\>20\&\&abs\\\(etaSC\\\)\<1.5\"\)
+    
+    
+    
+    
+     TTree* tree = (TTree*)  _file0 -> Get ("ntupleEcalAlignment/myTree");
+
+    tree->Draw("deltaEtaSuperClusterAtVtx:runId","electrons_classification==0 && ETSC>30 && mll<95 && mll>85", "colz")
+    
+    
+    r99t MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_644.root\"\)
+    
+    
     
