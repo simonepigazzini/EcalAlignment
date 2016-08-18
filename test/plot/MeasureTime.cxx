@@ -124,7 +124,7 @@ void MeasureTime(std::string nameInFileRoot, int where = 0) {
       time_t myTime = sum_h_Sig_tx->GetBinCenter(i)*1000000;
       std::string timestring = ctime (&myTime);
       timestring = timestring.substr(0, timestring.size()-1);
-      myfile << "     " << timestring << "  ";
+      myfile << "     " << timestring << "  " << (long) myTime;
       
       myfile << "  " << sum_h_Sig_tx->GetBinCenter(i);
       myfile << "     " << sum_h_Sig_tx->GetBinContent(i) << "  " << sum_h_Sig_tx->GetBinError(i) << std::endl;       
