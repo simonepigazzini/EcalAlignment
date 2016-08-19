@@ -4,7 +4,7 @@
 
 #include "TDRStyle.cc"
 
-void MeasureTime(std::string nameInFileRoot, int where = 0) {
+void MeasureTime(std::string nameInFileRoot, int where = 0, std::string run = "B") {
   
   std::string var_Y = "deltaEtaSuperClusterAtVtx";
   int NBIN_Y = 200;
@@ -104,7 +104,8 @@ void MeasureTime(std::string nameInFileRoot, int where = 0) {
   cc2D_x->SetGrid();
   sum_h_Sig_tx->Draw("PE");
   
-  name = Form ("time_time_%d.root", where);
+  name = Form ("time_time_%d_%s.root", where, run.c_str());
+//   name = Form ("time_time_%d.root", where);
   TFile outputFile(name.Data(), "recreate");
   sum_h_Sig->Write();
   sum_h_Sig_tx->Write();
@@ -112,7 +113,7 @@ void MeasureTime(std::string nameInFileRoot, int where = 0) {
   
   
   std::ofstream myfile;
-  name = Form ("time_time_%d.txt", where);
+  name = Form ("time_time_%d_%s.txt", where, run.c_str());
   myfile.open (name.Data());
   myfile << "# from" << nameInFileRoot << "\n";
   myfile << "# time multiplied by 1000000 \n";

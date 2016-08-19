@@ -376,5 +376,100 @@ General draw 2D:
     
     r99t MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_644.root\"\)
     
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",0\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",1\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",2\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",3\)
+    
+
+    
+    
+    
+    
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",0,\"B0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",1,\"B0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",2,\"B0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",3,\"B0\"\)
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0001/treeECALAlignment_*.root\",0,\"B1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0001/treeECALAlignment_*.root\",1,\"B1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0001/treeECALAlignment_*.root\",2,\"B1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0001/treeECALAlignment_*.root\",3,\"B1\"\)
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0002/treeECALAlignment_*.root\",0,\"B2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0002/treeECALAlignment_*.root\",1,\"B2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0002/treeECALAlignment_*.root\",2,\"B2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0002/treeECALAlignment_*.root\",3,\"B2\"\)
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",0,\"B3\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",1,\"B3\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",2,\"B3\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/treeECALAlignment_*.root\",3,\"B3\"\)
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0004/treeECALAlignment_*.root\",0,\"B4\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0004/treeECALAlignment_*.root\",1,\"B4\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0004/treeECALAlignment_*.root\",2,\"B4\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0004/treeECALAlignment_*.root\",3,\"B4\"\)
+    
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0005/treeECALAlignment_*.root\",0,\"B5\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0005/treeECALAlignment_*.root\",1,\"B5\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0005/treeECALAlignment_*.root\",2,\"B5\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0005/treeECALAlignment_*.root\",3,\"B5\"\)
+    
+    
+    
+    
+    
+
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0000/treeECALAlignment_*.root\",0,\"C0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0000/treeECALAlignment_*.root\",1,\"C0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0000/treeECALAlignment_*.root\",2,\"C0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0000/treeECALAlignment_*.root\",3,\"C0\"\)
+
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0001/treeECALAlignment_*.root\",0,\"C1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0001/treeECALAlignment_*.root\",1,\"C1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0001/treeECALAlignment_*.root\",2,\"C1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/160815_103118/0001/treeECALAlignment_*.root\",3,\"C1\"\)
+
+    
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0000/treeECALAlignment_*.root\",0,\"D0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0000/treeECALAlignment_*.root\",1,\"D0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0000/treeECALAlignment_*.root\",2,\"D0\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0000/treeECALAlignment_*.root\",3,\"D0\"\)
+ 
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0001/treeECALAlignment_*.root\",0,\"D1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0001/treeECALAlignment_*.root\",1,\"D1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0001/treeECALAlignment_*.root\",2,\"D1\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0001/treeECALAlignment_*.root\",3,\"D1\"\)
+
+    r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",0,\"D2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",1,\"D2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",2,\"D2\"\)
+    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",3,\"D2\"\)
+
+    
+    
+    time_time_0_B0.txt
+    
+    cat time_time_0_??.txt   >   time_time_0.txt 
+    cat time_time_1_??.txt   >   time_time_1.txt 
+    cat time_time_2_??.txt   >   time_time_2.txt 
+    cat time_time_3_??.txt   >   time_time_3.txt 
+ 
+    r99t plotVsTime.cxx\(\"time_time\"\)
+    
+    
+    
+    
+    
+    
+    
     
     
