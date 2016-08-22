@@ -7,6 +7,11 @@
 void plotVsTime(std::string nameInFileTxt) {
   
   
+  
+  std::ofstream my_out_file;
+  my_out_file.open ("summary.txt");
+  
+  
   std::string buffer;
   std::string temp_string;
   float temp_float;
@@ -19,6 +24,17 @@ void plotVsTime(std::string nameInFileTxt) {
   
   TCanvas* all_cc = new TCanvas ("all_cc", "", 800, 600);
   all_cc->Divide(2,2);
+
+  long long_time_0 [1000][4];
+  float time_0 [1000][4];
+  float error_time_0 [1000][4];
+  float value_0[1000][4];
+  float error_0[1000][4];
+  std::string Week_0[1000][4];
+  std::string Month_0[1000][4];
+  std::string Day_0[1000][4];
+  std::string Time_0[1000][4];
+  std::string Year_0[1000][4];
   
   int colors[4] = {2, 3, 4, 6};
   
@@ -36,16 +52,6 @@ void plotVsTime(std::string nameInFileTxt) {
       return;
     }
     
-    long long_time_0 [1000];
-    float time_0 [1000];
-    float error_time_0 [1000];
-    float value_0[1000];
-    float error_0[1000];
-    std::string Week_0[1000];
-    std::string Month_0[1000];
-    std::string Day_0[1000];
-    std::string Time_0[1000];
-    std::string Year_0[1000];
     
     num = 0;
     while(!file.eof()) {
@@ -60,26 +66,26 @@ void plotVsTime(std::string nameInFileTxt) {
         
         
         line >> temp_string;                                                                  /*   std::cout << " " << temp_string;  */
-        line >> temp_float;   error_time_0[num] =  temp_float;                                /*   std::cout << " " << temp_float;   */
-        line >> temp_float;   error_time_0[num] = (temp_float - error_time_0[num]) / 2.;      /*   std::cout << " " << temp_float;   */
-        line >> temp_string;  Week_0 [num] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
-        line >> temp_string;  Month_0[num] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
-        line >> temp_string;  Day_0  [num] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
-        line >> temp_string;  Time_0 [num] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
-        line >> temp_string;  Year_0 [num] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
+        line >> temp_float;   error_time_0[num][iDet] =  temp_float;                                /*   std::cout << " " << temp_float;   */
+        line >> temp_float;   error_time_0[num][iDet] = (temp_float - error_time_0[num][iDet]) / 2.;      /*   std::cout << " " << temp_float;   */
+        line >> temp_string;  Week_0 [num][iDet] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
+        line >> temp_string;  Month_0[num][iDet] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
+        line >> temp_string;  Day_0  [num][iDet] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
+        line >> temp_string;  Time_0 [num][iDet] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
+        line >> temp_string;  Year_0 [num][iDet] = temp_string ;                                    /*   std::cout << " " << temp_string;  */    
         
-        //       TDatime T0(Year_0 [num], Month_0[num], Day_0[num], 00,00,00);
-        //       time_0[num] = T0.Convert();
+        //       TDatime T0(Year_0 [num][iDet], Month_0[num][iDet], Day_0[num][iDet], 00,00,00);
+        //       time_0[num][iDet] = T0.Convert();
         
         line >> temp_long;
-        long_time_0[num] = temp_long;
+        long_time_0[num][iDet] = temp_long;
         
         line >> temp_float;
         
-        line >> value_0[num];
-        line >> error_0[num];
+        line >> value_0[num][iDet];
+        line >> error_0[num][iDet];
         
-        //       std::cout  << " ------ " << time_0[num] << "   " <<  value_0[num] << "   " << error_time_0[num] << "   " << error_0[num] << "   " << std::endl;    
+        //       std::cout  << " ------ " << time_0[num][iDet] << "   " <<  value_0[num][iDet] << "   " << error_time_0[num][iDet] << "   " << error_0[num][iDet] << "   " << std::endl;    
         num++;
         
       } 
@@ -88,9 +94,9 @@ void plotVsTime(std::string nameInFileTxt) {
     
     gr_Deta[iDet] = new TGraphErrors();
     for (int i=0; i<num; i++) {
-      //     std::cout << " -- " << long_time_0[i] << std::endl;
-      gr_Deta[iDet]->SetPoint(i, long_time_0[i], value_0[i]);
-      gr_Deta[iDet]->SetPointError(i, error_time_0[i], error_0[i]);
+      //     std::cout << " -- " << long_time_0[i][iDet] << std::endl;
+      gr_Deta[iDet]->SetPoint(i, long_time_0[i][iDet], value_0[i][iDet]);
+      gr_Deta[iDet]->SetPointError(i, error_time_0[i][iDet], error_0[i][iDet]);
     }
     
     //   (num, long_time_0, value_0, error_time_0, error_0);
@@ -102,7 +108,7 @@ void plotVsTime(std::string nameInFileTxt) {
     
     gr_Deta[iDet]->Draw("AP");
     
-    gStyle->SetTimeOffset(time_0[num]);
+    gStyle->SetTimeOffset(time_0[0][iDet]);
     
     gr_Deta[iDet]->GetXaxis()->SetTitle("time");
     gr_Deta[iDet]->GetYaxis()->SetTitle("#Delta#eta");
@@ -132,6 +138,7 @@ void plotVsTime(std::string nameInFileTxt) {
   mg->Draw("AP");
   gPad->SetGrid();
 
+  mg->GetXaxis()->SetTitleOffset(1.4);
   mg->GetXaxis()->SetTitle("time");
   mg->GetYaxis()->SetTitle("#Delta#eta");
   
@@ -150,6 +157,29 @@ void plotVsTime(std::string nameInFileTxt) {
   leg->Draw();
   
   
+  
+  
+  //---- for web
+  //   [new Date(2015, 0, 1, 3         ),  0 , 1 , 0 , 4 ], 
+  
+  
+  for (int i=0; i<num; i++) {
+    TDatime temp_date(long_time_0[i][0]);
+    my_out_file << "[ ";
+    my_out_file << "new Date(" << temp_date.GetYear()  << ", ";
+    my_out_file <<         " " << temp_date.GetMonth() << ", ";
+    my_out_file <<         " " << temp_date.GetDay()   << ", ";
+    my_out_file <<         " " << temp_date.GetHour()  << ", ";
+    my_out_file <<         " " << temp_date.GetMinute() << ")";
+    for (int iDet = 0; iDet<4; iDet++) {
+      my_out_file << " , " << value_0[i][iDet];
+      my_out_file << " , " << value_0[i][iDet] + error_0[i][iDet];
+      my_out_file << " , " << value_0[i][iDet] - error_0[i][iDet];
+    }
+    my_out_file << "], \n";
+  }
+  
+  my_out_file.close(); 
   
 }
 
