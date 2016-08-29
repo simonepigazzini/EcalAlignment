@@ -7,8 +7,15 @@
 #samples['DoubleElectron']   = ['/DoubleEG/Run2016B-PromptReco-v2/AOD',        ['outputFile=treeECALAlignment.root']]
 
 #samples['DoubleElectron2016B']   = ['/DoubleEG/Run2016B-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
-samples['DoubleElectron2016C']   = ['/DoubleEG/Run2016C-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+#samples['DoubleElectron2016C']   = ['/DoubleEG/Run2016C-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
 #samples['DoubleElectron2016D']   = ['/DoubleEG/Run2016D-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+
+samples['DoubleElectron2016E']   = ['/DoubleEG/Run2016E-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2016F']   = ['/DoubleEG/Run2016F-PromptReco-v1/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2016G']   = ['/DoubleEG/Run2016G-PromptReco-v1/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+
+
+
 
 #config.Data.useParent = True           # Important!
 
