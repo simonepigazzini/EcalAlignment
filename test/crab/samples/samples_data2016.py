@@ -6,9 +6,9 @@
 #samples['SingleElectron']   = ['/SingleElectron/Run2016B-PromptReco-v2/AOD',  ['outputFile=treeECALAlignment.root']]
 #samples['DoubleElectron']   = ['/DoubleEG/Run2016B-PromptReco-v2/AOD',        ['outputFile=treeECALAlignment.root']]
 
-samples['DoubleElectron2016B']   = ['/DoubleEG/Run2016B-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+#samples['DoubleElectron2016B']   = ['/DoubleEG/Run2016B-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
 samples['DoubleElectron2016C']   = ['/DoubleEG/Run2016C-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
-samples['DoubleElectron2016D']   = ['/DoubleEG/Run2016D-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
+#samples['DoubleElectron2016D']   = ['/DoubleEG/Run2016D-PromptReco-v2/MINIAOD',        ['outputFile=treeECALAlignment.root']]
 
 #config.Data.useParent = True           # Important!
 
@@ -221,14 +221,37 @@ config.Data.unitsPerJob   = 10
 # dump all data
 
 # 
-# old trakcer and pixel tag and new ECAL 
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump'
-config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-277148_13TeV_PromptReco_Collisions16_JSON.txt"
-config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump'
-#config.Data.allowNonValidInputDataset = True
+## old trakcer and pixel tag and new ECAL 
+##config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump'
+#config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump_2'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-277148_13TeV_PromptReco_Collisions16_JSON.txt"
+##config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump'
+#config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump_2'
+##config.Data.allowNonValidInputDataset = True
+##
+## /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/*/*/*/*.root
+## hadd /tmp/amassiro/ECALalignDATA_runA.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016A/*/*/*.root
+## hadd /tmp/amassiro/ECALalignDATA_runB.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/*/*/*.root
+## hadd /tmp/amassiro/ECALalignDATA_runC.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016C/*/*/*.root
+## hadd /tmp/amassiro/ECALalignDATA_runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/*/*/*.root
+##
+##
+
+##ls /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016B/160815_103126/0000/
+
+
+
 #
-# /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/*/*/*/*.root
+# dump all data after ICHEP
 #
+
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug29AlignmentEEEB_dump_AfterICHEP'
+config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-279116_13TeV_PromptReco_Collisions16_JSON_NoL1T.txt"
+config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump_AfterICHEP'
+config.Data.runRange = '277148-279119'
+#
+
+
 
 
 
