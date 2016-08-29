@@ -466,6 +466,15 @@ General draw 2D:
     r99t plotVsTime.cxx\(\"time_time\"\)
     
     
+    cat time_Mass_time_0_*.txt   >   time_Mass_time_0.txt 
+    cat time_Mass_time_1_*.txt   >   time_Mass_time_1.txt 
+    cat time_Mass_time_2_*.txt   >   time_Mass_time_2.txt 
+    cat time_Mass_time_3_*.txt   >   time_Mass_time_3.txt 
+ 
+    
+    
+    r99t plotVsTimeMass.cxx\(\"time_Mass_time\"\)
+    
     
     
     

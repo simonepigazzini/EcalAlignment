@@ -258,6 +258,8 @@ config.General.workArea     = 'crab_projects_Aug11AlignmentEEEB_dump_AfterICHEP'
 config.Data.runRange = '277148-279119'
 #
 
+#   ls /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug29AlignmentEEEB_dump_AfterICHEP/DoubleEG/
+#    crab_DoubleElectron2016E/160829_102157/  crab_DoubleElectron2016F/160829_102232/  crab_DoubleElectron2016G/160829_102224/
 
 
 
