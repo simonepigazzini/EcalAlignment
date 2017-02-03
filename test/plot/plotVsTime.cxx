@@ -25,16 +25,16 @@ void plotVsTime(std::string nameInFileTxt) {
   TCanvas* all_cc = new TCanvas ("all_cc", "", 800, 600);
   all_cc->Divide(2,2);
 
-  long long_time_0 [1000][4];
-  float time_0 [1000][4];
-  float error_time_0 [1000][4];
-  float value_0[1000][4];
-  float error_0[1000][4];
-  std::string Week_0[1000][4];
-  std::string Month_0[1000][4];
-  std::string Day_0[1000][4];
-  std::string Time_0[1000][4];
-  std::string Year_0[1000][4];
+  long long_time_0 [10000][4];
+  float time_0 [10000][4];
+  float error_time_0 [10000][4];
+  float value_0[10000][4];
+  float error_0[10000][4];
+  std::string Week_0[10000][4];
+  std::string Month_0[10000][4];
+  std::string Day_0[10000][4];
+  std::string Time_0[10000][4];
+  std::string Year_0[10000][4];
   
   int colors[4] = {2, 3, 4, 6};
   
@@ -44,6 +44,8 @@ void plotVsTime(std::string nameInFileTxt) {
     all_cc->cd(iDet+1);
     
     std::string complete_nameInFileTxt = nameInFileTxt + "_" + std::to_string(iDet) + ".txt";
+    
+    std::cout << " reading : " << complete_nameInFileTxt << std::endl;
     
     std::ifstream file (complete_nameInFileTxt.c_str()); 
     
@@ -56,7 +58,7 @@ void plotVsTime(std::string nameInFileTxt) {
     num = 0;
     while(!file.eof()) {
       getline(file,buffer);
-      //     std::cout << "buffer = " << buffer << std::endl;
+//       std::cout << "buffer = " << buffer << std::endl;
       if (buffer != "" && buffer.at(0) != '#') { ///---> save from empty line at the end!
         std::stringstream line( buffer );      
         //       line >> temp_string; 
@@ -167,7 +169,7 @@ void plotVsTime(std::string nameInFileTxt) {
     TDatime temp_date(long_time_0[i][0]);
     my_out_file << "[ ";
     my_out_file << "new Date(" << temp_date.GetYear()  << ", ";
-    my_out_file <<         " " << temp_date.GetMonth() << ", ";
+    my_out_file <<         " " << temp_date.GetMonth()-1 << ", ";
     my_out_file <<         " " << temp_date.GetDay()   << ", ";
     my_out_file <<         " " << temp_date.GetHour()  << ", ";
     my_out_file <<         " " << temp_date.GetMinute() << ")";

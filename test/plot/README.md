@@ -458,10 +458,10 @@ General draw 2D:
     
     time_time_0_B0.txt
     
-    cat time_time_0_??.txt   >   time_time_0.txt 
-    cat time_time_1_??.txt   >   time_time_1.txt 
-    cat time_time_2_??.txt   >   time_time_2.txt 
-    cat time_time_3_??.txt   >   time_time_3.txt 
+    cat time_time_0_??.txt   time_time_0_?.txt >   time_time_0.txt 
+    cat time_time_1_??.txt   time_time_1_?.txt >   time_time_1.txt 
+    cat time_time_2_??.txt   time_time_2_?.txt >   time_time_2.txt 
+    cat time_time_3_??.txt   time_time_3_?.txt >   time_time_3.txt 
  
     r99t plotVsTime.cxx\(\"time_time\"\)
     
