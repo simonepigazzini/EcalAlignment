@@ -11,32 +11,44 @@ process = cms.Process('EcalAlignment')
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 # add a list of strings for events to process
+process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 options.parseArguments()
 
 #process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 #process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
+print "I AM HERE 1.1"
 #process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi')
 process.load("RecoVertex.BeamSpotProducer.BeamSpot_cff")
-
+print "I AM HERE 1.2"
 
 
 
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
+print "I AM HERE 2.1"
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
+print "I AM HERE 2.2"
 process.load('FWCore.MessageService.MessageLogger_cfi')
+print "I AM HERE 2.3"
 process.load('Configuration.EventContent.EventContent_cff')
+print " I AM HERE 2.4"
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
+print "I AM HERE 2.5"
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
+print " I AM HERE 2.6"
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
+print " I AM HERE 2.7"
 process.load('Configuration.StandardSequences.Reconstruction_Data_cff')
+print " I AM HERE 2.8"
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
+print "I AM HERE 2.9"
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+print "I AM HERE 2.10"
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(100)
@@ -44,7 +56,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-   # fileNames = cms.untracked.vstring('/store/data/Run2017A/Commissioning2/ALCARECO/TkAlMinBias-PromptReco-v1/000/295/315/00000/22FBAC87-3945-E711-BF76-02163E019B49.root'),
+   # fileNames = cms.untracked.vstring('file:B8F0DC07-5845-E711-8318-02163E019E8D.root'),
     fileNames = cms.untracked.vstring(options.inputFiles),
     secondaryFileNames = cms.untracked.vstring()
 )
@@ -88,7 +100,7 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
 
 #process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 
-process.GlobalTag.toGet = cms.VPSet(
+#process.GlobalTag.toGet = cms.VPSet(
 
 
        # May 23 recipe
@@ -168,24 +180,27 @@ process.GlobalTag.toGet = cms.VPSet(
              ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
              #)
 
-          cms.PSet(record = cms.string("EEAlignmentRcd"),
-             tag = cms.string("EEAlignment_measured_v05_offline"),
+         # cms.PSet(record = cms.string("EEAlignmentRcd"),
+            # tag = cms.string("EEAlignment_measured_v05_offline"),
             # connect = cms.string("sqlite_file:EEAlign_2015.db")   #### The ZERO ####
-             ),
-          cms.PSet(record = cms.string("EBAlignmentRcd"),
-             tag = cms.string("EBAlignment_measured_v05_offline"),
+            # ),
+         # cms.PSet(record = cms.string("EBAlignmentRcd"),
+            # tag = cms.string("EBAlignment_measured_v05_offline"),
             # connect = cms.string("sqlite_file:EBAlign_2015.db")   #### The ZERO ####
-             ),
-         ) 
+            # ),
+        # ) 
 
 
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
+print "I AM HERE 3.1"
 process.reconstruction_step = cms.Path(process.reconstruction)
+print "I AM HERE 3.2"
 process.endjob_step = cms.EndPath(process.endOfProcess)
+print "I AM HERE 3.3"
 process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
-
+print "I AM HERE 3.4"
 
 
 
@@ -213,7 +228,7 @@ process = customizeHLTforCMSSW(process,"GRun")
 
 # Standard PAT Configuration File
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
-
+print " I AM HERE 4"
 process.patElectrons.addElectronID = cms.bool(False)
 
 # ---- remove MC references ----
@@ -221,29 +236,36 @@ process.patElectrons.addElectronID = cms.bool(False)
 from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
 #removeMCMatching(process, ['All'], outputModules=[], postfix="")
 process.makePatElectrons.remove(process.electronMatch)
+print " I AM HERE 5.1"
 process.makePatMuons.remove(process.muonMatch)
-
+print "I AM HERE 5.2"
 #process.patCandidates.remove(process.makePatTaus)
 process.makePatTaus.remove(process.tauMatch)
+print "I AM HERE 5.3"
 process.makePatTaus.remove(process.tauGenJets)
+print "I AM HERE 5.4"
 process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+print "I AM HERE 5.5"
 process.makePatTaus.remove(process.tauGenJetMatch)
-
+print "I AM HERE 5.6"
 process.cleanPatTaus.preselection = cms.string('tauID("decayModeFinding") > 0.5 & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 & tauID("againstMuonTight3") > 0.5 ')
-    
+print "I AM HERE 5.7"    
 
 process.patMETs.addGenMET = cms.bool(False)
-
+print "I AM HERE 5.8"
 
 process.makePatJets.remove(process.patJetPartonMatch)
+print " I AM HERE 5.9"
 process.makePatJets.remove(process.patJetGenJetMatch)
+print "I AM HERE 5.10"
 process.makePatJets.remove(process.patJetFlavourIdLegacy)
+print "I AM HERE 5.11"
 process.makePatJets.remove(process.patJetFlavourId)
-
+print "I AM HERE 5.12"
 
 
 process.makePatPhotons.remove(process.photonMatch)
-
+print "I AM HERE 5.13"
 #process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
@@ -296,7 +318,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
 
 process.TFileService = cms.Service(
     "TFileService",
-    #fileName = cms.string("EcalAlignment.root")
+   # fileName = cms.string("EcalAlignment.root")
     fileName = cms.string(options.outputFile)
     )
 
@@ -315,10 +337,13 @@ process.skimming = cms.EDFilter(
 
 # filter on bit = and (40 || 41) and !(bit36 || bit37 || bit38 || bit39)
 process.load('L1TriggerConfig.L1GtConfigProducers.L1GtTriggerMaskTechTrigConfig_cff')
+print "I AM HERE 6"
 process.load('HLTrigger/HLTfilters/hltLevel1GTSeed_cfi')
+print "I AM HERE 7"
 process.hltLevel1GTSeed.L1TechTriggerSeeding = cms.bool(True)
+print "I AM HERE 8"
 process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) AND NOT (36 OR 37 OR 38 OR 39)')
-
+print "I AM HERE 9"
 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
