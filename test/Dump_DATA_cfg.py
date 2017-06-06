@@ -53,7 +53,9 @@ process.source = cms.Source("PoolSource",
 # Other statements
 #process.GlobalTag.globaltag = 'GR_P_V56::All'
 #process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
-process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
+#process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
+process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
+
 
 
 

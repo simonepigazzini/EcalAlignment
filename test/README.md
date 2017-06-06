@@ -32,7 +32,12 @@ run:
         outputFile=reco_raw.root \
         isMC=False
 
+    cmsRun Dump_DATA_cfg.py  \
+        inputFiles=/store/data/Run2017A/HighPtPhoton30AndZ/MINIAOD/PromptReco-v1/000/295/977/00000/64502868-004A-E711-8880-02163E01A6A0.root  \
+        outputFile=treeAlignData.root
 
+
+        
     cmsRun Dump_DATA_cfg.py  \
         inputFiles=file:/tmp/amassiro/82589B55-5827-E511-AE9F-02163E012704.root  \
         outputFile=treeAlignData.root
