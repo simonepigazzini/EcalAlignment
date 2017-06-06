@@ -56,7 +56,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-   # fileNames = cms.untracked.vstring('file:B8F0DC07-5845-E711-8318-02163E019E8D.root'),
+    #fileNames = cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/315/00000/44FECA1A-3645-E711-8092-02163E011B25.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/317/00000/02955DA6-4F45-E711-A71B-02163E012381.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/318/00000/F6B22E65-6245-E711-A71E-02163E013727.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/320/00000/D6393D8E-3C45-E711-A01D-02163E0122C3.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/323/00000/CE3DD246-5745-E711-88CF-02163E013932.root'),
     fileNames = cms.untracked.vstring(options.inputFiles),
     secondaryFileNames = cms.untracked.vstring()
 )
@@ -193,14 +193,14 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
 
 
 # Path and EndPath definitions
-process.raw2digi_step = cms.Path(process.RawToDigi)
-print "I AM HERE 3.1"
-process.reconstruction_step = cms.Path(process.reconstruction)
-print "I AM HERE 3.2"
-process.endjob_step = cms.EndPath(process.endOfProcess)
-print "I AM HERE 3.3"
-process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
-print "I AM HERE 3.4"
+#process.raw2digi_step = cms.Path(process.RawToDigi)
+#print "I AM HERE 3.1"
+#process.reconstruction_step = cms.Path(process.reconstruction)
+#print "I AM HERE 3.2"
+#process.endjob_step = cms.EndPath(process.endOfProcess)
+#print "I AM HERE 3.3"
+#process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
+#print "I AM HERE 3.4"
 
 
 
@@ -318,7 +318,7 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
 
 process.TFileService = cms.Service(
     "TFileService",
-   # fileName = cms.string("EcalAlignment.root")
+  # fileName = cms.string("EcalAlignment.root")
     fileName = cms.string(options.outputFile)
     )
 
@@ -422,7 +422,8 @@ process.pEcalAlignment = cms.Path(
 
 
 # Schedule definition
-process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.RECOSIMoutput_step,process.pEcalAlignment)
+#process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.pEcalAlignment)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
