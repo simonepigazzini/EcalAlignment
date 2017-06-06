@@ -12,43 +12,36 @@ from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
 # add a list of strings for events to process
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
+#process.options = cms.untracked.PSet( allowUnscheduled = cms.untracked.bool(True) )
+
 options.parseArguments()
 
 #process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 #process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
-print "I AM HERE 1.1"
+#print "I AM HERE 1.1"
 #process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
 #process.load('RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi')
 process.load("RecoVertex.BeamSpotProducer.BeamSpot_cff")
-print "I AM HERE 1.2"
+#print "I AM HERE 1.2"
 
 
 
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
-print "I AM HERE 2.1"
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
-print "I AM HERE 2.2"
 process.load('FWCore.MessageService.MessageLogger_cfi')
-print "I AM HERE 2.3"
 process.load('Configuration.EventContent.EventContent_cff')
-print " I AM HERE 2.4"
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
-print "I AM HERE 2.5"
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
-print " I AM HERE 2.6"
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
-print " I AM HERE 2.7"
 process.load('Configuration.StandardSequences.Reconstruction_Data_cff')
-print " I AM HERE 2.8"
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-print "I AM HERE 2.9"
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-print "I AM HERE 2.10"
+
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(100)
@@ -228,7 +221,6 @@ process = customizeHLTforCMSSW(process,"GRun")
 
 # Standard PAT Configuration File
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
-print " I AM HERE 4"
 process.patElectrons.addElectronID = cms.bool(False)
 
 # ---- remove MC references ----
@@ -236,36 +228,26 @@ process.patElectrons.addElectronID = cms.bool(False)
 from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
 #removeMCMatching(process, ['All'], outputModules=[], postfix="")
 process.makePatElectrons.remove(process.electronMatch)
-print " I AM HERE 5.1"
 process.makePatMuons.remove(process.muonMatch)
-print "I AM HERE 5.2"
+
 #process.patCandidates.remove(process.makePatTaus)
 process.makePatTaus.remove(process.tauMatch)
-print "I AM HERE 5.3"
 process.makePatTaus.remove(process.tauGenJets)
-print "I AM HERE 5.4"
 process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
-print "I AM HERE 5.5"
 process.makePatTaus.remove(process.tauGenJetMatch)
-print "I AM HERE 5.6"
 process.cleanPatTaus.preselection = cms.string('tauID("decayModeFinding") > 0.5 & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 & tauID("againstMuonTight3") > 0.5 ')
-print "I AM HERE 5.7"    
+
 
 process.patMETs.addGenMET = cms.bool(False)
-print "I AM HERE 5.8"
+
 
 process.makePatJets.remove(process.patJetPartonMatch)
-print " I AM HERE 5.9"
 process.makePatJets.remove(process.patJetGenJetMatch)
-print "I AM HERE 5.10"
 process.makePatJets.remove(process.patJetFlavourIdLegacy)
-print "I AM HERE 5.11"
 process.makePatJets.remove(process.patJetFlavourId)
-print "I AM HERE 5.12"
 
 
 process.makePatPhotons.remove(process.photonMatch)
-print "I AM HERE 5.13"
 #process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
@@ -274,8 +256,8 @@ print "I AM HERE 5.13"
 #process.makePatElectrons.remove(process.electronMatch)
 #process.makePatMuons.remove(process.muonMatch)
 
-process.options.allowUnscheduled = cms.untracked.bool(False)
-#process.options.allowUnscheduled = cms.untracked.bool(True)
+#process.options.allowUnscheduled = cms.untracked.bool(False)
+process.options.allowUnscheduled = cms.untracked.bool(True)
 
 
 #--------------------------
@@ -337,13 +319,10 @@ process.skimming = cms.EDFilter(
 
 # filter on bit = and (40 || 41) and !(bit36 || bit37 || bit38 || bit39)
 process.load('L1TriggerConfig.L1GtConfigProducers.L1GtTriggerMaskTechTrigConfig_cff')
-print "I AM HERE 6"
 process.load('HLTrigger/HLTfilters/hltLevel1GTSeed_cfi')
-print "I AM HERE 7"
 process.hltLevel1GTSeed.L1TechTriggerSeeding = cms.bool(True)
-print "I AM HERE 8"
 process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) AND NOT (36 OR 37 OR 38 OR 39)')
-print "I AM HERE 9"
+
 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
@@ -423,7 +402,7 @@ process.pEcalAlignment = cms.Path(
 
 # Schedule definition
 #process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
-process.schedule = cms.Schedule(process.pEcalAlignment)
+#process.schedule = cms.Schedule(process.pEcalAlignment)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
