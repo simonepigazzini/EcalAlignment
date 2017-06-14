@@ -186,14 +186,10 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
 
 
 # Path and EndPath definitions
-#process.raw2digi_step = cms.Path(process.RawToDigi)
-#print "I AM HERE 3.1"
-#process.reconstruction_step = cms.Path(process.reconstruction)
-#print "I AM HERE 3.2"
-#process.endjob_step = cms.EndPath(process.endOfProcess)
-#print "I AM HERE 3.3"
-#process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
-#print "I AM HERE 3.4"
+process.raw2digi_step = cms.Path(process.RawToDigi)
+process.reconstruction_step = cms.Path(process.reconstruction)
+process.endjob_step = cms.EndPath(process.endOfProcess)
+process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
 
 
@@ -401,7 +397,7 @@ process.pEcalAlignment = cms.Path(
 
 
 # Schedule definition
-#process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step,process.pEcalAlignment)
 #process.schedule = cms.Schedule(process.pEcalAlignment)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
