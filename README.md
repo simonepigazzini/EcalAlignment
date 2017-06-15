@@ -20,6 +20,7 @@ where:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_5/src/EcalValidation/EcalAlignment/  --> bad
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_8/src/EcalValidation/EcalAlignment/
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_9_2_0_patch4/src/EcalValidation/EcalAlignment
+    /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_1/src/EcalValidation/EcalAlignment
     
     
     
@@ -49,7 +50,41 @@ where alignment constants are backuped:
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/
 
 
+    
+=============
+Luminosity
 
+How to measure the luminosity and where to get the lumisection json mask
+ 
+    json:  /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/
+    
+    e.g.: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PromptReco/Cert_294297-999999_13TeV_PromptReco_Collisions17_JSON.txt
+    
+Luminosity: 
+first install brilcal, following the recipe from https://cms-service-lumi.web.cern.ch/cms-service-lumi/brilwsdoc.html
+Then:
+
+     brilcalc lumi -u /pb -i  /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PromptReco/Cert_294297-999999_13TeV_PromptReco_Collisions17_JSON.txt
+
+Output:
+
+    +-------------+-------------------+-----+------+----------------+---------------+
+    | run:fill    | time              | nls | ncms | delivered(/pb) | recorded(/pb) |
+    +-------------+-------------------+-----+------+----------------+---------------+
+    | 296174:5750 | 06/06/17 06:29:30 | 22  | 22   | 1.096          | 1.067         |
+    +-------------+-------------------+-----+------+----------------+---------------+
+    #Summary: 
+    +-------+------+-----+------+-------------------+------------------+
+    | nfill | nrun | nls | ncms | totdelivered(/pb) | totrecorded(/pb) |
+    +-------+------+-----+------+-------------------+------------------+
+    | 1     | 1    | 22  | 22   | 1.096             | 1.067            |
+    +-------+------+-----+------+-------------------+------------------+
+
+meaning
+
+    1.067/pb
+    
+    
 =============
 
 Tools:
