@@ -222,28 +222,33 @@ process.patElectrons.addElectronID = cms.bool(False)
 # ---- remove MC references ----
 
 from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
-#removeMCMatching(process, ['All'], outputModules=[], postfix="")
-process.makePatElectrons.remove(process.electronMatch)
-process.makePatMuons.remove(process.muonMatch)
+removeMCMatching(process, ['All'], outputModules=[], postfix="")
+#removeMCMatching(process, ['All'])
+
+#process.makePatElectrons.remove(process.electronMatch)
+#process.makePatMuons.remove(process.muonMatch)
+
+
+
 
 #process.patCandidates.remove(process.makePatTaus)
-process.makePatTaus.remove(process.tauMatch)
-process.makePatTaus.remove(process.tauGenJets)
-process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
-process.makePatTaus.remove(process.tauGenJetMatch)
+#process.makePatTaus.remove(process.tauMatch)
+#process.makePatTaus.remove(process.tauGenJets)
+#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+#process.makePatTaus.remove(process.tauGenJetMatch)
 process.cleanPatTaus.preselection = cms.string('tauID("decayModeFinding") > 0.5 & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 & tauID("againstMuonTight3") > 0.5 ')
 
 
 process.patMETs.addGenMET = cms.bool(False)
 
 
-process.makePatJets.remove(process.patJetPartonMatch)
-process.makePatJets.remove(process.patJetGenJetMatch)
-process.makePatJets.remove(process.patJetFlavourIdLegacy)
-process.makePatJets.remove(process.patJetFlavourId)
+#process.makePatJets.remove(process.patJetPartonMatch)
+#process.makePatJets.remove(process.patJetGenJetMatch)
+#process.makePatJets.remove(process.patJetFlavourIdLegacy)
+#process.makePatJets.remove(process.patJetFlavourId)
 
 
-process.makePatPhotons.remove(process.photonMatch)
+#process.makePatPhotons.remove(process.photonMatch)
 #process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
 
 #from PhysicsTools.PatAlgos.tools.coreTools import *
