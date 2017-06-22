@@ -142,6 +142,8 @@ Multicrab
 
     python multicrab.py   samples/samples_data2016.py
 
+    python multicrab.py   samples/samples_data2017.py
+
     
     
     crab status folder_name
@@ -244,7 +246,9 @@ Multicrab
     python multicrab.py  crab_projects_Aug11AlignmentEEEB_dump        status
 
     python multicrab.py  crab_projects_Aug11AlignmentEEEB_dump_AfterICHEP        status
-    
+
+    python multicrab.py  crab_projects_Jun22AlignmentEEEB_closure        status
+
     
     
 Samples
