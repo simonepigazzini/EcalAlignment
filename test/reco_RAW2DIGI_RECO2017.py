@@ -93,7 +93,7 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
 
 #process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 
-#process.GlobalTag.toGet = cms.VPSet(
+process.GlobalTag.toGet = cms.VPSet(
 
 
        # May 23 recipe
@@ -181,7 +181,17 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
             # tag = cms.string("EBAlignment_measured_v05_offline"),
             # connect = cms.string("sqlite_file:EBAlign_2015.db")   #### The ZERO ####
             # ),
-        # ) 
+
+         cms.PSet(record = cms.string("EEAlignmentRcd"),
+            tag = cms.string("EEAlignment_measured_v05_offline"),
+            connect = cms.string("sqlite_file:EEAlign_2015.db")   #### new 2017 ####
+            ),
+         cms.PSet(record = cms.string("EBAlignmentRcd"),
+            tag = cms.string("EBAlignment_measured_v05_offline"),
+            connect = cms.string("sqlite_file:EBAlign_2015.db")   #### new 2017 ####
+            ),
+
+        ) 
 
 
 

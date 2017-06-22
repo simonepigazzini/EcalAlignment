@@ -27,6 +27,13 @@ Test file with DATA:
     
 run:
     
+    cp /eos/cms/store/data/Run2017A/DoubleEG/RAW-RECO/ZElectron-PromptReco-v2/000/296/168/00000/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root    /tmp/amassiro/
+    cmsRun reco_RAW2DIGI_RECO2017.py  \
+        inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
+        outputFile=reco_raw.root
+        
+        
+    
     cmsRun RAW2RECO_DATA_cfg.py  \
         inputFiles=file:/tmp/amassiro/FEE043A5-93D4-E111-84DC-0030486790C0.root  \
         outputFile=reco_raw.root \
@@ -181,6 +188,11 @@ CombineRotoTraslations
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/20Jan/myEEAlignment_2015_0Tesla_combined.txt
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
     
+    
+    
+    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEBAlignment_2016.txt   myEBAlignment_2017_preliminary.txt   myEBAlignment_2017_combined.txt
+    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt   myEEAlignment_2017_preliminary_onlytranslation.txt   myEEAlignment_2017_combined.txt
+
     
 e.g.
 
