@@ -3,11 +3,15 @@
 ########
 
 #        CRAB task name          DAS name                                 
-samples['DoubleElectron2017A']   = ['/DoubleEG/Run2017A-ZElectron-PromptReco-v2/RAW-RECO',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2017A_v2']   = ['/DoubleEG/Run2017A-ZElectron-PromptReco-v2/RAW-RECO',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectron2017A_v3']   = ['/DoubleEG/Run2017A-ZElectron-PromptReco-v3/RAW-RECO',        ['outputFile=treeECALAlignment.root']]
+samples['DoubleElectrin2017B_v1']   = ['/DoubleEG/Run2017B-ZElectron-PromptReco-v1/RAW-RECO',        ['outputFile=treeECALAlignment.root']]
+
+
 
 #config.Data.useParent = True           # Important!
 
- 
+
 
 
 ########
@@ -38,9 +42,9 @@ config.Data.unitsPerJob   = 10
 ################
 
 
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/      TO BE FIXED'
-config.Data.lumiMask = "/afs/cern.ch/cms/   TO BE FIXED"
-config.General.workArea     = 'crab_projects_Jun22AlignmentEEEB_closure'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/twamorka/24Jun_postalignment_v3'     #TO BE FIXED'
+#config.Data.lumiMask = "/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/DCSOnly/json_DCSONLY.txt"   #TO BE FIXED
+config.General.workArea     = 'crab_projects_Jun22AlignmentEEEB_closure_v3'
 config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
 #config.Data.runRange = '277148-279119'
 #
@@ -48,11 +52,4 @@ config.JobType.inputFiles = ['../EBAlign_2015.db','../EEAlign_2015.db']
 
 ## hadd /tmp/amassiro/ECALalignDATA_runD.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/*/*/*.root
 #   ls /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug29AlignmentEEEB_dump_AfterICHEP/DoubleEG/
-#    crab_DoubleElectron2016E/160829_102157/  crab_DoubleElectron2016F/160829_102232/  crab_DoubleElectron2016G/160829_102224/
-
-
-
-
-
-
-
+-- INSERT --                                                                                                                                               
