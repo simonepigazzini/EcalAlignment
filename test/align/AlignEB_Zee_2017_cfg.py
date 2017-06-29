@@ -99,7 +99,8 @@ DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.27e-3) \
         #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODAllData/SingleElectron/crab_SingleElectron/150827_143017/treeECALAlignment.root    \
         #/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/DATA29Aug2015AODRAWAllData/SingleElectron/crab_SingleElectron/150826_214823/treeECALAlignment.root  
 
-          'file:/afs/cern.ch/user/t/twamorka/public/2017data.root'
+          #'file:/afs/cern.ch/user/t/twamorka/public/2017data.root'
+          'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/alldata_prealign.root'
 
     )
 )

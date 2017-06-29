@@ -101,7 +101,9 @@ process.inputTree = cms.PSet(
   #),
    
   inputFiles    = cms.vstring(
-           'file:/afs/cern.ch/user/t/twamorka/public/2017data.root'
+              'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/alldata_prealign.root'
+
+           #'file:/afs/cern.ch/user/t/twamorka/public/2017data.root'
           #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_2.root'
                #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_1.root',
 

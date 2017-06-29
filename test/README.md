@@ -155,6 +155,12 @@ Get alignment values out of the trees
     EE_Alignment_RotoTraslation align/AlignEE_Zee_2015_cfg.py
     EB_Alignment_RotoTraslation align/AlignEB_Zee_2015_cfg.py
     
+    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   0
+    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   1
+    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   2
+    and so on
+    
+    EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_2017_cfg.py   2
 
 
 CombineRotoTraslations
