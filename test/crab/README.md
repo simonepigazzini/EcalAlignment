@@ -125,6 +125,7 @@ Multicrab
 
     voms-proxy-init --voms cms
     myproxy-init -v
+    source /cvmfs/cms.cern.ch/crab3/crab.sh
 
     python multicrab.py   samples/samples_spring15.py
     python multicrab.py   samples/samples_dataB.py
@@ -143,6 +144,10 @@ Multicrab
     python multicrab.py   samples/samples_data2016.py
 
     python multicrab.py   samples/samples_data2017.py
+
+    python multicrab.py   samples/samples_data2017_noSR.py
+    python multicrab.py   samples/samples_data2017_yesSR.py
+    python multicrab.py   samples/samples_data2017_yesSR_weights.py
 
     
     
