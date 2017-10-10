@@ -160,6 +160,36 @@ process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
 
 
+#########
+#
+# move to weights
+#
+
+
+#
+# weights rechits 
+#
+process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
+process.ecalUncalibRecHit.EBdigiCollection = cms.InputTag("ecalDigis","ebDigis")
+process.ecalUncalibRecHit.EEdigiCollection = cms.InputTag("ecalDigis","eeDigis")
+process.weights = cms.Path(process.ecalUncalibRecHit)
+
+
+
+#
+# change the default into weights
+#
+process.ecalRecHit.EEuncalibRecHitCollection = cms.InputTag("ecalUncalibRecHit","EcalUncalibRecHitsEE")
+process.ecalRecHit.EBuncalibRecHitCollection = cms.InputTag("ecalUncalibRecHit","EcalUncalibRecHitsEB")
+#
+#
+#
+
+
+#########
+#########
+
+
 
 ##################################
 #### costumization for Stage2 ####
@@ -369,7 +399,10 @@ process.pEcalAlignment = cms.Path(
 
 
 # Schedule definition
-process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+#process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.raw2digi_step,process.weights,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+
+
 #process.schedule = cms.Schedule(process.pEcalAlignment)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)

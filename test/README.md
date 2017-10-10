@@ -40,6 +40,11 @@ run:
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw_yesSRatPF.root
     
+    cmsRun reco_RAW2DIGI_RECO2017_yesSRatPF_weights.py  \
+        inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
+        outputFile=reco_raw_yesSRatPF_weights.root
+    
+        
         
     
     cmsRun RAW2RECO_DATA_cfg.py  \
