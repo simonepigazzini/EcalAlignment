@@ -122,6 +122,7 @@ process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
             #qualityTests = cms.VPSet(
                  #cms.PSet(
                  #name = cms.string("PFRecHitQTestThreshold"),
+                 #srFlags = cms.InputTag("ecalDigis"),
                  #threshold = cms.double(0.08)
                  #),
                  #cms.PSet(
@@ -139,6 +140,7 @@ process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
            #qualityTests = cms.VPSet(
                 #cms.PSet(
                 #name = cms.string("PFRecHitQTestThreshold"),
+                #srFlags = cms.InputTag("ecalDigis"),
                 #threshold = cms.double(0.3)
                 #),
                 #cms.PSet(

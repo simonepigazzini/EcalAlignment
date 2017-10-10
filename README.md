@@ -21,6 +21,7 @@ where:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_8/src/EcalValidation/EcalAlignment/
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_9_2_0_patch4/src/EcalValidation/EcalAlignment
     /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_1/src/EcalValidation/EcalAlignment
+    /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_11/src/EcalValidation/EcalAlignment
     
     
     

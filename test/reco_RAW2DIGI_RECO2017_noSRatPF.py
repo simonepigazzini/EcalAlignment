@@ -119,6 +119,7 @@ process.particleFlowRecHitECAL.producers = cms.VPSet(
           cms.PSet(
             name = cms.string("PFEBRecHitCreator"),
             src  = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
+            srFlags = cms.InputTag("ecalDigis"),
             qualityTests = cms.VPSet(
                  cms.PSet(
                  name = cms.string("PFRecHitQTestThreshold"),
@@ -136,6 +137,7 @@ process.particleFlowRecHitECAL.producers = cms.VPSet(
          cms.PSet(
            name = cms.string("PFEERecHitCreator"),
            src  = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
+           srFlags = cms.InputTag("ecalDigis"),
            qualityTests = cms.VPSet(
                 cms.PSet(
                 name = cms.string("PFRecHitQTestThreshold"),
