@@ -31,7 +31,15 @@ run:
     cmsRun reco_RAW2DIGI_RECO2017.py  \
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw.root
-        
+    
+    cmsRun reco_RAW2DIGI_RECO2017_noSRatPF.py  \
+        inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
+        outputFile=reco_raw_noSRatPF.root
+    
+    cmsRun reco_RAW2DIGI_RECO2017_yesSRatPF.py  \
+        inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
+        outputFile=reco_raw_yesSRatPF.root
+    
         
     
     cmsRun RAW2RECO_DATA_cfg.py  \
