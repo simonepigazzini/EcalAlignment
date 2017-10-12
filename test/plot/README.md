@@ -481,6 +481,18 @@ General draw 2D:
     
     
     
+Plot arbitrary variable
+
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_361.root\",\"myTest\",\"etaSC\",1000,-1,1\)
+
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
