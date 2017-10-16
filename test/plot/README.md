@@ -453,7 +453,7 @@ General draw 2D:
     r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0001/treeECALAlignment_*.root\",3,\"D1\"\)
 
     r99t -q  MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",0,\"D2\"\)
-    r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",1,\"D2\"\)
+<!--     r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",1,\"D2\"\) -->
     r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",2,\"D2\"\)
     r99t -q MeasureTime.cxx\(\"/tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/Aug11AlignmentEEEB_dump/DoubleEG/crab_DoubleElectron2016D/160815_103133/0002/treeECALAlignment_*.root\",3,\"D2\"\)
 
@@ -484,6 +484,8 @@ General draw 2D:
 Plot arbitrary variable
 
     r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_361.root\",\"myTest\",\"etaSC\",1000,-1,1\)
+
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso\",\"eleEcalIso\",1000,0,10\)
 
     
     
