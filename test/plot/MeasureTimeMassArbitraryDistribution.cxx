@@ -18,7 +18,7 @@ void MeasureTimeMassArbitraryDistribution(std::string nameInFileRoot,
   std::string var_X = "time/1000000.";
   int NBIN_X = 2000;
   float MIN_X = 1466500000;
-  float MAX_X = 1468000000;
+  float MAX_X = 1508000000;
   std::string varHR_X = "time";
   std::string globalCut = "mll>60 && mll<130 && ETSC>35";
   

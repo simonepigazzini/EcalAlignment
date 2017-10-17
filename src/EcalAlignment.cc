@@ -142,6 +142,9 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("eleHcalIsoD1",&eleHcalIsoD1_,"eleHcalIsoD1/D");
   myTree_ -> Branch("eleHcalIsoD2",&eleHcalIsoD2_,"eleHcalIsoD2/D");
 
+  myTree_ -> Branch("elePFphotonIso",&elePFphotonIso_,"elePFphotonIso/D");
+  myTree_ -> Branch("elePFneutralHadronIso",&elePFneutralHadronIso_,"elePFneutralHadronIso/D");
+  
   myTree_ -> Branch("DeltaEtaIn",&DeltaEtaIn_,"DeltaEtaIn/D");
   myTree_ -> Branch("DeltaPhiIn",&DeltaPhiIn_,"DeltaPhiIn/D");
   myTree_ -> Branch("etaSC",&etaSC_,"etaSC/D");
@@ -365,6 +368,9 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   eleHcalIsoD1_ = electron.dr03HcalDepth1TowerSumEt();
   eleHcalIsoD2_ = electron.dr03HcalDepth2TowerSumEt();
 
+  elePFphotonIso_        = electron.pfIsolationVariables().sumPhotonEt;
+  elePFneutralHadronIso_ = electron.pfIsolationVariables().sumNeutralHadronEt;
+  
   EoP_ = ESC_ /p_;
   eleFBrem_ = electron.fbrem();
 

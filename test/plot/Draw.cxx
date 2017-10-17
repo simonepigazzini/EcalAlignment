@@ -46,8 +46,9 @@ void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000
  }
  gStyle->SetOptStat(0);
  int nSig = 5;
- TFile* f_Sig[100];
- TTree* t_Sig[100];
+//  TFile* f_Sig[100];
+//  TTree* t_Sig[100];
+ TChain* t_Sig[100];
  TH1F* h_Sig[100];
  std::vector<std::string> vNameSig;
  std::vector<std::string> vNameSigHR;
@@ -58,13 +59,19 @@ void Draw(std::string nameInFileRoot, std::string var = "etaSC", int NBIN = 1000
  
  nSig = vXsecSig.size();
  TString name;
- for (int iSig = 0; iSig < nSig; iSig++) {
-  f_Sig[iSig] = new TFile (vNameSig.at(iSig).c_str());
- }
+
+ //  for (int iSig = 0; iSig < nSig; iSig++) {
+//   f_Sig[iSig] = new TFile (vNameSig.at(iSig).c_str());
+//  }
+//  
+//  for (int iSig = 0; iSig < nSig; iSig++) {
+//   t_Sig[iSig] = (TTree*) f_Sig[iSig] -> Get ("ntupleEcalAlignment/myTree");
+//  }
+// 
  
- for (int iSig = 0; iSig < nSig; iSig++) {
-  t_Sig[iSig] = (TTree*) f_Sig[iSig] -> Get ("ntupleEcalAlignment/myTree");
- }
+ t_Sig[0] = new TChain ("ntupleEcalAlignment/myTree");
+ t_Sig[0] -> Add (vNameSig.at(0).c_str());
+  
  
  for (int iSig = 0; iSig < nSig; iSig++) {
   name = Form ("hSig_%d",iSig);

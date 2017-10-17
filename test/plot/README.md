@@ -487,6 +487,125 @@ Plot arbitrary variable
 
     r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso\",\"eleEcalIso\",1000,0,10\)
 
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso\",\"eleEcalIso\",1000,0,10\)
+
+    
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/
+    
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/
+    
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/
+    
+    
+    
+    
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_yesSR_B\",\"eleEcalIso\",1000,0,10\)
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_yesSR_D\",\"eleEcalIso\",1000,0,10\)
+
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_noSR_B\",\"eleEcalIso\",1000,0,10\)
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_noSR_D\",\"eleEcalIso\",1000,0,10\)
+
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_yesSRWeight_B\",\"eleEcalIso\",1000,0,10\)
+    r99t -q MeasureTimeMassArbitraryDistribution.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/0000/treeECALAlignment_*.root\",\"dump_eleEcalIso_yesSRWeight_D\",\"eleEcalIso\",1000,0,10\)
+    
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+
+    
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+
+    
+    
+    
+    //---- fast test
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_1*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"ET\",200,20,200,\"ET\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+
+ 
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"eleTrkIso\",1000,0,20,\"eleTrkIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"HoE\",1000,0,1,\"HoE\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_10*.root\",\"HoE\",1000,0,1,\"HoE\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_10*.root\",\"E5x5\",300,0,500,\"E5x5\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+ 
+ 
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_10*.root\",\"E5x5\",300,0,500,\"E5x5\",\"abs\(etaSC\)\<1.5\",\"noSR\",\"yesSR\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_10*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"noSR\",\"yesSR\"\)
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_10*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_10*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\<1.5\",\"noSR\",\"yesSR\"\)
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_160831/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_160814/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+
+    
+    
+    
+    
+    //---- fast test
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161035/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161018/0000/treeECALAlignment_1*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017B_v1/171010_161132/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171010_161115/0000/treeECALAlignment_1*.root\",\"eleEcalIso\",1000,0,20,\"eleEcalIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    
+
     
     
     
@@ -494,6 +613,55 @@ Plot arbitrary variable
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180417/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180433/
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180454/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180511/
+    
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180609/
+    /eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180627/
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180417/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180433/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180454/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180511/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180609/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180627/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180609/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180627/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,50,\"elePFphotonIso\",\"abs\(etaSC\)\<1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180417/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180433/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180454/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180511/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017C_v1/171016_180609/0000/treeECALAlignment_1*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF_weights/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180627/0000/treeECALAlignment_1*.root\",\"elePFphotonIso\",200,0,50,\"elePFphotonIso\",\"abs\(etaSC\)\>1.5\",\"RunB\",\"RunD\"\)
+    
+    
+    
+    
+    
+    r99t DrawCompare.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/noSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180433/0000/treeECALAlignment_*.root\",\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/16Oct/yesSRatPF/DoubleEG/crab_DoubleElectrin2017D_v1/171016_180511/0000/treeECALAlignment_*.root\",\"elePFphotonIso\",200,0,5,\"elePFphotonIso\",\"abs\(etaSC\)\>1.5\",\"noSRatPF\",\"yesSRatPF\"\)
+
     
     
     

@@ -158,6 +158,10 @@ class EcalAlignment : public edm::EDAnalyzer {
   double eleEcalIso_;
   double eleHcalIsoD1_;
   double eleHcalIsoD2_;
+  
+  double elePFphotonIso_;
+  double elePFneutralHadronIso_;
+  
   unsigned int eleMisHits_;
   double met_;
   double sumEt_;
