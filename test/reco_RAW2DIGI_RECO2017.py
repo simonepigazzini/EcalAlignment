@@ -84,8 +84,8 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_Prompt_v4', '')
-process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
-
+#process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
+process.GlobalTag.globaltag = '92X_dataRun2_2017Repro_Candidate_2017_11_10_15_04_54'
 
 
 
@@ -94,7 +94,26 @@ process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
 #process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 
 process.GlobalTag.toGet = cms.VPSet(
-
+       # Best conditions for 2017 BCDE
+               cms.PSet(record = cms.string("EcalPulseShapesRcd"),
+               tag = cms.string("EcalPulseShapes_October2017_rereco_v3"),
+               connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+               ),
+     
+      cms.PSet(record = cms.string("EcalTimeCalibConstantsRcd"),
+               tag = cms.string("EcalTimeCalibConstants_Legacy2017_v2"),
+               connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+               ),
+     
+      cms.PSet(record = cms.string("EcalIntercalibConstantsRcd"),
+               tag = cms.string("EcalIntercalibConstants_Run1_Run2_V04_offline"),
+               connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+               ),
+     
+      cms.PSet(record = cms.string("ESEEIntercalibConstantsRcd"),
+               tag = cms.string("ESEEIntercalibConstants_V05_offline"),
+               connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
+               ),         
 
        # May 23 recipe
               #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
@@ -182,14 +201,14 @@ process.GlobalTag.toGet = cms.VPSet(
             # connect = cms.string("sqlite_file:EBAlign_2015.db")   #### The ZERO ####
             # ),
 
-         cms.PSet(record = cms.string("EEAlignmentRcd"),
-            tag = cms.string("EEAlignment_measured_v05_offline"),
-            connect = cms.string("sqlite_file:EEAlign_2015.db")   #### new 2017 ####
-            ),
-         cms.PSet(record = cms.string("EBAlignmentRcd"),
-            tag = cms.string("EBAlignment_measured_v05_offline"),
-            connect = cms.string("sqlite_file:EBAlign_2015.db")   #### new 2017 ####
-            ),
+         #cms.PSet(record = cms.string("EEAlignmentRcd"),
+            #tag = cms.string("EEAlignment_measured_v05_offline"),
+            #connect = cms.string("sqlite_file:EEAlign_2015.db")   #### new 2017 ####
+            #),
+         #cms.PSet(record = cms.string("EBAlignmentRcd"),
+            #tag = cms.string("EBAlignment_measured_v05_offline"),
+            #connect = cms.string("sqlite_file:EBAlign_2015.db")   #### new 2017 ####
+            #),
 
         ) 
 
