@@ -86,9 +86,9 @@ process.source = cms.Source("PoolSource",
 #process.GlobalTag.globaltag = 'PHYS14_25_V2::All'
 #process.GlobalTag.globaltag = 'PHY1474_STV4::All'
 #process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
-process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
+#process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
 #process.GlobalTag.globaltag = '74X_mcRun2_asymptotic_v4::All'
-
+process.GlobalTag.globaltag = '100X_upgrade2018_realistic_v10'
 
 
 ################################################################################
