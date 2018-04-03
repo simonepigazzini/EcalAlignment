@@ -383,7 +383,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   deltaPhiEleClusterAtCalo_ = electron.deltaPhiEleClusterTrackAtCalo();
   deltaPhiSuperClusterAtVtx_ = electron.deltaPhiSuperClusterTrackAtVtx();
   deltaPhiSeedClusterAtCalo_ = electron.deltaPhiSeedClusterTrackAtCalo();
-  mishits_ = electron.gsfTrack()->hitPattern().numberOfTrackerHits(reco::HitPattern::TRACK_HITS);  //--- trackerExpectedHitsInner().numberOfHits();
+  mishits_ = electron.gsfTrack()->hitPattern().numberOfAllTrackerHits(reco::HitPattern::TRACK_HITS);  //--- trackerExpectedHitsInner().numberOfHits();
   nAmbiguousGsfTracks_ = electron.ambiguousGsfTracksSize();
   dist_ = 0;
   dcot_ = 0;
@@ -412,7 +412,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
   E5x5_ = electron.e5x5();  
    
-  eleMisHits_ = electron.gsfTrack()->hitPattern().numberOfTrackerHits(reco::HitPattern::TRACK_HITS);  //--- trackerExpectedHitsInner().numberOfHits();
+  eleMisHits_ = electron.gsfTrack()->hitPattern().numberOfAllTrackerHits(reco::HitPattern::TRACK_HITS);  //--- trackerExpectedHitsInner().numberOfHits();
 
    // preshower variables 
   eleES_ = scRef->preshowerEnergy();
