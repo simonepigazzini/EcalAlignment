@@ -8,9 +8,9 @@ Beautifying 2017 plots:
      
      hadd file1_prealign.root /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunA_v2_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunA_v2_prealign/170703_155819/0000/treeECALAlignment_* 
      hadd file2_prealign.root
-     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunA_v3_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunA_v3_prealign/170703_155903/0000/treeECALAlignment_* 
-hadd file3_prealign.root     /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunB_v1_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunB_v1_prealign/170703_155725/0000/treeECALAlignment_* 
-hadd file4_prealign.root     
+ /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunA_v3_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunA_v3_prealign/170703_155903/0000/treeECALAlignment_* 
+     hadd file3_prealign.root  /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunB_v1_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunB_v1_prealign/170703_155725/0000/treeECALAlignment_* 
+     hadd file4_prealign.root     
 /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunB_v1_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunB_v1_prealign/170703_155725/0001/treeECALAlignment_1* 
 file5_prealign.root     
 /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/3Jul_RunB_v1_prealign/DoubleEG/crab_DATAdoubleEle3Jul_RAWRECO_RunB_v1_prealign/170703_155725/0002/treeECALAlignment_2*
