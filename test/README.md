@@ -6,7 +6,7 @@ cmsRun Dump_MC_cfg.py inputFiles=/store/mc/RunIISpring18MiniAOD/ZToEE_NNPDF30_13
 
 Data 2018 Dumper on MiniAOD https://cmsweb.cern.ch/das/request?input=dataset%3D%2FEGamma%2FRun2018A-PromptReco-v1%2FMINIAOD&instance=prod%2Fglobal
 
-cmsRun Dump_DATA_cfg.py inputFiles=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root outputFile=dump2018_test.root
+cmsRun Dump_DATA_cfg_2018.py inputFiles=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root outputFile=dump2018_test.root
 
 Examples
 ====
