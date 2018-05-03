@@ -2,8 +2,12 @@
 # using: 
 # Revision: 1.19 
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: reco -s RAW2DIGI,RECO -n 100 --filein=/store/data/Run2017A/Commissioning2/ALCARECO/TkAlMinBias-PromptReco-v1/000/295/315/00000/22FBAC87-3945-E711-BF76-02163E019B49.root --data --conditions=92X_dataRun2_Prompt_v4 --nThreads=4
+# with command line options: reco -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT -n 100 --filein=/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root --data --conditions=101X_dataRun2_Prompt_v9 --era Run2_2018 --runUnscheduled --nThreads=4
 import FWCore.ParameterSet.Config as cms
+
+from Configuration.StandardSequences.Eras import eras
+
+#process = cms.Process('SuperRECO',eras.Run2_2018)
 
 process = cms.Process('EcalAlignment')
 
@@ -16,19 +20,8 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 options.parseArguments()
 
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
-#process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
-#print "I AM HERE 1.1"
-#process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi')
 process.load("RecoVertex.BeamSpotProducer.BeamSpot_cff")
-#print "I AM HERE 1.2"
-
-
-
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -38,10 +31,14 @@ process.load('Configuration.EventContent.EventContent_cff')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
+#process.load('Configuration.StandardSequences.L1Reco_cff')
 process.load('Configuration.StandardSequences.Reconstruction_Data_cff')
+#process.load('Configuration.StandardSequences.RecoSim_cff')
+#process.load('CommonTools.ParticleFlow.EITopPAG_cff')
+#process.load('PhysicsTools.PatAlgos.slimming.metFilterPaths_cff')
+#process.load('Configuration.StandardSequences.PAT_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(100)
@@ -49,8 +46,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    #fileNames = cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/315/00000/44FECA1A-3645-E711-8092-02163E011B25.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/317/00000/02955DA6-4F45-E711-A71B-02163E012381.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/318/00000/F6B22E65-6245-E711-A71E-02163E013727.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/320/00000/D6393D8E-3C45-E711-A01D-02163E0122C3.root','root://cms-xrd-global.cern.ch//store/data/Run2017A/Commissioning3/RAW-RECO/EcalActivity-PromptReco-v1/000/295/323/00000/CE3DD246-5745-E711-88CF-02163E013932.root'),
-    fileNames = cms.untracked.vstring(options.inputFiles),
+    fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -72,10 +68,9 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string(''),
         filterName = cms.untracked.string('')
     ),
-    eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     fileName = cms.untracked.string('reco_RAW2DIGI_RECO.root'),
-   # outputCommands = process.RECOSIMEventContent.outputCommands,
-    outputCommands= cms.untracked.vstring("drop *"),
+                                         #outputCommands = process.RECOSIMEventContent.outputCommands,
+     outputCommands= cms.untracked.vstring("drop *"),
     splitLevel = cms.untracked.int32(0)
 )
 
@@ -83,150 +78,67 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-#process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_Prompt_v4', '')
-#process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
-#process.GlobalTag.globaltag = '92X_dataRun2_2017Repro_Candidate_2017_11_10_15_04_54'
-process.GlobalTag.globaltag = '101X_dataRun2_Prompt_v9'
+process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 
-
-
-
-#process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 
 process.GlobalTag.toGet = cms.VPSet(
-       # Best conditions for 2017 BCDE
-       #cms.PSet(record = cms.string("EcalPulseShapesRcd"),
-       #tag = cms.string("EcalPulseShapes_October2017_rereco_v3"),
-       #connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-           #),
-     
-     #cms.PSet(record = cms.string("EcalTimeCalibConstantsRcd"),
-     #tag = cms.string("EcalTimeCalibConstants_Legacy2017_v2"),
-     #connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-     #),
-     
-     #cms.PSet(record = cms.string("EcalIntercalibConstantsRcd"),
-     #tag = cms.string("EcalIntercalibConstants_Run1_Run2_V04_offline"),
-     #connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-     #),
-     
-     #cms.PSet(record = cms.string("ESEEIntercalibConstantsRcd"),
-     #tag = cms.string("ESEEIntercalibConstants_V05_offline"),
-     #connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS"),
-#),
-
-       # May 23 recipe
-              #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                       #tag =  cms.string("TrackerAlignment_MP_Run2016B"),
-                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       #),
-                                             
-       # May 24 recipe, definitive!
-              #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                       #tag =  cms.string("TrackerAlignment_MP_Run2016B_v2"),
-                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       #),
-              #cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
-                       #tag =  cms.string("TrackerAlignmentExtendedErrors_MP_Run2016B"),
-                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       #),
-              #cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
-                       #tag =  cms.string("SiPixelTemplateDBObject_38T_2016_v1_hltvalidation"),
-                       #connect = cms.string('frontier://FrontierProd/CMS_CONDITIONS')
-                       #),
-       
-       
-          #cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-           #tag = cms.string("Alignments"),
-           #connect = cms.untracked.string("sqlite_file:alignments_MP.db")
-          #),
-          ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                   ##tag = cms.string("TrackerAlignment_forRun2015D_v0"),
-                   ##connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  ##),
-          #cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
-                   #tag = cms.string("TrackerAlignmentExtendedErrors_forRun2015C"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  #),
-          #cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
-                   #tag = cms.string("SiPixelTemplateDBObject_38T_2015_v3_hltvalidation"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  #),
-          #cms.PSet(record = cms.string("SiPixelLorentzAngleRcd"),
-                   #tag = cms.string("SiPixelLorentzAngle_2015_v3_hltvalidation"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  #),
-          #cms.PSet(record = cms.string("SiPixelGenErrorDBObjectRcd"),
-                   #tag = cms.string("SiPixelGenErrorDBObject_38T_2015_v3_hltvalidation"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  #),
-          #cms.PSet(record = cms.string("SiStripLorentzAngleRcd"),
-                   #tag = cms.string("SiStripLorentzAngleDeco_v3_offline"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS"),
-                   #label = cms.untracked.string("deconvolution") 
-                  #),
-          #cms.PSet(record = cms.string("SiStripBackPlaneCorrectionRcd"),
-                   #tag = cms.string("SiStripBackPlaneCorrection_deco_GR10_v4_offline"),
-                   #connect = cms.untracked.string("frontier://FrontierProd/CMS_CONDITIONS")
-                  #),
-         ##)
-                  ##cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                 ##tag = cms.string("testTag"),
-                 ##connect = cms.untracked.string('sqlite_file:TkAlignment.db')
-                 ###connect = cms.untracked.string('sqlite_file:/afs/cern.ch/work/c/chmartin/public/pp3.8T_2015_Alignment/Local_DB/TkAlignment.db')
-                ##),
-          ##cms.PSet(record = cms.string("EBAlignmentRcd"),
-             ##tag = cms.string("EBAlignment_measured_v08_offline"),
-             ##connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")   #### New ####
-             ##),
-          #cms.PSet(record = cms.string("EEAlignmentRcd"),
-             #tag = cms.string("EEAlignment_measured_v05_offline"),
-             ##connect = cms.untracked.string("sqlite_file:dbEcalAlignment/EEAlign_2015.db")  #### New ####
-             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/23Jul/EEAlign_2015.db")  #### New ####
-             #connect = cms.untracked.string("sqlite_file:EEAlign_2015.db")  #### New ####
-             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EEAlign_2015.db")  #### New ####
-             #),
-          #cms.PSet(record = cms.string("EBAlignmentRcd"),
-             #tag = cms.string("EBAlignment_measured_v05_offline"),
-             #connect = cms.untracked.string("sqlite_file:EBAlign_2015.db")  #### New ####
-             ##connect = cms.untracked.string("sqlite_file:/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/EBAlign_2015.db")  #### New ####
-             #)
-
-         # cms.PSet(record = cms.string("EEAlignmentRcd"),
-            # tag = cms.string("EEAlignment_measured_v05_offline"),
-            # connect = cms.string("sqlite_file:EEAlign_2015.db")   #### The ZERO ####
-            # ),
-         # cms.PSet(record = cms.string("EBAlignmentRcd"),
-            # tag = cms.string("EBAlignment_measured_v05_offline"),
-            # connect = cms.string("sqlite_file:EBAlign_2015.db")   #### The ZERO ####
-            # ),
-
-         #cms.PSet(record = cms.string("EEAlignmentRcd"),
-            #tag = cms.string("EEAlignment_measured_v05_offline"),
-            #connect = cms.string("sqlite_file:EEAlign_2015.db")   #### new 2017 ####
-            #),
-         #cms.PSet(record = cms.string("EBAlignmentRcd"),
-            #tag = cms.string("EBAlignment_measured_v05_offline"),
-            #connect = cms.string("sqlite_file:EBAlign_2015.db")   #### new 2017 ####
-            #),
-
-          cms.PSet(record = cms.string("EEAlignmentRcd"),   ##  2018 EE DB ###
-          tag = cms.string("EEAlignment_measured_v05_offline"),
-          connect = cms.string("sqlite_file:EEAlign_2018.db")   #### The ZERO ####
-          ),
-
-)
-
-
+                                    
+                                    
+                                    cms.PSet(record = cms.string("EEAlignmentRcd"),
+                                             tag = cms.string("EEAlignment_measured_v05_offline"),
+                                             connect = cms.string("sqlite_file:dbEcalAlignment/EEAlign_2018.db")
+                                             ),
+                                    
+                                    
+                                    cms.PSet(record = cms.string("EBAlignmentRcd"),
+                                             tag = cms.string("EBAlignment_measured_v05_offline"),
+                                             connect = cms.string("sqlite_file:dbEcalAlignment/EBAlign_2018.db")
+                                             ),
+                                    
+                                    
+                                    #EcalPedestals_Legacy2017_time_v1
+                                    #EcalPulseShapes_October2017_rereco_v1
+                                    
+                                    )
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
+#process.L1Reco_step = cms.Path(process.L1Reco)
 process.reconstruction_step = cms.Path(process.reconstruction)
+#process.recosim_step = cms.Path(process.recosim)
+#process.eventinterpretaion_step = cms.Path(process.EIsequence)
+#process.Flag_trackingFailureFilter = cms.Path(process.goodVertices+process.trackingFailureFilter)
+#process.Flag_goodVertices = cms.Path(process.primaryVertexFilter)
+#process.Flag_CSCTightHaloFilter = cms.Path(process.CSCTightHaloFilter)
+#process.Flag_trkPOGFilters = cms.Path(process.trkPOGFilters)
+#process.Flag_HcalStripHaloFilter = cms.Path(process.HcalStripHaloFilter)
+#process.Flag_trkPOG_logErrorTooManyClusters = cms.Path(~process.logErrorTooManyClusters)
+#process.Flag_EcalDeadCellTriggerPrimitiveFilter = cms.Path(process.EcalDeadCellTriggerPrimitiveFilter)
+#process.Flag_ecalLaserCorrFilter = cms.Path(process.ecalLaserCorrFilter)
+#process.Flag_globalSuperTightHalo2016Filter = cms.Path(process.globalSuperTightHalo2016Filter)
+#process.Flag_eeBadScFilter = cms.Path(process.eeBadScFilter)
+#process.Flag_METFilters = cms.Path(process.metFilters)
+#process.Flag_chargedHadronTrackResolutionFilter = cms.Path(process.chargedHadronTrackResolutionFilter)
+#process.Flag_globalTightHalo2016Filter = cms.Path(process.globalTightHalo2016Filter)
+#process.Flag_CSCTightHaloTrkMuUnvetoFilter = cms.Path(process.CSCTightHaloTrkMuUnvetoFilter)
+#process.Flag_HBHENoiseIsoFilter = cms.Path(process.HBHENoiseFilterResultProducer+process.HBHENoiseIsoFilter)
+#process.Flag_BadChargedCandidateSummer16Filter = cms.Path(process.BadChargedCandidateSummer16Filter)
+#process.Flag_hcalLaserEventFilter = cms.Path(process.hcalLaserEventFilter)
+#process.Flag_BadPFMuonFilter = cms.Path(process.BadPFMuonFilter)
+#process.Flag_ecalBadCalibFilter = cms.Path(process.ecalBadCalibFilter)
+#process.Flag_HBHENoiseFilter = cms.Path(process.HBHENoiseFilterResultProducer+process.HBHENoiseFilter)
+#process.Flag_trkPOG_toomanystripclus53X = cms.Path(~process.toomanystripclus53X)
+#process.Flag_EcalDeadCellBoundaryEnergyFilter = cms.Path(process.EcalDeadCellBoundaryEnergyFilter)
+#process.Flag_BadChargedCandidateFilter = cms.Path(process.BadChargedCandidateFilter)
+#process.Flag_trkPOG_manystripclus53X = cms.Path(~process.manystripclus53X)
+#process.Flag_BadPFMuonSummer16Filter = cms.Path(process.BadPFMuonSummer16Filter)
+#process.Flag_muonBadTrackFilter = cms.Path(process.muonBadTrackFilter)
+#process.Flag_CSCTightHalo2015Filter = cms.Path(process.CSCTightHalo2015Filter)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
-
-
+# Schedule definition
+#process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.recosim_step,process.eventinterpretaion_step,process.Flag_HBHENoiseFilter,process.Flag_HBHENoiseIsoFilter,process.Flag_CSCTightHaloFilter,process.Flag_CSCTightHaloTrkMuUnvetoFilter,process.Flag_CSCTightHalo2015Filter,process.Flag_globalTightHalo2016Filter,process.Flag_globalSuperTightHalo2016Filter,process.Flag_HcalStripHaloFilter,process.Flag_hcalLaserEventFilter,process.Flag_EcalDeadCellTriggerPrimitiveFilter,process.Flag_EcalDeadCellBoundaryEnergyFilter,process.Flag_ecalBadCalibFilter,process.Flag_goodVertices,process.Flag_eeBadScFilter,process.Flag_ecalLaserCorrFilter,process.Flag_trkPOGFilters,process.Flag_chargedHadronTrackResolutionFilter,process.Flag_muonBadTrackFilter,process.Flag_BadChargedCandidateFilter,process.Flag_BadPFMuonFilter,process.Flag_BadChargedCandidateSummer16Filter,process.Flag_BadPFMuonSummer16Filter,process.Flag_trkPOG_manystripclus53X,process.Flag_trkPOG_toomanystripclus53X,process.Flag_trkPOG_logErrorTooManyClusters,process.Flag_METFilters,process.endjob_step,process.RECOSIMoutput_step)
 
 ##################################
 #### costumization for Stage2 ####
@@ -236,8 +148,6 @@ from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
 
 from HLTrigger.Configuration.customizeHLTforCMSSW import customizeHLTforCMSSW
 process = customizeHLTforCMSSW(process,"GRun")
-
-
 
 ################################################################################
 ################################################################################
@@ -318,26 +228,26 @@ process.FilterPatDefaultSequenceEvents = cms.EDProducer("EventCountProducer")
 #--------------------------
 
 process.ntupleEcalAlignment = cms.EDAnalyzer(
-    'EcalAlignment',
-    recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
-    recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
-#    recHitCollection_EB = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
-#    recHitCollection_EE = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
-    EleTag              = cms.InputTag("patElectrons"),
-    TrackTag            = cms.InputTag("generalTracks"),
-    CALOMetTag          = cms.InputTag("patMETs"),
-    vtxTag              = cms.InputTag("goodPrimaryVertices"),
-    isMC                = cms.untracked.bool(False),
-    genEvtInfoTag       = cms.untracked.InputTag("generator")
-    )
+                                             'EcalAlignment',
+                                             recHitCollection_EB = cms.InputTag("reducedEcalRecHitsEB"),
+                                             recHitCollection_EE = cms.InputTag("reducedEcalRecHitsEE"),
+                                             #    recHitCollection_EB = cms.InputTag("ecalRecHit","EcalRecHitsEB"),
+                                             #    recHitCollection_EE = cms.InputTag("ecalRecHit","EcalRecHitsEE"),
+                                             EleTag              = cms.InputTag("patElectrons"),
+                                             TrackTag            = cms.InputTag("generalTracks"),
+                                             CALOMetTag          = cms.InputTag("patMETs"),
+                                             vtxTag              = cms.InputTag("goodPrimaryVertices"),
+                                             isMC                = cms.untracked.bool(False),
+                                             genEvtInfoTag       = cms.untracked.InputTag("generator")
+                                             )
 
 
 
 process.TFileService = cms.Service(
-    "TFileService",
-  # fileName = cms.string("EcalAlignment.root")
-    fileName = cms.string(options.outputFile)
-    )
+                                   "TFileService",
+                                   # fileName = cms.string("EcalAlignment.root")
+                                   fileName = cms.string(options.outputFile)
+                                   )
 
 
 #--------------------------
@@ -346,11 +256,11 @@ process.TFileService = cms.Service(
 
 # filter on PhysDeclared bit
 process.skimming = cms.EDFilter(
-    "PhysDecl",
-    applyfilter = cms.untracked.bool(True),
-    debugOn = cms.untracked.bool(False),
-    HLTriggerResults = cms.InputTag("TriggerResults","","HLT")
-    )
+                                "PhysDecl",
+                                applyfilter = cms.untracked.bool(True),
+                                debugOn = cms.untracked.bool(False),
+                                HLTriggerResults = cms.InputTag("TriggerResults","","HLT")
+                                )
 
 # filter on bit = and (40 || 41) and !(bit36 || bit37 || bit38 || bit39)
 process.load('L1TriggerConfig.L1GtConfigProducers.L1GtTriggerMaskTechTrigConfig_cff')
@@ -362,41 +272,41 @@ process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
 process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
-  src = cms.InputTag("offlinePrimaryVertices"),
-  cut = cms.string(VERTEX_SEL),
-  filter = cms.bool(True),
-)
+                                           src = cms.InputTag("offlinePrimaryVertices"),
+                                           cut = cms.string(VERTEX_SEL),
+                                           filter = cms.bool(True),
+                                           )
 
 # filter on primary vertex
 process.primaryVertexFilter = cms.EDFilter(
-    "GoodVertexFilter",
-    vertexCollection = cms.InputTag('offlinePrimaryVertices'),
-    minimumNDOF = cms.uint32(4) ,
-    maxAbsZ = cms.double(24),
-    maxd0 = cms.double(2)
-    )
+                                           "GoodVertexFilter",
+                                           vertexCollection = cms.InputTag('offlinePrimaryVertices'),
+                                           minimumNDOF = cms.uint32(4) ,
+                                           maxAbsZ = cms.double(24),
+                                           maxd0 = cms.double(2)
+                                           )
 
 # FilterOutScraping
 process.noscraping = cms.EDFilter(
-    "FilterOutScraping",
-    applyfilter = cms.untracked.bool(True),
-    debugOn = cms.untracked.bool(False),
-    numtrack = cms.untracked.uint32(10),
-    thresh = cms.untracked.double(0.25)
-    )
+                                  "FilterOutScraping",
+                                  applyfilter = cms.untracked.bool(True),
+                                  debugOn = cms.untracked.bool(False),
+                                  numtrack = cms.untracked.uint32(10),
+                                  thresh = cms.untracked.double(0.25)
+                                  )
 
 # select events with at least one gsf electron
 process.highetele = cms.EDFilter(
-    "GsfElectronSelector",
-    src = cms.InputTag("gedGsfElectrons"),  # -> new!
-    cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
-    )
+                                 "GsfElectronSelector",
+                                 src = cms.InputTag("gedGsfElectrons"),  # -> new!
+                                 cut = cms.string("superCluster().get().energy()*sin(theta())> 0 ")
+                                 )
 
 process.highetFilter = cms.EDFilter(
-    "CandViewCountFilter",
-    src = cms.InputTag("highetele"),
-    minNumber = cms.uint32(1)
-    )
+                                    "CandViewCountFilter",
+                                    src = cms.InputTag("highetele"),
+                                    minNumber = cms.uint32(1)
+                                    )
 
 
 
@@ -405,39 +315,40 @@ process.highetFilter = cms.EDFilter(
 #--------------------------
 
 process.pEcalAlignment = cms.Path(
-    process.AllEvents   # |-> counter
-#*process.skimming
-#*process.FilterL1FilterEvents   # |-> counter
-#*process.hltLevel1GTSeed
-#*process.FilterGoodVertexFilterEvents   # |-> counter   
-#*process.primaryVertexFilter
-    *process.goodPrimaryVertices
-#*process.FilterNoScrapingFilterEvents   # |-> counter    
-#*process.noscraping
-#*process.FilterElectronFilterEvents   # |-> counter
-#*process.tagGsfSeq
-    *process.highetele
-    *process.highetFilter
-    *process.FilterReRECOEvents   # |-> counter   
-    *process.patDefaultSequence
-    *process.FilterPatDefaultSequenceEvents   # |-> counter
-    *process.ntupleEcalAlignment
-    )
+                                  process.AllEvents   # |-> counter
+                                  #*process.skimming
+                                  #*process.FilterL1FilterEvents   # |-> counter
+                                  #*process.hltLevel1GTSeed
+                                  #*process.FilterGoodVertexFilterEvents   # |-> counter   
+                                  #*process.primaryVertexFilter
+                                  *process.goodPrimaryVertices
+                                  #*process.FilterNoScrapingFilterEvents   # |-> counter    
+                                  #*process.noscraping
+                                  #*process.FilterElectronFilterEvents   # |-> counter
+                                  #*process.tagGsfSeq
+                                  *process.highetele
+                                  *process.highetFilter
+                                  *process.FilterReRECOEvents   # |-> counter   
+                                  *process.patDefaultSequence
+                                  *process.FilterPatDefaultSequenceEvents   # |-> counter
+                                  *process.ntupleEcalAlignment
+                                  )
 
 #process.outpath = cms.EndPath(process.out)
 
 
 
 #process.schedule = cms.Schedule(
-   #process.pEcalAlignment        # | -> selections and ntuple
+#process.pEcalAlignment        # | -> selections and ntuple
 #)
 
 
 
 
-# Schedule definition
-process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
-#process.schedule = cms.Schedule(process.pEcalAlignment)
+
+#process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.eventinterpretaion_step,process.endjob_step,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+#process.schedule.associate(process.patTask)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
@@ -445,12 +356,25 @@ associatePatAlgosToolsTask(process)
 process.options.numberOfThreads=cms.untracked.uint32(4)
 process.options.numberOfStreams=cms.untracked.uint32(0)
 
+#do not add changes to your config after this point (unless you know what you are doing)
+#from FWCore.ParameterSet.Utilities import convertToUnscheduled
+#process=convertToUnscheduled(process)
+
+# customisation of the process.
+
+# Automatic addition of the customisation function from PhysicsTools.PatAlgos.slimming.miniAOD_tools
+#from PhysicsTools.PatAlgos.slimming.miniAOD_tools import miniAOD_customizeAllData
+
+#call to customisation function miniAOD_customizeAllData imported from PhysicsTools.PatAlgos.slimming.miniAOD_tools
+#process = miniAOD_customizeAllData(process)
+
+# End of customisation functions
 
 # Customisation from command line
-from Configuration.DataProcessing.RecoTLR import customiseDataRun2Common 
 
-#call to customisation function customiseDataRun2Common imported from Configuration.DataProcessing.RecoTLR
-process = customiseDataRun2Common(process)
+#Have logErrorHarvester wait for the same EDProducers to finish as those providing data for the OutputModule
+from FWCore.Modules.logErrorHarvester_cff import customiseLogErrorHarvesterUsingOutputCommands
+process = customiseLogErrorHarvesterUsingOutputCommands(process)
 
 # Add early deletion of temporary data products to reduce peak memory need
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
