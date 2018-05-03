@@ -2,7 +2,7 @@ Steps to 2018 Alignment:
 
 Test MC Dumper:
 
-cmsRun Dump_MC_cfg.py inputFiles=/store/mc/RunIISpring18MiniAOD/ZToEE_NNPDF30_13TeV-powheg_M_50_120/MINIAODSIM/NZSPU40to70_100X_upgrade2018_realistic_v10-v2/70000/24A70308-1124-E811-9609-0CC47A4D769E.root outputFile=test_zee.root
+cmsRun Dump_MC_cfg_2018.py inputFiles=/store/mc/RunIISpring18MiniAOD/ZToEE_NNPDF30_13TeV-powheg_M_50_120/MINIAODSIM/NZSPU40to70_100X_upgrade2018_realistic_v10-v2/70000/24A70308-1124-E811-9609-0CC47A4D769E.root outputFile=test_zee.root
 
 Data 2018 Dumper on MiniAOD https://cmsweb.cern.ch/das/request?input=dataset%3D%2FEGamma%2FRun2018A-PromptReco-v1%2FMINIAOD&instance=prod%2Fglobal
 
