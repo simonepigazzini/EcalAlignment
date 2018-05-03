@@ -5,6 +5,10 @@
 # with command line options: reco -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT -n 100 --filein=/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root --data --conditions=101X_dataRun2_Prompt_v9 --era Run2_2018 --runUnscheduled --nThreads=4
 import FWCore.ParameterSet.Config as cms
 
+from Configuration.StandardSequences.Eras import eras
+
+process = cms.Process('SuperRECO',eras.Run2_2018)
+
 process = cms.Process('EcalAlignment')
 
 # manage input variables
@@ -16,21 +20,8 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 options.parseArguments()
 
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
-#process.load('Configuration.Geometry.GeometryExtended2015Reco_cff')
 process.load('Configuration.StandardSequences.L1Reco_cff')
-#print "I AM HERE 1.1"
-#process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalMultiFitUncalibRecHit_cfi')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalUncalibRecHit_cfi')
-#process.load('RecoLocalCalo.EcalRecProducers.ecalRecHit_cfi')
 process.load("RecoVertex.BeamSpotProducer.BeamSpot_cff")
-#print "I AM HERE 1.2"
-
-
-from Configuration.StandardSequences.Eras import eras
-
-process = cms.Process('SuperRECO',eras.Run2_2018)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -40,12 +31,12 @@ process.load('Configuration.EventContent.EventContent_cff')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
-process.load('Configuration.StandardSequences.L1Reco_cff')
+#process.load('Configuration.StandardSequences.L1Reco_cff')
 process.load('Configuration.StandardSequences.Reconstruction_Data_cff')
-process.load('Configuration.StandardSequences.RecoSim_cff')
-process.load('CommonTools.ParticleFlow.EITopPAG_cff')
-process.load('PhysicsTools.PatAlgos.slimming.metFilterPaths_cff')
-process.load('Configuration.StandardSequences.PAT_cff')
+#process.load('Configuration.StandardSequences.RecoSim_cff')
+#process.load('CommonTools.ParticleFlow.EITopPAG_cff')
+#process.load('PhysicsTools.PatAlgos.slimming.metFilterPaths_cff')
+#process.load('Configuration.StandardSequences.PAT_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
@@ -77,10 +68,9 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string(''),
         filterName = cms.untracked.string('')
     ),
-                                         #fileName = cms.untracked.string('reco_RAW2DIGI_L1Reco_RECO_RECOSIM_EI_PAT.root'),
     fileName = cms.untracked.string('reco_RAW2DIGI_RECO.root'),
                                          #outputCommands = process.RECOSIMEventContent.outputCommands,
-    outputCommands= cms.untracked.vstring("drop *"),
+     outputCommands= cms.untracked.vstring("drop *"),
     splitLevel = cms.untracked.int32(0)
 )
 
@@ -90,29 +80,9 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 
-process.GlobalTag.toGet = cms.VPSet(
-                                    
-                                    
-                                    cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                             tag = cms.string("EEAlignment_measured_v05_offline"),
-                                             connect = cms.string("sqlite_file:dbEcalAlignment/EEAlign_2018.db")
-                                             ),
-                                    
-                                    
-                                    cms.PSet(record = cms.string("EBAlignmentRcd"),
-                                             tag = cms.string("EBAlignment_measured_v05_offline"),
-                                             connect = cms.string("sqlite_file:dbEcalAlignment/EBAlign_2018.db")
-                                             ),
-                                    
-                                    
-                                    #EcalPedestals_Legacy2017_time_v1 
-                                    #EcalPulseShapes_October2017_rereco_v1
-                                    
-                                    )
-
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
-process.L1Reco_step = cms.Path(process.L1Reco)
+#process.L1Reco_step = cms.Path(process.L1Reco)
 process.reconstruction_step = cms.Path(process.reconstruction)
 #process.recosim_step = cms.Path(process.recosim)
 #process.eventinterpretaion_step = cms.Path(process.EIsequence)
@@ -146,6 +116,9 @@ process.reconstruction_step = cms.Path(process.reconstruction)
 process.endjob_step = cms.EndPath(process.endOfProcess)
 process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
+# Schedule definition
+#process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.recosim_step,process.eventinterpretaion_step,process.Flag_HBHENoiseFilter,process.Flag_HBHENoiseIsoFilter,process.Flag_CSCTightHaloFilter,process.Flag_CSCTightHaloTrkMuUnvetoFilter,process.Flag_CSCTightHalo2015Filter,process.Flag_globalTightHalo2016Filter,process.Flag_globalSuperTightHalo2016Filter,process.Flag_HcalStripHaloFilter,process.Flag_hcalLaserEventFilter,process.Flag_EcalDeadCellTriggerPrimitiveFilter,process.Flag_EcalDeadCellBoundaryEnergyFilter,process.Flag_ecalBadCalibFilter,process.Flag_goodVertices,process.Flag_eeBadScFilter,process.Flag_ecalLaserCorrFilter,process.Flag_trkPOGFilters,process.Flag_chargedHadronTrackResolutionFilter,process.Flag_muonBadTrackFilter,process.Flag_BadChargedCandidateFilter,process.Flag_BadPFMuonFilter,process.Flag_BadChargedCandidateSummer16Filter,process.Flag_BadPFMuonSummer16Filter,process.Flag_trkPOG_manystripclus53X,process.Flag_trkPOG_toomanystripclus53X,process.Flag_trkPOG_logErrorTooManyClusters,process.Flag_METFilters,process.endjob_step,process.RECOSIMoutput_step)
+
 ##################################
 #### costumization for Stage2 ####
 
@@ -159,6 +132,7 @@ process = customizeHLTforCMSSW(process,"GRun")
 ################################################################################
 ################################################################################
 ################## create ntuple for ECAL alignment purposes ###################
+
 
 #--------------------------
 #Define PAT sequence
@@ -351,13 +325,9 @@ process.pEcalAlignment = cms.Path(
 
 
 
-
-# Schedule definition
-#process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.recosim_step,process.eventinterpretaion_step,process.Flag_HBHENoiseFilter,process.Flag_HBHENoiseIsoFilter,process.Flag_CSCTightHaloFilter,process.Flag_CSCTightHaloTrkMuUnvetoFilter,process.Flag_CSCTightHalo2015Filter,process.Flag_globalTightHalo2016Filter,process.Flag_globalSuperTightHalo2016Filter,process.Flag_HcalStripHaloFilter,process.Flag_hcalLaserEventFilter,process.Flag_EcalDeadCellTriggerPrimitiveFilter,process.Flag_EcalDeadCellBoundaryEnergyFilter,process.Flag_ecalBadCalibFilter,process.Flag_goodVertices,process.Flag_eeBadScFilter,process.Flag_ecalLaserCorrFilter,process.Flag_trkPOGFilters,process.Flag_chargedHadronTrackResolutionFilter,process.Flag_muonBadTrackFilter,process.Flag_BadChargedCandidateFilter,process.Flag_BadPFMuonFilter,process.Flag_BadChargedCandidateSummer16Filter,process.Flag_BadPFMuonSummer16Filter,process.Flag_trkPOG_manystripclus53X,process.Flag_trkPOG_toomanystripclus53X,process.Flag_trkPOG_logErrorTooManyClusters,process.Flag_METFilters,process.endjob_step,process.RECOSIMoutput_step)
 #process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.eventinterpretaion_step,process.endjob_step,process.RECOSIMoutput_step)
 process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
-
-process.schedule.associate(process.patTask)
+#process.schedule.associate(process.patTask)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
@@ -366,8 +336,8 @@ process.options.numberOfThreads=cms.untracked.uint32(4)
 process.options.numberOfStreams=cms.untracked.uint32(0)
 
 #do not add changes to your config after this point (unless you know what you are doing)
-from FWCore.ParameterSet.Utilities import convertToUnscheduled
-process=convertToUnscheduled(process)
+#from FWCore.ParameterSet.Utilities import convertToUnscheduled
+#process=convertToUnscheduled(process)
 
 # customisation of the process.
 
