@@ -9,7 +9,7 @@ from Configuration.StandardSequences.Eras import eras
 
 #process = cms.Process('SuperRECO',eras.Run2_2018)
 
-process = cms.Process('EcalAlignment')
+process = cms.Process('EcalAlignment', eras.Run2_2018)
 
 # manage input variables
 from FWCore.ParameterSet.VarParsing import VarParsing
@@ -85,21 +85,21 @@ process.GlobalTag.toGet = cms.VPSet(
                                     
                                     
                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                             tag = cms.string("EEAlignment_measured_v05_offline"),
-                                             connect = cms.string("sqlite_file:dbEcalAlignment/EEAlign_2018.db")
-                                             ),
+                                    tag = cms.string("EEAlignment_measured_v05_offline"),
+                                    connect = cms.string("sqlite_file:EEAlign_2018.db")
+                                    ),
                                     
                                     
                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
-                                             tag = cms.string("EBAlignment_measured_v05_offline"),
-                                             connect = cms.string("sqlite_file:dbEcalAlignment/EBAlign_2018.db")
+                                    tag = cms.string("EBAlignment_measured_v05_offline"),
+                                    connect = cms.string("sqlite_file:EBAlign_2018.db")
                                              ),
                                     
                                     
                                     #EcalPedestals_Legacy2017_time_v1
                                     #EcalPulseShapes_October2017_rereco_v1
                                     
-                                    )
+)
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
@@ -347,13 +347,14 @@ process.pEcalAlignment = cms.Path(
 
 
 #process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.eventinterpretaion_step,process.endjob_step,process.RECOSIMoutput_step)
-process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+#process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
 #process.schedule.associate(process.patTask)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
 #Setup FWK for multithreaded
-process.options.numberOfThreads=cms.untracked.uint32(4)
+#process.options.numberOfThreads=cms.untracked.uint32(4)
 process.options.numberOfStreams=cms.untracked.uint32(0)
 
 #do not add changes to your config after this point (unless you know what you are doing)
