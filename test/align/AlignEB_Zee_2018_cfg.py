@@ -8,7 +8,8 @@ process.inputTree = cms.PSet(
    
   #selection = cms.string("(electrons_classification==0 && ETSC>20)"),
   #selection = cms.string("(electrons_classification==0 && ETSC>30) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
-  selection = cms.string("(electrons_classification==0 && ETSC>20) && mll<95 && mll>85  && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
+                             #selection = cms.string("(electrons_classification==0 && ETSC>20) && mll<95 && mll>85  && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
+ selection = cms.string("(electrons_classification==0 && ETSC>40) && mll<95 && mll>85 && etaSC < 2.1 && etaSC > -2.1 && HoE<0.3 && eleEcalIso<15 && (abs(DeltaEtaIn)<(25e-3)) && (abs(DeltaPhiIn)<(10e-3))&& ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
  
  #selection = cms.string("(ETSC>30 && mishits <= 0 ) && ((abs(eta) <= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta) >= 1.5 && (eleTrkIso + eleEcalIso + eleHcalIsoD1 + eleHcalIsoD2)/pT < 0.06 && abs(SigmaIEtaIEta)<0.03))"),
   #selection = cms.string("1"),
@@ -79,13 +80,13 @@ process.inputTree = cms.PSet(
 
 
 #2018 values
-  DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.15e-3) \
+                             # DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.15e-3) \
                                  +(x>1.5)           * (-0.24e-3)    \
                                  +(x<0.0 && x>-1.5) * (0.23e-3)    \
                                  +(x<-1.5)          * (0.20e-3) \
                                  + y*0"),
                              
-  DphiBias = cms.untracked.string(" (y>0)*    \
+                             #DphiBias = cms.untracked.string(" (y>0)*    \
                                  ((x>0.0 && x<1.5)   * (0.77e-3)  \
                                 + (x>1.5)            * (0.09e-3)  \
                                 + (x<0.0 && x>-1.5)  * (0.13e-3)  \
@@ -96,12 +97,49 @@ process.inputTree = cms.PSet(
                                 + (x<0.0 && x>-1.5)  * (-0.67e-03)  \
                                 + (x<-1.5)           * (-0.06e-03))"),
 
+## 2018 - revised bias values
+                             # DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.16e-3) \
+                                 +(x>1.5)           * (-0.29e-3)    \
+                                 +(x<0.0 && x>-1.5) * (0.24e-3)    \
+                                 +(x<-1.5)          * (0.22e-3) \
+                                 + y*0"),
+                             
+                             #DphiBias = cms.untracked.string(" (y>0)*    \
+                                ((x>0.0 && x<1.5)   * (0.75e-3)  \
+                                + (x>1.5)            * (0.08e-3)  \
+                                + (x<0.0 && x>-1.5)  * (0.10e-3)  \
+                                + (x<-1.5)           * (0.25e-03)) \
+                                + (y<0)*   \
+                                ((x>0.0 && x<1.5)   * (-0.04e-03) \
+                                + (x>1.5)             * (-0.20e-03) \
+                                + (x<0.0 && x>-1.5)  * (-0.66e-03)  \
+                                + (x<-1.5)           * (-0.13e-03))"),
+                             
+#2018 values -- revised bias values
+ DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.16e-3) \
+                                +(x>1.5)           * (-0.29e-3)    \
+                                +(x<0.0 && x>-1.5) * (0.24e-3)    \
+                                +(x<-1.5)          * (0.22e-3) \
+                                + y*0"),
+                             
+DphiBias = cms.untracked.string(" (y>0)*    \
+                              ((x>0.0 && x<1.5)   * (0.75e-3)  \
+                              + (x>1.5)            * (0.08e-3)  \
+                              + (x<0.0 && x>-1.5)  * (0.10e-3)  \
+                              + (x<-1.5)           * (0.25e-03)) \
+                              + (y<0)*   \
+                              ((x>0.0 && x<1.5)   * (-0.04e-03) \
+                              + (x>1.5)             * (-0.20e-03) \
+                              + (x<0.0 && x>-1.5)  * (-0.66e-03)  \
+                              + (x<-1.5)           * (-0.13e-03))"),
+                             
+
   #inputFilesPosition    = cms.untracked.string(
          #'myEBAlignment_2010_OLD.txt'
     #),
 
   inputFiles    = cms.vstring(
-                              'file:/tmp/twamorka/Data_2018.root'
+                              'file:/tmp/twamorka/Data2018_15May_postalign.root'
           #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_1.root',
           #'root://eoscms.cern.ch//store/user/amassiro/ECAL/Alignment/test13Mar2015/DYToEE_M-50_Tune4C_13TeV-pythia8/crab_DYll/150315_215425/0000/treeECALAlignment_2.root'
           
@@ -134,6 +172,6 @@ process.outputTree = cms.PSet(
    #outputFile = cms.string("myEBAlignment_2015_NewTrkAlign_26Oct2015.txt")
    #outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_23May2016.txt")
    #outputFile = cms.string("myEBAlignment_2016_NewTrkAlign_newPix_24May2016.txt")
-   outputFile = cms.string("myEBAlignment_2018_preliminary.txt")
+   outputFile = cms.string("myEBAlignment_2018_preliminary_onlytranslation_version_25May.txt")
 )
 
