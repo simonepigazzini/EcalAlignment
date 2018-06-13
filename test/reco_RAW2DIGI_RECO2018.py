@@ -86,13 +86,16 @@ process.GlobalTag.toGet = cms.VPSet(
                                     
                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
                                     tag = cms.string("EEAlignment_measured_v05_offline"),
-                                    connect = cms.string("sqlite_file:EEAlign_2018.db")
+                                    connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
+                                             #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+#                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
                                     ),
                                     
                                     
                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
                                     tag = cms.string("EBAlignment_measured_v05_offline"),
-                                    connect = cms.string("sqlite_file:EBAlign_2018.db")
+                                    connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+  #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
                                              ),
                                     
                                     
