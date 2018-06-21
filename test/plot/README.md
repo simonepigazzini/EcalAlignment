@@ -1,5 +1,13 @@
 Plot tools
 ====
+
+MC 2018 values (https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fglobal&input=%2FDYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8%2FRunIISpring18MiniAOD-NZSPU40to70_100X_upgrade2018_realistic_v10-v2%2FMINIAODSIM)
+  
+    ntuples are here:  /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/Alignment_2018/MC_2018_Jun20/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/crab_MC_2018_Jun20/180620_162742/0000
+
+    hadd  /tmp/twamorka/MC_2018.root /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/Alignment_2018/MC_2018_Jun20/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/crab_MC_2018_Jun20/180620_162742/0000/treeECALAlignment_*
+
+
 Beautifying 2017 plots:
      
      hadd MC_2017.root /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/8May2017/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/crab_MC/170508_122135/0000/treeECALAlignment_*
