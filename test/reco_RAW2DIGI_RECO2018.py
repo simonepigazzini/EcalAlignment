@@ -1,7 +1,7 @@
 # Auto generated configuration file
-# using: 
-# Revision: 1.19 
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
+# using:
+# Revision: 1.19
+# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
 # with command line options: reco -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT -n 100 --filein=/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root --data --conditions=101X_dataRun2_Prompt_v9 --era Run2_2018 --runUnscheduled --nThreads=4
 import FWCore.ParameterSet.Config as cms
 
@@ -78,31 +78,80 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
-
+#process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v10', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
 
 process.GlobalTag.toGet = cms.VPSet(
-                                    
-                                    
-                                    cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                    tag = cms.string("EEAlignment_measured_v05_offline"),
-                                    connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
-                                             #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
-#                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
-                                    ),
-                                    
-                                    
-                                    cms.PSet(record = cms.string("EBAlignmentRcd"),
-                                    tag = cms.string("EBAlignment_measured_v05_offline"),
-                                    connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
-  #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
-                                             ),
-                                    
-                                    
+
+
+#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
+#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
+# #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12.db")
+# #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul9.db")
+#                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+# #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
+#                                      connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12_angleson.db")
+#                                     ),
+#
+#
+#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
+#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
+#                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
+#  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
+#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
+#                                              ),
+
+
                                     #EcalPedestals_Legacy2017_time_v1
                                     #EcalPulseShapes_October2017_rereco_v1
-                                    
+
 )
+# process.GlobalTag.toGet = cms.VPSet(
+#
+#
+#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
+#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
+#                                     connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
+#                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+# #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
+#                                     ),
+#
+#
+#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
+#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+#                                              ),
+#
+#
+#                                     #EcalPedestals_Legacy2017_time_v1
+#                                     #EcalPulseShapes_October2017_rereco_v1
+#
+# )
+# process.GlobalTag.toGet = cms.VPSet(
+#
+#
+#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
+#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
+#                                     connect = cms.string("sqlite_file:EEAlign_2018_post4Jun.db")
+#                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+# #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
+#                                     ),
+#
+#
+#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
+#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_post4Jun.db")
+#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+#                                              ),
+#
+#
+#                                     #EcalPedestals_Legacy2017_time_v1
+#                                     #EcalPulseShapes_October2017_rereco_v1
+#
+# )
 
 # Path and EndPath definitions
 process.raw2digi_step = cms.Path(process.RawToDigi)
@@ -322,16 +371,16 @@ process.pEcalAlignment = cms.Path(
                                   #*process.skimming
                                   #*process.FilterL1FilterEvents   # |-> counter
                                   #*process.hltLevel1GTSeed
-                                  #*process.FilterGoodVertexFilterEvents   # |-> counter   
+                                  #*process.FilterGoodVertexFilterEvents   # |-> counter
                                   #*process.primaryVertexFilter
                                   *process.goodPrimaryVertices
-                                  #*process.FilterNoScrapingFilterEvents   # |-> counter    
+                                  #*process.FilterNoScrapingFilterEvents   # |-> counter
                                   #*process.noscraping
                                   #*process.FilterElectronFilterEvents   # |-> counter
                                   #*process.tagGsfSeq
                                   *process.highetele
                                   *process.highetFilter
-                                  *process.FilterReRECOEvents   # |-> counter   
+                                  *process.FilterReRECOEvents   # |-> counter
                                   *process.patDefaultSequence
                                   *process.FilterPatDefaultSequenceEvents   # |-> counter
                                   *process.ntupleEcalAlignment
