@@ -85,23 +85,27 @@ process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
 process.GlobalTag.toGet = cms.VPSet(
 
 
-#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
-#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
+                                    cms.PSet(record = cms.string("EEAlignmentRcd"),
+                                    tag = cms.string("EEAlignment_measured_v05_offline"),
 # #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12.db")
 # #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul9.db")
 #                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
 # #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
 #                                      connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12_angleson.db")
-#                                     ),
+                                    #connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
+                                    connect = cms.string("sqlite_file:EEAlign_2018_test.db")
+                                    ),
 #
 #
-#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
-#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
+                                    cms.PSet(record = cms.string("EBAlignmentRcd"),
+                                    tag = cms.string("EBAlignment_measured_v05_offline"),
+                                    #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+                                    connect = cms.string("sqlite_file:EBAlign_2018_test.db")
 #                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
 #  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
 #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
 #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
-#                                              ),
+                                             ),
 
 
                                     #EcalPedestals_Legacy2017_time_v1
