@@ -81,6 +81,7 @@ from Configuration.AlCa.GlobalTag import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v10', '')
 process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11','')
 
 process.GlobalTag.toGet = cms.VPSet(
 
@@ -107,7 +108,19 @@ process.GlobalTag.toGet = cms.VPSet(
 #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
                                              ),
 
+                                    cms.PSet(record = cms.string("TkAlignmentRcd"),
+                                    tag = cms.string("TrackerAlignment_SummerCamp2018_testRunB"),
+                                    #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+                                    connect = cms.string("sqlite_file:EBAlign_2018_test.db")
+#                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
+#  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
+#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
+                                             ),
 
+
+                                    #EcalPedestals_timestamp_2018_25July2018_collisions_blue_laser
+                                    #EcalPulseShapes_July2018_rereco_v1
                                     #EcalPedestals_Legacy2017_time_v1
                                     #EcalPulseShapes_October2017_rereco_v1
 
