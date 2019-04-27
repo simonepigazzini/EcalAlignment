@@ -24,9 +24,10 @@
 
 //==== parameter include ====
 #include "FWCore/Utilities/interface/Exception.h"
-#include "FWCore/PythonParameterSet/interface/MakeParameterSets.h"
+#include "FWCore/PythonParameterSet/interface/MakePyBind11ParameterSets.h"
 #include "FWCore/ParameterSet/interface/ProcessDesc.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/ParameterSetReader/interface/ParameterSetReader.h"
 
 
 //---- std include ----

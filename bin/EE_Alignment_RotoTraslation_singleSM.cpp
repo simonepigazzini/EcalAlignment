@@ -24,9 +24,10 @@
 
 //==== parameter include ====
 #include "FWCore/Utilities/interface/Exception.h"
-#include "FWCore/PythonParameterSet/interface/MakeParameterSets.h"
+#include "FWCore/PythonParameterSet/interface/MakePyBind11ParameterSets.h"
 #include "FWCore/ParameterSet/interface/ProcessDesc.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/ParameterSetReader/interface/ParameterSetReader.h"
 
 
 //---- std include ----
@@ -201,8 +202,9 @@ int main(int argc, char** argv) {
  bool rotationPsi ;
  
  std::string fileName (argv[1]) ;
- std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
+// std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
  
+ std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
  edm::ParameterSet subPSetInput = parameterSet->getParameter<edm::ParameterSet> ("inputTree") ;
  std::vector<std::string> nameFileIn = subPSetInput.getParameter<std::vector<std::string> > ("inputFiles") ;
  std::string nameTree = subPSetInput.getParameter<std::string> ("nameTree") ;

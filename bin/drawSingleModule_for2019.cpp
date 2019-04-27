@@ -472,8 +472,9 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 int main(int argc, char* argv[]) {
   
   std::string fileName (argv[1]) ;
-    std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
+  //std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
   
+ std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
   
   edm::ParameterSet subPSetInput = parameterSet->getParameter<edm::ParameterSet> ("ConfigurationToDraw") ;
   std::string nameInFileRoot   = subPSetInput.getParameter<std::string> ("nameInFileRoot") ;

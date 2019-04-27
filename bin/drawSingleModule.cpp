@@ -20,9 +20,10 @@
 
 //==== parameter include ====
 #include "FWCore/Utilities/interface/Exception.h"
-#include "FWCore/PythonParameterSet/interface/MakeParameterSets.h"
+#include "FWCore/PythonParameterSet/interface/MakePyBind11ParameterSets.h"
 #include "FWCore/ParameterSet/interface/ProcessDesc.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/ParameterSetReader/interface/ParameterSetReader.h"
 
 
 
@@ -473,8 +474,9 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
 int main(int argc, char** argv) {
   
   std::string fileName (argv[1]) ;
-  std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
+//  std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
   
+ std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
   
   edm::ParameterSet subPSetInput = parameterSet->getParameter<edm::ParameterSet> ("ConfigurationToDraw") ;
   std::string nameInFileRoot   = subPSetInput.getParameter<std::string> ("nameInFileRoot") ;
