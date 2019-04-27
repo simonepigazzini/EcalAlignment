@@ -221,8 +221,9 @@ int main(int argc, char** argv) {
  bool rotationPsi ;
  
  std::string fileName (argv[1]) ;
- std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
+ //std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
 
+ std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
  edm::ParameterSet subPSetInput = parameterSet->getParameter<edm::ParameterSet> ("inputTree") ;
  std::vector<std::string> nameFileIn = subPSetInput.getParameter<std::vector<std::string> > ("inputFiles") ;
  std::string nameTree = subPSetInput.getParameter<std::string> ("nameTree") ;
