@@ -5,12 +5,12 @@
 # with command line options: reco -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT -n 100 --filein=/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root --data --conditions=101X_dataRun2_Prompt_v9 --era Run2_2018 --runUnscheduled --nThreads=4
 import FWCore.ParameterSet.Config as cms
 
-# from Configuration.StandardSequences.Eras import eras
+from Configuration.StandardSequences.Eras import eras
 
 #process = cms.Process('SuperRECO',eras.Run2_2018)
 
-# process = cms.Process('EcalAlignment', eras.Run2_2018)
-process = cms.Process('EcalAlignment')
+process = cms.Process('EcalAlignment', eras.Run2_2018)
+
 # manage input variables
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
@@ -41,12 +41,12 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(10)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root'),
+    fileNames = cms.untracked.vstring('/store/data/Run2017F/DoubleEG/RAW-RECO/ZElectron-09May2018-v1/80005/48DF7EE7-1360-E811-985D-FA163EB82297.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -82,52 +82,52 @@ from Configuration.AlCa.GlobalTag import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v10', '')
 # process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11','')
-process.GlobalTag = GlobalTag(process.GlobalTag, '103X_dataRun2_v6','')
+process.GlobalTag = GlobalTag(process.GlobalTag, '106X_dataRun2_trackerAlignment2017_v1', '')
 
 process.GlobalTag.toGet = cms.VPSet(
 
 
-                                    # cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                    # tag = cms.string("EEAlignment_measured_v05_offline"),
-# #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12.db")
-# #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul9.db")
-#                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
-# #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
-#                                      connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12_angleson.db")
-                                    #connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
-                                    # connect = cms.string("sqlite_file:EEAlign_2018_test.db")
-                                    # ),
+#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
+#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
+# # #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12.db")
+# # #                                    connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul9.db")
+# #                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+# # #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
+# #                                      connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12_angleson.db")
+#                                     #connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
+#                                     connect = cms.string("sqlite_file:EEAlign_2018_test.db")
+#                                     ),
 #
 #
-                                    # cms.PSet(record = cms.string("EBAlignmentRcd"),
-                                    # tag = cms.string("EBAlignment_measured_v05_offline"),
-                                    #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
-                                    # connect = cms.string("sqlite_file:EBAlign_2018_test.db")
-#                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
-#  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
-#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
-#                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
-                                             # ),
+#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
+#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
+#                                     #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_test.db")
+# #                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
+# #  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
+# #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+# #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
+#                                              ),
 
-                                    # cms.PSet(record = cms.string("TkAlignmentRcd"),
-                                    # tag = cms.string("TrackerAlignment_SummerCamp2018_testRunB"),
-                                    # #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
-                                    # connect = cms.string("sqlite_file:EBAlign_2018_test.db")
-#                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
-#  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
-#   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
-#                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
-                                   #           ),
-                                   #  cms.PSet(record = cms.string("EcalPedestalsRcd"),
-                                   #  tag = cms.string("EcalPedestals_Legacy2017_time_v1"),
-                                   #  connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
-                                   #           ),
-                                   #
-                                   #
-                                   # cms.PSet(record = cms.string("EcalPulseShapesRcd"),
-                                   # tag = cms.string("EcalPulseShapes_July2018_rereco_v1"),
-                                   # connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
-                                   #              ),
+#                                     cms.PSet(record = cms.string("TkAlignmentRcd"),
+#                                     tag = cms.string("TrackerAlignment_SummerCamp2018_testRunB"),
+#                                     #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
+#                                     connect = cms.string("sqlite_file:EBAlign_2018_test.db")
+# #                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
+# #  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
+# #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
+# #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
+#                                              ),
+#                                     cms.PSet(record = cms.string("EcalPedestalsRcd"),
+#                                     tag = cms.string("EcalPedestals_Legacy2017_time_v1"),
+#                                     connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+#                                              ),
+#
+#
+#                                    cms.PSet(record = cms.string("EcalPulseShapesRcd"),
+#                                    tag = cms.string("EcalPulseShapes_July2018_rereco_v1"),
+#                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+#                                                 ),
 
 
 
