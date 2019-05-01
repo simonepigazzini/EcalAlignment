@@ -137,7 +137,36 @@ process.GlobalTag.toGet = cms.VPSet(
                                    cms.PSet(record = cms.string("EcalPFRecHitThresholdsRcd"),
                                    tag = cms.string("EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas"),
                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
-                                               )
+                                               ),
+                                   cms.PSet(record = cms.string("TrackerAlignmentRcd"),
+                                   tag = cms.string("TrackerAlignment_2017_ultralegacy_v1"),
+                                   connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                               ),
+                                    cms.PSet(record = cms.string("TrackerAlignmentErrorExtendedRcd"),
+                                    tag = cms.string("TrackerAlignmentExtendedErrors_2017_ultralegacy_v1"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                ),
+                                    cms.PSet(record = cms.string("TrackerSurfaceDeformationRcd"),
+                                    tag = cms.string("TrackerSurfaceDeformations_2017_ultralegacy_v1"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                ),
+                                    cms.PSet(record = cms.string("SiPixelTemplateDBObjectRcd"),
+                                    tag = cms.string("SiPixelTemplateDBObject_38T_v15_offline"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                ),
+                                    cms.PSet(record = cms.string("SiPixelLorentzAngleRcd"),
+                                    tag = cms.string("SiPixelLorentzAngle_v11_offline"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                ),
+                                    cms.PSet(record = cms.string("SiPixelGenErrorDBObjectRcd"),
+                                    tag = cms.string("SiPixelGenErrorDBObject_38T_v9_offline"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                ),
+                                    cms.PSet(record = cms.string("SiPixel2DTemplateDBObjectRcd"),
+                                    tag = cms.string("SiPixel2DTemplateDBObject_38T_v2_offline"),
+                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
+                                                )                                          
+
 )
 # process.GlobalTag.toGet = cms.VPSet(
 #
