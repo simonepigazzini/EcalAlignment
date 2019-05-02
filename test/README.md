@@ -5,9 +5,9 @@ Data: \
 /DoubleEG/Run2017E-ZElectron-17Nov2017-v1/RAW-RECO \
 /DoubleEG/Run2017D-ZElectron-17Nov2017-v1/RAW-RECO \
 /DoubleEG/Run2017C-ZElectron-17Nov2017-v1/RAW-RECO \
-/DoubleEG/Run2017B-ZElectron-17Nov2017-v1/RAW-RECO \
+/DoubleEG/Run2017B-ZElectron-17Nov2017-v1/RAW-RECO
 
-Two sets of conditions studied: \
+Two sets of conditions studied:
 
 Conditions 1: \
    GT: 106X_dataRun2_trackerAlignment2017_v1 \
@@ -22,9 +22,9 @@ Conditions 1: \
    SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_v15_offline \
    SiPixelLorentzAngleRcd: SiPixelLorentzAngle_v11_offline \
    SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_v9_offline \
-   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline \
+   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py \
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py
 
 Conditions 2: \
    GT: 106X_dataRun2_trackerAlignment2017_v1 \
@@ -39,9 +39,9 @@ Conditions 2: \
    SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_forPR26263 \
    SiPixelLorentzAngleRcd: SiPixelLorentzAngle_38T_forPR26263 \
    SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_forPR26263 \
-   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline \
+   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py \
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py 
 
 Steps to 2018 Alignment:
 
