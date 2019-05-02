@@ -1,45 +1,47 @@
 Studies for providing UL conditions:
 
-Data:
-/DoubleEG/Run2017F-ZElectron-09May2018-v1/RAW-RECO
-/DoubleEG/Run2017E-ZElectron-17Nov2017-v1/RAW-RECO
-/DoubleEG/Run2017D-ZElectron-17Nov2017-v1/RAW-RECO
-/DoubleEG/Run2017C-ZElectron-17Nov2017-v1/RAW-RECO
-/DoubleEG/Run2017B-ZElectron-17Nov2017-v1/RAW-RECO
+Data: \
+/DoubleEG/Run2017F-ZElectron-09May2018-v1/RAW-RECO \
+/DoubleEG/Run2017E-ZElectron-17Nov2017-v1/RAW-RECO \
+/DoubleEG/Run2017D-ZElectron-17Nov2017-v1/RAW-RECO \
+/DoubleEG/Run2017C-ZElectron-17Nov2017-v1/RAW-RECO \
+/DoubleEG/Run2017B-ZElectron-17Nov2017-v1/RAW-RECO \
 
-Two sets of conditions studied:
+Two sets of conditions studied: \
 
-Conditions 1:
--> GT: 106X_dataRun2_trackerAlignment2017_v1
--> EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1
--> EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib
--> EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3
--> EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17
--> EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas
--> TrackerAlignmentRcd: TrackerAlignment_2017_ultralegacy_v1
--> TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_2017_ultralegacy_v1
--> TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_2017_ultralegacy_v1
--> SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_v15_offline
--> SiPixelLorentzAngleRcd: SiPixelLorentzAngle_v11_offline
--> SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_v9_offline
--> SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline
+Conditions 1: \
+   GT: 106X_dataRun2_trackerAlignment2017_v1 \
+   EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1 \
+   EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib \
+   EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3 \
+   EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17 \
+   EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas \
+   TrackerAlignmentRcd: TrackerAlignment_2017_ultralegacy_v1 \
+   TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_2017_ultralegacy_v1 \
+   TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_2017_ultralegacy_v1 \
+   SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_v15_offline \
+   SiPixelLorentzAngleRcd: SiPixelLorentzAngle_v11_offline \
+   SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_v9_offline \
+   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline \
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py
-Conditions 2:
--> EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1
--> EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib
--> EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3
--> EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17
--> EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas
--> TrackerAlignmentRcd: TrackerAlignment_v24_offline
--> TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_v10_offline_IOVs
--> TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_v11_offline
--> SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_forPR26263
--> SiPixelLorentzAngleRcd: SiPixelLorentzAngle_38T_forPR26263
--> SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_forPR26263
--> SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py \
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py
+Conditions 2: \
+   GT: 106X_dataRun2_trackerAlignment2017_v1 \
+   EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1 \
+   EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib \
+   EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3 \
+   EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17 \
+   EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas \
+   TrackerAlignmentRcd: TrackerAlignment_v24_offline \
+   TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_v10_offline_IOVs \
+   TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_v11_offline \
+   SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_forPR26263 \
+   SiPixelLorentzAngleRcd: SiPixelLorentzAngle_38T_forPR26263 \
+   SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_forPR26263 \
+   SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline \
+
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py \
 
 Steps to 2018 Alignment:
 
