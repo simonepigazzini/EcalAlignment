@@ -24,7 +24,8 @@ Conditions 1: \
    SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_v9_offline \
    SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py \
+Files are here: /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions
 
 Conditions 2: \
    GT: 106X_dataRun2_trackerAlignment2017_v1 \
@@ -41,7 +42,8 @@ Conditions 2: \
    SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_forPR26263 \
    SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline
 
-cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py 
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py \
+Files are here: /eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2
 
 Steps to 2018 Alignment:
 
