@@ -1,3 +1,46 @@
+Studies for providing UL conditions:
+
+Data:
+/DoubleEG/Run2017F-ZElectron-09May2018-v1/RAW-RECO
+/DoubleEG/Run2017E-ZElectron-17Nov2017-v1/RAW-RECO
+/DoubleEG/Run2017D-ZElectron-17Nov2017-v1/RAW-RECO
+/DoubleEG/Run2017C-ZElectron-17Nov2017-v1/RAW-RECO
+/DoubleEG/Run2017B-ZElectron-17Nov2017-v1/RAW-RECO
+
+Two sets of conditions studied:
+
+Conditions 1:
+-> GT: 106X_dataRun2_trackerAlignment2017_v1
+-> EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1
+-> EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib
+-> EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3
+-> EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17
+-> EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas
+-> TrackerAlignmentRcd: TrackerAlignment_2017_ultralegacy_v1
+-> TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_2017_ultralegacy_v1
+-> TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_2017_ultralegacy_v1
+-> SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_v15_offline
+-> SiPixelLorentzAngleRcd: SiPixelLorentzAngle_v11_offline
+-> SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_v9_offline
+-> SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v2_offline
+
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions1.py
+Conditions 2:
+-> EcalPedestalsRcd: EcalPedestals_timestamp_UltraLegacy_2017_v1
+-> EcalPulseShapesRcd: EcalPulseShapes_UltraLegacy2017_calib
+-> EcalLaserAPDPNRatiosRcd: EcalLaserAPDPNRatios_rereco2017_v3
+-> EcalLaserAlphasRcd: EcalLaserAlphas_EB152-150_EE116_107_SICoptimized17
+-> EcalPFRecHitThresholdsRcd: EcalPFRecHitThresholds_UL_2017_mc_v2_mixedsigmas
+-> TrackerAlignmentRcd: TrackerAlignment_v24_offline
+-> TrackerAlignmentErrorExtendedRcd: TrackerAlignmentExtendedErrors_v10_offline_IOVs
+-> TrackerSurfaceDeformationRcd: TrackerSurfaceDeformations_v11_offline
+-> SiPixelTemplateDBObjectRcd: SiPixelTemplateDBObject_38T_forPR26263
+-> SiPixelLorentzAngleRcd: SiPixelLorentzAngle_38T_forPR26263
+-> SiPixelGenErrorDBObjectRcd: SiPixelGenErrorDBObject_38T_forPR26263
+-> SiPixel2DTemplateDBObjectRcd: SiPixel2DTemplateDBObject_38T_v1_offline
+
+cmsRun reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py
+
 Steps to 2018 Alignment:
 
 Test MC Dumper:
@@ -15,7 +58,7 @@ Test file with perfect ideal MC geometry:
 
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/RunIISpring15DR74//WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/AODSIM/006D71A7-73FC-E411-8C41-6CC2173BBE60.root /tmp/amassiro/
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/RunIISpring15DR74/DYToEE_NNPDF30_13TeV-powheg-pythia8/AODSIM/007B5BA2-FF5E-E511-90B7-00266CF9B7AC.root /tmp/amassiro/
-    
+
 run:
 
     cmsRun Dump_MC_cfg.py     inputFiles=file:/tmp/amassiro/006D71A7-73FC-E411-8C41-6CC2173BBE60.root    outputFile=/tmp/amassiro/treeECALAlignment.root
@@ -29,34 +72,34 @@ run:
 
 
 
-    
+
 Test file with DATA:
 
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/SingleElectron/PromptReco-v1_AOD/82589B55-5827-E511-AE9F-02163E012704.root /tmp/amassiro/
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/DoubleEG/RAW/0612FA2F-C025-E511-AA96-02163E014770.root /tmp/amassiro/
-    
+
 run:
-    
+
     cp /eos/cms/store/data/Run2017A/DoubleEG/RAW-RECO/ZElectron-PromptReco-v2/000/296/168/00000/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root    /tmp/amassiro/
     cmsRun reco_RAW2DIGI_RECO2017.py  \
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw.root
-    
+
     cmsRun reco_RAW2DIGI_RECO2017_noSRatPF.py  \
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw_noSRatPF.root
-    
+
     cmsRun reco_RAW2DIGI_RECO2017_yesSRatPF.py  \
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw_yesSRatPF.root
-    
+
     cmsRun reco_RAW2DIGI_RECO2017_yesSRatPF_weights.py  \
         inputFiles=file:/tmp/amassiro/5EC59A07-5A4C-E711-AF4B-02163E01A46D.root  \
         outputFile=reco_raw_yesSRatPF_weights.root
-    
-        
-        
-    
+
+
+
+
     cmsRun RAW2RECO_DATA_cfg.py  \
         inputFiles=file:/tmp/amassiro/FEE043A5-93D4-E111-84DC-0030486790C0.root  \
         outputFile=reco_raw.root \
@@ -67,7 +110,7 @@ run:
         outputFile=treeAlignData.root
 
 
-        
+
     cmsRun Dump_DATA_cfg.py  \
         inputFiles=file:/tmp/amassiro/82589B55-5827-E511-AE9F-02163E012704.root  \
         outputFile=treeAlignData.root
@@ -86,7 +129,7 @@ run:
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAWmyTag.root
 
-        
+
     @raw level (electron stream)
     scp amassiro@cmsneu.cern.ch:/media/data/CMSSWRoot/DATARunII/Run2015B/ElectronStream/RAW/4C45E949-8A2E-E511-BE26-02163E011DDE.root /tmp/amassiro/
     cmsRun reco_STREAMRAW2DIGI_RECO_AOD.py  \
@@ -103,35 +146,35 @@ run:
     cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignData0TeslaMyTag.root
-    
+
 
     2016 data
     cmsRun reco_RAW2DIGI_RECO_AOD.py  \
         inputFiles=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/158/00000/0079F1EC-7518-E611-9650-02163E011E38.root  \
         outputFile=/tmp/amassiro/treeAlignData2016data.root
-    
-    
+
+
     cmsRun reco_RAW2DIGI_RECO_AOD.py  \
         inputFiles=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/450/00000/F448588C-4F1A-E611-AEB9-02163E0145B3.root  \
         outputFile=/tmp/amassiro/treeAlignData2016data.root
-    
-    
+
+
     cmsDriver.py reco -s RAW2DIGI,RECO -n 100 --filein=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/450/00000/F448588C-4F1A-E611-AEB9-02163E0145B3.root --data --conditions=80X_dataRun2_Prompt_v8 --nThreads=4
-    
-    
+
+
     cmsRun reco_RAW2DIGI_RECO_AOD.py  \
         inputFiles=/store/data/Run2016B/SingleElectron/RAW/v2/000/273/450/00000/F448588C-4F1A-E611-AEB9-02163E0145B3.root  \
         outputFile=/tmp/amassiro/treeAlignData2016data.root
-    
-    
-    
-    
+
+
+
+
 closure test:
 
     cmsRun reco_my_tag_RAW2DIGI_RECO_AOD.py  \
         inputFiles=file:/tmp/amassiro/0612FA2F-C025-E511-AA96-02163E014770.root  \
         outputFile=treeAlignDataFromRAWmyTag.root
-        
+
 Cleaning
 ====
 
@@ -151,7 +194,7 @@ MC07May2016
 
 
 
-    
+
 Fake GRID
 ====
 
@@ -162,13 +205,13 @@ to run through GRID in local machine:
     cmsRun Dump_MC_local_GRID_cfg_TEMP.py  listFiles=list/myfilelist_DYEE.py   outputFile=/tmp/amassiro/treeECALAlignment_all_MC_standard.root
     cmsRun Dump_MC_local_GRID_cfg_TEMP.py  listFiles=list/myfilelist_DYEE_big.py   outputFile=/tmp/amassiro/treeECALAlignment_all_MC_standard.root
 
-    
+
 See here for the files definition (from DAS, plain dump):
 
     list/myfilelist.py
 
 
-    
+
 
 Alignment
 ====
@@ -177,12 +220,12 @@ Get alignment values out of the trees
 
     EE_Alignment_RotoTraslation align/AlignEE_Zee_2015_cfg.py
     EB_Alignment_RotoTraslation align/AlignEB_Zee_2015_cfg.py
-    
+
     EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   0
     EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   1
     EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   2
     and so on
-    
+
     EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_2017_cfg.py   2
 
 
@@ -203,26 +246,26 @@ CombineRotoTraslations
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/    
     CombineRotoTraslations  myEBAlignment_2015_combined_27Oct.txt   myEBAlignment_2015_18Jan2016_0Tesla.txt  myEBAlignment_2015_0Tesla_combined.txt   
     CombineRotoTraslations  myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_18Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_combined.txt   
-    
+
     CombineRotoTraslations  myEEAlignment_2015_0Tesla_combined.txt  myEEAlignment_2015_19Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_19Jan_combined.txt   
-    
+
 
     CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_19Apr.txt
 
     cp /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_combined_27Oct_modified.txt
     CombineRotoTraslations     myEEAlignment_2015_combined_27Oct_modified.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
 
-    
-    cp /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt     myEEAlignment_2016_0TeslaShifted.txt 
+
+    cp /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt     myEEAlignment_2016_0TeslaShifted.txt
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/20Jan/myEEAlignment_2015_0Tesla_combined.txt
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
-    
-    
-    
+
+
+
     CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEBAlignment_2016.txt   myEBAlignment_2017_preliminary.txt   myEBAlignment_2017_combined.txt
     CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt   myEEAlignment_2017_preliminary_onlytranslation.txt   myEEAlignment_2017_combined.txt
 
-    
+
 e.g.
 
     subtract two tags
@@ -237,13 +280,13 @@ Create local sqlite db
     cmsRun  copyFileAlignEE_cfg.py
     cmsRun  copyFileAlignEB_cfg.py
 
-    
+
 
 Check alignment in GT
 ====
 
 Tag used for alignment:
-    
+
     conddb list 74X_dataRun2_Prompt_v0 |grep EEAlig
     EEAlignmentRcd - EEAlignment_measured_v02_express
 
@@ -257,16 +300,14 @@ Dump last payload:
 
     conddb dump --type payload --format xml 049a24d4eca8dc8bfa35092de7ed079d5fda056d > dump.xml
 
-    
+
 
 PickEvent
 ====
 
 
     edmPickEvents.py  "/DoubleEG/Run2015D-PromptReco-v4/MINIAOD" 254294:2:131
-    
+
     edmCopyPickMerge outputFile=pickevents.root \
        eventsToProcess=207279:114339019 \
        inputFiles=/store/data/Run2012D/MuEG/AOD/PromptReco-v1/000/207/279/3ECCEBEF-6831-E211-99E5-003048D2BC5C.root
-    
-    
