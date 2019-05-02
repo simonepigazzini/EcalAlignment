@@ -8,11 +8,11 @@ pyCfgParams = ['inputFiles=FAKEINPUT']
 config.section_('General')
 config.General.transferLogs = True
 # config.General.workArea     = 'crab_projects_6July'  # Make sure you set this parameter
-config.General.workArea     = 'crab_projects_ECAL_LegacyConditions_WithTracker'  # Make sure you set this parameter
+config.General.workArea     = 'crab_projects_ECAL_LegacyConditions_WithTracker_Conditions2'  # Make sure you set this parameter
 
 config.section_('JobType')
 # config.JobType.psetName = '../Dump_MC_cfg.py'
-config.JobType.psetName = '../reco_RAW2DIGI_RECO2019_TrackerConditions.py'
+config.JobType.psetName = '../reco_RAW2DIGI_RECO2019_TrackerConditions_Conditions2.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['treeECALAlignment.root']
 config.JobType.maxJobRuntimeMin = 2700
@@ -23,7 +23,7 @@ config.section_('Data')
 config.Data.inputDBS      = 'global'
 config.Data.splitting     = 'FileBased'
 config.Data.unitsPerJob   = 10   # since files based, 10 files per job
-config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions'
+config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2'
 
 
 config.section_('Site')
