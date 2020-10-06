@@ -35,10 +35,12 @@ where:
 
     
 to setup:
-
+   
+    cmsrel CMSSW_10_6_8
+    cd CMSSW_10_6_8/src/ 
     mkdir EcalValidation
     cd EcalValidation
-    git clone git@github.com:amassiro/EcalAlignment.git
+    git clone -b forAmrutha git@github.com:NEUAnalyses/EcalAlignment.git
 
     cmsenv
     scramv1 b -j 8 -Werror=unused-variable
