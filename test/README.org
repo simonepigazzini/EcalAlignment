@@ -49,5 +49,7 @@
 ** Create local sqlite db
 #+BEGIN_EXAMPLE
   cmsRun dbEcalAlignment/copyFileAlignEB_cfg.py
-  cmsRun dbEcalAlignment/copyFileAlignEE_cfg.py 
+  cmsRun dbEcalAlignment/copyFileAlignEE_cfg.py
 #+END_EXAMPLE
+
+- Make sure to save the txt files with the alignment coefficients and the .db files somewhere. They should be provided to AlcaDB.
