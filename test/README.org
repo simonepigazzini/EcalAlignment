@@ -1,4 +1,4 @@
-** Obtaining information from MC or data without doing any Re-Reco
+** Creating ntuples from MC or data without doing any Re-Reco
 
     - MC (This step gives the values of DEta and DPhi in MC)
     #+BEGIN_EXAMPLE
@@ -14,6 +14,8 @@
     cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO --conditions 101X_dataRun2_Prompt_v9 --data --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
     cmsRun Dump_DATA_cfg.py inputFiles=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root outputFile=output.root
     #+END_EXAMPLE
+
+    
 
 ** Get alignment coefficients out of the trees created in the previous step
 
