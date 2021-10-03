@@ -46,52 +46,6 @@
     CombineRotoTraslations   myEEAlignment_2018.txt  myEEAlignment_Run3.txt  myEEAlignment_Run3_NewConditions.txt
    #+END_EXAMPLE
 
-
-
-CombineRotoTraslations
-====
-
-    CombineRotoTraslations   origin.txt    modification.txt    new.txt
-    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/1Mar2011/myEEAlignment_2010.txt   myEEAlignment_2011.txt    myEEAlignment_2011_combined.txt
-
-    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEBAlignment_2015.txt  myEBAlignment_2015_NewTrkAlign_13Oct2015.txt    myEBAlignment_2015_combined.txt
-    CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/05Sep/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_13Oct2015.txt    myEEAlignment_2015_combined.txt
-
-    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/14Oct/myEBAlignment_2015.txt   myEBAlignment_2015_NewTrkAlign_23Oct2015.txt    myEBAlignment_2015_combined.txt
-
-    CombineRotoTraslations  myEBAlignment_2015_combined.txt   myEBAlignment_2015_NewTrkAlign_26Oct2015.txt   myEBAlignment_2015_combined_27Oct.txt
-    CombineRotoTraslations  myEEAlignment_2015_combined.txt   myEEAlignment_2015_NewTrkAlign_26Oct2015.txt   myEEAlignment_2015_combined_27Oct.txt
-
-    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/
-    CombineRotoTraslations  myEBAlignment_2015_combined_27Oct.txt   myEBAlignment_2015_18Jan2016_0Tesla.txt  myEBAlignment_2015_0Tesla_combined.txt
-    CombineRotoTraslations  myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_18Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_combined.txt
-
-    CombineRotoTraslations  myEEAlignment_2015_0Tesla_combined.txt  myEEAlignment_2015_19Jan2016_0Tesla.txt  myEEAlignment_2015_0Tesla_19Jan_combined.txt
-
-
-    CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_19Apr.txt
-
-    cp /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt   myEEAlignment_2015_combined_27Oct_modified.txt
-    CombineRotoTraslations     myEEAlignment_2015_combined_27Oct_modified.txt                                  macro/newForEE.txt                                     myEEAlignment_2016_combined_27Apr.txt
-
-
-    cp /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt     myEEAlignment_2016_0TeslaShifted.txt
-    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/20Jan/myEEAlignment_2015_0Tesla_combined.txt
-    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
-
-
-
-    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEBAlignment_2016.txt   myEBAlignment_2017_preliminary.txt   myEBAlignment_2017_combined.txt
-    CombineRotoTraslations  /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2016/Jun01/myEEAlignment_2016.txt   myEEAlignment_2017_preliminary_onlytranslation.txt   myEEAlignment_2017_combined.txt
-
-
-e.g.
-
-    subtract two tags
-    CombineRotoTraslations   myEEAlignment_2011.txt   myEEAlignment_2012.txt    myEEAlignment_2011_2012_difference.txt
-    CombineRotoTraslations   myEBAlignment_2011.txt   myEBAlignment_2012.txt    myEBAlignment_2011_2012_difference.txt
-
-
 Create local sqlite db
 ====
 
