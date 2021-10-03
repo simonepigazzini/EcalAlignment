@@ -30,8 +30,7 @@ scramv1 b -j 8 -Werror=unused-variable
 
 ** Alignment procedure
 
-\chi_{\pm}^{2}=\sum_{\text {lepton }} \frac{\left(\Delta \varphi-\left\langle\Delta \varphi_{\pm}^{M C}\right\rangle\right)^{2}}{\varepsilon_{\varphi}^{2}}+\frac{\left(\Delta \eta-\left\langle\Delta \eta^{M C}\right\rangle\right)^{2}}{\varepsilon_{\eta}^{2}}
-
+   - Z \rightarrow ee events are used for the alignment procedure.
 EcalAlignment framework
 
     read doc/README
