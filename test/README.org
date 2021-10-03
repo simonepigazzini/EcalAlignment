@@ -16,7 +16,7 @@
     #+END_EXAMPLE
 
 
-** Get alignment values out of the trees created in the previous step
+** Get alignment coefficients out of the trees created in the previous step
 
    - \chi^{2} minimization procedure is done for each supermodule (SM) in the ECAL barrel (EB) and each Dee in the ECAL endcap (EE)
    - There are 2 separate scripts for EB and EE. Both of them take the SM number and Dee number as an input argument. This allows us to perform the minimization in parallel across all of the ECAL elements.
@@ -35,7 +35,15 @@
    Eg: python align/doAlign.py -o Run3 -r EB
        python align/doAlign.py -o Run3 -r EE
        python align/doAlign.py -o Run3 -r All
-   Make sure that the output txt files look sensible. For eg: the combined txt file for EB should have 36 rows and for EE should have four rows. 
+   Make sure that the output txt files look sensible. For eg: the combined txt file for EB should have 36 rows and for EE should have four rows.
+   #+END_EXAMPLE
+
+** Combine alignment coefficients with previous alignment coefficients
+   - CombineRotoTraslations   <previous alignment txt file>    <new alignment txt file obtained in previous step>    <output new txt file>
+
+   #+BEGIN_EXAMPLE
+    CombineRotoTraslations   myEBAlignment_2018.txt  myEBAlignment_Run3.txt  myEBAlignment_Run3_NewConditions.txt
+    CombineRotoTraslations   myEEAlignment_2018.txt  myEEAlignment_Run3.txt  myEEAlignment_Run3_NewConditions.txt
    #+END_EXAMPLE
 
 
