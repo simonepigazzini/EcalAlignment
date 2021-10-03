@@ -35,7 +35,7 @@
    Eg: python align/doAlign.py -o Run3 -r EB
        python align/doAlign.py -o Run3 -r EE
        python align/doAlign.py -o Run3 -r All
-
+   Make sure that the output txt files look sensible. For eg: the combined txt file for EB should have 36 rows and for EE should have four rows. 
    #+END_EXAMPLE
 
 
