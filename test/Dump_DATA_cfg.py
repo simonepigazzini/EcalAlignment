@@ -1,7 +1,7 @@
 # Auto generated configuration file
-# using: 
-# Revision: 1.222.2.6 
-# Source: /cvs_server/repositories/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v 
+# using:
+# Revision: 1.222.2.6
+# Source: /cvs_server/repositories/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v
 # with command line options: step2 -s RAW2DIGI,L1Reco,RECO --data --datatier RECO --eventcontent RECO --conditions GR10_P_V11::All --scenario pp --no_exec --magField AutoFromDBCurrent --process reRECO --customise Configuration/GlobalRuns/reco_TLR_38X.py --cust_function customisePPData --filein=outSkim_1_1_GlC.root
 import FWCore.ParameterSet.Config as cms
 
@@ -43,18 +43,14 @@ process.options = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring (options.inputFiles),
-    #fileNames = cms.untracked.vstring('file:/tmp/amassiro/2EB0D0B7-C275-E111-8CFB-001A64789E04.root')
   )
 #process.source.inputCommands = cms.untracked.vstring("drop *_*_*_RECO", "drop *_MEtoEDMConverter_*_*", "keep FEDRawDataCollection_*_*_*")
 
-  
+
 # Additional output definition
 
 # Other statements
-#process.GlobalTag.globaltag = 'GR_P_V56::All'
-#process.GlobalTag.globaltag = '74X_dataRun2_Prompt_v2'
-#process.GlobalTag.globaltag = '80X_dataRun2_Prompt_v8'
-#process.GlobalTag.globaltag = '92X_dataRun2_Prompt_v4'
+
 process.GlobalTag.globaltag = '101X_dataRun2_Prompt_v9'
 
 
@@ -84,9 +80,9 @@ process.GlobalTag.globaltag = '101X_dataRun2_Prompt_v9'
 
 ## fix for private central reco
 #process.patCandidates.remove(process.makePatTaus)
-#process.patTaus.tauIDSources.chargedIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
-#process.patTaus.tauIDSources.neutralIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
-#process.patTaus.tauIDSources.puCorrPtSum     =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw") 
+#process.patTaus.tauIDSources.chargedIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw")
+#process.patTaus.tauIDSources.neutralIsoPtSum =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw")
+#process.patTaus.tauIDSources.puCorrPtSum     =  cms.InputTag("hpsPFTauDiscriminationByIsolationMVA3newDMwLTraw")
 
 
 
@@ -160,7 +156,6 @@ process.ntupleEcalAlignment = cms.EDAnalyzer(
 
 process.TFileService = cms.Service(
     "TFileService",
-    #fileName = cms.string("EcalAlignment.root")
     fileName = cms.string(options.outputFile)
     )
 
@@ -236,16 +231,16 @@ process.pEcalAlignment = cms.Path(
 #*process.skimming
 #*process.FilterL1FilterEvents   # |-> counter
 #*process.hltLevel1GTSeed
-#*process.FilterGoodVertexFilterEvents   # |-> counter   
+#*process.FilterGoodVertexFilterEvents   # |-> counter
 #*process.primaryVertexFilter
     *process.goodPrimaryVertices
-#*process.FilterNoScrapingFilterEvents   # |-> counter    
+#*process.FilterNoScrapingFilterEvents   # |-> counter
 #*process.noscraping
 #*process.FilterElectronFilterEvents   # |-> counter
 #*process.tagGsfSeq
     *process.highetele
     *process.highetFilter
-    *process.FilterReRECOEvents   # |-> counter   
+    *process.FilterReRECOEvents   # |-> counter
     #*process.patDefaultSequence
     *process.FilterPatDefaultSequenceEvents   # |-> counter
     *process.ntupleEcalAlignment
