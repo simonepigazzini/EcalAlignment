@@ -1,6 +1,11 @@
 EcalAlignment
 =============
 
+Documentation
+
+    CMS ECAL Alignment in LHC Run 1: https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20AN-2013/328
+    CMS ECAL Alignment in LHC Run 2: https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20DN-2015/026
+
 EcalAlignment framework
 
     read doc/README
@@ -22,22 +27,22 @@ where:
     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_9_2_0_patch4/src/EcalValidation/EcalAlignment
     /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_1/src/EcalValidation/EcalAlignment
     /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_11/src/EcalValidation/EcalAlignment
-    
-    
-    
+
+
+
     kate: LXPLUS-ECALAlignment
     xps kate: lxplus-ECAL-alignment
 
 
-    
+
     /home/amassiro/Cern/Code/ECAL/ECALAlignment
     just to make plots faster in local
 
-    
+
 to setup:
-   
+
     cmsrel CMSSW_10_6_8
-    cd CMSSW_10_6_8/src/ 
+    cd CMSSW_10_6_8/src/
     mkdir EcalValidation
     cd EcalValidation
     git clone -b forAmrutha git@github.com:NEUAnalyses/EcalAlignment.git
@@ -53,17 +58,17 @@ where alignment constants are backuped:
     /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/
 
 
-    
+
 =============
 Luminosity
 
 How to measure the luminosity and where to get the lumisection json mask
- 
+
     json:  /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/
-    
+
     e.g.: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions17/13TeV/PromptReco/Cert_294297-999999_13TeV_PromptReco_Collisions17_JSON.txt
-    
-Luminosity: 
+
+Luminosity:
 first install brilcal, following the recipe from https://cms-service-lumi.web.cern.ch/cms-service-lumi/brilwsdoc.html
 Then:
 
@@ -76,7 +81,7 @@ Output:
     +-------------+-------------------+-----+------+----------------+---------------+
     | 296174:5750 | 06/06/17 06:29:30 | 22  | 22   | 1.096          | 1.067         |
     +-------------+-------------------+-----+------+----------------+---------------+
-    #Summary: 
+    #Summary:
     +-------+------+-----+------+-------------------+------------------+
     | nfill | nrun | nls | ncms | totdelivered(/pb) | totrecorded(/pb) |
     +-------+------+-----+------+-------------------+------------------+
@@ -86,8 +91,8 @@ Output:
 meaning
 
     1.067/pb
-    
-    
+
+
 =============
 
 Tools:
@@ -106,12 +111,12 @@ e.g.
 
     CombineRotoTraslations   data/myEBAlignment_2015_startup.txt   myEBAlignment_2015_NewTrkAlign_31Aug2015.txt    myEBAlignment_2015.txt
     CombineRotoTraslations   data/myEEAlignment_2015_startup.txt   myEEAlignment_2015_NewTrkAlign_31Aug2015.txt    myEEAlignment_2015.txt
-    
+
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_31Aug2015_additional.txt    myEEAlignment_2015.txt
-    
+
 
     CombineRotoTraslations   /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/31Aug/myEEAlignment_2015.txt  myEEAlignment_2015_NewTrkAlign_31Aug2015_additional_NEW.txt    myEEAlignment_2015.txt
-    
+
 
 
 
@@ -120,14 +125,7 @@ Transform ES to EE
 
     TransformRotoTraslationsWithES   originES.txt   newForEE.txt
 
-    
+
     CombineRotoTraslations     /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt   \
                                macro/newForEE.txt      \
                                myEEAlignment_2016_combined_19Apr.txt
-                               
-                               
-    
-    
-    
-    
-    
