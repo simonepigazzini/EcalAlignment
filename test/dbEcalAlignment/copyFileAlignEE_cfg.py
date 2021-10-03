@@ -1,38 +1,14 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("TEST")
-#process.load("EcalTrivialAlignment_cfi")
+process = cms.Process("ECALAlignent")
 process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
 
 process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.bool(True)
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_NewTrkAlign.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_combined_27Oct.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2016_NewTrkAlign_newPix_24May2016.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2016_NewTrkAlign_newPix_27May2016.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2016_NewTrkAlign_newPix_28May2016.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2016_NewTrkAlign_newPix_28May2016_newAlgoWithFabs.txt')
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2017_combined.txt')
-
-
-#/afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/2015/29Oct/myEEAlignment_2015_combined_27Oct.txt
-
-# 0 Tesla
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_0Tesla_combined.txt')
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2015_0Tesla_19Jan_combined.txt')
-
-# Zero alignment
-#process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_Zero.txt')
-
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2017_combined.txt') ## ## Link to the txt file containing the ECAL Alignment coefficient (result of CombineRotoTraslations)
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 
-#process.CondDBCommon.connect = 'sqlite_file:EEAlign_2010_GlobalAlignment.db'
-#process.CondDBCommon.connect = 'sqlite_file:EEAlign_2011.db'
-#process.CondDBCommon.connect = 'sqlite_file:EEAlign_2010_NoAlign.db'
-
-process.CondDBCommon.connect = 'sqlite_file:EEAlign_2015.db'
+process.CondDBCommon.connect = 'sqlite_file:EEAlign.db' ## name of output .db file
 
 process.MessageLogger = cms.Service("MessageLogger",
     debugModules = cms.untracked.vstring('*'),
@@ -59,7 +35,7 @@ process.PoolDBOutputService = cms.Service("PoolDBOutputService",
 
 process.dbCopy = cms.EDAnalyzer("EcalDBCopy",
     timetype = cms.string('runnumber'),
-    toCopy = cms.VPSet( 
+    toCopy = cms.VPSet(
        cms.PSet(
           record = cms.string('EEAlignmentRcd'),
           container = cms.string('EEAlignment')
@@ -71,5 +47,3 @@ process.dbCopy = cms.EDAnalyzer("EcalDBCopy",
 process.prod = cms.EDAnalyzer("EcalTrivialObjectAnalyzer")
 
 process.p = cms.Path(process.prod*process.dbCopy)
-
-
