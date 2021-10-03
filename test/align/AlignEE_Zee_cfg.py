@@ -17,6 +17,8 @@ process.inputTree = cms.PSet(
   #selection = cms.string("(eleFBrem<0.8&&eleCharge<0)"),
 #  selection = cms.string("1"),
 
+## Chi^2 is calculated and minimized w.r.t the 3D translations (x,y,z) (plus three Euler angles in the endcap) is performed
+## This is why traslationX, traslationY and traslationZ are set to True. rotationPhi, rotationTheta and rotationPsi are set to False because usually the corresponding shift is negligible. They can also be set to True and the effect on the final alignment can be studied.
 
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),

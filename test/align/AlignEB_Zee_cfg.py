@@ -16,7 +16,8 @@ process.inputTree = cms.PSet(
   #even = cms.untracked.bool(False), # only "odd" events are used
   #odd  = cms.untracked.bool(False), # only "even" events are used
 
-
+## Chi^2 is calculated and minimized w.r.t the 3D translations (x,y,z) (plus three Euler angles in the endcap) is performed
+## This is why traslationX, traslationY and traslationZ are set to True and rotationPhi, rotationTheta and rotationPsi are set to False. This means that the Chi2 will be calculated and minimized only w.r.t x, y and z.
 
   traslationX = cms.bool(True),
   traslationY = cms.bool(True),
@@ -52,7 +53,7 @@ DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.27e-3) \
                                  + (x>1.5)             * (-0.38e-03) \
                                  + (x<0.0 && x>-1.5)  * (-0.93e-03)  \
                                  + (x<-1.5)           * (-0.33e-03))"),
-  ## change input file appropriately 
+  ## change input file appropriately
   inputFiles    = cms.vstring(
           'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
 
