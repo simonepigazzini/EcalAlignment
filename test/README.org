@@ -20,12 +20,22 @@
 
    - \chi^{2} minimization procedure is done for each supermodule (SM) in the ECAL barrel (EB) and each Dee in the ECAL endcap (EE)
    - There are 2 separate scripts for EB and EE. Both of them take the SM number and Dee number as an input argument. This allows us to perform the minimization in parallel across all of the ECAL elements.
+   - This process can be done individually for each SM and Dee as follows:
    #+BEGIN_EXAMPLE
    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_cfg.py  <iSM> (iSM ranges from 0 to 35)
    EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_cfg.py  <iDee> (iDee ranges from 0 to 3)
 
    Eg: To run minimization on iSM=0: EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_cfg.py  0
    Eg: To run minimization on iDee=0: EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_cfg.py  0
+   #+END_EXAMPLE
+   - The process can also be done all at once using [[file:align/doAlign.py][this]] script as follows. This will run the minimization process on each SM and Dee and combine the different output txt files into one txt file.
+   #+BEGIN_EXAMPLE
+   python align/doAlign.py -o <output file extension> -r <region>
+
+   Eg: python align/doAlign.py -o Run3 -r EB
+       python align/doAlign.py -o Run3 -r EE
+       python align/doAlign.py -o Run3 -r All
+
    #+END_EXAMPLE
 
 
