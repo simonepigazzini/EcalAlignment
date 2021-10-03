@@ -31,7 +31,9 @@ scramv1 b -j 8 -Werror=unused-variable
 ** Alignment procedure
 
    - Z \rightarrow ee events are used for the alignment procedure.
-   - [[file:src/EcalAlignment.cc][This]] script 
+   - [[file:src/EcalAlignment.cc][This]] script creates Z candidates from good quality electrons. This script can be used in 2 different ways:
+     - Dump information from the input files
+     - Perform Re-Reco and then 
 EcalAlignment framework
 
     read doc/README
