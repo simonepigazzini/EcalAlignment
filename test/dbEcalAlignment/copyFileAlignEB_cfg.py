@@ -5,7 +5,7 @@ process = cms.Process("ECALAlignent")
 process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
 
 process.EcalTrivialConditionRetriever.getEBAlignmentFromFile = cms.untracked.bool(True)
-process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_Zero.txt') ## Link to the txt file containing the ECAL Alignment coefficient (result of CombineRotoTraslations)
+process.EcalTrivialConditionRetriever.EBAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEBAlignment_Zero.txt') ## Link to the txt file containing the EB Alignment coefficient (result of CombineRotoTraslations)
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 

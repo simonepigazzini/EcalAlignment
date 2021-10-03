@@ -4,7 +4,7 @@ process = cms.Process("ECALAlignent")
 process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
 
 process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.bool(True)
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2017_combined.txt') ## ## Link to the txt file containing the ECAL Alignment coefficient (result of CombineRotoTraslations)
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2017_combined.txt') ## ## Link to the txt file containing the EE coefficient (result of CombineRotoTraslations)
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 
