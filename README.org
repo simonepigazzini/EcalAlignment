@@ -5,7 +5,7 @@
     - CMS ECAL Alignment in LHC Run 1: [[https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20AN-2013/328][Note Link]]
     - CMS ECAL Alignment in LHC Run 2: [[https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20DN-2015/026][Note Link]]
 
-** Package installation
+** Installation
 
 #+BEGIN_EXAMPLE
 
@@ -18,7 +18,17 @@ git clone -b forAmrutha git@github.com:NEUAnalyses/EcalAlignment.git
 cmsenv
 scramv1 b -j 8 -Werror=unused-variable
 
-#+END_EXAMPLE      
+#+END_EXAMPLE
+
+
+** Alignment procedure
+
+   - ECAL alignment procedure is performed to ensure that ECAL is aligned w.r.t the tracker detector. For eg. the ECAL and tracker detector can be considered aligned with each other when the position of the eletron track in the tracker detector, when extrapolated to ECAL, is very close to that electron's energy deposit in ECAL.
+   - This procedure is required to be performed for multiple reasons:
+     - During LHC shutdown, the CMS detector is opened for repair, upgrade work etc. This can physically move the detectors. In such scenarios the alignment procedure should be performed.
+     - The tracker detector might introduce some changes in their reconstruction. In that case it should be checked if ECAL is still aligned with the tracker.
+     
+
 
 EcalAlignment framework
 
