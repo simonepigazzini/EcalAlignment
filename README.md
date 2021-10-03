@@ -3,8 +3,8 @@ EcalAlignment
 
 Documentation
 
-    CMS ECAL Alignment in LHC Run 1: [Note Link] (https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20AN-2013/328)
-    CMS ECAL Alignment in LHC Run 2: [Note Link] (https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20DN-2015/026)
+    CMS ECAL Alignment in LHC Run 1: [Note Link](https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20AN-2013/328)
+    CMS ECAL Alignment in LHC Run 2: [Note Link](https://cms.cern.ch/iCMS/user/noteinfo?cmsnoteid=CMS%20DN-2015/026)
 
 EcalAlignment framework
 
