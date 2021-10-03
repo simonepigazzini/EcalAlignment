@@ -4,10 +4,11 @@
     #+BEGIN_EXAMPLE
     cmsenv
     voms-proxy-init --voms cms
-    cmsRun Dump_DATA_cfg_2018.py inputFiles=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root outputFile=output.root
+    cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO --conditions 101X_dataRun2_Prompt_v9 --data --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
+    cmsRun Dump_DATA_cfg.py inputFiles=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root outputFile=output.root
     #+END_EXAMPLE
 
-    - MC
+    - MC (This step gives the values of DEta and DPhi in MC)
     #+BEGIN_EXAMPLE
     cmsenv
     voms-proxy-init --voms cms
@@ -15,20 +16,16 @@
     #+END_EXAMPLE
 
 
-Alignment
-====
+** Get alignment values out of the trees created in the previous steps
 
-Get alignment values out of the trees
+   - \chi^{2} minimization procedure is done for each supermodule (SM) in the ECAL barrel (EB) and each Dee in the ECAL endcap (EE)
+   - There are 2 separate scripts for EB and EE. Both of them take the SM number and Dee number as an input argument. This allows us to perform the minimization in parallel across all of the ECAL elements.
+   #+BEGIN_EXAMPLE
+   EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_cfg.py  <iSM> (iSM ranges from 0 to 35)
 
-    EE_Alignment_RotoTraslation align/AlignEE_Zee_2015_cfg.py
-    EB_Alignment_RotoTraslation align/AlignEB_Zee_2015_cfg.py
+   EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_cfg.py  <iDee> (iDee ranges from 0 to 3)
+   #+END_EXAMPLE
 
-    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   0
-    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   1
-    EB_Alignment_RotoTraslation_singleSM     align/AlignEB_Zee_2017_cfg.py   2
-    and so on
-
-    EE_Alignment_RotoTraslation_singleSM     align/AlignEE_Zee_2017_cfg.py   2
 
 
 CombineRotoTraslations
