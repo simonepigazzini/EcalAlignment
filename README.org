@@ -31,6 +31,7 @@ scramv1 b -j 8 -Werror=unused-variable
 ** Alignment procedure
 
    - Z \rightarrow ee events are used for the alignment procedure.
+   - [[file:src/EcalAlignment.cc][This]] script 
 EcalAlignment framework
 
     read doc/README
