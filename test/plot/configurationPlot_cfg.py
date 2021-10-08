@@ -139,9 +139,9 @@ process = cms.Process("TEST")
 
 
 process.ConfigurationToDraw = cms.PSet(
-  nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root"),
-  nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC_small.root"),
-  nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_vs_oldTrk_13Jun_newJSON_forPublic"),
+  nameInFileRoot = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
+  nameInFileRootComparison = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
+  nameOutputDir = cms.string("/eos/user/a/amkrishn/EcalAlignment"),
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
   specialZeroTesla = cms.untracked.int32(2),   # special binning for public
 
@@ -149,7 +149,7 @@ process.ConfigurationToDraw = cms.PSet(
 
   treeName = cms.untracked.string("myTree"),  
   
-  nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root"),
+#  nameInFileRootAlternative = cms.untracked.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
 
 )
 
