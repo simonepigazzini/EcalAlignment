@@ -46,7 +46,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/data/Run2017F/DoubleEG/RAW-RECO/ZElectron-09May2018-v1/80005/48DF7EE7-1360-E811-985D-FA163EB82297.root'),
+    fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -78,11 +78,11 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-#process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v10', '')
 # process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11','')
-process.GlobalTag = GlobalTag(process.GlobalTag, '106X_dataRun2_trackerAlignment2017_v1', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '106X_dataRun2_trackerAlignment2017_v1', '')
 
 process.GlobalTag.toGet = cms.VPSet(
 

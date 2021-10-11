@@ -4,11 +4,11 @@ process = cms.Process("ECALAlignent")
 process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
 
 process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.bool(True)
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/test/myEEAlignment_2017_combined.txt') ## ## Link to the txt file containing the EE coefficient (result of CombineRotoTraslations)
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/alignment_values/EEAlignment_test_combined.txt') ## ## Link to the txt file containing the EE coefficient (result of CombineRotoTraslations)
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 
-process.CondDBCommon.connect = 'sqlite_file:EEAlign.db' ## name of output .db file
+process.CondDBCommon.connect = 'sqlite_file:EEAlign_test.db' ## name of output .db file
 
 process.MessageLogger = cms.Service("MessageLogger",
     debugModules = cms.untracked.vstring('*'),
