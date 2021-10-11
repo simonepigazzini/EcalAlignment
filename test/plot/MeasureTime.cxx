@@ -4,14 +4,35 @@
 
 #include "TDRStyle.cc"
 
-void MeasureTime(std::string nameInFileRoot, int where = 0, std::string run = "B") {
+void MeasureTime(std::string nameInFileRoot, std::string var_Y = "deltaEtaSuperClusterAtVtx",int where = 0, std::string run = "B") {
   
-  std::string var_Y = "deltaEtaSuperClusterAtVtx";
-  int NBIN_Y = 200;
-  float MIN_Y = -0.02;
-  float MAX_Y = 0.02;
-  std::string varHR_Y = "#Delta#eta";
-  
+  int NBIN_Y;
+  float MIN_Y;
+  float MAX_Y;
+  std::string varHR_Y;
+
+  if (var_Y == "deltaEtaSuperClusterAtVtx")
+     {
+      NBIN_Y = 200;
+      MIN_Y = -0.02;
+      MAX_Y = 0.02;
+      varHR_Y = "#Delta#eta";     
+     }
+  else if (var_Y == "deltaPhiSuperClusterAtVtx")
+     {
+      NBIN_Y = 200;
+      MIN_Y = -0.02;
+      MAX_Y = 0.02;
+      varHR_Y = "#Delta#phi";
+     }
+
+  else if (var_Y == "mll")
+     {
+      NBIN_Y = 200;
+      MIN_Y = 70.;
+      MAX_Y = 130.;
+      varHR_Y = "m_{Z}";
+     }
   std::string var_X = "time/1000000.";
   int NBIN_X = 2000;
   float MIN_X = 1466500000;
@@ -104,7 +125,7 @@ void MeasureTime(std::string nameInFileRoot, int where = 0, std::string run = "B
   cc2D_x->SetGrid();
   sum_h_Sig_tx->Draw("PE");
   
-  name = Form ("time_time_%d_%s.root", where, run.c_str());
+  name = Form ("%s_%d_%s.root", var_Y.c_str(),where, run.c_str());
 //   name = Form ("time_time_%d.root", where);
   TFile outputFile(name.Data(), "recreate");
   sum_h_Sig->Write();
@@ -113,7 +134,7 @@ void MeasureTime(std::string nameInFileRoot, int where = 0, std::string run = "B
   
   
   std::ofstream myfile;
-  name = Form ("time_time_%d_%s.txt", where, run.c_str());
+  name = Form ("%s_%d_%s.txt", var_Y.c_str(),where, run.c_str());
   myfile.open (name.Data());
   myfile << "# from" << nameInFileRoot << "\n";
   myfile << "# time multiplied by 1000000 \n";
