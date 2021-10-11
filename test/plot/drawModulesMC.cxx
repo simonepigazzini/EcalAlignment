@@ -19,8 +19,11 @@ std::string specialRegion;
  
  gStyle->SetTitleYOffset(1.1);
  gStyle->cd();
- 
- TChain* trMC   = new TChain("myTree");   //ntupleEcalAlignment/myTree
+
+ gROOT->SetBatch(kTRUE);
+ //TChain* trMC   = new TChain("ntupleEcalAlignment/myTree");
+ TChain* trMC   = new TChain("myTree");
+
  trMC->Add(nameInFileRoot.Data());
  
  std::string FunctionDetaName = "(x>0.0 && x<1.5)   * (-(0.4e-3)) \
@@ -119,8 +122,8 @@ std::string specialRegion;
  
  
  TString toDoShell;
- toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
- system(toDoShell.Data());
+ //toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
+ //system(toDoShell.Data());
  toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
  system(toDoShell.Data());
  toDoShell = Form("mkdir %s/images ;",nameOutputDir.Data());
@@ -284,7 +287,6 @@ std::string specialRegion;
 //  gPad->SetGrid();
 //  toDoShell = Form("%s/images/cDetavsPhi_EE.png",nameOutputDir.Data());
 //  gPad->SaveAs(toDoShell.Data());
- 
  
  
  
