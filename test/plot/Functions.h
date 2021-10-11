@@ -32,7 +32,7 @@ void createHisto (TLatex* tinfo, TH1F* hmc, TTree* tmc, const char* variable, co
  else          sinfo = Form ("#splitline{<%s>_{MC} = %.2f #times 10^{-3}}{#sigma_{MC} = %.2f #times 10^{-3}}",title,hmc->GetMean()*1000,hmc->GetRMS()*1000);
  if (col == 0) tinfo -> SetText(0.2,0.85,sinfo);
  else          tinfo -> SetText(0.2,0.60,sinfo);
- tinfo -> SetTextSize(0.040);
+ tinfo -> SetTextSize(0.035);  //0.040
  tinfo -> SetNDC(true); 
 }
 
