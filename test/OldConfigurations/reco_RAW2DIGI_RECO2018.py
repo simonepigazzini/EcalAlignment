@@ -46,7 +46,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root'),
+#   fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/315/488/00000/44D99B63-AA4E-E811-855D-FA163EC6FA1A.root'),
+    fileNames = cms.untracked.vstring('/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root'),                                       
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -68,7 +69,7 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string(''),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('reco_RAW2DIGI_RECO.root'),
+    fileName = cms.untracked.string('reco_RAW2DIGI_RECO_test.root'),
                                          #outputCommands = process.RECOSIMEventContent.outputCommands,
      outputCommands= cms.untracked.vstring("drop *"),
     splitLevel = cms.untracked.int32(0)
@@ -80,7 +81,7 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 from Configuration.AlCa.GlobalTag import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v10', '')
-process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v9', '')
 #process.GlobalTag = GlobalTag(process.GlobalTag, '101X_dataRun2_Prompt_v11','')
 
 process.GlobalTag.toGet = cms.VPSet(
@@ -94,29 +95,29 @@ process.GlobalTag.toGet = cms.VPSet(
 # #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
 #                                      connect = cms.string("sqlite_file:EEAlign_2018_postJun4_repriseJul12_angleson.db")
                                     #connect = cms.string("sqlite_file:EEAlign_2018_6May.db")
-                                    connect = cms.string("sqlite_file:EEAlign_2018_test.db")
+                                    connect = cms.string("sqlite_file:../dbEcalAlignment/EEAlign_test.db")
                                     ),
 #
 #
                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
                                     tag = cms.string("EBAlignment_measured_v05_offline"),
                                     #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
-                                    connect = cms.string("sqlite_file:EBAlign_2018_test.db")
+                                    connect = cms.string("sqlite_file:../dbEcalAlignment/EBAlign_test.db")
 #                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
 #  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
 #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
 #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
                                              ),
 
-                                    cms.PSet(record = cms.string("TkAlignmentRcd"),
-                                    tag = cms.string("TrackerAlignment_SummerCamp2018_testRunB"),
+                                   # cms.PSet(record = cms.string("TkAlignmentRcd"),
+                                    #tag = cms.string("TrackerAlignment_SummerCamp2018_testRunB"),
                                     #connect = cms.string("sqlite_file:EBAlign_2018_6May.db")
-                                    connect = cms.string("sqlite_file:EBAlign_2018_test.db")
+                                   # connect = cms.string("sqlite_file:EBAlign_test.db")
 #                                    # connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12.db")
 #  #                                   connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul9.db")
 #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
 #                                     connect = cms.string("sqlite_file:EBAlign_2018_postJun4_repriseJul12_angleson.db")
-                                             ),
+                                    #         ),
                                     cms.PSet(record = cms.string("EcalPedestalsRcd"),
                                     tag = cms.string("EcalPedestals_Legacy2017_time_v1"),
                                     connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
@@ -182,9 +183,9 @@ process.GlobalTag.toGet = cms.VPSet(
 # )
 
 # Path and EndPath definitions
-process.raw2digi_step = cms.Path(process.RawToDigi)
+#process.raw2digi_step = cms.Path(process.RawToDigi)
 #process.L1Reco_step = cms.Path(process.L1Reco)
-process.reconstruction_step = cms.Path(process.reconstruction)
+#process.reconstruction_step = cms.Path(process.reconstruction)
 #process.recosim_step = cms.Path(process.recosim)
 #process.eventinterpretaion_step = cms.Path(process.EIsequence)
 #process.Flag_trackingFailureFilter = cms.Path(process.goodVertices+process.trackingFailureFilter)
@@ -214,8 +215,8 @@ process.reconstruction_step = cms.Path(process.reconstruction)
 #process.Flag_BadPFMuonSummer16Filter = cms.Path(process.BadPFMuonSummer16Filter)
 #process.Flag_muonBadTrackFilter = cms.Path(process.muonBadTrackFilter)
 #process.Flag_CSCTightHalo2015Filter = cms.Path(process.CSCTightHalo2015Filter)
-process.endjob_step = cms.EndPath(process.endOfProcess)
-process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
+#process.endjob_step = cms.EndPath(process.endOfProcess)
+#process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
 # Schedule definition
 #process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.recosim_step,process.eventinterpretaion_step,process.Flag_HBHENoiseFilter,process.Flag_HBHENoiseIsoFilter,process.Flag_CSCTightHaloFilter,process.Flag_CSCTightHaloTrkMuUnvetoFilter,process.Flag_CSCTightHalo2015Filter,process.Flag_globalTightHalo2016Filter,process.Flag_globalSuperTightHalo2016Filter,process.Flag_HcalStripHaloFilter,process.Flag_hcalLaserEventFilter,process.Flag_EcalDeadCellTriggerPrimitiveFilter,process.Flag_EcalDeadCellBoundaryEnergyFilter,process.Flag_ecalBadCalibFilter,process.Flag_goodVertices,process.Flag_eeBadScFilter,process.Flag_ecalLaserCorrFilter,process.Flag_trkPOGFilters,process.Flag_chargedHadronTrackResolutionFilter,process.Flag_muonBadTrackFilter,process.Flag_BadChargedCandidateFilter,process.Flag_BadPFMuonFilter,process.Flag_BadChargedCandidateSummer16Filter,process.Flag_BadPFMuonSummer16Filter,process.Flag_trkPOG_manystripclus53X,process.Flag_trkPOG_toomanystripclus53X,process.Flag_trkPOG_logErrorTooManyClusters,process.Flag_METFilters,process.endjob_step,process.RECOSIMoutput_step)
@@ -352,7 +353,7 @@ process.hltLevel1GTSeed.L1SeedsLogicalExpression = cms.string('0 AND (40 OR 41) 
 VERTEX_SEL=("!isFake && ndof > 4 && abs(z) <= 24 && position.Rho <= 2")
 
 process.goodPrimaryVertices = cms.EDFilter("VertexSelector",
-                                           src = cms.InputTag("offlinePrimaryVertices"),
+                                           src = cms.InputTag("offlineSlimmedPrimaryVertices"),
                                            cut = cms.string(VERTEX_SEL),
                                            filter = cms.bool(True),
                                            )
@@ -428,7 +429,8 @@ process.pEcalAlignment = cms.Path(
 
 #process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.eventinterpretaion_step,process.endjob_step,process.RECOSIMoutput_step)
 #process.schedule = cms.Schedule(process.raw2digi_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
-process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+#process.schedule = cms.Schedule(process.raw2digi_step,process.reconstruction_step,process.endjob_step,process.pEcalAlignment,process.RECOSIMoutput_step)
+process.schedule = cms.Schedule(process.pEcalAlignment)
 #process.schedule.associate(process.patTask)
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
