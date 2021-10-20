@@ -58,9 +58,9 @@ DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.27e-3) \
   ## change input file appropriately
   inputFiles    = cms.vstring(
       #    'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
-
       'file:/afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/data/test_forAmrutha.root'
 
+#'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
 
     )
 )

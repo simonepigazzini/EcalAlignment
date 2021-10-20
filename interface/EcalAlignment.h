@@ -53,7 +53,7 @@
 #include "Geometry/EcalAlgo/interface/EcalEndcapGeometry.h"
 
 #include "Geometry/CaloTopology/interface/CaloTopology.h"
-#include "Geometry/CaloEventSetup/interface/CaloTopologyRecord.h"
+#include "Geometry/Records/interface/CaloTopologyRecord.h"
 #include "CondFormats/DataRecord/interface/EcalChannelStatusRcd.h"
 #include "CondFormats/EcalObjects/interface/EcalChannelStatus.h"
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
