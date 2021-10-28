@@ -23,12 +23,14 @@ scramv1 b -j 8 -Werror=unused-variable
 
 ** Alignment requirement
 
-   - ECAL alignment procedure is performed to ensure that ECAL is aligned w.r.t the tracker detector. For eg. the ECAL and tracker detector can be considered aligned with each other when the position of the eletron track in the tracker detector, when extrapolated to ECAL, is very close to that electron's energy deposit in ECAL.
+   - ECAL alignment procedure is performed to ensure that ECAL is aligned w.r.t the tracker detector. For eg. the ECAL and tracker detector can be considered aligned with each other when the position of the electron track in the tracker detector, when extrapolated to ECAL, is very close to that electron's energy deposit in ECAL.
    - This procedure is required to be performed for multiple reasons:
      - During LHC shutdown, the CMS detector is opened for repair, upgrade work etc. This can physically move the detectors. In such scenarios the alignment procedure should be performed.
      - The tracker detector might introduce some changes in their reconstruction. In that case it should be checked if ECAL is still aligned with the tracker.
 
 ** Alignment procedure
+
+*** Step1: Create ntuples from data/MC files
 
    - Z \rightarrow ee events are used for the alignment procedure.
    - [[file:src/EcalAlignment.cc][This]] script creates Z candidates from good quality electrons. This script can be used in 2 different ways:
