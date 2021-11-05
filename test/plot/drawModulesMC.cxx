@@ -2,20 +2,20 @@
 
 #include "Functions.h"
 
-void drawModules(TString nameInFileRoot, TString nameOutputDir, TString commonCut = "1"){
+void drawModulesMC(TString nameInFileRoot, TString nameOutputDir){            //, TString commonCut = "1"
  TDRStyle();
- 
-std::string specialRegion;
- if (commonCut == "(etaSC>0 && etaSC<1.479)") specialRegion = "EB+";
- else if (commonCut =="(etaSC<0 && etaSC<-1.479)") specialRegion = "EB-";
- else if (commonCut =="(etaSC>1.5)") specialRegion = "EE+";
- else if (commonCut =="(etaSC<-1.5)") specialRegion = "EE+";
+
 
 //  TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && mishits<=0 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
 //  TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && mishits<=0 && 1 )", commonCut.Data());
- TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
- commonCut = tempCut;
  
+ TString toDoShell;
+ TString commonCut_ep;
+ TString commonCut_em;
+ std::vector<std::string> deta_values, dphi_values, dphi_ep_values, dphi_em_values;
+
+ std::ofstream outFile;
+ outFile.open ("MC_bias_values.txt");
  
  gStyle->SetTitleYOffset(1.1);
  gStyle->cd();
@@ -25,42 +25,6 @@ std::string specialRegion;
  TChain* trMC   = new TChain("myTree");
 
  trMC->Add(nameInFileRoot.Data());
- 
- std::string FunctionDetaName = "(x>0.0 && x<1.5)   * (-(0.4e-3)) \
-                               + (x>1.5 && x<2.0)   * (2.45513e-03*(x-1.75)) \
-                               + (x>2.0)            * ((6.137825e-04)/2.) \
-                               + (x<0.0 && x>-1.5)  * (0.4e-3) \
-                               + (x<-1.5 && x>-2.0) * (2.45513e-03*(x+1.75)) \
-                               + (x<-2.0)           * ((-6.137825e-04)/2.)"; 
- 
- TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
- FunctionDeta->SetLineColor(kBlack);
- FunctionDeta->SetLineStyle(2);
- FunctionDeta->SetLineWidth(4);
- 
- 
- std::string FunctionDphiName_ep = "(x>0.0 && x<1.5)   * (1.46233e-03) \
-                                  + (x>1.5)            * (2.73084e-03) \
-                                  + (x<0.0 && x>-1.5)  * (6.59298e-04) \
-                                  + (x<-1.5)           * (2.57010e-03)";
- 
- TF1* FunctionDphi_ep = new TF1 ("DphiBias_ep",FunctionDphiName_ep.c_str(),-5,5);
- FunctionDphi_ep->SetLineColor(kBlack);
- FunctionDphi_ep->SetLineStyle(2);
- FunctionDphi_ep->SetLineWidth(4);
- 
- 
- 
- std::string FunctionDphiName_em = "(x>0.0 && x<1.5)   * (-7.24105e-04) \
-                                  + (x>1.5)            * (-1.992615e-03) \
-                                  + (x<0.0 && x>-1.5)  * (-1.527137e-03) \
-                                  + (x<-1.5)           * (-3.437939e-03)";
- 
- TF1* FunctionDphi_em = new TF1 ("DphiBias_em",FunctionDphiName_em.c_str(),-5,5);
- FunctionDphi_em->SetLineColor(kBlack);
- FunctionDphi_em->SetLineStyle(2);
- FunctionDphi_em->SetLineWidth(4);
- 
  
  ///---- all ----
  TH1F* DPhiMC     = new TH1F("DPhiMC",     " MC"  ,200,-0.04,0.04);
@@ -75,12 +39,25 @@ std::string specialRegion;
  TLatex*  tinfoDPhi_em = new TLatex(0.2,0.8,"");
  ///---- text info (end) ----
  
+std::vector<TString> specialRegionCut{"(etaSC>0 && etaSC<1.479)","(etaSC<0 && etaSC<-1.479)","(etaSC>1.5)","(etaSC<-1.5)"}; 
+
+for(auto commonCut : specialRegionCut){
+
+ std::string specialRegion;
+ if (commonCut == "(etaSC>0 && etaSC<1.479)") specialRegion = "EB+";
+ else if (commonCut =="(etaSC<0 && etaSC<-1.479)") specialRegion = "EB-";
+ else if (commonCut =="(etaSC>1.5)") specialRegion = "EE+";
+ else if (commonCut =="(etaSC<-1.5)") specialRegion = "EE-";
+
+ TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
+ commonCut = tempCut;
+
  createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",commonCut.Data(),1);
  createHisto(tinfoDEta, DEtaMC, trMC, "deltaEtaSuperClusterAtVtx", "#Delta#eta",commonCut.Data(),1);
  
- TString commonCut_ep = Form ("(%s) && (eleCharge>0)",commonCut.Data());
- TString commonCut_em = Form ("(%s) && (eleCharge<0)",commonCut.Data());
- 
+ commonCut_ep = Form ("(%s) && (eleCharge>0)",commonCut.Data());
+ commonCut_em = Form ("(%s) && (eleCharge<0)",commonCut.Data());
+
  createHisto(tinfoDPhi_ep, DPhiMC_ep, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",commonCut_ep.Data(),1);
  createHisto(tinfoDPhi_em, DPhiMC_em, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",commonCut_em.Data(),1);
  
@@ -105,6 +82,8 @@ std::string specialRegion;
  tinfoDPhi->Draw();
  gPad->SetGrid();
  gPad->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/DphiMC_%s.png",specialRegion.c_str())); 
+ dphi_values.push_back(std::to_string(DPhiMC->GetMean()));
+ outFile << "Dphi"<< " " << specialRegion << " " << DPhiMC->GetMean() << endl; 
 
 
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
@@ -112,6 +91,8 @@ std::string specialRegion;
  tinfoDPhi_ep->Draw();
  gPad->SetGrid();
  gPad->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/DphiMC_ep_%s.png",specialRegion.c_str()));
+ dphi_ep_values.push_back(std::to_string(DPhiMC_ep->GetMean()));
+ outFile << "Dphi_e+"<< " " << specialRegion << " " << DPhiMC_ep->GetMean() << endl; 
 
  
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
@@ -119,9 +100,10 @@ std::string specialRegion;
  tinfoDPhi_em->Draw();
  gPad->SetGrid();
  gPad->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/DphiMC_em_%s.png",specialRegion.c_str()));
+ dphi_em_values.push_back(std::to_string(DPhiMC_em->GetMean()));
+ outFile << "Dphi_e-"<< " " << specialRegion << " " << DPhiMC_em->GetMean() << endl; 
  
  
- TString toDoShell;
  //toDoShell = Form("rm -r %s ;",nameOutputDir.Data());
  //system(toDoShell.Data());
  toDoShell = Form("mkdir %s ;",nameOutputDir.Data());
@@ -139,9 +121,62 @@ std::string specialRegion;
  legend->Draw();
  cDEta->SetGrid(); gPad->Update();   
  gPad->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/DetaMC_%s.png",specialRegion.c_str()));
+ deta_values.push_back(std::to_string(DEtaMC->GetMean()));
+ outFile << "Deta"<< " " << specialRegion << " " << DEtaMC->GetMean() << endl; 
 
+}
+
+ outFile.close();
+
+ for(int i = 0; i<4; i++){
+
+    std::cout<<"deta_value"<<i<<"\t"<<deta_values[i]<<endl;
+    std::cout<<"dphi_value"<<i<<"\t"<<dphi_values[i]<<endl;
+    std::cout<<"dphi_ep_value"<<i<<"\t"<<dphi_ep_values[i]<<endl;
+    std::cout<<"dphi_em_value"<<i<<"\t"<<dphi_em_values[i]<<endl;
+ }
  
  ///---- 2D plot vs eta ----
+
+ std::string FunctionDetaName = "(x>0.0 && x<1.5)   * " + deta_values[0] + \
+                                "+ (x>1.5) * " + deta_values[2] +\
+                                "+ (x<0.0 && x>-1.5)* " + deta_values[1] + \
+                                "+ (x<-1.5) * " + deta_values[3] ; 
+ 
+ TF1* FunctionDeta = new TF1 ("DetaBias",FunctionDetaName.c_str(),-5,5);
+ FunctionDeta->SetLineColor(kBlack);
+ FunctionDeta->SetLineStyle(2);
+ FunctionDeta->SetLineWidth(4);
+ 
+ 
+ std::string FunctionDphiName_ep = "(x>0.0 && x<1.5)   * " + dphi_ep_values[0] + \
+                                 " + (x>1.5)            * " + dphi_ep_values[2] + \
+                                 " + (x<0.0 && x>-1.5)  * " + dphi_ep_values[1] + \
+                                 " + (x<-1.5)           * " + dphi_ep_values[3] ;
+ 
+ TF1* FunctionDphi_ep = new TF1 ("DphiBias_ep",FunctionDphiName_ep.c_str(),-5,5);
+ FunctionDphi_ep->SetLineColor(kBlack);
+ FunctionDphi_ep->SetLineStyle(2);
+ FunctionDphi_ep->SetLineWidth(4);
+ 
+ 
+ 
+ std::string FunctionDphiName_em = "(x>0.0 && x<1.5)   * " + dphi_em_values[0] + \
+                                 " + (x>1.5)            * " + dphi_em_values[2] + \
+                                 " + (x<0.0 && x>-1.5)  * " + dphi_em_values[1] + \
+                                 " + (x<-1.5)           * " + dphi_em_values[3] ;
+
+ 
+ TF1* FunctionDphi_em = new TF1 ("DphiBias_em",FunctionDphiName_em.c_str(),-5,5);
+ FunctionDphi_em->SetLineColor(kBlack);
+ FunctionDphi_em->SetLineStyle(2);
+ FunctionDphi_em->SetLineWidth(4);
+
+ 
+ TString commonCut = "(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )";
+ commonCut_ep = Form ("(%s) && (eleCharge>0)",commonCut.Data());
+ commonCut_em = Form ("(%s) && (eleCharge<0)",commonCut.Data());
+
  TH2F* DPhiMCvsEta_ep = new TH2F("DPhiMCvsEta_ep",  "DATA"  , 40,-3,3,  400,-0.04,0.04);
  TH2F* DPhiMCvsEta_em = new TH2F("DPhiMCvsEta_em",  "DATA"  , 40,-3,3,  400,-0.04,0.04);
  TH2F* DPhiMCvsEta    = new TH2F("DPhiMCvsEta",  "DATA"  , 80,-3,3,  400,-0.04,0.04);
