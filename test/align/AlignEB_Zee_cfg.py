@@ -35,32 +35,31 @@ process.inputTree = cms.PSet(
 
 # Put MC Deta and DPhi bias values here:
 
-# For eg: these are 2017 values (Plots for ref: https://indico.cern.ch/event/648996/contributions/2638537/attachments/1484713/2304818/TanviWamorkar_MoCaJun28.pdf)
 # DPhi values are different for electrons and positrons because of their opposite bending in the Phi direction under the magnetic field
 # DEta values follow the sequence: EB+, EE+, EB-, EE-
 # DPhi values follow the sequence: [Positron: EB+, EE+, EB-, EE-], [Electron: EB+, EE+, EB-, EE-]
-DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.27e-3) \
-                                   +(x>1.5)           * (-0.09e-3)    \
-                                   +(x<0.0 && x>-1.5) * (0.17e-3)    \
-                                   +(x<-1.5)          * (0.14e-3) \
+DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.000146944) \
+                                   +(x>1.5)           * (-0.000252088)    \
+                                   +(x<0.0 && x>-1.5) * (0.00022965)    \
+                                   +(x<-1.5)          * (0.00022965) \
                                    + y*0"),
 
   DphiBias = cms.untracked.string(" (y>0)*    \
-                                  ((x>0.0 && x<1.5)   * (1.02e-3)  \
-                                 + (x>1.5)            * (0.46e-3)  \
-                                 + (x<0.0 && x>-1.5)  * (0.28e-3)  \
-                                 + (x<-1.5)           * (0.48e-03)) \
+                                  ((x>0.0 && x<1.5)   * (0.000772008)  \
+                                 + (x>1.5)            * (5.94356e-05)  \
+                                 + (x<0.0 && x>-1.5)  * (0.000133081)  \
+                                 + (x<-1.5)           * (0.000133081)) \
                                  + (y<0)*   \
-                                   ((x>0.0 && x<1.5)   * (-0.23e-03) \
-                                 + (x>1.5)             * (-0.38e-03) \
-                                 + (x<0.0 && x>-1.5)  * (-0.93e-03)  \
-                                 + (x<-1.5)           * (-0.33e-03))"),
+                                   ((x>0.0 && x<1.5)   * (-6.74691e-05) \
+                                 + (x>1.5)             * (-0.000152649) \
+                                 + (x<0.0 && x>-1.5)  * (-9.07622e-05)  \
+                                 + (x<-1.5)           * (-9.07622e-05))"),
   ## change input file appropriately
   inputFiles    = cms.vstring(
       #    'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
-      'file:/afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/data/test_forAmrutha.root'
+    #  'file:/afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/data/test_forAmrutha.root'
 
-#'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
+'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
 
     )
 )
