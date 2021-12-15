@@ -168,7 +168,13 @@ EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
   myTree_ -> Branch("mc_phi",&mc_phi_,"mc_phi/D");
 
   myTree_ -> Branch("mc_weight",&_mc_weight,"mc_weight/D");
-  
+
+  //to check if these selections are still valid for CMSSW_12_0_0
+
+  myTree_ -> Branch("EGMcutBasedElectronIDloose",&EGMcutBasedElectronIDloose_,"EGMcutBasedElectronIDloose/I");
+  myTree_ -> Branch("EGMcutBasedElectronIDmedium",&EGMcutBasedElectronIDmedium_,"EGMcutBasedElectronIDmedium/I");
+  myTree_ -> Branch("EGMcutBasedElectronIDtight",&EGMcutBasedElectronIDtight_,"EGMcutBasedElectronIDtight/I");
+  myTree_ -> Branch("rawEnergySC",&rawEnergySC_,"rawEnergySC/D");  
 }
 
 
@@ -334,6 +340,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   reco::GsfTrackRef eleTrack  = electron.gsfTrack () ; 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
   reco::SuperClusterRef scRef = electron.superCluster();
+  const reco::SuperCluster sc;
 
   electrons_classification_ = electron.classification();
   electrons_basicClustersSize_ = electron.basicClustersSize();
@@ -352,6 +359,9 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   ET_ = electron.p4().Et();
   etaSC_ = scRef->eta();
   phiSC_ = scRef->phi();
+
+  rawEnergySC_ = sc.rawEnergy();
+  std::cout<<ESC_<<"\t"<<rawEnergySC_<<std::endl;
 
   Sigma_Phi_ = scRef->phiWidth();
   Sigma_Eta_ = scRef->etaWidth();
@@ -376,6 +386,12 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
   DeltaEtaIn_ = electron.deltaEtaSuperClusterTrackAtVtx();
   DeltaPhiIn_ = electron.deltaPhiSuperClusterTrackAtVtx();
+
+  //--------------------------------------------------------------
+
+  EGMcutBasedElectronIDloose_ = electron.electronID("cutBasedElectronID-Fall17-94X-V2-loose");
+  EGMcutBasedElectronIDmedium_ = electron.electronID("cutBasedElectronID-Fall17-94X-V2-medium");
+  EGMcutBasedElectronIDtight_ = electron.electronID("cutBasedElectronID-Fall17-94X-V2-tight");
 
   deltaEtaSuperClusterAtVtx_ = electron.deltaEtaSuperClusterTrackAtVtx();
   deltaEtaSeedClusterAtCalo_ = electron.deltaEtaSeedClusterTrackAtCalo();

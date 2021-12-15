@@ -206,6 +206,12 @@ class EcalAlignment : public edm::EDAnalyzer {
   double yvtx_;
   double zvtx_;
 
+  //-------------------------
+  int EGMcutBasedElectronIDloose_;
+  int EGMcutBasedElectronIDmedium_;
+  int EGMcutBasedElectronIDtight_;
+  double rawEnergySC_;
+
   //---- MC information ----
   double mc_pt_;
   double mc_eta_;
