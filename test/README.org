@@ -26,6 +26,14 @@
         - Use the above steps to verify that the ntuples are created properly and then submit crab jobs to dump data from several files.
         - See miscellaneous section to know how to find the integrated luminosity of different runs in a dataset.
         - See README in the crab directory to know how to submit CRAB jobs. 
+        
+** Get MC bias values for EB+, EB-, EE+ and EE-
+
+#+BEGIN_EXAMPLE
+cd plot/
+root -l drawModulesMC.cxx\(\"root:/path/to/MC/root/file.root\",\"output_directory_name\"\)
+eg: root -l drawModulesMC.cxx\(\"root:///afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/MC/MC_2018_small.root\",\"MC_bias_values\"\)
+#+END_EXAMPLE
 
 ** Get alignment coefficients out of the trees created in the previous step
 
