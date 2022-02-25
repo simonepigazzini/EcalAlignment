@@ -18,7 +18,7 @@ config.Data.inputDataset = '/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/R
 config.Data.unitsPerJob = 10   # since files based, 10 files per job
 config.Data.inputDBS = 'https://cmsweb.cern.ch/dbs/prod/global/DBSReader/'
 #config.Data.publishDBS = 'https://cmsweb.cern.ch/dbs/prod/phys03/DBSWriter/'
-config.Data.splitting = 'FileBased'    #'LumiBased'
+config.Data.splitting = 'FileBased'
 
 #config.Data.outLFN = '/store/user/amassiro/ECAL/Alignment/test16Jan2015'
 config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/twamorka/Alignment_2018/MC_2018'
