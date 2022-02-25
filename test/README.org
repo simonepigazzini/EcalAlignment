@@ -19,7 +19,7 @@
         #+BEGIN_EXAMPLE
          cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO --conditions 101X_dataRun2_Prompt_v9 --data --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
         #+END_EXAMPLE
-        and then changing the process.schedule line as shown [here]
+        and then changing the process.schedule line as shown [[https://github.com/NEUAnalyses/EcalAlignment/blob/forAmrutha/test/Dump_DATA_cfg.py#L253][here]]
         
         - The steps given above dump data/MC from a single data/MC root file. In reality, we need to have approximately 100 - 200 pb-1 of integrated luminosity so that the alignment coefficients obtained are not affected by statistical fluctuations. 
         - Use the above steps to verify that the ntuples are created properly and then submit crab jobs to dump data from several files.
