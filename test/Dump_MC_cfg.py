@@ -25,8 +25,8 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 #process.load('Configuration.StandardSequences.L1Reco_cff')
 #process.load('Configuration.StandardSequences.Reconstruction_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.load('Configuration.EventContent.EventContent_cff')
 
 process.configurationMetadata = cms.untracked.PSet(
@@ -88,8 +88,8 @@ process.source = cms.Source("PoolSource",
 #process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
 #process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
 #process.GlobalTag.globaltag = '74X_mcRun2_asymptotic_v4::All'
-process.GlobalTag.globaltag = '100X_upgrade2018_realistic_v10'
-
+process.GlobalTag.globaltag = '106X_upgrade2018_realistic_v16_L1v1'
+#process.GlobalTag.globaltag = '120X_upgrade2018_realistic_v1'
 
 ################################################################################
 ################################################################################

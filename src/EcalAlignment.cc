@@ -340,7 +340,6 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   reco::GsfTrackRef eleTrack  = electron.gsfTrack () ; 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
   reco::SuperClusterRef scRef = electron.superCluster();
-  const reco::SuperCluster sc;
 
   electrons_classification_ = electron.classification();
   electrons_basicClustersSize_ = electron.basicClustersSize();
@@ -359,9 +358,6 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   ET_ = electron.p4().Et();
   etaSC_ = scRef->eta();
   phiSC_ = scRef->phi();
-
-  rawEnergySC_ = sc.rawEnergy();
-  std::cout<<ESC_<<"\t"<<rawEnergySC_<<std::endl;
 
   Sigma_Phi_ = scRef->phiWidth();
   Sigma_Eta_ = scRef->etaWidth();
@@ -434,6 +430,13 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   eleES_ = scRef->preshowerEnergy();
 
   E9oE25_ = E3x3_ / E5x5_;
+
+  reco::SuperCluster sc = *scRef;
+  //rawEnergySC_ = electron->superCluster()->rawEnergy();
+  //reco::SuperCluster sc = scRef.get();
+  rawEnergySC_ = sc.rawEnergy();
+  std::cout<<ESC_<<"\t"<<rawEnergySC_<<std::endl;
+   
    
   for(std::vector<std::string>::const_iterator iEleId = eleId_names_.begin(); iEleId != eleId_names_.end(); iEleId++){
    eleId_[iEleId-eleId_names_.begin()] = electron.electronID(*iEleId);

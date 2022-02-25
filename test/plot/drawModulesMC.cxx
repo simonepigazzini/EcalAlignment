@@ -1,10 +1,14 @@
+//----- Example command to run this code:
+//root -l drawModulesMC.cxx\(\"/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECAL_Alignment_2018UL_test/MC/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/crab_MC_2018/211124_171821/0000/treeECALAlignment_MC_4.root\",\"/eos/user/a/amkrishn/EcalAlignment/images/"\)
+
+
 #include "TDRStyle.cc"
 
 #include "Functions.h"
 
 void drawModulesMC(TString nameInFileRoot, TString nameOutputDir){            //, TString commonCut = "1"
  TDRStyle();
-
+gStyle->SetOptStat(1101);
 
 //  TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && mishits<=0 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
 //  TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && mishits<=0 && 1 )", commonCut.Data());
@@ -21,8 +25,8 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir){            //
  gStyle->cd();
 
  gROOT->SetBatch(kTRUE);
- //TChain* trMC   = new TChain("ntupleEcalAlignment/myTree");
- TChain* trMC   = new TChain("myTree");
+ TChain* trMC   = new TChain("ntupleEcalAlignment/myTree");
+ // TChain* trMC   = new TChain("myTree");
 
  trMC->Add(nameInFileRoot.Data());
  
@@ -32,6 +36,13 @@ void drawModulesMC(TString nameInFileRoot, TString nameOutputDir){            //
  TH1F* DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.04,0.04);
  TH1F* DEtaMC     = new TH1F("DEtaMC"     ," MC"  ,200,-0.02,0.02);
  
+ TH1F* DPhiMC_corr     = new TH1F("DPhiMC_corr",     " MC"  ,200,-0.04,0.04);
+ TH1F* DPhiMC_ep_corr  = new TH1F("DPhiMC_ep_corr",  " MC"  ,200,-0.04,0.04);
+ TH1F* DPhiMC_em_corr  = new TH1F("DPhiMC_em_corr",  " MC"  ,200,-0.04,0.04);
+ TH1F* DEtaMC_corr     = new TH1F("DEtaMC_corr"     ," MC"  ,200,-0.02,0.02);
+ 
+ TCanvas *c = new TCanvas();
+
  ///---- text info (begin) ----
  TLatex*  tinfoDPhi    = new TLatex(0.2,0.8,"");
  TLatex*  tinfoDEta    = new TLatex(0.2,0.8,"");
@@ -49,7 +60,7 @@ for(auto commonCut : specialRegionCut){
  else if (commonCut =="(etaSC>1.5)") specialRegion = "EE+";
  else if (commonCut =="(etaSC<-1.5)") specialRegion = "EE-";
 
- TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
+ TString tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && pT>20 && EGMcutBasedElectronIDloose == 1 && mll<95 && mll>85 )", commonCut.Data());
  commonCut = tempCut;
 
  createHisto(tinfoDPhi, DPhiMC, trMC, "deltaPhiSuperClusterAtVtx", "#Delta#phi",commonCut.Data(),1);
@@ -124,7 +135,86 @@ for(auto commonCut : specialRegionCut){
  deta_values.push_back(std::to_string(DEtaMC->GetMean()));
  outFile << "Deta"<< " " << specialRegion << " " << DEtaMC->GetMean() << endl; 
 
+ //--------- hardcoded to check if the bias values are ok -----------
+ /*
+ if(specialRegion == "EB+"){
+   c->Clear();
+   c->cd();
+ //auto val_eta = DEtaMC->GetMean();
+   trMC->Draw("deltaEtaSuperClusterAtVtx - (-0.000176076) >> DEtaMC_corr",commonCut.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DetaMC_%s_corr.png",specialRegion.c_str()));
+   
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (0.00108118) >> DPhiMC_ep_corr",commonCut_ep.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_ep_%s_corr.png",specialRegion.c_str()));
+
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (-0.000326522) >> DPhiMC_em_corr",commonCut_em.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_em_%s_corr.png",specialRegion.c_str()));
+
+ }
+
+ if(specialRegion == "EB-"){
+   c->Clear();
+   c->cd();
+ //auto val_eta = DEtaMC->GetMean();
+   trMC->Draw("deltaEtaSuperClusterAtVtx - (0.00025655) >> DEtaMC_corr",commonCut.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DetaMC_%s_corr.png",specialRegion.c_str()));
+   
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (0.000482674) >> DPhiMC_ep_corr",commonCut_ep.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_ep_%s_corr.png",specialRegion.c_str()));
+
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (-0.000399648) >> DPhiMC_em_corr",commonCut_em.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_em_%s_corr.png",specialRegion.c_str()));
+
+ }
+
+ if(specialRegion == "EE+"){
+   c->Clear();
+   c->cd();
+ //auto val_eta = DEtaMC->GetMean();
+   trMC->Draw("deltaEtaSuperClusterAtVtx - (-0.000216178) >> DEtaMC_corr",commonCut.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DetaMC_%s_corr.png",specialRegion.c_str()));
+   
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (0.000476084) >> DPhiMC_ep_corr",commonCut_ep.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_ep_%s_corr.png",specialRegion.c_str()));
+
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (-0.000334339) >> DPhiMC_em_corr",commonCut_em.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_em_%s_corr.png",specialRegion.c_str()));
+
+ }
+
+if(specialRegion == "EE-"){
+   c->Clear();
+   c->cd();
+ //auto val_eta = DEtaMC->GetMean();
+   trMC->Draw("deltaEtaSuperClusterAtVtx - (0.00025655) >> DEtaMC_corr",commonCut.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DetaMC_%s_corr.png",specialRegion.c_str()));
+   
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (0.000482674) >> DPhiMC_ep_corr",commonCut_ep.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_ep_%s_corr.png",specialRegion.c_str()));
+
+   c->Clear();
+   c->cd();
+   trMC->Draw("deltaPhiSuperClusterAtVtx - (-0.000399648) >> DPhiMC_em_corr",commonCut_em.Data());
+   c->SaveAs(Form("/eos/user/a/amkrishn/EcalAlignment/MC_bias_values/test/DphiMC_em_%s_corr.png",specialRegion.c_str()));
 }
+ */
+
+
+ }
 
  outFile.close();
 
@@ -173,7 +263,7 @@ for(auto commonCut : specialRegionCut){
  FunctionDphi_em->SetLineWidth(4);
 
  
- TString commonCut = "(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )";
+ TString commonCut = "(electrons_classification==0 && ETSC>20 && pT>20 && EGMcutBasedElectronIDloose == 1 && mll<95 && mll>85)";
  commonCut_ep = Form ("(%s) && (eleCharge>0)",commonCut.Data());
  commonCut_em = Form ("(%s) && (eleCharge<0)",commonCut.Data());
 

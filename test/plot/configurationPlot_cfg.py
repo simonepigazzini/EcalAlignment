@@ -139,17 +139,17 @@ process = cms.Process("TEST")
 
 
 process.ConfigurationToDraw = cms.PSet(
-  nameInFileRoot = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
-  nameInFileRootComparison = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
-  nameOutputDir = cms.string("/eos/user/a/amkrishn/EcalAlignment"),
+  nameInFileRoot = cms.string("/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECAL_Alignment_2018UL_test/EGamma/EGamma/crab_DATA2018UL/211124_215549/0000/treeECALAlignment_UL2018.root"),  #data after alignment
+  nameInFileRootComparison = cms.string("/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECAL_Alignment_2018UL_test/MC/DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/crab_MC_2018/211124_171821/0000/treeECALAlignment_MC.root"),  #MC
+  nameOutputDir = cms.string("/eos/user/a/amkrishn/www/EcalAlignment"),
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
   specialZeroTesla = cms.untracked.int32(2),   # special binning for public
 
   onlyRMS = cms.untracked.int32(1),   # special for public to show only RMS
 
-  treeName = cms.untracked.string("myTree"),  
+  treeName = cms.untracked.string("ntupleEcalAlignment/myTree"),  
   
-#  nameInFileRootAlternative = cms.untracked.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
+  nameInFileRootAlternative = cms.untracked.string("/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECAL_Alignment_2018UL_test/EGamma/EGamma/crab_DATA2018UL/211124_215549/0000/treeECALAlignment_UL2018.root"),     #data before alignment
 
 )
 
