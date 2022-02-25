@@ -11,14 +11,13 @@ crab checkwrite --site=T2_CH_CERN
 
 - To submit CRAB jobs
         - Data
-    
     #+BEGIN_EXAMPLE
     cd crab/
     crab submit -c crab_Dump_DATA.py
     crab status -d crab_logfile_name 
     #+END_EXAMPLE
-        - MC
         
+        - MC
     #+BEGIN_EXAMPLE
     crab submit -c crab_Dump_MC.py
     crab status -d crab_logfile_name
