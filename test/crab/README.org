@@ -1,10 +1,10 @@
 crab
 ====
 
-See details in:
+CRAB Documenation:
 
-    https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCRAB3Tutorial#CRAB_configuration_parameters
-    https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile
+    - [[https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookCRAB3Tutorial#CRAB_configuration_parameters][CRAB3 tutorial]]
+    - [[https://twiki.cern.ch/twiki/bin/view/CMSPublic/CRAB3ConfigurationFile][CRAB3 configuration file]]
 
 check if I have writing permissions:
 
