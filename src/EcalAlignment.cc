@@ -32,7 +32,11 @@
 //
 // constructors and destructor
 //
-EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig){
+EcalAlignment::EcalAlignment(const edm::ParameterSet& iConfig):
+  Token_caloTopology_(esConsumes()),
+  Token_channelStatus_(esConsumes())
+{
+  usesResource(TFileService::kSharedResource);
   edm::Service<TFileService> fs ;
   myTree_  =        fs -> make <TTree>("myTree","myTree"); 
   m_totalEvents =      fs -> make<TH1F>("totalEvents", "totalEvents", 1,  0., 1.);
@@ -277,13 +281,11 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
  ///==== save ELECTRON ====
  
  //*********** CALO TOPOLOGY
- edm::ESHandle<CaloTopology> pTopology;
- iSetup.get<CaloTopologyRecord>().get(pTopology);
+ edm::ESHandle<CaloTopology> pTopology = iSetup.getHandle(Token_caloTopology_);
  const CaloTopology *topology = pTopology.product();
 
  //*********** CHANNEL STATUS
- edm::ESHandle<EcalChannelStatus> theChannelStatus;
- iSetup.get<EcalChannelStatusRcd>().get(theChannelStatus);
+ edm::ESHandle<EcalChannelStatus> theChannelStatus = iSetup.getHandle(Token_channelStatus_);
 
  //*********** EB REC HITS
  edm::Handle<EcalRecHitCollection> recHitsEB;
@@ -340,7 +342,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   reco::GsfTrackRef eleTrack  = electron.gsfTrack () ; 
   if (debug_) std::cout << ">>> >>> electron get SC" << std::endl;
   reco::SuperClusterRef scRef = electron.superCluster();
-  const reco::SuperCluster sc;
+  reco::SuperCluster sc = *scRef;
 
   electrons_classification_ = electron.classification();
   electrons_basicClustersSize_ = electron.basicClustersSize();
@@ -361,7 +363,7 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   phiSC_ = scRef->phi();
 
   rawEnergySC_ = sc.rawEnergy();
-  std::cout<<ESC_<<"\t"<<rawEnergySC_<<std::endl;
+  //std::cout<<ESC_<<"\t"<<rawEnergySC_<<std::endl;
 
   Sigma_Phi_ = scRef->phiWidth();
   Sigma_Eta_ = scRef->etaWidth();

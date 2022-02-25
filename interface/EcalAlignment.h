@@ -30,9 +30,9 @@
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
-#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h"
 #include "FWCore/Framework/interface/ESHandle.h"
-
+#include "FWCore/Framework/interface/ESWatcher.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 
@@ -79,7 +79,7 @@
 // class declaration
 //
 
-class EcalAlignment : public edm::EDAnalyzer {
+class EcalAlignment : public edm::one::EDAnalyzer<edm::one::SharedResources> {
  public:
   explicit EcalAlignment(const edm::ParameterSet&);
   ~EcalAlignment();
@@ -110,7 +110,8 @@ class EcalAlignment : public edm::EDAnalyzer {
   edm::EDGetTokenT<EcalRecHitCollection> Token_recHitCollection_EB_;
   edm::EDGetTokenT<EcalRecHitCollection> Token_recHitCollection_EE_;
   edm::EDGetTokenT<std::vector<pat::Electron> > Token_EleTag_;
-  
+  edm::ESGetToken<CaloTopology, CaloTopologyRecord> Token_caloTopology_;
+  edm::ESGetToken<EcalChannelStatus, EcalChannelStatusRcd> Token_channelStatus_;
   
   
   
