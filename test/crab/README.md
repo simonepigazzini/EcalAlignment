@@ -13,15 +13,20 @@ check if I have writing permissions:
     crab checkwrite --site=T2_CH_CERN  --lfn=/store/user/amassiro/ECAL/
     crab checkwrite --site=T2_CH_CERN  --lfn=/store/group/dpg_ecal/alca_ecalcalib/amassiro/
 
-run
-
-    crab submit -c crab_Dump_MC.py
-    crab status    
-
-run on data
-
+- To submit CRAB jobs
+        - Data
+    
+    #+BEGIN_EXAMPLE
+    cd crab/
     crab submit -c crab_Dump_DATA.py
-    crab status    
+    #+END_EXAMPLE
+        - MC
+    #+BEGIN_EXAMPLE
+    crab submit -c crab_Dump_MC.py
+    #+END_EXAMPLE   
+    
+        - Remember to change the parameters (path to output directory, input dataset name, lumimask, run range etc.) of the crab config file before submitting jobs.
+    
 
 
 details:
