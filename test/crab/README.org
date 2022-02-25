@@ -24,7 +24,14 @@ crab checkwrite --site=T2_CH_CERN
     crab status -d crab_logfile_name
     #+END_EXAMPLE   
     
-        - Remember to change the parameters (path to output directory, input dataset name, lumimask, run range etc.) of the crab config file before submitting jobs.
+ - Remember to change the parameters (path to output directory, input dataset name, lumimask, run range etc.) of the crab config file before submitting jobs.
+ - One ntuple will be created per job. So there will be hundreds of ntuples in total. 
+ - Do
+ #+BEGIN_EXAMPLE
+hadd treeECALAlignment_merged.root /path/to/full/ntuples/produced/*.root
+ #+END_EXAMPLE
+ to merge all the ntuples to a single root file.
+        
     
 
 
