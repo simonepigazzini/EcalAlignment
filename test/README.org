@@ -35,7 +35,7 @@ root -l drawModulesMC.cxx\(\"root:/path/to/MC/root/file.root\",\"output_director
 eg: root -l drawModulesMC.cxx\(\"root:///afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/MC/MC_2018_small.root\",\"MC_bias_values\"\)
 #+END_EXAMPLE
 
-- Update the MC bias values for EB+, EB-, EE+ and EE- in align/AlignEB_Zee_cfg.py and align/AlignEE_Zee_cfg.py.
+- Update the MC bias values for EB+, EB-, EE+ and EE- in align/AlignEB_Zee_cfg.py and align/AlignEE_Zee_cfg.py before proceeding to the next step.
 
 ** Get alignment coefficients out of the trees created in the previous step
 
