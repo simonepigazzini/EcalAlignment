@@ -37,7 +37,7 @@ scramv1 b -j 8 -Werror=unused-variable
      - Dump information from the input files
      - Perform Re-Reco and then create ntuples
 
-*** Step2: Derive MC bias values of \delta \phi and \delta \eta along \eta
+*** Step2: Derive MC bias values of \delta \phi and ∆η along η
     - ∆η and ∆φ distributions in MC have a small bias along η because of the interplay between bending of electrons in the magnetic field and the tilt of crystals in SM. See run 1 documentation for more information on this
     - 
 
