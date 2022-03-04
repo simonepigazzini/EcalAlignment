@@ -87,3 +87,17 @@ Ofcourse you will need to submit crab jobs to do this step on multiple data root
 #+BEGIN_EXAMPLE
         drawSingleModule  configurationPlot_cfg.py
         #+END_EXAMPLE
+        
+** Miscellaneous
+**** Luminosity 
+    - [[https://cms-service-lumi.web.cern.ch/cms-service-lumi/brilwsdoc.html][Documentation]]
+    - export PATH=$HOME/.local/bin:/cvmfs/cms-bril.cern.ch/brilconda/bin:$PATH
+    - pip install --user brilws
+    - To determine the integrated luminosity
+    #+BEGIN_EXAMPLE
+        brilcalc lumi -u /pb -i <input json file>
+        Eg: brilcalc lumi -u /pb /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/
+    #+END_EXAMPLE
+    All the JSON files can be found here: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/
+
+
