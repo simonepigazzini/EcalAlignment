@@ -35,59 +35,14 @@ scramv1 b -j 8 -Werror=unused-variable
    - Z \rightarrow ee events are used for the alignment procedure.
    - [[file:src/EcalAlignment.cc][This]] script creates Z candidates from good quality electrons. This script can be used in 2 different ways:
      - Dump information from the input files
-     - Perform Re-Reco and then 
-EcalAlignment framework
+     - Perform Re-Reco and then create ntuples
 
-    read doc/README
-
-where:
-
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_5_3_3/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_0_6_patch1/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_0_7_patch1/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_2_1/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_1/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_3_3/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_4/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_6_patch4/src/EcalValidation/EcalAlignment  --> 2015
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_7_4_14/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_3/src/EcalValidation/EcalAlignment/
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_5/src/EcalValidation/EcalAlignment/  --> bad
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_8_0_8/src/EcalValidation/EcalAlignment/
-    /afs/cern.ch/work/a/amassiro/ECALAlignment/CMSSW_9_2_0_patch4/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_1/src/EcalValidation/EcalAlignment
-    /afs/cern.ch/user/a/amassiro/work/ECALAlignment/CMSSW_9_2_11/src/EcalValidation/EcalAlignment
+*** Step2: Derive MC bias values of \delta \phi and \delta \eta along \eta
+    - ∆η and ∆φ distributions in MC have a small bias along η because of the interplay between bending of electrons in the magnetic field and the tilt of crystals in SM. See run 1 documentation for more information on this
+    - 
 
 
-
-    kate: LXPLUS-ECALAlignment
-    xps kate: lxplus-ECAL-alignment
-
-
-
-    /home/amassiro/Cern/Code/ECAL/ECALAlignment
-    just to make plots faster in local
-
-
-to setup:
-
-    cmsrel CMSSW_10_6_8
-    cd CMSSW_10_6_8/src/
-    mkdir EcalValidation
-    cd EcalValidation
-    git clone -b forAmrutha git@github.com:NEUAnalyses/EcalAlignment.git
-
-    cmsenv
-    scramv1 b -j 8 -Werror=unused-variable
-
-        NB: the "unused variable" errors must be disabled, because are coming from CLHEP libraries loaded by geometry, I have no access to
-
-
-where alignment constants are backuped:
-
-    /afs/cern.ch/user/a/amassiro/public/ECAL_Alignment/
-
-
+    
 
 =============
 Luminosity
