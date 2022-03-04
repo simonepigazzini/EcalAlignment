@@ -74,3 +74,16 @@ eg: root -l drawModulesMC.cxx\(\"root:///afs/cern.ch/user/a/amkrishn/private/ECA
 #+END_EXAMPLE
 
 - Make sure to save the txt files with the alignment coefficients and the .db files somewhere. They should be provided to AlcaDB.
+
+** Perform RE-RECO with the new ECAL alignment conditions 
+#+BEGIN_EXAMPLE
+         cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO --conditions 101X_dataRun2_Prompt_v9 --data --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
+         cmsRun reco_RAW2DIGI_L1Reco_RECO.py
+        #+END_EXAMPLE
+        
+Ofcourse you will need to submit crab jobs to do this step on multiple data root files.
+
+** Plot ∆η and ∆φ distributions before and after alignment
+#+BEGIN_EXAMPLE
+        drawSingleModule  configurationPlot_cfg.py
+        #+END_EXAMPLE
