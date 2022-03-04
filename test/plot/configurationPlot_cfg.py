@@ -139,8 +139,8 @@ process = cms.Process("TEST")
 
 
 process.ConfigurationToDraw = cms.PSet(
-  nameInFileRoot = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
-  nameInFileRootComparison = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
+  nameInFileRoot = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),  #data after alignment
+  nameInFileRootComparison = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),  #MC
   nameOutputDir = cms.string("/eos/user/a/amkrishn/EcalAlignment"),
   commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
   specialZeroTesla = cms.untracked.int32(2),   # special binning for public
@@ -149,7 +149,8 @@ process.ConfigurationToDraw = cms.PSet(
 
   treeName = cms.untracked.string("myTree"),  
   
-#  nameInFileRootAlternative = cms.untracked.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),
+  nameInFileRootAlternative = cms.untracked.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),  #data before alignment
+
 
 )
 
