@@ -42,7 +42,8 @@ scramv1 b -j 8 -Werror=unused-variable
     - Use [[file:test/plot/drawModulesMC.cxx][this]] script to obtain these values and update /test/align/AlignEB_Zee_cfg.py and test/align/AlignEE_Zee_cfg.py accordingly.
     
 *** Step3: Perform alignment 
-    - Use bin/EB_Alignment_RotoTraslation_singleSM.cpp (or bin/EB_Alignment_RotoTraslation.cpp) and bin/EE_Alignment_RotoTraslation_singleSM.cpp (or bin/EE_Alignment_RotoTraslation.cpp) scripts to perform alignment. Output of these scripts are two text files containing values of alignment coefficients (∆x, ∆y, ∆z) for each SM and Dee.
+    - Use bin/EB_Alignment_RotoTraslation_singleSM.cpp (or bin/EB_Alignment_RotoTraslation.cpp) and bin/EE_Alignment_RotoTraslation_singleSM.cpp (or bin/EE_Alignment_RotoTraslation.cpp) scripts to perform alignment. 
+    - Output of these scripts are two text files containing values of alignment coefficients (∆x, ∆y, ∆z) for each SM and Dee.
     
 *** Step4: Validate the alignment results
     - [[file:bin/CombineRotoTraslations.cpp][Combine]] the new alignment coefficients text file with the old one.
