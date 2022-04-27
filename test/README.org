@@ -96,7 +96,7 @@ Ofcourse you will need to submit crab jobs to do this step on multiple data root
     - To determine the integrated luminosity
     #+BEGIN_EXAMPLE
         brilcalc lumi -u /pb -i <input json file>
-        Eg: brilcalc lumi -u /pb /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/
+        Eg: brilcalc lumi -u /pb -i /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions18/13TeV/PromptReco/
     #+END_EXAMPLE
     All JSON files can be found here: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/
     
