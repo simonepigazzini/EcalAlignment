@@ -89,7 +89,7 @@ Ofcourse you will need to submit crab jobs to do this step on multiple data root
         #+END_EXAMPLE
         
 ** Miscellaneous
-**** Luminosity 
+*** Luminosity 
     - [[https://cms-service-lumi.web.cern.ch/cms-service-lumi/brilwsdoc.html][Documentation]]
     - export PATH=$HOME/.local/bin:/cvmfs/cms-bril.cern.ch/brilconda/bin:$PATH
     - pip install --user brilws
@@ -100,5 +100,38 @@ Ofcourse you will need to submit crab jobs to do this step on multiple data root
     #+END_EXAMPLE
     All JSON files can be found here: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/
     
+    *** CondDB
+    - Example on how to view the contents of the sqlite files you created:
+        - command:
+    #+BEGIN_EXAMPLE
+        conddb --db EBAlign_test.db listTags
+    #+END_EXAMPLE
+        - output:
+    #+BEGIN_EXAMPLE
+    
+        [2021-10-05 16:23:40,759] INFO: Connecting to EBAlign_test.db [sqlite:///EBAlign_test.db]
+Name                              TimeType  ObjectType  Synchronisation  EndOfValidity  Insertion_time              Description  
+--------------------------------  --------  ----------  ---------------  -------------  --------------------------  -----------  
+EBAlignment_measured_v05_offline  Run       Alignments  any              -1             2021-10-05 14:02:23.319116  New Tag    
+
+    #+END_EXAMPLE
+        - command:
+    #+BEGIN_EXAMPLE
+        conddb --db EBAlign_test.db list EBAlignment_measured_v05_offline
+    #+END_EXAMPLE
+        - output:
+    #+BEGIN_EXAMPLE
+  [2021-10-05 16:24:29,629] INFO: Connecting to EBAlign_test.db [sqlite:///EBAlign_test.db]
+[2021-10-05 16:24:29,791] INFO: Listing with a limit of 500 IOVs, starting from the highest since. If you need to see more, please increase the limit of returned results.
+Since: Run   Insertion Time              Payload                                   Object Type  
+-----------  --------------------------  ----------------------------------------  -----------  
+1            2021-10-05 14:02:23.319140  65733778ae8bed9464556f7f76da78d9fee2188f  Alignments   
+
+    #+END_EXAMPLE
+    
+   #+BEGIN_EXAMPLE
+        conddb --db EBAlign_test.db dump 65733778ae8bed9464556f7f76da78d9fee2188f >> dump.txt
+    #+END_EXAMPLE 
+    dump.txt should contain the contents of your .db file.
 
 
