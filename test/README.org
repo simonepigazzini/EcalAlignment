@@ -100,13 +100,13 @@ Ofcourse you will need to submit crab jobs to do this step on multiple data root
     #+END_EXAMPLE
     All JSON files can be found here: /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/
     
-    *** CondDB
-    - Example on how to view the contents of the sqlite files you created:
-        - command:
+*** CondDB
+    - Example on how to view the contents of the sqlite files you created: \\
+     command:
     #+BEGIN_EXAMPLE
         conddb --db EBAlign_test.db listTags
     #+END_EXAMPLE
-        - output:
+     output:
     #+BEGIN_EXAMPLE
     
         [2021-10-05 16:23:40,759] INFO: Connecting to EBAlign_test.db [sqlite:///EBAlign_test.db]
@@ -115,11 +115,11 @@ Name                              TimeType  ObjectType  Synchronisation  EndOfVa
 EBAlignment_measured_v05_offline  Run       Alignments  any              -1             2021-10-05 14:02:23.319116  New Tag    
 
     #+END_EXAMPLE
-        - command:
+     command:
     #+BEGIN_EXAMPLE
         conddb --db EBAlign_test.db list EBAlignment_measured_v05_offline
     #+END_EXAMPLE
-        - output:
+     output:
     #+BEGIN_EXAMPLE
   [2021-10-05 16:24:29,629] INFO: Connecting to EBAlign_test.db [sqlite:///EBAlign_test.db]
 [2021-10-05 16:24:29,791] INFO: Listing with a limit of 500 IOVs, starting from the highest since. If you need to see more, please increase the limit of returned results.
@@ -128,7 +128,7 @@ Since: Run   Insertion Time              Payload                                
 1            2021-10-05 14:02:23.319140  65733778ae8bed9464556f7f76da78d9fee2188f  Alignments   
 
     #+END_EXAMPLE
-    
+    Finally,
    #+BEGIN_EXAMPLE
         conddb --db EBAlign_test.db dump 65733778ae8bed9464556f7f76da78d9fee2188f >> dump.txt
     #+END_EXAMPLE 
