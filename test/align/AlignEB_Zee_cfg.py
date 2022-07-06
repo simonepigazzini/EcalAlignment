@@ -38,26 +38,28 @@ process.inputTree = cms.PSet(
 # DPhi values are different for electrons and positrons because of their opposite bending in the Phi direction under the magnetic field
 # DEta values follow the sequence: EB+, EE+, EB-, EE-
 # DPhi values follow the sequence: [Positron: EB+, EE+, EB-, EE-], [Electron: EB+, EE+, EB-, EE-]
-DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.000146944) \
-                                   +(x>1.5)           * (-0.000252088)    \
-                                   +(x<0.0 && x>-1.5) * (0.00022965)    \
-                                   +(x<-1.5)          * (0.00022965) \
+# x = eta, y = charge
+
+    DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.000170933)\
+                                   +(x>1.5)           * (-0.000438338)    \
+                                   +(x<0.0 && x>-1.5) * (0.000180109)    \
+                                   +(x<-1.5)          * (0.00042374) \
                                    + y*0"),
 
   DphiBias = cms.untracked.string(" (y>0)*    \
-                                  ((x>0.0 && x<1.5)   * (0.000772008)  \
-                                 + (x>1.5)            * (5.94356e-05)  \
-                                 + (x<0.0 && x>-1.5)  * (0.000133081)  \
-                                 + (x<-1.5)           * (0.000133081)) \
+                                  ((x>0.0 && x<1.5)   * (0.000931704)  \
+                                 + (x>1.5)            * (1.76616e-05)  \
+                                 + (x<0.0 && x>-1.5)  * (0.000265959)  \
+                                 + (x<-1.5)           * (-0.000136237)) \
                                  + (y<0)*   \
-                                   ((x>0.0 && x<1.5)   * (-6.74691e-05) \
-                                 + (x>1.5)             * (-0.000152649) \
-                                 + (x<0.0 && x>-1.5)  * (-9.07622e-05)  \
-                                 + (x<-1.5)           * (-9.07622e-05))"),
+                                   ((x>0.0 && x<1.5)   * (-0.000184643) \
+                                 + (x>1.5)             * (0.000427552) \
+                                 + (x<0.0 && x>-1.5)  * (-0.000838635)  \
+                                 + (x<-1.5)           * (0.000408662))"),
   ## change input file appropriately
   inputFiles    = cms.vstring(
       #    'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
-    #  'file:/afs/cern.ch/user/a/amkrishn/private/ECAL_Alignment/data/test_forAmrutha.root'
+#      'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/*.root'
 
 'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
 
@@ -66,5 +68,5 @@ DetaBias = cms.untracked.string(" (x>0.0 && x<1.5)  * (-0.000146944) \
 
 
 process.outputTree = cms.PSet(
-   outputFile = cms.string("EBAlignment_test")
+   outputFile = cms.string("EBAlignmentCoefficients.txt")
 )
