@@ -34,13 +34,13 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100),
+    input = cms.untracked.int32(-1),
     output = cms.optional.untracked.allowed(cms.int32,cms.PSet)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/data/Run2022B/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/355/381/00000/83cd8150-e426-4809-9af6-635b24fefc67.root'),
+    fileNames = cms.untracked.vstring('/store/data/Run2022B/EGamma/RAW-RECO/ZElectron-PromptReco-v1/000/355/680/00000/f94fc5bf-3509-4501-ba6a-9dcb930cbd8a.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
