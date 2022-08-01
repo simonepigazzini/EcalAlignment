@@ -57,7 +57,38 @@ process.inputTree = cms.PSet(
   inputFiles    = cms.vstring(
          # 'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
 
-  'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/*.root'
+
+
+  
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355680/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355381/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355558/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355456/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355208/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355679/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355678/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355671/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355631/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355630/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355629/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355628/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355627/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355559/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355552/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355463/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355457/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355455/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355454/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355453/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355445/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355444/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355443/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355442/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355441/ecal_alignment_0.root',
+  #'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/355439/ecal_alignment_0.root'
+
+#'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECALalignment2022run3Commisioning/data/EGamma/crab_EcalAlignment_RERECO/220719_092417/0000/treeECALAlignment_run3Commissioning.root'
+'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECALalignment2022run3Commisioning/data/automationOutputHadd/treeECALAlignment_run3Commissioning_2022C.root'
 # 'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
 
     )
@@ -65,5 +96,5 @@ process.inputTree = cms.PSet(
 
 
 process.outputTree = cms.PSet(
-  outputFile = cms.string("EEAlignmentCoefficients.txt")
+  outputFile = cms.string("EEAlignmentCoefficients")
 )

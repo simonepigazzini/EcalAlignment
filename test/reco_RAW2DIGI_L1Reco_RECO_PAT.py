@@ -99,15 +99,15 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run3_data_prompt', '')
 
-# process.GlobalTag.toGet = cms.VPSet(
-#
-#
-#                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
-#                                     tag = cms.string("EEAlignment_measured_v05_offline"),
-#                                     connect = cms.string("sqlite_file:EEAlign_2018_post4Jun.db")
-#                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
-# #                                    connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
-#                                     ),
+process.GlobalTag.toGet = cms.VPSet(
+
+
+                                     cms.PSet(record = cms.string("EEAlignmentRcd"),
+                                     tag = cms.string("EEAlignment_measured_run3_v0_offline"),
+                                     connect = cms.string("sqlite_file:EEAlign_run3_v0.db")
+                                              #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
+                                    #connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
+                                   ),
 #
 #
 #                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
@@ -120,7 +120,7 @@ process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run3_data_prompt', '')
 #                                     #EcalPedestals_Legacy2017_time_v1
 #                                     #EcalPulseShapes_October2017_rereco_v1
 #
-# )
+ )
 
 
 # Path and EndPath definitions
