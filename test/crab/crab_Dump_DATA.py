@@ -12,7 +12,7 @@ config.JobType.psetName = '../rereco_cfg.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.outputFiles = ['treeECALAlignment.root']
 config.JobType.pyCfgParams = ['inputFiles=FAKEINPUT', 'outputFile=treeECALAlignment.root']
-#config.JobType.maxMemoryMB = 3000 
+config.JobType.maxMemoryMB = 3000 
 config.JobType.inputFiles = ['EEAlign_run3_v0.db','EEAlign_run3_v0.db']
 #config.JobType.priority = 30
 #config.JobType.numCores = 2
