@@ -449,6 +449,34 @@ int main(int argc, char** argv) {
  }
  
  outFile.close(); 
+
+ ///==== dump results ====
+ 
+ std::ofstream outFile2;
+ TString fileNamebis = Form ("%s.bis",nameFileOut.c_str());
+ outFile2.open (fileNamebis.Data());
+ //  outFile2 << "dphi   dtheta   dpsi   dx   dy  dz  errdphi   errdtheta   errdpsi   errdx  errdy  errdz  " << std::endl;
+ 
+ for (int iSC = whichSC; iSC<(whichSC+1); iSC++){
+  outFile2 << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SM_Mean[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SM_Mean[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPSIe_SM_Mean[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DX_SM_Mean[iSM] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SM_Mean[iSM] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SM_Mean[iSM] << " "
+
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SM_RMS[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SM_RMS[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPSIe_SM_RMS[iSM] << " " 
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DX_SM_RMS[iSM] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DY_SM_RMS[iSM] << " "
+  << std::setfill(' ') << std::setw(10) << std::setprecision(5) << 100*DZ_SM_RMS[iSM] << " "
+
+  << std::endl;
+ }
+ 
+ outFile2.close(); 
  
 }
 

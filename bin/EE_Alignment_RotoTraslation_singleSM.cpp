@@ -408,7 +408,7 @@ int main(int argc, char** argv) {
  std::ofstream outFile2;
  TString fileNamebis = Form ("%s.bis",nameFileOut.c_str());
  outFile2.open (fileNamebis.Data());
- //  outFile << "#SC  dx   errdx   dy   errdy   dz   errdz  " << std::endl;
+ //  outFile2 << "dphi   dtheta   dpsi   dx   dy  dz  errdphi   errdtheta   errdpsi   errdx  errdy  errdz  " << std::endl;
  
  for (int iSC = whichSC; iSC<(whichSC+1); iSC++){
   outFile2 << " " 
