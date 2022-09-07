@@ -2,150 +2,15 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("TEST")
 
-# scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/May25/MC/ECAL_DYMC.root  /tmp/amassiro/
-# scp amassiro@cmsneu.cern.ch:/media/data/amassiro/ECALalignment/2016/May25/MC/ECAL_DYMC_small.root    /tmp/amassiro/
-# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/MC07May2016/DYToEE_NNPDF30_13TeV-powheg-pythia8/ECAL_DYMC_small.root    /tmp/amassiro/ 
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_noECAL_newTrk_24Nov.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_NewTrk_NewPix_ZeroECAL_27May"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_25Nov.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_NewTrk_NewPix_NewECAL_27May"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_28Nov.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_NewTrk_NewPix_NewECAL_EEfix_28May"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_29May.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_NewTrk_NewPix_NewECAL_EEfix_SignFix_29May"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_oldECAL_newTrk_30May.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_oldECAL_newTrk_30May"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun_newJSON"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(0),
-#)
-
-
-
-
-################################################################
-# Pre-filter
-#
-# TFile *f1 = new TFile("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON.root");
-# TTree *ntuple = (TTree*) f1->Get("ntupleEcalAlignment/myTree");
-# TFile *f2 = new TFile("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root","recreate");
-# TTree *small = ntuple->CopyTree("(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) ) && electrons_classification==0 && ETSC>20 && mll<95 && mll>85");
-# small->Write();
-# .q
-#
-#
-# TFile *f1 = new TFile("/tmp/amassiro/data_oldECAL_newTrk_30May.root");
-# TTree *ntuple = (TTree*) f1->Get("ntupleEcalAlignment/myTree");
-# TFile *f2 = new TFile("/tmp/amassiro/data_oldECAL_newTrk_30May_small.root","recreate");
-# TTree *small = ntuple->CopyTree("(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) ) && electrons_classification==0 && ETSC>20 && mll<95 && mll>85");
-# small->Write();
-# .q
-#
-#
-#
-################################################################
-#
-#
-# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_newTrk2016_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root   /tmp/amassiro/ 
-# cp /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May28AlignmentEEEB_newTrk2016_oldECALfrom2015/DoubleEG/data_oldECAL_newTrk_30May_small.root   /tmp/amassiro/ 
-#
-#
-
-#process.ConfigurationToDraw = cms.PSet(
-  #nameInFileRoot = cms.string("/tmp/amassiro/data_newECAL_newTrk_EEfix_SignOk_30May_andNewEB_newJSON_small.root"),
-  #nameInFileRootComparison = cms.string("/tmp/amassiro/ECAL_DYMC_small.root"),
-  #nameOutputDir = cms.string("2016TCodeCompiled_newECAL_newTrk_1Jun_newJSON_forPublic"),
-  #commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  #specialZeroTesla = cms.untracked.int32(2),   # special binning for public
-
-  #onlyRMS = cms.untracked.int32(1),   # special for public to show only RMS
-
-  #treeName = cms.untracked.string("myTree"),  
-  
-  #nameInFileRootAlternative = cms.untracked.string("/tmp/amassiro/data_oldECAL_newTrk_30May_small.root"),
-
-#)
-
-
-
-
-################################################################
-# Pre-filter
-#
-#TFile *f1 = new TFile("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON.root");
-#TTree *ntuple = (TTree*) f1->Get("ntupleEcalAlignment/myTree");
-#TFile *f2 = new TFile("/tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root","recreate");
-#TTree *small = ntuple->CopyTree("(electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) ) && electrons_classification==0 && ETSC>20 && mll<95 && mll>85");
-#small->Write();
-#.q
-#
-# 
-################################################################
-#
-# cp /tmp/amassiro/data_newECAL_oldTrk_newECAL_signFix_andNewEB_newJSON_small.root /tmp/amassiro/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amassiro/ECALAlignment/2016/May31AlignmentEEEB_oldTrk_newECAL_signFix_andNewEB_newJSON/DoubleEG/crab_DoubleElectron/160610_113435/
-#
-#
-
 
 process.ConfigurationToDraw = cms.PSet(
-  nameInFileRoot = cms.string("/afs/cern.ch/user/a/amkrishn/public/EcalAlignment_MC/MC_2018_small.root"),  #data after alignment
+  nameInFileRoot = cms.string("/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECALalignment2022run3Commisioning/data/2022C/EGamma/crab_EcalAlignment_RERECO_2022C_with_rotationEE/220812_190006/0000/treeECALAlignment_run3_withRotationEE.root"),  #data after alignment
   nameInFileRootComparison = cms.string("/eos/cms/store/group/dpg_ecal/alca_ecalcalib/amkrishn/ECALalignment2022run3Commisioning/MC/DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8/crab_MC_2022_Run3commisioning/220705_182016/0000/treeECALAlignment_MC2022.root"),  #MC
-  nameOutputDir = cms.string("/eos/user/a/amkrishn/www/EcalAlignment/MC2022_run3Commisioning/validation_plots/"),  #output directory
-  commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<95 && mll>85"),
-  specialZeroTesla = cms.untracked.int32(2),   # special binning for public
+    nameOutputDir = cms.string("/eos/user/a/amkrishn/www/EcalAlignment/MC2022_run3Commisioning/validation_plots/with_rotationEE/test"),  #output directory
+  commonCut = cms.string("electrons_classification==0 && ETSC>20 && mll<100 && mll>80"),
+    specialZeroTesla = cms.untracked.int32(2),   # 2 = special binning for public
 
-  onlyRMS = cms.untracked.int32(1),   # special for public to show only RMS
+    onlyRMS = cms.untracked.int32(1),   # 1 = special for public to show only RMS
 
   treeName = cms.untracked.string("ntupleEcalAlignment/myTree"),  
   

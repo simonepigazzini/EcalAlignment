@@ -4,11 +4,11 @@ process = cms.Process("ECALAlignent")
 process.load("CalibCalorimetry.EcalTrivialCondModules.EcalTrivialCondRetriever_cfi")
 
 process.EcalTrivialConditionRetriever.getEEAlignmentFromFile = cms.untracked.bool(True)
-process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/EEAlignmentCoefficients_run3_v0.txt') ## ## Link to the txt file containing the EE coefficient (result of CombineRotoTraslations)
+process.EcalTrivialConditionRetriever.EEAlignmentFile = cms.untracked.string('EcalValidation/EcalAlignment/EEAlignmentCoefficients_run3_v4.txt') ## ## Link to the txt file containing the EE coefficient (result of CombineRotoTraslations)
 
 process.load("CondCore.DBCommon.CondDBCommon_cfi")
 
-process.CondDBCommon.connect = 'sqlite_file:EEAlign_run3_v0.db' ## name of output .db file
+process.CondDBCommon.connect = 'sqlite_file:EEAlign_run3_v4.db' ## name of output .db file
 
 process.MessageLogger = cms.Service("MessageLogger",
     debugModules = cms.untracked.vstring('*'),
@@ -28,7 +28,7 @@ process.PoolDBOutputService = cms.Service("PoolDBOutputService",
     toPut = cms.VPSet(
        cms.PSet(
           record = cms.string('EEAlignmentRcd'),
-          tag = cms.string('EEAlignment_measured_run3_v0_offline')
+          tag = cms.string('EEAlignment_measured_run3_v4_offline')
        )
     )
 )
