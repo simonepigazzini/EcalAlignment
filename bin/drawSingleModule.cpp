@@ -36,7 +36,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (specialZeroTesla == 0) tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
  else                       tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.Data());
 
- 
+ //tempCut = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.Data());
  
  if (isMC == 0) {
   commonCut = tempCut;
@@ -75,12 +75,20 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  TH1F* DPhiMC_em;
  if (specialZeroTesla == 2) DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_em  = new TH1F("DPhiMC_em",  " MC"  ,200,-0.02,0.02);
-  
+
+ /* 
  TH1F* DEtaMC;
  if      (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
  else if (specialZeroTesla == 2) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,60,-0.010,0.010);
  else                            DEtaMC = new TH1F("DEtaMC"     ," MC"  ,150,-0.025,0.025);
- 
+ */
+
+TH1F* DEtaMC;
+ if      (specialZeroTesla == 0) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,120,-0.010,0.010);
+ else if (specialZeroTesla == 2) DEtaMC = new TH1F("DEtaMC"     ," MC"  ,60,-0.010,0.010);
+ else                            DEtaMC = new TH1F("DEtaMC"     ," MC"  ,120,-0.010,0.010);
+
+
  TH1F* DPhiMC_ref;
  if      (specialZeroTesla == 0) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,200,-0.02,0.02);
  else if (specialZeroTesla == 2) DPhiMC_ref = new TH1F("DPhiMC_ref"     ," MC"  ,100,-0.02,0.02);
@@ -93,10 +101,17 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  if (specialZeroTesla == 2) DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,50,-0.02,0.02);
  else                       DPhiMC_ref_em  = new TH1F("DPhiMC_ref_em",  " MC"  ,100,-0.02,0.02);
  
+ /*
  TH1F* DEtaMC_ref;
  if      (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
  else if (specialZeroTesla == 2) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,60,-0.010,0.010);
  else                            DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,150,-0.025,0.025);
+ */
+
+ TH1F* DEtaMC_ref;
+ if      (specialZeroTesla == 0) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,120,-0.010,0.010);
+ else if (specialZeroTesla == 2) DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,60,-0.010,0.010);
+ else                            DEtaMC_ref = new TH1F("DEtaMC_ref"     ," MC"  ,120,-0.010,0.010);
  
 
  TH1F* DPhiMC_alt;
@@ -221,16 +236,18 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  
  
  //---- output txt file
- std::ofstream myfile;
- TString nameResults;
- if (isMC) {
-  nameResults = Form ("%s/MC.txt", nameOutputDir.Data()); 
- }
- else {
+ std::ofstream myfile, myfileMC;
+ TString nameResults, nameResultsMC;
+ //if (isMC) {
+  nameResultsMC = Form ("%s/MC.txt", nameOutputDir.Data()); 
+ //}
+ //else {
   nameResults = Form ("%s/DATA.txt", nameOutputDir.Data());   
- }
+ //}
  myfile.open(nameResults.Data(),std::ios::out | std::ios::app); 
  myfile << iEB << " " << iEE << " ";
+ myfileMC.open(nameResultsMC.Data(),std::ios::out | std::ios::app); 
+ myfileMC << iEB << " " << iEE << " ";
  
  
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
@@ -245,21 +262,57 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  tinfoDPhi->Draw();
  legend->Draw();
  // writing the lumi information and the CMS "logo"
- CMS_lumi( cDPhi, 4, 10 );
+ CMS_lumi( cDPhi, 0, 10 );
 //  cDPhi->SetGrid();
  gPad->Update();
 //  gPad->SetGrid();
- toDoShell = Form("%s/images/cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+std::string label;
+if(iEB != -100){
+  label = "SM";
+  toDoShell = Form("%s/images/cDphi_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(iEE != -100){
+  label = "Dee";
+  toDoShell = Form("%s/images/cDphi_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(specialRegions != 0){
+  if(specialRegions == 1) label = "EB+";
+  if(specialRegions == 2) label = "EB-";
+  if(specialRegions == 3) label = "EE+";
+  if(specialRegions == 4) label = "EE-";
+  if(specialRegions == 5) label = "EB";
+  if(specialRegions == 6) label = "EE";
+  
+  toDoShell = Form("%s/images/cDphi_%s.png",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s.pdf",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_%s.C",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+}
+
+/* toDoShell = Form("%s/images/cDphi_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
- myfile << DPhiMC->GetMean() << " " << DPhiMC->GetRMS() << " " << DPhiMC->GetEntries() << "      ";
+*/
 
- 
- 
- 
+ myfile << DPhiMC->GetMean() << " " << DPhiMC->GetRMS() << " " << DPhiMC->GetEntries() << "      "; 
+ myfileMC << DPhiMC_ref->GetMean() << " " << DPhiMC_ref->GetRMS() << " " << DPhiMC_ref->GetEntries() << "      "; 
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
@@ -272,16 +325,54 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  tinfoDPhi_ref_ep->Draw();
  tinfoDPhi_ep->Draw();
  legend->Draw();
- CMS_lumi( cDPhi_ep, 4, 10 );
+ CMS_lumi( cDPhi_ep, 0, 10 );
 //  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+
+if(iEB != -100){
+  label = "SM";
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(iEE != -100){
+  label = "Dee";
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(specialRegions != 0){
+  if(specialRegions == 1) label = "EB+";
+  if(specialRegions == 2) label = "EB-";
+  if(specialRegions == 3) label = "EE+";
+  if(specialRegions == 4) label = "EE-";
+  if(specialRegions == 5) label = "EB";
+  if(specialRegions == 6) label = "EE";
+  
+  toDoShell = Form("%s/images/cDphi_ep_%s.png",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s.pdf",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_ep_%s.C",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+}
+/* toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_ep_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
- myfile << DPhiMC_ep->GetMean() << " " << DPhiMC_ep->GetRMS() << " " << DPhiMC_ep->GetEntries() << "      ";
- 
+ */
+ myfile << DPhiMC_ep->GetMean() << " " << DPhiMC_ep->GetRMS() << " " << DPhiMC_ep->GetEntries() << "      "; 
+ myfileMC << DPhiMC_ref_ep->GetMean() << " " << DPhiMC_ref_ep->GetRMS() << " " << DPhiMC_ref_ep->GetEntries() << "      "; 
+
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
  DPhiMC_em->GetYaxis()->SetRangeUser( 0, ScaleAxis *  DPhiMC_em->GetMaximum() );
@@ -293,21 +384,53 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  tinfoDPhi_ref_em->Draw();
  tinfoDPhi_em->Draw();
  legend->Draw();
- CMS_lumi( cDPhi_em, 4, 10 );
+ CMS_lumi( cDPhi_em, 0, 10 );
 //  gPad->SetGrid();
- toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+
+if(iEB != -100){
+  label = "SM";
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(iEE != -100){
+  label = "Dee";
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(specialRegions != 0){
+  if(specialRegions == 1) label = "EB+";
+  if(specialRegions == 2) label = "EB-";
+  if(specialRegions == 3) label = "EE+";
+  if(specialRegions == 4) label = "EE-";
+  if(specialRegions == 5) label = "EB";
+  if(specialRegions == 6) label = "EE";
+  
+  toDoShell = Form("%s/images/cDphi_em_%s.png",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s.pdf",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDphi_em_%s.C",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+}
+
+/* toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDPhi_em_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- myfile << DPhiMC_em->GetMean() << " " << DPhiMC_em->GetRMS() << " " << DPhiMC_em->GetEntries() << "      ";
- 
- 
- 
- 
- 
- 
+ gPad->SaveAs(toDoShell.Data()); */
+ myfile << DPhiMC_em->GetMean() << " " << DPhiMC_em->GetRMS() << " " << DPhiMC_em->GetEntries() << "      ";  
+ myfileMC << DPhiMC_ref_em->GetMean() << " " << DPhiMC_ref_em->GetRMS() << " " << DPhiMC_ref_em->GetEntries() << "      "; 
  
  
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
@@ -323,16 +446,55 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  legend->Draw();
 //  cDEta->SetGrid();
  gPad->Update();
- CMS_lumi( cDEta, 4, 10 );
- toDoShell = Form("%s/images/cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
+ CMS_lumi( cDEta, 0, 10 );
+
+
+if(iEB != -100){
+  label = "SM";
+  toDoShell = Form("%s/images/cDEta_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEB);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(iEE != -100){
+  label = "Dee";
+  toDoShell = Form("%s/images/cDEta_%s_%d.png",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s_%d.pdf",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s_%d.C",nameOutputDir.Data(), label.c_str(),iEE);
+  gPad->SaveAs(toDoShell.Data());
+}
+
+if(specialRegions != 0){
+  if(specialRegions == 1) label = "EB+";
+  if(specialRegions == 2) label = "EB-";
+  if(specialRegions == 3) label = "EE+";
+  if(specialRegions == 4) label = "EE-";
+  if(specialRegions == 5) label = "EB";
+  if(specialRegions == 6) label = "EE";
+  
+  toDoShell = Form("%s/images/cDEta_%s.png",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s.pdf",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+  toDoShell = Form("%s/images/cDEta_%s.C",nameOutputDir.Data(), label.c_str());
+  gPad->SaveAs(toDoShell.Data());
+}
+
+
+ /*toDoShell = Form("%s/images/cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDEta_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/cDEta_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
- gPad->SaveAs(toDoShell.Data());
- myfile << DEtaMC->GetMean() << " " << DEtaMC->GetRMS() << " " << DEtaMC->GetEntries() << "      ";
- 
- 
+ gPad->SaveAs(toDoShell.Data()); */
+ myfile << DEtaMC->GetMean() << " " << DEtaMC->GetRMS() << " " << DEtaMC->GetEntries() << "      ";  
+ myfileMC << DEtaMC_ref->GetMean() << " " << DEtaMC_ref->GetRMS() << " " << DEtaMC_ref->GetEntries() << "      "; 
+ /*
  
  //---------------------------------
  //---- now without the numbers ----
@@ -373,7 +535,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDphi_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
- CMS_lumi( cDPhi, 4, 10 );
+ CMS_lumi( cDPhi, 0, 10 );
 //  cDPhi->SetGrid(); 
  gPad->Update();
  
@@ -385,7 +547,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_ep->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_ep->Draw("PE same"); }
  legendNoNumber->Draw();
- CMS_lumi( cDPhi_ep, 4, 10 );
+ CMS_lumi( cDPhi_ep, 0, 10 );
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_ep_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -402,7 +564,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  DPhiMC_em->Draw("PE same");
  if (InFileAlternative != 0) { DPhiMC_alt_em->Draw("PE same"); }
  legendNoNumber->Draw();
- CMS_lumi( cDPhi_em, 4, 10 );
+ CMS_lumi( cDPhi_em, 0, 10 );
 //  gPad->SetGrid();
  toDoShell = Form("%s/images/noNumbers_cDPhi_em_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
@@ -422,7 +584,7 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  legendNoNumber->Draw();
 //  cDEta->SetGrid();
  gPad->Update();
- CMS_lumi( cDEta, 4, 10 );
+ CMS_lumi( cDEta, 0, 10 );
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.png",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.pdf",nameOutputDir.Data(), iEB, iEE, specialRegions);
@@ -430,19 +592,17 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
  toDoShell = Form("%s/images/noNumbers_cDEta_%d_%d_%d.C",nameOutputDir.Data(), iEB, iEE, specialRegions);
  gPad->SaveAs(toDoShell.Data());
  
+  
  
- 
- 
- 
- 
- 
- 
+ */
  
  
  
  
  myfile << std::endl;
  myfile.close(); 
+ myfileMC << std::endl;
+ myfileMC.close(); 
  //--- output text file (end)
  
  
@@ -532,7 +692,7 @@ int main(int argc, char** argv) {
   TString tempCut_data;
   if (specialZeroTesla == 0) tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.c_str());
   else                       tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.c_str());
-  
+  //tempCut_data = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.c_str());
   
   InFile->SetEntryList(0); 
   InFile->Draw(">> myList",tempCut_data.Data(),"entrylist");
@@ -581,7 +741,7 @@ int main(int argc, char** argv) {
   //---- EE
   for (int iEE = 0; iEE <4; iEE++) {
     if (nameInFileRootAlternative != "NONE") {
-      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, InFileAlternative);
+      drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, InFileAlternative, onlyRMS);
     }
     else {
       drawSingleModule(InFile, InFileComparison, nameOutputDir, commonCut, -100, iEE, 0, 0, specialZeroTesla, 0, onlyRMS);
