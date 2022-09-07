@@ -33,7 +33,7 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10),
+    input = cms.untracked.int32(-1),
     output = cms.optional.untracked.allowed(cms.int32,cms.PSet)
 )
 
@@ -97,26 +97,26 @@ process.RECOSIMoutput = cms.OutputModule("PoolOutputModule",
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run3_data_prompt', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '124X_dataRun3_Prompt_v4', '')
 
 
 process.GlobalTag.toGet = cms.VPSet(
 
 
                                      cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                     tag = cms.string("EEAlignment_measured_run3_v0_offline"),
-                                     connect = cms.string("sqlite_file:EEAlign_run3_v0.db")
+                                     tag = cms.string("EEAlignment_measured_run3_v4_offline"),
+                                     connect = cms.string("sqlite_file:EEAlign_run3_v4.db")
                                               #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")
                                     #connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")
                                    ),
 #
 #
-#                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
-#                                     tag = cms.string("EBAlignment_measured_v05_offline"),
-#                                     connect = cms.string("sqlite_file:EBAlign_2018_post4Jun.db")
+                                     cms.PSet(record = cms.string("EBAlignmentRcd"),
+                                     tag = cms.string("EBAlignment_measured_run3_v0_offline"),
+                                     connect = cms.string("sqlite_file:EBAlign_run3_v0.db")
 #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")
-#                                              ),
-#
+                                              ),
+
 #
 #                                     #EcalPedestals_Legacy2017_time_v1
 #                                     #EcalPulseShapes_October2017_rereco_v1
@@ -163,10 +163,72 @@ process.endjob_step = cms.EndPath(process.endOfProcess)
 process.RECOSIMoutput_step = cms.EndPath(process.RECOSIMoutput)
 
 
+##################################
+#### costumization for Stage2 ####
+
+from HLTrigger.Configuration.customizeHLTforALL import customizeHLTforAll
+#process = customizeHLTforAll(process,"GRun",_customInfo)
+
+from HLTrigger.Configuration.customizeHLTforCMSSW import customizeHLTforCMSSW
+process = customizeHLTforCMSSW(process,"GRun")
+
+
 ################################################################################
 ################################################################################
 ################################################################################
 ################## create ntuple for ECAL alignment purposes ###################
+
+
+#--------------------------
+#Define PAT sequence
+#--------------------------
+
+# Standard PAT Configuration File
+process.load("PhysicsTools.PatAlgos.patSequences_cff")
+process.patElectrons.addElectronID = cms.bool(False)
+
+# ---- remove MC references ----
+
+from PhysicsTools.PatAlgos.tools.coreTools import removeMCMatching
+removeMCMatching(process, ['All'], outputModules=[], postfix="")
+#removeMCMatching(process, ['All'])
+
+#process.makePatElectrons.remove(process.electronMatch)
+#process.makePatMuons.remove(process.muonMatch)
+
+
+
+
+#process.patCandidates.remove(process.makePatTaus)
+#process.makePatTaus.remove(process.tauMatch)
+#process.makePatTaus.remove(process.tauGenJets)
+#process.makePatTaus.remove(process.tauGenJetsSelectorAllHadrons)
+#process.makePatTaus.remove(process.tauGenJetMatch)
+process.cleanPatTaus.preselection = cms.string('tauID("decayModeFinding") > 0.5 & tauID("byLooseCombinedIsolationDeltaBetaCorr3Hits") > 0.5 & tauID("againstMuonTight3") > 0.5 ')
+
+
+process.patMETs.addGenMET = cms.bool(False)
+
+
+#process.makePatJets.remove(process.patJetPartonMatch)
+#process.makePatJets.remove(process.patJetGenJetMatch)
+#process.makePatJets.remove(process.patJetFlavourIdLegacy)
+#process.makePatJets.remove(process.patJetFlavourId)
+
+
+#process.makePatPhotons.remove(process.photonMatch)
+#process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourIdLegacy+process.patJetFlavourId
+
+#from PhysicsTools.PatAlgos.tools.coreTools import *
+#removeMCMatching(process, names=['All'], outputModules=[])
+#process.patMuons.embedGenMatch = cms.bool(False)
+#process.makePatElectrons.remove(process.electronMatch)
+#process.makePatMuons.remove(process.muonMatch)
+
+#process.options.allowUnscheduled = cms.untracked.bool(False)
+process.options.allowUnscheduled = cms.untracked.bool(True)
+
+
 
 #--------------------------
 # AllPassFilter
