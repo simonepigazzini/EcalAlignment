@@ -457,7 +457,7 @@ int main(int argc, char** argv) {
  outFile2.open (fileNamebis.Data());
  //  outFile2 << "dphi   dtheta   dpsi   dx   dy  dz  errdphi   errdtheta   errdpsi   errdx  errdy  errdz  " << std::endl;
  
- for (int iSC = whichSC; iSC<(whichSC+1); iSC++){
+ for (int iSM = whichSM; iSM<(whichSM+1); iSM++){
   outFile2 << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DPHIe_SM_Mean[iSM] << " " 
   << std::setfill(' ') << std::setw(10) << std::setprecision(5) << DTHETAe_SM_Mean[iSM] << " " 
