@@ -35,7 +35,7 @@ process.configurationMetadata = cms.untracked.PSet(
     name = cms.untracked.string('PyReleaseValidation')
 )
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(-1)
+    input = cms.untracked.int32(10)
 )
 process.options = cms.untracked.PSet(
 
@@ -88,7 +88,7 @@ process.source = cms.Source("PoolSource",
 #process.GlobalTag.globaltag = 'MCRUN2_74_V9::All'
 #process.GlobalTag.globaltag = '80X_mcRun2_asymptotic_2016_v3'
 #process.GlobalTag.globaltag = '74X_mcRun2_asymptotic_v4::All'
-process.GlobalTag.globaltag = '100X_upgrade2018_realistic_v10'
+process.GlobalTag.globaltag = '122X_mcRun3_2021_realistic_v9'
 
 
 ################################################################################
