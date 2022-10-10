@@ -1,0 +1,13 @@
+** Summary plots
+
+*** Plot mean of ∆η and ∆φ distributions vs iSM/iDee
+#+BEGIN_EXAMPLE
+   root -l drawComparison.cxx\(\"validation_plot_directory/MC.txt\",\"validation_plot_directory/DATA.txt\",\"validation_plot_directory/DATA2.txt\"\)
+#+END_EXAMPLE
+        
+*** Plot alignment coefficients vs iSM/iDee
+#+BEGIN_EXAMPLE
+   root -l EE_Alignment_Draw.cxx\(\"../../myEEAlignment_after.txt\",\"../../myEEAlignment_before.txt\"\)
+   root -l EB_Alignment_Draw.cxx\(\"../../myEBAlignment_after.txt\",\"../../myEBAlignment_before.txt\"\)
+#+END_EXAMPLE
+
