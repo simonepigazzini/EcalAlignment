@@ -249,7 +249,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDZ_EBMinus_Ele->SetLineWidth(1);
  grDZ_EBMinus_Ele->GetXaxis()->SetTitle("iSM");
  grDZ_EBMinus_Ele->GetYaxis()->SetTitle("#DeltaZ (cm)");
- grDZ_EBMinus_Ele->Draw("AP");
+ //grDZ_EBMinus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDZ_EBMinus_After = new TGraphErrors(18,iSM_SM_Ele+18,DZ_SM_Mean_After+18,iSM_SM_Ele_RMS,DZ_SM_RMS_After+18);
@@ -260,10 +260,18 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDZ_EBMinus_After->SetLineWidth(1);
  grDZ_EBMinus_After->GetXaxis()->SetTitle("iSM");
  grDZ_EBMinus_After->GetYaxis()->SetTitle("#DeltaZ (cm)");
- grDZ_EBMinus_After->Draw("P");
+ //grDZ_EBMinus_After->Draw("P");
  gPad->SetGrid();
   
-  
+ double maxMC = TMath::MaxElement(grDZ_EBMinus_Ele->GetN(),grDZ_EBMinus_Ele->GetY());
+ double maxDATA = TMath::MaxElement(grDZ_EBMinus_After->GetN(),grDZ_EBMinus_After->GetY());
+ double minMC = TMath::MinElement(grDZ_EBMinus_Ele->GetN(),grDZ_EBMinus_Ele->GetY());
+ double minDATA = TMath::MinElement(grDZ_EBMinus_After->GetN(),grDZ_EBMinus_After->GetY());
+ grDZ_EBMinus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDZ_EBMinus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDZ_EBMinus_Ele->Draw("AP");
+ grDZ_EBMinus_After->Draw("P");
+
  cSM_DX_DY_DZ->cd(2);
  TGraphErrors* grDZ_EBPlus_Ele = new TGraphErrors(18,iSM_SM_Ele,DZ_SM_Mean,iSM_SM_Ele_RMS,DZ_SM_RMS);
  grDZ_EBPlus_Ele->SetTitle("EB+ #DeltaZ");
@@ -274,7 +282,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDZ_EBPlus_Ele->SetLineWidth(1);
  grDZ_EBPlus_Ele->GetXaxis()->SetTitle("iSM");
  grDZ_EBPlus_Ele->GetYaxis()->SetTitle("#DeltaZ (cm)");
- grDZ_EBPlus_Ele->Draw("AP");
+ //grDZ_EBPlus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDZ_EBPlus_After = new TGraphErrors(18,iSM_SM_Ele,DZ_SM_Mean_After,iSM_SM_Ele_RMS,DZ_SM_RMS_After);
@@ -285,10 +293,17 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDZ_EBPlus_After->SetLineWidth(1);
  grDZ_EBPlus_After->GetXaxis()->SetTitle("iSM");
  grDZ_EBPlus_After->GetYaxis()->SetTitle("#DeltaZ (cm)");
- grDZ_EBPlus_After->Draw("P");
+ //grDZ_EBPlus_After->Draw("P");
  gPad->SetGrid();
   
- 
+ maxMC = TMath::MaxElement(grDZ_EBPlus_Ele->GetN(),grDZ_EBPlus_Ele->GetY());
+ maxDATA = TMath::MaxElement(grDZ_EBPlus_After->GetN(),grDZ_EBPlus_After->GetY());
+ minMC = TMath::MinElement(grDZ_EBPlus_Ele->GetN(),grDZ_EBPlus_Ele->GetY());
+ minDATA = TMath::MinElement(grDZ_EBPlus_After->GetN(),grDZ_EBPlus_After->GetY());
+ grDZ_EBPlus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDZ_EBPlus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDZ_EBPlus_Ele->Draw("AP");
+ grDZ_EBPlus_After->Draw("P");
 
   ///===================================
  cSM_DX_DY_DZ->cd(3);
@@ -301,7 +316,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDY_EBMinus_Ele->SetLineWidth(1);
  grDY_EBMinus_Ele->GetXaxis()->SetTitle("iSM");
  grDY_EBMinus_Ele->GetYaxis()->SetTitle("#DeltaY (cm)");
- grDY_EBMinus_Ele->Draw("AP");
+ //grDY_EBMinus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDY_EBMinus_After = new TGraphErrors(18,iSM_SM_Ele+18,DY_SM_Mean_After+18,iSM_SM_Ele_RMS+18,DY_SM_RMS_After+18);
@@ -312,9 +327,17 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDY_EBMinus_After->SetLineWidth(1);
  grDY_EBMinus_After->GetXaxis()->SetTitle("iSM");
  grDY_EBMinus_After->GetYaxis()->SetTitle("#DeltaY (cm)");
- grDY_EBMinus_After->Draw("P");
+ //grDY_EBMinus_After->Draw("P");
  gPad->SetGrid();
   
+ maxMC = TMath::MaxElement(grDY_EBMinus_Ele->GetN(),grDY_EBMinus_Ele->GetY());
+ maxDATA = TMath::MaxElement(grDY_EBMinus_After->GetN(),grDY_EBMinus_After->GetY());
+ minMC = TMath::MinElement(grDY_EBMinus_Ele->GetN(),grDY_EBMinus_Ele->GetY());
+ minDATA = TMath::MinElement(grDY_EBMinus_After->GetN(),grDY_EBMinus_After->GetY());
+ grDY_EBMinus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDY_EBMinus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDY_EBMinus_Ele->Draw("AP");
+ grDY_EBMinus_After->Draw("P");
   
  cSM_DX_DY_DZ->cd(4);
  TGraphErrors* grDY_EBPlus_Ele = new TGraphErrors(18,iSM_SM_Ele,DY_SM_Mean,iSM_SM_Ele_RMS,DY_SM_RMS);
@@ -326,7 +349,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDY_EBPlus_Ele->SetLineWidth(1);
  grDY_EBPlus_Ele->GetXaxis()->SetTitle("iSM");
  grDY_EBPlus_Ele->GetYaxis()->SetTitle("#DeltaY (cm)");
- grDY_EBPlus_Ele->Draw("AP");
+ //grDY_EBPlus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDY_EBPlus_After = new TGraphErrors(18,iSM_SM_Ele,DY_SM_Mean_After,iSM_SM_Ele_RMS,DY_SM_RMS_After);
@@ -337,8 +360,17 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDY_EBPlus_After->SetLineWidth(1);
  grDY_EBPlus_After->GetXaxis()->SetTitle("iSM");
  grDY_EBPlus_After->GetYaxis()->SetTitle("#DeltaY (cm)");
- grDY_EBPlus_After->Draw("P");
+ //grDY_EBPlus_After->Draw("P");
  gPad->SetGrid();
+
+ maxMC = TMath::MaxElement(grDY_EBPlus_Ele->GetN(),grDY_EBPlus_Ele->GetY());
+ maxDATA = TMath::MaxElement(grDY_EBPlus_After->GetN(),grDY_EBPlus_After->GetY());
+ minMC = TMath::MinElement(grDY_EBPlus_Ele->GetN(),grDY_EBPlus_Ele->GetY());
+ minDATA = TMath::MinElement(grDY_EBPlus_After->GetN(),grDY_EBPlus_After->GetY());
+ grDY_EBPlus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDY_EBPlus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDY_EBPlus_Ele->Draw("AP");
+ grDY_EBPlus_After->Draw("P");
   
   ///===================================
  cSM_DX_DY_DZ->cd(5);
@@ -351,7 +383,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDX_EBMinus_Ele->SetLineWidth(1);
  grDX_EBMinus_Ele->GetXaxis()->SetTitle("iSM");
  grDX_EBMinus_Ele->GetYaxis()->SetTitle("#DeltaX (cm)");
- grDX_EBMinus_Ele->Draw("AP");
+ //grDX_EBMinus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDX_EBMinus_After = new TGraphErrors(18,iSM_SM_Ele+18,DX_SM_Mean_After+18,iSM_SM_Ele_RMS+18,DX_SM_RMS_After+18);
@@ -362,8 +394,17 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDX_EBMinus_After->SetLineWidth(1);
  grDX_EBMinus_After->GetXaxis()->SetTitle("iSM");
  grDX_EBMinus_After->GetYaxis()->SetTitle("#DeltaX (cm)");
- grDX_EBMinus_After->Draw("P");
+ //grDX_EBMinus_After->Draw("P");
  gPad->SetGrid();
+
+ maxMC = TMath::MaxElement(grDX_EBMinus_Ele->GetN(),grDX_EBMinus_Ele->GetY());
+ maxDATA = TMath::MaxElement(grDX_EBMinus_After->GetN(),grDX_EBMinus_After->GetY());
+ minMC = TMath::MinElement(grDX_EBMinus_Ele->GetN(),grDX_EBMinus_Ele->GetY());
+ minDATA = TMath::MinElement(grDX_EBMinus_After->GetN(),grDX_EBMinus_After->GetY());
+ grDX_EBMinus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDX_EBMinus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDX_EBMinus_Ele->Draw("AP");
+ grDX_EBMinus_After->Draw("P");
   
   
  cSM_DX_DY_DZ->cd(6);
@@ -376,7 +417,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDX_EBPlus_Ele->SetLineWidth(1);
  grDX_EBPlus_Ele->GetXaxis()->SetTitle("iSM");
  grDX_EBPlus_Ele->GetYaxis()->SetTitle("#DeltaX (cm)");
- grDX_EBPlus_Ele->Draw("AP");
+ //grDX_EBPlus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDX_EBPlus_After = new TGraphErrors(18,iSM_SM_Ele,DX_SM_Mean_After,iSM_SM_Ele_RMS,DX_SM_RMS_After);
@@ -387,10 +428,17 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDX_EBPlus_After->SetLineWidth(1);
  grDX_EBPlus_After->GetXaxis()->SetTitle("iSM");
  grDX_EBPlus_After->GetYaxis()->SetTitle("#DeltaX (cm)");
- grDX_EBPlus_After->Draw("P");
+ //grDX_EBPlus_After->Draw("P");
  gPad->SetGrid();
   
-  
+ maxMC = TMath::MaxElement(grDX_EBPlus_Ele->GetN(),grDX_EBPlus_Ele->GetY());
+ maxDATA = TMath::MaxElement(grDX_EBPlus_After->GetN(),grDX_EBPlus_After->GetY());
+ minMC = TMath::MinElement(grDX_EBPlus_Ele->GetN(),grDX_EBPlus_Ele->GetY());
+ minDATA = TMath::MinElement(grDX_EBPlus_After->GetN(),grDX_EBPlus_After->GetY());
+ grDX_EBPlus_Ele->SetMaximum(std::max(maxMC,maxDATA) + 0.02);
+ grDX_EBPlus_Ele->SetMinimum(std::min(minMC, minDATA) - 0.02);
+ grDX_EBPlus_Ele->Draw("AP");
+ grDX_EBPlus_After->Draw("P");
   
   
   

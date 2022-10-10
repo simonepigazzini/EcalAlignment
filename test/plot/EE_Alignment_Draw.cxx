@@ -1,3 +1,14 @@
+void set_gr_range(TGraphErrors* gMC, TGraphErrors* gDATA){
+ float mxMC = TMath::MaxElement(gMC->GetN(),gMC->GetY());
+ float mxDATA = TMath::MaxElement(gDATA->GetN(),gDATA->GetY());
+ float mnMC = TMath::MinElement(gMC->GetN(),gMC->GetY());
+ float mnDATA = TMath::MinElement(gDATA->GetN(),gDATA->GetY());
+ gMC->SetMaximum(std::max(mxMC,mxDATA) + 0.005);
+ gMC->SetMinimum(std::min(mnMC, mnDATA) - 0.005);
+}
+
+
+
 void EE_Alignment_Draw(std::string nameFile, std::string nameFileComparison="../data/myEEAlignment_default.txt", int withError = 0) {
  
  double Z = 3.205;
@@ -62,14 +73,6 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  double DZ_SM_Mean_After[4];
  double DZ_SM_RMS_After[4];
  
- for (int i=0; i<4; i++) {
-  DX_SM_RMS[i] = 0;
-  DY_SM_RMS[i] = 0;
-  DZ_SM_RMS[i] = 0;
-//   DX_SM_RMS_After[i] = 0;
-//   DY_SM_RMS_After[i] = 0;
-//   DZ_SM_RMS_After[i] = 0;
- }
  
  double DTHETAe_SM_Mean_After[4];
  double DTHETAe_SM_RMS_After[4];
@@ -77,7 +80,24 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  double DPSIe_SM_RMS_After[4];
  double DPHIe_SM_Mean_After[4];
  double DPHIe_SM_RMS_After[4];
+ 
+ for (int i=0; i<4; i++) {
+  DX_SM_RMS[i] = 0;
+  DY_SM_RMS[i] = 0;
+  DZ_SM_RMS[i] = 0;
+  DX_SM_RMS_After[i] = 0;
+  DY_SM_RMS_After[i] = 0;
+  DZ_SM_RMS_After[i] = 0;
 
+  DTHETAe_SM_RMS[i] = 0;
+  DPSIe_SM_RMS[i] = 0;
+  DPHIe_SM_RMS[i] = 0;
+  DTHETAe_SM_RMS_After[i] = 0;
+  DPSIe_SM_RMS_After[i] = 0;
+  DPHIe_SM_RMS_After[i] = 0;
+
+ }
+ 
  double iSM_SM_Ele[4];
  double iSM_SM_Ele_RMS[38];
     
@@ -428,6 +448,8 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
   ///===========================================================================
   ///===========================================================================
   ///===========================================================================
+
+
  TCanvas* cSM_DTHETAe_DPSIe_DPHIe = new TCanvas ("cSM_DTHETAe_DPSIe_DPHIe","cSM_DTHETAe_DPSIe_DPHIe",800,800);
  cSM_DTHETAe_DPSIe_DPHIe->Divide(2,3);
   
@@ -443,7 +465,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPHIe_EEMinus_Ele->SetLineWidth(1);
  grDPHIe_EEMinus_Ele->GetXaxis()->SetTitle("iDee");
  grDPHIe_EEMinus_Ele->GetYaxis()->SetTitle("#Delta#phi Euler ");
- grDPHIe_EEMinus_Ele->Draw("AP");
+ //grDPHIe_EEMinus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDPHIe_EEMinus_After = new TGraphErrors(2,iSM_SM_Ele+2,DPHIe_SM_Mean_After+2,iSM_SM_Ele_RMS,DPHIe_SM_RMS_After+2);
@@ -454,10 +476,14 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPHIe_EEMinus_After->SetLineWidth(1);
  grDPHIe_EEMinus_After->GetXaxis()->SetTitle("iDee");
  grDPHIe_EEMinus_After->GetYaxis()->SetTitle("#Delta#phi Euler ");
- grDPHIe_EEMinus_After->Draw("P");
+ //grDPHIe_EEMinus_After->Draw("P");
  gPad->SetGrid();
   
-  
+ set_gr_range(grDPHIe_EEMinus_Ele, grDPHIe_EEMinus_After);
+ grDPHIe_EEMinus_Ele->Draw("AP");
+ grDPHIe_EEMinus_After->Draw("P");
+
+
  cSM_DTHETAe_DPSIe_DPHIe->cd(2);
  TGraphErrors* grDPHIe_EEPlus_Ele = new TGraphErrors(2,iSM_SM_Ele,DPHIe_SM_Mean,iSM_SM_Ele_RMS,DPHIe_SM_RMS);
  grDPHIe_EEPlus_Ele->SetTitle("EE+ #Delta#phi Euler");
@@ -468,7 +494,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPHIe_EEPlus_Ele->SetLineWidth(1);
  grDPHIe_EEPlus_Ele->GetXaxis()->SetTitle("iDee");
  grDPHIe_EEPlus_Ele->GetYaxis()->SetTitle("#Delta#phi Euler ");
- grDPHIe_EEPlus_Ele->Draw("AP");
+ //grDPHIe_EEPlus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDPHIe_EEPlus_After = new TGraphErrors(2,iSM_SM_Ele,DPHIe_SM_Mean_After,iSM_SM_Ele_RMS,DPHIe_SM_RMS_After);
@@ -479,10 +505,12 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPHIe_EEPlus_After->SetLineWidth(1);
  grDPHIe_EEPlus_After->GetXaxis()->SetTitle("iDee");
  grDPHIe_EEPlus_After->GetYaxis()->SetTitle("#Delta#phi Euler ");
- grDPHIe_EEPlus_After->Draw("P");
+ //grDPHIe_EEPlus_After->Draw("P");
  gPad->SetGrid();
   
- 
+ set_gr_range(grDPHIe_EEPlus_Ele, grDPHIe_EEPlus_After);
+ grDPHIe_EEPlus_Ele->Draw("AP");
+ grDPHIe_EEPlus_After->Draw("P");
 
   ///===================================
  cSM_DTHETAe_DPSIe_DPHIe->cd(3);
@@ -495,7 +523,7 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPSIe_EEMinus_Ele->SetLineWidth(1);
  grDPSIe_EEMinus_Ele->GetXaxis()->SetTitle("iDee");
  grDPSIe_EEMinus_Ele->GetYaxis()->SetTitle("#Delta#psi Euler ");
- grDPSIe_EEMinus_Ele->Draw("AP");
+ //grDPSIe_EEMinus_Ele->Draw("AP");
  gPad->SetGrid();
   
  TGraphErrors* grDPSIe_EEMinus_After = new TGraphErrors(2,iSM_SM_Ele+2,DPSIe_SM_Mean_After+2,iSM_SM_Ele_RMS+2,DPSIe_SM_RMS_After+2);
@@ -506,10 +534,13 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPSIe_EEMinus_After->SetLineWidth(1);
  grDPSIe_EEMinus_After->GetXaxis()->SetTitle("iDee");
  grDPSIe_EEMinus_After->GetYaxis()->SetTitle("#Delta#psi Euler ");
- grDPSIe_EEMinus_After->Draw("P");
+ //grDPSIe_EEMinus_After->Draw("P");
  gPad->SetGrid();
   
-  
+ set_gr_range(grDPSIe_EEMinus_Ele, grDPSIe_EEMinus_After);
+ grDPSIe_EEMinus_Ele->Draw("AP");
+ grDPSIe_EEMinus_After->Draw("P"); 
+
  cSM_DTHETAe_DPSIe_DPHIe->cd(4);
  TGraphErrors* grDPSIe_EEPlus_Ele = new TGraphErrors(2,iSM_SM_Ele,DPSIe_SM_Mean,iSM_SM_Ele_RMS,DPSIe_SM_RMS);
  grDPSIe_EEPlus_Ele->SetTitle("EE+ #Delta#psi Euler");
@@ -533,6 +564,10 @@ std::cout << std::endl << " New File: " << nameFile << std::endl;
  grDPSIe_EEPlus_After->GetYaxis()->SetTitle("#Delta#psi Euler ");
  grDPSIe_EEPlus_After->Draw("P");
  gPad->SetGrid();
+
+ set_gr_range(grDPSIe_EEPlus_Ele, grDPSIe_EEPlus_After);
+ grDPSIe_EEPlus_Ele->Draw("AP");
+ grDPSIe_EEPlus_After->Draw("P"); 
   
   ///===================================
  cSM_DTHETAe_DPSIe_DPHIe->cd(5);
