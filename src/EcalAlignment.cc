@@ -377,8 +377,8 @@ void EcalAlignment::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
   SigmaIEtaIEta_ = electron.sigmaIetaIeta();
   eleTrkIso_ = electron.dr03TkSumPt();
   eleEcalIso_ = electron.dr03EcalRecHitSumEt();
-  eleHcalIsoD1_ = electron.dr03HcalTowerSumEt();
-  eleHcalIsoD2_ = electron.dr03HcalTowerSumEt();
+  eleHcalIsoD1_ = electron.dr03HcalTowerSumEt(1);
+  eleHcalIsoD2_ = electron.dr03HcalTowerSumEt(2);
 
   elePFphotonIso_        = electron.pfIsolationVariables().sumPhotonEt;
   elePFneutralHadronIso_ = electron.pfIsolationVariables().sumNeutralHadronEt;
