@@ -33,8 +33,8 @@ void drawSingleModule(TChain* InFile, TChain* InFileComparison , TString nameOut
   
  //---- for data
  TString tempCut;
- if (specialZeroTesla == 0) tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.Data());
- else                       tempCut = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.Data());
+ if (specialZeroTesla == 0) tempCut = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.Data());
+ else                       tempCut = Form ("%s && (HoE<0.3 && eleEcalIso<15)", commonCut.Data());
 
  //tempCut = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.Data());
  
@@ -236,19 +236,25 @@ TH1F* DEtaMC;
  
  
  //---- output txt file
- std::ofstream myfile, myfileMC;
- TString nameResults, nameResultsMC;
+ std::ofstream myfile, myfileMC, myfileDATA2 ;
+ TString nameResults, nameResultsMC, nameResultsDATA2;
  //if (isMC) {
   nameResultsMC = Form ("%s/MC.txt", nameOutputDir.Data()); 
  //}
  //else {
   nameResults = Form ("%s/DATA.txt", nameOutputDir.Data());   
  //}
+
  myfile.open(nameResults.Data(),std::ios::out | std::ios::app); 
  myfile << iEB << " " << iEE << " ";
  myfileMC.open(nameResultsMC.Data(),std::ios::out | std::ios::app); 
  myfileMC << iEB << " " << iEE << " ";
  
+ if (InFileAlternative != 0) { 
+  nameResultsDATA2 = Form ("%s/DATA2.txt", nameOutputDir.Data()); 
+  myfileDATA2.open(nameResultsDATA2.Data(),std::ios::out | std::ios::app); 
+  myfileDATA2 << iEB << " " << iEE << " ";
+ }
  
  TCanvas* cDPhi = new TCanvas("cDphi","cDphi",700,700);
  DPhiMC->Draw("PE");
@@ -313,6 +319,7 @@ if(specialRegions != 0){
 
  myfile << DPhiMC->GetMean() << " " << DPhiMC->GetRMS() << " " << DPhiMC->GetEntries() << "      "; 
  myfileMC << DPhiMC_ref->GetMean() << " " << DPhiMC_ref->GetRMS() << " " << DPhiMC_ref->GetEntries() << "      "; 
+ if (InFileAlternative != 0) {myfileDATA2 <<DPhiMC_alt->GetMean() << " " <<DPhiMC_alt->GetRMS() << " " <<DPhiMC_alt->GetEntries() << "      ";}
  
  TCanvas* cDPhi_ep = new TCanvas("cDPhi_ep","cDPhi_ep",700,700);
  DPhiMC_ep->Draw("PE");
@@ -372,6 +379,7 @@ if(specialRegions != 0){
  */
  myfile << DPhiMC_ep->GetMean() << " " << DPhiMC_ep->GetRMS() << " " << DPhiMC_ep->GetEntries() << "      "; 
  myfileMC << DPhiMC_ref_ep->GetMean() << " " << DPhiMC_ref_ep->GetRMS() << " " << DPhiMC_ref_ep->GetEntries() << "      "; 
+ if (InFileAlternative != 0) {myfileDATA2 <<DPhiMC_alt_ep->GetMean() << " " <<DPhiMC_alt_ep->GetRMS() << " " <<DPhiMC_alt_ep->GetEntries() << "      ";}
 
  TCanvas* cDPhi_em = new TCanvas("cDPhi_em","cDPhi_em",700,700);
  DPhiMC_em->Draw("PE");
@@ -431,6 +439,7 @@ if(specialRegions != 0){
  gPad->SaveAs(toDoShell.Data()); */
  myfile << DPhiMC_em->GetMean() << " " << DPhiMC_em->GetRMS() << " " << DPhiMC_em->GetEntries() << "      ";  
  myfileMC << DPhiMC_ref_em->GetMean() << " " << DPhiMC_ref_em->GetRMS() << " " << DPhiMC_ref_em->GetEntries() << "      "; 
+ if (InFileAlternative != 0) {myfileDATA2 <<DPhiMC_alt_em->GetMean() << " " <<DPhiMC_alt_em->GetRMS() << " " <<DPhiMC_alt_em->GetEntries() << "      ";}
  
  
  TCanvas* cDEta = new TCanvas("cDeta","cDeta",700,700);
@@ -494,6 +503,7 @@ if(specialRegions != 0){
  gPad->SaveAs(toDoShell.Data()); */
  myfile << DEtaMC->GetMean() << " " << DEtaMC->GetRMS() << " " << DEtaMC->GetEntries() << "      ";  
  myfileMC << DEtaMC_ref->GetMean() << " " << DEtaMC_ref->GetRMS() << " " << DEtaMC_ref->GetEntries() << "      "; 
+ if (InFileAlternative != 0) {myfileDATA2 <<DEtaMC_alt->GetMean() << " " <<DEtaMC_alt->GetRMS() << " " <<DEtaMC_alt->GetEntries() << "      ";}
  /*
  
  //---------------------------------
@@ -603,6 +613,8 @@ if(specialRegions != 0){
  myfile.close(); 
  myfileMC << std::endl;
  myfileMC.close(); 
+ myfileDATA2 << std::endl;
+ myfileDATA2.close();
  //--- output text file (end)
  
  
@@ -690,8 +702,8 @@ int main(int argc, char** argv) {
   
   //---- for data
   TString tempCut_data;
-  if (specialZeroTesla == 0) tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03)) )", commonCut.c_str());
-  else                       tempCut_data = Form ("%s && (electrons_classification==0 && ETSC>20 && HoE<0.3 && eleEcalIso<15)", commonCut.c_str());
+  if (specialZeroTesla == 0) tempCut_data = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.c_str());
+  else                       tempCut_data = Form ("%s && (HoE<0.3 && eleEcalIso<15)", commonCut.c_str());
   //tempCut_data = Form ("%s && ((abs(eta)<=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.07 && abs(SigmaIEtaIEta)<0.01) || (abs(eta)>=1.5 && (eleTrkIso+eleEcalIso+eleHcalIsoD1+eleHcalIsoD2)/pT<0.06 && abs(SigmaIEtaIEta)<0.03))", commonCut.c_str());
   
   InFile->SetEntryList(0); 
