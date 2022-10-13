@@ -102,8 +102,8 @@ process.GlobalTag = GlobalTag(process.GlobalTag, '124X_dataRun3_Prompt_v4', '')
 process.GlobalTag.toGet = cms.VPSet(
                                    
                                      cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                     tag = cms.string("EEAlignment_measured_run3_v0_offline"),
-                                     connect = cms.string("sqlite_file:EEAlign_run3_v0.db")
+                                     tag = cms.string("EEAlignment_measured_run3_v2_offline"),
+                                     connect = cms.string("sqlite_file:EEAlign_run3_v2.db")
                                               #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")                                                                                            
                                     #connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")                                                                                     
                                    ),
@@ -117,7 +117,7 @@ process.GlobalTag.toGet = cms.VPSet(
 
 
                                    cms.PSet(record = cms.string("TrackerAlignmentRcd"),
-                                   tag = cms.string("TrackerAlignment_collisions22_v3"),
+                                   tag = cms.string("TrackerAlignment_collisions22_v7"),
                                    connect = cms.string("frontier://FrontierProd/CMS_CONDITIONS")
                                             )
 )
