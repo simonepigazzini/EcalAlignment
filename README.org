@@ -9,11 +9,11 @@
 
 #+BEGIN_EXAMPLE
 
-cmsrel CMSSW_12_3_0_pre5 <The CMSSW version will change depending on when alignment is being performed>
-cd CMSSW_12_3_0_pre5/src/
+cmsrel CMSSW_12_4_6 <The CMSSW version will change depending on when alignment is being performed>
+cd CMSSW_12_4_6/src/
 mkdir EcalValidation
 cd EcalValidation
-git clone -b CMSSW_12_3_0_pre5 git@github.com:NEUAnalyses/EcalAlignment.git
+git clone -b CMSSW_12_4_6 git@github.com:NEUAnalyses/EcalAlignment.git
 
 cmsenv
 scramv1 b -j 8 -Werror=unused-variable
