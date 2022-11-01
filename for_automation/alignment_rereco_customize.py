@@ -1,26 +1,27 @@
 # manage input variables                                                                                                                                                                                  
-from FWCore.ParameterSet.VarParsing import VarParsing
+#from FWCore.ParameterSet.VarParsing import VarParsing
+import FWCore.ParameterSet.Config as cms
 
 def customize_alignment_reco(process):
 
-    options = VarParsing ('analysis')
+    #options = VarParsing ('analysis')
     # add a list of strings for events to process                                                                                                                                                             
-    options.parseArguments()
+    #options.parseArguments()
 
     process.GlobalTag.toGet = cms.VPSet(
 
 
                                         cms.PSet(record = cms.string("EEAlignmentRcd"),
-                                        tag = cms.string("EEAlignment_measured_run3_v4_offline"),
-                                        connect = cms.string("sqlite_file:EEAlign_run3_v4.db")
+                                        tag = cms.string("EEAlignment_measured_run3_trackerTag_v7_offline"),
+                                        connect = cms.string("sqlite_file:EEAlign_run3_trackerTag_v7.db")
                                                 #connect = cms.string("sqlite_file:EEAlign_2018_25May_check.db")                                                                                             
                                         #connect = cms.string("sqlite_file:EEAlign_2018_3Jun_newselections_onlyphion.db")                                                                                      
                                     ),
     #                                                                                                                                                                                                          
     #                                                                                                                                                                                                          
                                         cms.PSet(record = cms.string("EBAlignmentRcd"),
-                                        tag = cms.string("EBAlignment_measured_run3_v0_offline"),
-                                        connect = cms.string("sqlite_file:EBAlign_run3_v0.db")
+                                        tag = cms.string("EBAlignment_measured_run3_trackerTag_v7_offline"),
+                                        connect = cms.string("sqlite_file:EBAlign_run3_trackerTag_v7.db")
     #   #                                  connect = cms.string("sqlite_file:EBAlign_2018_3Jun_newselections.db")                                                                                              
                                                 ),
 
@@ -131,7 +132,7 @@ def customize_alignment_reco(process):
 
     process.TFileService = cms.Service(
         "TFileService",
-        fileName = cms.string(options.outputFile)
+        fileName = cms.string('output.root')
         )
 
 
