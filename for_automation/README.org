@@ -19,8 +19,8 @@
 *** Create local sqlite db
 Change the path to the txt file, name of db file and tag name if needed.
 #+BEGIN_EXAMPLE
-  cmsRun ../dbEcalAlignment/copyFileAlignEB_cfg.py
-  cmsRun ../dbEcalAlignment/copyFileAlignEE_cfg.py
+  cmsRun ../test/dbEcalAlignment/copyFileAlignEB_cfg.py
+  cmsRun ../test/dbEcalAlignment/copyFileAlignEE_cfg.py
 #+END_EXAMPLE
 
 *** Perform RE-RECO with new alignment conditions
