@@ -25,7 +25,7 @@ Change the path to the txt file, name of db file and tag name if needed.
 
 *** Perform RE-RECO with new alignment conditions
 #+BEGIN_EXAMPLE
-   cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,PAT --conditions 124X_dataRun3_Prompt_v4 --data --era Run3 --python_filename=alignment_rereco_cfg.py --customise=alignment_rereco_customize.py --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
+   cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,PAT --conditions 124X_dataRun3_Prompt_v4 --data --era Run3 --python_filename=alignment_rereco_cfg.py --customise=EcalValidation/EcalAlignment/alignment_rereco_customize.customize_alignment_reco --filein=/store/data/Run2022D/EGamma/RAW-RECO/ZElectron-PromptReco-v2/000/357/734/00000/0002e651-145c-4b78-8746-41629601d33f.root
 
    cmsRun alignment_rereco_cfg.py
 #+END_EXAMPLE
