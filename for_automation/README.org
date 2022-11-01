@@ -16,6 +16,13 @@
    CombineRotoTraslations   EE_alignment_coeff_old.txt  EEAlignmentCoefficients_merged.txt EEAlignment_Run3_NewConditions.txt
 #+END_EXAMPLE
 
+*** Create local sqlite db
+Change the path to the txt file, name of db file and tag name if needed.
+#+BEGIN_EXAMPLE
+  cmsRun ../dbEcalAlignment/copyFileAlignEB_cfg.py
+  cmsRun ../dbEcalAlignment/copyFileAlignEE_cfg.py
+#+END_EXAMPLE
+
 *** Perform RE-RECO with new alignment conditions
 #+BEGIN_EXAMPLE
    cmsDriver.py reco -s RAW2DIGI,L1Reco,RECO,PAT --conditions 124X_dataRun3_Prompt_v4 --data --era Run3 --python_filename=alignment_rereco_cfg.py --customise=alignment_rereco_customize.py --filein=/store/data/Run2018A/EGamma/MINIAOD/PromptReco-v1/000/315/257/00000/6AB583CF-4D4B-E811-BE94-FA163EFC4E1B.root
