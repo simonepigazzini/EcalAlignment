@@ -2,6 +2,16 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("Minimization")
 
+# manage input variables
+from FWCore.ParameterSet.VarParsing import VarParsing
+options = VarParsing ('analysis')
+options.register ('iDee', 
+                  0, 
+                  VarParsing.multiplicity.singleton, 
+                  VarParsing.varType.int, 
+                  "iDee number 0-3")
+options.parseArguments()
+
 process.inputTree = cms.PSet(
   nameTree = cms.string("ntupleEcalAlignment/myTree"),
   #selection = cms.string("(ETSC>20 && met>30 && mishits <= 0 && MT>30)"),
@@ -55,15 +65,17 @@ process.inputTree = cms.PSet(
                                  + (x<-1.5)           * (0.000408662))"),
   ## change input file appropriately
   inputFiles    = cms.vstring(
-         # 'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
+      options.inputFiles
+      # 'file:///eos/cms/store/group/dpg_ecal/alca_ecalcalib/twamorka/UltraLegacy_WithTrackerConditions_Conditions2/DoubleEG/crab_ZElectron-2017B-RAWReco-v1/190502_160024/0000/treeECALAlignment_499.root'
 
-  'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/*.root'
+      # 'file:/eos/cms/store/group/dpg_ecal/alca_ecalcalib/automation_prompt/alignment-reco/*.root'
 # 'file:/afs/cern.ch/user/a/amkrishn/CMSSW_12_0_0/src/EcalValidation/EcalAlignment/test/output.root'
 
-    )
+  ),
+    iDee = cms.int32(options.iDee)    
 )
 
 
 process.outputTree = cms.PSet(
-  outputFile = cms.string("EEAlignmentCoefficients.txt")
+  outputFile = cms.string("output/EEAlignmentCoefficients")
 )

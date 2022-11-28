@@ -28,7 +28,7 @@
 #include "FWCore/ParameterSet/interface/ProcessDesc.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ParameterSetReader/interface/ParameterSetReader.h"
-
+#include "FWCore/PythonParameterSet/interface/PyBind11ProcessDesc.h"
 
 //---- std include ----
 #include <string>
@@ -201,10 +201,9 @@ int main(int argc, char** argv) {
  bool rotationTheta ;
  bool rotationPsi ;
  
- std::string fileName (argv[1]) ;
-// std::shared_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
- 
- std::unique_ptr<edm::ParameterSet> parameterSet = edm::readConfig(fileName) ;
+ PyBind11ProcessDesc builder(argv[1], argc, argv);
+
+ auto parameterSet = builder.processDesc()->getProcessPSet();
  edm::ParameterSet subPSetInput = parameterSet->getParameter<edm::ParameterSet> ("inputTree") ;
  std::vector<std::string> nameFileIn = subPSetInput.getParameter<std::vector<std::string> > ("inputFiles") ;
  std::string nameTree = subPSetInput.getParameter<std::string> ("nameTree") ;
@@ -228,11 +227,8 @@ int main(int argc, char** argv) {
  edm::ParameterSet subPSetOutput = parameterSet->getParameter<edm::ParameterSet> ("outputTree") ;
  std::string nameFileOut = subPSetOutput.getParameter<std::string> ("outputFile") ;
  
- int whichSC (atoi(argv[2])) ;
- std::string whichSC_str (argv[2]) ;
- 
- nameFileOut = nameFileOut + "_" + whichSC_str + ".txt";
- 
+ int whichSC = subPSetInput.getParameter<int> ("iDee") ;
+ nameFileOut = nameFileOut + "_" + std::to_string(whichSC) + ".txt"; 
  
  //==== plot input/output ====
  std::cout << " nameFileIn = ";

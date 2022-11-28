@@ -4,13 +4,19 @@
 # Source: /cvs_server/repositories/CMSSW/CMSSW/Configuration/PyReleaseValidation/python/ConfigBuilder.py,v
 # with command line options: step2 -s RAW2DIGI,L1Reco,RECO --data --datatier RECO --eventcontent RECO --conditions GR10_P_V11::All --scenario pp --no_exec --magField AutoFromDBCurrent --process reRECO --customise Configuration/GlobalRuns/reco_TLR_38X.py --cust_function customisePPData --filein=outSkim_1_1_GlC.root
 import FWCore.ParameterSet.Config as cms
+from Configuration.StandardSequences.Eras import eras
 
-process = cms.Process('EcalAlignment')
+process = cms.Process('EcalAlignment', eras.Run3)
 
 
 # manage input variables
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing ('analysis')
+options.register ('globaltag', 
+                  '', 
+                  VarParsing.multiplicity.singleton, 
+                  VarParsing.varType.string, 
+                  "Input global tag")
 # add a list of strings for events to process
 options.parseArguments()
 
@@ -50,10 +56,12 @@ process.source = cms.Source("PoolSource",
 # Additional output definition
 
 # Other statements
-
-process.GlobalTag.globaltag = '120X_dataRun2_v2'
-
-
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+if options.globaltag != '':
+    process.GlobalTag.globaltag = options.globaltag
+else:
+    from Configuration.AlCa.GlobalTag import GlobalTag
+    process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run3_data_prompt', '')
 
 
 ################################################################################
